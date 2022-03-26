@@ -1,28 +1,42 @@
 import React from 'react'
 import {Provider} from 'jotai';
 import {useAtomDevtools} from 'jotai/devtools'
-import {networkAtom} from "./store";
+import {ThemeProvider as MThemeProvider, createTheme} from "@mui/material";
 
-import {ThemeProvider, createTheme} from "@mui/material";
+import {networkAtom, appThemeAtom} from "./store";
+import useAppTheme from "./hooks/useAppTheme";
 
-const AtomsDevtools: React.FC = ({children}) => {
+const StoreDevToolsProvider: React.FC = ({children}) => {
     useAtomDevtools(networkAtom, 'Network');
-
-    return <>{children}</>
+    useAtomDevtools(appThemeAtom, 'App Theme');
+    return <>{children}</>;
 }
 
-const theme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
+const themes = {
+    "light": createTheme({
+        palette: {
+            mode: "light",
+        },
+    }),
+    "dark": createTheme({
+        palette: {
+            mode: "dark",
+        },
+    })
+}
+
+const ThemeProvider: React.FC = ({children}) => {
+    const [appTheme,] = useAppTheme();
+
+    return <MThemeProvider theme={themes[appTheme]}>{children}</MThemeProvider>;
+}
 
 const Providers: React.FC = ({children}) => {
     return (
         <Provider>
-            <AtomsDevtools>
-                <ThemeProvider theme={theme}>{children}</ThemeProvider>
-            </AtomsDevtools>
+            <StoreDevToolsProvider>
+                <ThemeProvider>{children}</ThemeProvider>
+            </StoreDevToolsProvider>
         </Provider>
     )
 }

@@ -1,3 +1,2 @@
-import {atom} from "jotai";
-
-export const networkAtom = atom("");
+export {appThemeAtom} from "./app-theme";
+export {networkAtom} from "./network";
