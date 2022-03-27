@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 import {Network} from '../../store/network';
 
@@ -58,19 +59,18 @@ const Navbar = () => {
                         <Typography variant='h5' component='div' sx={{flexGrow: 1}}>
                             MultiSafe
                         </Typography>
-                        <Toolbar>
+                        <Stack direction="row" spacing={2}>
                             {userData &&
                             <Button variant='outlined' style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
                                     onClick={handleOpenMenu}>{truncateMiddle(userData.profile.stxAddress[network], 4)}</Button>}
                             {!userData && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
-                        </Toolbar>
-                        <IconButton onClick={toggleAppTheme}>
-                            {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}
-                        </IconButton>
+                            <IconButton onClick={toggleAppTheme}>
+                                {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}
+                            </IconButton>
+                        </Stack>
                     </Toolbar>
                     <Menu
                         sx={{mt: '45px', minWidth: '400px'}}
-                        id='menu-appbar'
                         anchorEl={anchorElMenu}
                         anchorOrigin={{
                             vertical: 'top',
