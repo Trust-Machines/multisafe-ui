@@ -1,4 +1,5 @@
-import {useState} from "react";
+import React, {useState} from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -11,14 +12,15 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
 
-import useAppTheme from "../../hooks/useAppTheme";
-import useAuth from "../../hooks/useAuth";
-import useNetwork from "../../hooks/useNetwork";
+import {Network} from '../../store/network';
 
-import NetworkDialog from "../../components/NetworkDialog";
-import {Network} from "../../store/network";
+import useAppTheme from '../../hooks/useAppTheme';
+import useAuth from '../../hooks/useAuth';
+import useNetwork from '../../hooks/useNetwork';
 
-import {truncateMiddle} from "../../util";
+import NetworkDialog from '../../components/NetworkDialog';
+
+import {truncateMiddle} from '../../util';
 
 
 const Navbar = () => {
@@ -40,7 +42,7 @@ const Navbar = () => {
         setNetworkDialog(true);
     }
 
-    const closeNetworkDialog = (selected: Network) => {
+    const handleCloseNetworkDialog = (selected: Network) => {
         setNetworkDialog(false);
 
         if (selected !== network) {
@@ -50,25 +52,25 @@ const Navbar = () => {
 
     return (
         <>
-            <AppBar position="static">
-                <Container maxWidth="lg">
+            <AppBar position='static'>
+                <Container maxWidth='lg'>
                     <Toolbar>
-                        <Typography variant="h5" component="div" sx={{flexGrow: 1}}>
+                        <Typography variant='h5' component='div' sx={{flexGrow: 1}}>
                             MultiSafe
                         </Typography>
                         <Toolbar>
                             {userData &&
-                            <Button variant="outlined" style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
+                            <Button variant='outlined' style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
                                     onClick={handleOpenMenu}>{truncateMiddle(userData.profile.stxAddress[network], 4)}</Button>}
-                            {!userData && <Button color="inherit" onClick={openAuth}>Connect Wallet</Button>}
+                            {!userData && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
                         </Toolbar>
                         <IconButton onClick={toggleAppTheme}>
-                            {appTheme === "light" ? <DarkModeIcon/> : <LightModeIcon/>}
+                            {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}
                         </IconButton>
                     </Toolbar>
                     <Menu
                         sx={{mt: '45px', minWidth: '400px'}}
-                        id="menu-appbar"
+                        id='menu-appbar'
                         anchorEl={anchorElMenu}
                         anchorOrigin={{
                             vertical: 'top',
@@ -86,7 +88,7 @@ const Navbar = () => {
                             openNetworkDialog();
                             handleCloseMenu();
                         }}>
-                            Network <Chip size="small" label={network} sx={{ml: '60px'}}/>
+                            Network <Chip size='small' label={network} sx={{ml: '60px'}}/>
                         </MenuItem>
                         <MenuItem onClick={() => {
                             openAuth();
@@ -103,7 +105,7 @@ const Navbar = () => {
                     </Menu>
                 </Container>
             </AppBar>
-            <NetworkDialog selectedValue={network} open={networkDialog} onClose={closeNetworkDialog}/>
+            <NetworkDialog selectedValue={network} open={networkDialog} onClose={handleCloseNetworkDialog}/>
         </>
     );
 }
