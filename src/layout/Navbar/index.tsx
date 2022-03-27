@@ -7,15 +7,16 @@ import IconButton from '@mui/material/IconButton';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Container from '@mui/material/Container';
-import MoreIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 
 import useAppTheme from "../../hooks/useAppTheme";
 import useAuth from "../../hooks/useAuth";
+import useNetwork from "../../hooks/useNetwork";
 
+import NetworkDialog from "../../components/NetworkDialog";
+import {Network} from "../../store/network";
 
 const truncateMiddle = (s: string, cut: number): string => {
     const l = s.length;
@@ -26,7 +27,9 @@ const truncateMiddle = (s: string, cut: number): string => {
 const Navbar = () => {
     const [appTheme, toggleAppTheme] = useAppTheme();
     const [userData, openAuth, signOut] = useAuth();
+    const [network, setNetwork] = useNetwork();
     const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
+    const [networkDialog, setNetworkDialog] = useState(false);
 
     const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElMenu(event.currentTarget);
@@ -36,59 +39,75 @@ const Navbar = () => {
         setAnchorElMenu(null);
     };
 
+    const openNetworkDialog = () => {
+        setNetworkDialog(true);
+    }
+
+    const closeNetworkDialog = (selected: Network) => {
+        setNetworkDialog(false);
+
+        if (selected !== network) {
+            setNetwork(selected);
+        }
+    }
+
     return (
-        <AppBar position="static">
-            <Container maxWidth="lg">
-                <Toolbar>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        MultiSafe
-                    </Typography>
+        <>
+            <AppBar position="static">
+                <Container maxWidth="lg">
                     <Toolbar>
-                        {userData &&
-                        <Button variant="outlined" style={{background: "#fff"}}
-                                onClick={handleOpenMenu}>{truncateMiddle(userData.profile.stxAddress.mainnet, 4)}</Button>}
-                        {!userData && <Button color="inherit" onClick={openAuth}>Connect Wallet</Button>}
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            MultiSafe
+                        </Typography>
+                        <Toolbar>
+                            {userData &&
+                            <Button variant="outlined" style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
+                                    onClick={handleOpenMenu}>{truncateMiddle(userData.profile.stxAddress[network], 4)}</Button>}
+                            {!userData && <Button color="inherit" onClick={openAuth}>Connect Wallet</Button>}
+                        </Toolbar>
+                        <IconButton onClick={toggleAppTheme}>
+                            {appTheme === "light" ? <DarkModeIcon/> : <LightModeIcon/>}
+                        </IconButton>
                     </Toolbar>
-                    <IconButton onClick={toggleAppTheme}>
-                        {appTheme === "light" ? <DarkModeIcon/> : <LightModeIcon/>}
-                    </IconButton>
-                </Toolbar>
-                <Menu
-                    sx={{mt: '45px', minWidth: '400px'}}
-                    id="menu-appbar"
-                    anchorEl={anchorElMenu}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElMenu)}
-                    onClose={handleCloseMenu}
-                >
-                    <MenuItem onClick={() => {
-                        handleCloseMenu();
-                    }}>
-                        <Typography>Network <Chip size="small" label="Mainnet" sx={{ml: '60px'}} /></Typography>
-                    </MenuItem>
-                    <MenuItem onClick={() => {
-                        openAuth();
-                        handleCloseMenu();
-                    }}>
-                        <Typography>Switch Account</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={() => {
-                        signOut();
-                        handleCloseMenu();
-                    }}>
-                        <Typography>Sign Out</Typography>
-                    </MenuItem>
-                </Menu>
-            </Container>
-        </AppBar>
+                    <Menu
+                        sx={{mt: '45px', minWidth: '400px'}}
+                        id="menu-appbar"
+                        anchorEl={anchorElMenu}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElMenu)}
+                        onClose={handleCloseMenu}
+                    >
+                        <MenuItem onClick={() => {
+                            openNetworkDialog();
+                            handleCloseMenu();
+                        }}>
+                            Network <Chip size="small" label={network} sx={{ml: '60px'}}/>
+                        </MenuItem>
+                        <MenuItem onClick={() => {
+                            openAuth();
+                            handleCloseMenu();
+                        }}>
+                            Switch Account
+                        </MenuItem>
+                        <MenuItem onClick={() => {
+                            signOut();
+                            handleCloseMenu();
+                        }}>
+                            Sign Out
+                        </MenuItem>
+                    </Menu>
+                </Container>
+            </AppBar>
+            <NetworkDialog selectedValue={network} open={networkDialog} onClose={closeNetworkDialog}/>
+        </>
     );
 }
 
