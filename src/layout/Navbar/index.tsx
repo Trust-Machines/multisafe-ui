@@ -52,7 +52,7 @@ const Navbar = () => {
 
     return (
         <>
-            <AppBar position='static'>
+            <AppBar position='static' sx={{mb: '30px'}}>
                 <Container maxWidth='lg'>
                     <Toolbar>
                         <Typography variant='h5' component='div' sx={{flexGrow: 1}}>

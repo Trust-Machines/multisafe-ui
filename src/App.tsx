@@ -1,11 +1,13 @@
 import React from 'react';
-import Navbar from "./layout/Navbar";
+import {Router} from '@reach/router'
+
+import Home from './pages/Home';
 
 function App() {
     return (
-        <>
-            <Navbar/>
-        </>
+        <Router>
+            <Home path='/'/>
+        </Router>
     );
 }
 
