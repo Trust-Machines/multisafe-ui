@@ -1,3 +1,3 @@
-import {Network} from "./store/network";
+import {Network} from './store/network';
 
-export const BASE_NETWORKS: Network[] = ["mainnet", "testnet"];
+export const BASE_NETWORKS: Network[] = ['mainnet', 'testnet'];

@@ -18,10 +18,7 @@ import useNetwork from "../../hooks/useNetwork";
 import NetworkDialog from "../../components/NetworkDialog";
 import {Network} from "../../store/network";
 
-const truncateMiddle = (s: string, cut: number): string => {
-    const l = s.length;
-    return s.substring(0, cut) + "..." + s.substring(l - cut, l);
-}
+import {truncateMiddle} from "../../util";
 
 
 const Navbar = () => {
@@ -56,7 +53,7 @@ const Navbar = () => {
             <AppBar position="static">
                 <Container maxWidth="lg">
                     <Toolbar>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                        <Typography variant="h5" component="div" sx={{flexGrow: 1}}>
                             MultiSafe
                         </Typography>
                         <Toolbar>

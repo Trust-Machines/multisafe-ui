@@ -1,12 +1,12 @@
-import {useAtom} from "jotai";
-import {appThemeAtom} from "../store";
-import {PaletteMode} from "@mui/material";
+import {useAtom} from 'jotai';
+import {appThemeAtom} from '../store';
+import {PaletteMode} from '@mui/material';
 
 const useAppTheme = (): [PaletteMode, () => void] => {
     const [appTheme, setAppTheme] = useAtom(appThemeAtom);
 
     const toggleAppTheme = () => {
-        setAppTheme(appTheme === "dark" ? "light" : "dark");
+        setAppTheme(appTheme === 'dark' ? 'light' : 'dark');
     }
 
     return [appTheme, toggleAppTheme];

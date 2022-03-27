@@ -1,8 +1,9 @@
-import {AppConfig, FinishedAuthData, UserData, UserSession} from '@stacks/connect-react';
+import {useAtom} from 'jotai';
+import {FinishedAuthData, UserData} from '@stacks/connect-react';
 import {showConnect} from '@stacks/connect';
-import {useAtom} from "jotai";
-import {userDataAtom} from "../store";
-import {userSession} from "../store/userData";
+
+import {userDataAtom} from '../store';
+import {userSession} from '../store/userData';
 
 const useAuth = (): [UserData | null, () => void, () => void] => {
     const [userData, setUserData] = useAtom(userDataAtom);
@@ -15,21 +16,22 @@ const useAuth = (): [UserData | null, () => void, () => void] => {
     const authOptions = {
         onFinish,
         userSession,
-        redirectTo: "/",
-        manifestPath: "/manifest.json",
+        redirectTo: '/',
+        manifestPath: '/manifest.json',
         appDetails: {
-            name: "MultiSafe",
-            icon: "/logo400.png",
+            name: 'MultiSafe',
+            icon: '/logo400.png',
         },
     };
 
     const openAuth = () => {
+        setUserData(null);
         showConnect(authOptions);
     };
 
     const signOut = () => {
         setUserData(null);
-        userSession.signUserOut("/");
+        userSession.signUserOut('/');
     }
 
     return [userData, openAuth, signOut];

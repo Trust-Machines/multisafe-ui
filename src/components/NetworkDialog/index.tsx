@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -9,8 +10,9 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {blue} from '@mui/material/colors';
-import {BASE_NETWORKS} from "../../constants";
-import {Network} from "../../store/network";
+
+import {BASE_NETWORKS} from '../../constants';
+import {Network} from '../../store/network';
 
 export interface DialogProps {
     open: boolean;

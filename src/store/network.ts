@@ -1,5 +1,5 @@
-import {atom} from "jotai";
+import {atom} from 'jotai';
 
-export type Network = "mainnet" | "testnet";
+export type Network = 'mainnet' | 'testnet';
 
-export const networkAtom = atom<Network>("mainnet");
+export const networkAtom = atom<Network>('mainnet');
