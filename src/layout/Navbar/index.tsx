@@ -52,8 +52,8 @@ const Navbar = () => {
     }
 
     return (
-        <>
-            <AppBar position='static' sx={{mb: '30px'}}>
+        <div style={{flexGrow: 0, zIndex: 1}}>
+            <AppBar position='static'>
                 <Container maxWidth='lg'>
                     <Toolbar>
                         <Typography variant='h5' component='div' sx={{flexGrow: 1}}>
@@ -106,7 +106,7 @@ const Navbar = () => {
                 </Container>
             </AppBar>
             <NetworkDialog selectedValue={network} open={networkDialog} onClose={handleCloseNetworkDialog}/>
-        </>
+        </div>
     );
 }
 
