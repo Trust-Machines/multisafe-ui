@@ -9,14 +9,16 @@ import AppMenu from '../../layout/AppMenu';
 import useAuth from '../../hooks/useAuth';
 import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
 import useTranslation from '../../hooks/useTranslation';
+import useAppTheme from '../../hooks/useAppTheme';
 
 const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }) => {
     const [isMd] = useMediaBreakPoint();
+    const [theme] = useAppTheme();
 
     const [, openAuth,] = useAuth();
 
     const boxStyles = {
-        bgcolor: grey[300],
+        bgcolor: theme === 'light' ? grey[300] : grey[800],
         padding: '20px',
         flexShrink: 0,
         width: isMd ? '260px' : 'auto',
