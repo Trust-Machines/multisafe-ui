@@ -18,7 +18,7 @@ import {Network} from '../../store/network';
 import useAppTheme from '../../hooks/useAppTheme';
 import useAuth from '../../hooks/useAuth';
 import useNetwork from '../../hooks/useNetwork';
-
+import useAddress from "../../hooks/useAddress";
 import NetworkDialog from '../../components/NetworkDialog';
 
 import {truncateMiddle} from '../../util';
@@ -26,7 +26,8 @@ import {truncateMiddle} from '../../util';
 
 const Navbar = () => {
     const [appTheme, toggleAppTheme] = useAppTheme();
-    const [userData, openAuth, signOut] = useAuth();
+    const [, openAuth, signOut] = useAuth();
+    const address = useAddress();
     const [network, setNetwork] = useNetwork();
     const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
     const [networkDialog, setNetworkDialog] = useState(false);
@@ -60,10 +61,10 @@ const Navbar = () => {
                             MultiSafe
                         </Typography>
                         <Stack direction="row" spacing={2}>
-                            {userData &&
+                            {address &&
                             <Button variant='outlined' style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
-                                    onClick={handleOpenMenu}>{truncateMiddle(userData.profile.stxAddress[network], 4)}</Button>}
-                            {!userData && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
+                                    onClick={handleOpenMenu}>{truncateMiddle(address, 4)}</Button>}
+                            {!address && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
                             <IconButton onClick={toggleAppTheme}>
                                 {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}
                             </IconButton>
