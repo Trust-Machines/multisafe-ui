@@ -6,13 +6,12 @@ import useAuth from '../../hooks/useAuth';
 
 import AppContent from '../../layout/AppContent';
 import AppMenu from '../../layout/AppMenu';
-import {useTheme} from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+
+import useMainBreakPoint from "../../hooks/useMainBreakPoint";
 
 
 const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }) => {
-    const theme = useTheme();
-    const isMd = useMediaQuery(theme.breakpoints.up('md'));
+    const [isMd] = useMainBreakPoint();
 
     const [, openAuth, ] = useAuth();
 
@@ -31,8 +30,7 @@ const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }
 }
 
 const Landing = () => {
-    const theme = useTheme();
-    const isMd = useMediaQuery(theme.breakpoints.up('md'));
+    const [isMd] = useMainBreakPoint();
     const boxStyles = {
         display: 'flex',
         justifyContent: 'space-between',
