@@ -12,6 +12,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import {Network} from '../../store/network';
 
@@ -65,7 +66,7 @@ const Navbar = () => {
                         <Stack direction="row" spacing={2}>
                             {address &&
                             <Button variant='outlined' style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
-                                    onClick={handleOpenMenu}>{bnsName || truncateMiddle(address, 4)}</Button>}
+                                    onClick={handleOpenMenu}>{bnsName || truncateMiddle(address, 4)} <ArrowDropDownIcon /></Button>}
                             {!address && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
                             <IconButton onClick={toggleAppTheme}>
                                 {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}

@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import {standardPrincipalCV, callReadOnlyFunction, cvToJSON} from '@stacks/transactions';
-import {StacksMainnet, StacksTestnet} from '@stacks/network';
 
 import useAddress from './useAddress';
 import useNetwork from './useNetwork';
@@ -32,7 +31,7 @@ const useBnsName = (): string | null => {
                 setName(bnsName);
             }
         })
-    }, [address, network])
+    }, [address, network, stacksNetwork])
 
     return name;
 }
