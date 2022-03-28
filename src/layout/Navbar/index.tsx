@@ -30,7 +30,7 @@ const Navbar = () => {
     const [, openAuth, signOut] = useAuth();
     const address = useAddress();
     const bnsName = useBnsName();
-    const [network, setNetwork] = useNetwork();
+    const [network, ,setNetwork] = useNetwork();
     const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
     const [networkDialog, setNetworkDialog] = useState(false);
 

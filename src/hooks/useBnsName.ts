@@ -10,7 +10,7 @@ import {BNS_ADDRESSES} from '../constants';
 const useBnsName = (): string | null => {
     const [name, setName] = useState<string | null>(null);
     const address = useAddress();
-    const [network] = useNetwork()
+    const [network, stacksNetwork] = useNetwork()
 
     useEffect(() => {
         setName(null);
@@ -24,7 +24,7 @@ const useBnsName = (): string | null => {
             functionName: 'resolve-principal',
             functionArgs: [standardPrincipalCV(address)],
             senderAddress: address,
-            network: (network === 'mainnet' ? new StacksMainnet() : new StacksTestnet())
+            network: stacksNetwork
         }).then(r => {
             const res = cvToJSON(r).value.value;
             if (res?.name?.value && res?.namespace?.value) {
