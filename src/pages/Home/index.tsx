@@ -7,11 +7,11 @@ import useAuth from '../../hooks/useAuth';
 import AppContent from '../../layout/AppContent';
 import AppMenu from '../../layout/AppMenu';
 
-import useMainBreakPoint from "../../hooks/useMainBreakPoint";
+import useMediaBreakPoint from "../../hooks/useMediaBreakPoint";
 
 
 const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }) => {
-    const [isMd] = useMainBreakPoint();
+    const [isMd] = useMediaBreakPoint();
 
     const [, openAuth, ] = useAuth();
 
@@ -30,7 +30,7 @@ const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }
 }
 
 const Landing = () => {
-    const [isMd] = useMainBreakPoint();
+    const [isMd] = useMediaBreakPoint();
     const boxStyles = {
         display: 'flex',
         justifyContent: 'space-between',

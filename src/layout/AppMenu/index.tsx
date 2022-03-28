@@ -1,10 +1,9 @@
 import React from 'react';
 import {Box} from '@mui/material';
-import useMainBreakPoint from "../../hooks/useMainBreakPoint";
+import useMediaBreakPoint from "../../hooks/useMediaBreakPoint";
 
 const AppMenu = (props: { children?: React.ReactNode }) => {
-
-    const [isMd] = useMainBreakPoint();
+    const [isMd] = useMediaBreakPoint();
 
     const boxStyles = {
         width: isMd ? '200px' : '100%',

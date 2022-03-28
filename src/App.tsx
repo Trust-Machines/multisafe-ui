@@ -5,10 +5,10 @@ import {Container} from '@mui/material';
 import Home from './pages/Home';
 import Navbar from './layout/Navbar';
 import AppWrapper from './layout/AppWrapper';
-import useMainBreakPoint from './hooks/useMainBreakPoint';
+import useMediaBreakPoint from './hooks/useMediaBreakPoint';
 
 function App() {
-    const [isMd] = useMainBreakPoint();
+    const [isMd] = useMediaBreakPoint();
 
     return (
         <AppWrapper>
