@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@mui/material';
-import {grey} from "@mui/material/colors";
-import useAppTheme from "../../hooks/useAppTheme";
+import {grey} from '@mui/material/colors';
+import useAppTheme from '../../hooks/useAppTheme';
 
 const AppContent = (props: { children: React.ReactNode }) => {
     const [theme] = useAppTheme();

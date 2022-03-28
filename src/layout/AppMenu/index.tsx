@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box} from '@mui/material';
-import useMediaBreakPoint from "../../hooks/useMediaBreakPoint";
+import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
 
 const AppMenu = (props: { children?: React.ReactNode }) => {
     const [isMd] = useMediaBreakPoint();

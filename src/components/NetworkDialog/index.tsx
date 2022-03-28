@@ -11,8 +11,11 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {blue} from '@mui/material/colors';
 
-import {BASE_NETWORKS} from '../../constants';
 import {Network} from '../../store/network';
+
+import useTranslation from '../../hooks/useTranslation';
+
+import {BASE_NETWORKS} from '../../constants';
 
 export interface DialogProps {
     open: boolean;
@@ -22,6 +25,7 @@ export interface DialogProps {
 
 const NetworkDialog = (props: DialogProps) => {
     const {onClose, selectedValue, open} = props;
+    const [t] = useTranslation();
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -34,7 +38,7 @@ const NetworkDialog = (props: DialogProps) => {
     return (
         <Dialog onClose={handleClose} open={open}>
             <DialogTitle>
-                Select Network
+                {t('Select Network')}
                 <IconButton
                     onClick={handleClose}
                     sx={{

@@ -1,4 +1,4 @@
-import {atom} from "jotai";
+import {atom} from 'jotai';
 import {AppConfig, UserData, UserSession} from '@stacks/connect-react';
 
 const appConfig = new AppConfig(['store_write', 'publish_data'], document.location.href);

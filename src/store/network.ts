@@ -1,5 +1,5 @@
 import {atom} from 'jotai';
-import {BASE_NETWORKS} from "../constants";
+import {BASE_NETWORKS} from '../constants';
 
 export type Network = 'mainnet' | 'testnet';
 

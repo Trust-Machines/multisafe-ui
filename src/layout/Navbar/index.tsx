@@ -19,8 +19,10 @@ import {Network} from '../../store/network';
 import useAppTheme from '../../hooks/useAppTheme';
 import useAuth from '../../hooks/useAuth';
 import useNetwork from '../../hooks/useNetwork';
-import useBnsName from "../../hooks/useBnsName";
-import useAddress from "../../hooks/useAddress";
+import useBnsName from '../../hooks/useBnsName';
+import useAddress from '../../hooks/useAddress';
+import useTranslation from '../../hooks/useTranslation';
+
 import NetworkDialog from '../../components/NetworkDialog';
 
 import {truncateMiddle} from '../../util';
@@ -34,7 +36,8 @@ const Navbar = () => {
     const [network, ,setNetwork] = useNetwork();
     const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
     const [networkDialog, setNetworkDialog] = useState(false);
-
+    const [t] = useTranslation();
+    
     const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElMenu(event.currentTarget);
     };
@@ -63,11 +66,11 @@ const Navbar = () => {
                         <Typography variant='h5' component='div' sx={{flexGrow: 1}}>
                             MultiSafe
                         </Typography>
-                        <Stack direction="row" spacing={2}>
+                        <Stack direction='row' spacing={2}>
                             {address &&
                             <Button variant='outlined' style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
                                     onClick={handleOpenMenu}>{bnsName || truncateMiddle(address, 4)} <ArrowDropDownIcon /></Button>}
-                            {!address && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
+                            {!address && <Button color='inherit' onClick={openAuth}>{t('Connect Wallet')}</Button>}
                             <IconButton onClick={toggleAppTheme}>
                                 {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}
                             </IconButton>
@@ -92,19 +95,19 @@ const Navbar = () => {
                             openNetworkDialog();
                             handleCloseMenu();
                         }}>
-                            Network <Chip size='small' label={network} sx={{ml: '60px'}}/>
+                            {t('Network')} <Chip size='small' label={network} sx={{ml: '60px'}}/>
                         </MenuItem>
                         <MenuItem onClick={() => {
                             openAuth();
                             handleCloseMenu();
                         }}>
-                            Switch Account
+                            {t('Switch Account')}
                         </MenuItem>
                         <MenuItem onClick={() => {
                             signOut();
                             handleCloseMenu();
                         }}>
-                            Sign Out
+                            {t('Sign Out')}
                         </MenuItem>
                     </Menu>
                 </Container>
