@@ -18,6 +18,7 @@ import {Network} from '../../store/network';
 import useAppTheme from '../../hooks/useAppTheme';
 import useAuth from '../../hooks/useAuth';
 import useNetwork from '../../hooks/useNetwork';
+import useBnsName from "../../hooks/useBnsName";
 import useAddress from "../../hooks/useAddress";
 import NetworkDialog from '../../components/NetworkDialog';
 
@@ -28,6 +29,7 @@ const Navbar = () => {
     const [appTheme, toggleAppTheme] = useAppTheme();
     const [, openAuth, signOut] = useAuth();
     const address = useAddress();
+    const bnsName = useBnsName();
     const [network, setNetwork] = useNetwork();
     const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
     const [networkDialog, setNetworkDialog] = useState(false);
@@ -63,7 +65,7 @@ const Navbar = () => {
                         <Stack direction="row" spacing={2}>
                             {address &&
                             <Button variant='outlined' style={{background: appTheme === 'light' ? 'white' : 'inherit'}}
-                                    onClick={handleOpenMenu}>{truncateMiddle(address, 4)}</Button>}
+                                    onClick={handleOpenMenu}>{bnsName || truncateMiddle(address, 4)}</Button>}
                             {!address && <Button color='inherit' onClick={openAuth}>Connect Wallet</Button>}
                             <IconButton onClick={toggleAppTheme}>
                                 {appTheme === 'light' ? <DarkModeIcon/> : <LightModeIcon/>}
