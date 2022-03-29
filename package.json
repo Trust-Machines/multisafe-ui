@@ -12,6 +12,7 @@
     "@stacks/connect": "^6.4.1",
     "@stacks/connect-react": "^13.0.2",
     "@stacks/network": "^3.3.0",
+    "@stacks/storage": "^3.3.0",
     "@stacks/transactions": "^2.0.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",

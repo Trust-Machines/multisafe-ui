@@ -10,6 +10,7 @@ import useAuth from '../../hooks/useAuth';
 import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
 import useTranslation from '../../hooks/useTranslation';
 import useAppTheme from '../../hooks/useAppTheme';
+import useSafes from '../../hooks/useSafes';
 
 const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }) => {
     const [isMd] = useMediaBreakPoint();
@@ -54,6 +55,12 @@ const Landing = () => {
     </>
 }
 
+const SafeList = () => {
+    const [safes] = useSafes();
+
+    return <span>List</span>
+}
+
 const Home = (_: RouteComponentProps) => {
     const [userData, openAuth, signOut] = useAuth();
 
@@ -61,8 +68,7 @@ const Home = (_: RouteComponentProps) => {
         <AppMenu/>
         <AppContent>
             {!userData && <Landing/>}
-
-            <Link to="/create">create</Link>
+            {userData && <SafeList/>}
         </AppContent>
     </>
 }
