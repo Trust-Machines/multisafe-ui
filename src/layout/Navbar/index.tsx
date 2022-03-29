@@ -61,7 +61,7 @@ const Navbar = () => {
     return (
         <div style={{flexGrow: 0, zIndex: 1}}>
             <AppBar position='static'>
-                <Container maxWidth='lg'>
+                <Container maxWidth='lg' style={{paddingRight: '0', paddingLeft: '0'}}>
                     <Toolbar>
                         <Typography variant='h5' component='div' sx={{flexGrow: 1}}>
                             MultiSafe

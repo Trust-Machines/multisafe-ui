@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouteComponentProps} from '@reach/router';
+import {RouteComponentProps, Link} from '@reach/router';
 import {Box, Typography, Button} from '@mui/material';
 import {grey} from '@mui/material/colors';
 
@@ -61,6 +61,8 @@ const Home = (_: RouteComponentProps) => {
         <AppMenu/>
         <AppContent>
             {!userData && <Landing/>}
+
+            <Link to="/create">create</Link>
         </AppContent>
     </>
 }
