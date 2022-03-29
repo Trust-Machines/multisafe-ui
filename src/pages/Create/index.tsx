@@ -4,11 +4,11 @@ import {RouteComponentProps} from '@reach/router';
 import AppContent from '../../layout/AppContent';
 import AppMenu from '../../layout/AppMenu';
 
-import useAuth from '../../hooks/useAuth';
+import useUserSession from '../../hooks/useUserSession';
 
 
 const Create = (_: RouteComponentProps) => {
-    const [userData, openAuth, signOut] = useAuth();
+    const [, userData, openAuth, signOut] = useUserSession();
 
     return <>
         <AppMenu/>

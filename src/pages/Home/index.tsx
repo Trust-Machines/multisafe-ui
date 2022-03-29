@@ -6,7 +6,7 @@ import {grey} from '@mui/material/colors';
 import AppContent from '../../layout/AppContent';
 import AppMenu from '../../layout/AppMenu';
 
-import useAuth from '../../hooks/useAuth';
+import useUserSession from '../../hooks/useUserSession';
 import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
 import useTranslation from '../../hooks/useTranslation';
 import useAppTheme from '../../hooks/useAppTheme';
@@ -16,7 +16,7 @@ const LandingBox = (props: { title: string, subtitle: string, btnLabel: string }
     const [isMd] = useMediaBreakPoint();
     const [theme] = useAppTheme();
 
-    const [, openAuth,] = useAuth();
+    const [,, openAuth,] = useUserSession();
 
     const boxStyles = {
         bgcolor: theme === 'light' ? grey[300] : grey[800],
@@ -62,7 +62,7 @@ const SafeList = () => {
 }
 
 const Home = (_: RouteComponentProps) => {
-    const [userData, openAuth, signOut] = useAuth();
+    const [,userData, openAuth, signOut] = useUserSession();
 
     return <>
         <AppMenu/>

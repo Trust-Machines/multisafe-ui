@@ -17,7 +17,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {Network} from '../../store/network';
 
 import useAppTheme from '../../hooks/useAppTheme';
-import useAuth from '../../hooks/useAuth';
+import useUserSession from '../../hooks/useUserSession';
 import useNetwork from '../../hooks/useNetwork';
 import useBnsName from '../../hooks/useBnsName';
 import useAddress from '../../hooks/useAddress';
@@ -30,7 +30,7 @@ import {truncateMiddle} from '../../util';
 
 const Navbar = () => {
     const [appTheme, toggleAppTheme] = useAppTheme();
-    const [, openAuth, signOut] = useAuth();
+    const [,, openAuth, signOut] = useUserSession();
     const address = useAddress();
     const bnsName = useBnsName();
     const [network, ,setNetwork] = useNetwork();

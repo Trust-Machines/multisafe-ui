@@ -1,4 +1,4 @@
 export {appThemeAtom} from './appTheme';
 export {networkAtom} from './network';
-export {userDataAtom} from './userData';
+export {userSessionAtom, userDataAtom} from './userSession';
 export {safesAtom} from './safes';
