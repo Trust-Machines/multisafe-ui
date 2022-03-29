@@ -1,14 +1,20 @@
-import {useEffect} from "react";
+import {useEffect, useMemo} from 'react';
 import {useAtom} from 'jotai';
-import {safesAtom} from "../store";
-import useAddress from './useAddress';
+import {Storage} from '@stacks/storage';
 
-import {SafesState} from "../store/safes";
+import {safesAtom} from '../store';
+import useAddress from './useAddress';
+import useUserSession from './useUserSession';
+import {SafesState} from '../store/safes';
 
 const useSafes = (): [SafesState, () => Promise<boolean>, () => Promise<boolean>, () => Promise<boolean>] => {
     const address = useAddress();
+    const [userSession] = useUserSession();
     const [safes, setSafes] = useAtom(safesAtom);
-
+    const storage = useMemo(() => {
+        return userSession ? new Storage({userSession}) : null
+    }, [userSession]);
+    //const storage = new Storage({ userSession });
     useEffect(() => {
         setSafes({loading: false, safes: []});
         if (address) {
@@ -17,7 +23,22 @@ const useSafes = (): [SafesState, () => Promise<boolean>, () => Promise<boolean>
     }, [address, setSafes])
 
     const fetchSafes = async (): Promise<boolean> => {
-        console.log("here")
+        if (!storage) {
+            return false;
+        }
+
+        
+
+        storage.getFile('safes.txt').then(r => {
+            console.log(r)
+        }).catch((e: Error) => {
+            console.log(e.name === 'DoesNotExist')
+        })
+
+        /*
+
+
+         */
         return true
     }
 

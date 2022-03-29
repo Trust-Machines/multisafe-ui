@@ -3,6 +3,7 @@ import {FinishedAuthData} from '@stacks/connect-react';
 import {showConnect} from '@stacks/connect';
 import {UserSession, UserData} from '@stacks/connect-react';
 import {userSessionAtom, userDataAtom} from '../store';
+
 import {appConfig, baseAuthOptions} from '../constants';
 
 const useUserSession = (): [UserSession | null, UserData | null, () => void, () => void] => {
@@ -19,7 +20,7 @@ const useUserSession = (): [UserSession | null, UserData | null, () => void, () 
             userSession: new UserSession({appConfig}),
             ...baseAuthOptions
         };
-        setUserSession(new UserSession({appConfig}));
+        setUserSession(null);
         showConnect(authOptions);
     };
 
