@@ -5,53 +5,65 @@ import {Storage} from '@stacks/storage';
 import {safesAtom} from '../store';
 import useAddress from './useAddress';
 import useUserSession from './useUserSession';
+import useStorage from './useStorage';
+
 import {SafesState} from '../store/safes';
 
-const useSafes = (): [SafesState, () => Promise<boolean>, () => Promise<boolean>, () => Promise<boolean>] => {
+const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) => Promise<any>, () => Promise<boolean>] => {
     const address = useAddress();
     const [userSession] = useUserSession();
     const [safes, setSafes] = useAtom(safesAtom);
-    const storage = useMemo(() => {
-        return userSession ? new Storage({userSession}) : null
-    }, [userSession]);
-    //const storage = new Storage({ userSession });
+    const [getFile, putFile] = useStorage(userSession);
+
     useEffect(() => {
-        setSafes({loading: false, safes: []});
+        setSafes({loading: !!address, safes: []});
         if (address) {
-            fetchSafes().then();
+            getSafeList().then(r => {
+                setSafes({loading: false, safes: r.map((x) => ({name: x}))});
+            });
         }
-    }, [address, setSafes])
+    }, [address])
+
+    /*
+    //const storage = new Storage({ userSession });
+
 
     const fetchSafes = async (): Promise<boolean> => {
         if (!storage) {
             return false;
         }
 
-        
 
         storage.getFile('safes.txt').then(r => {
-            console.log(r)
+            //  console.log(r)
         }).catch((e: Error) => {
             console.log(e.name === 'DoesNotExist')
         })
 
-        /*
 
-
-         */
         return true
+    } */
+
+    const getSafeList = async (): Promise<string[]> => {
+        return getFile('safes').then(r => {
+            return r.split("\n");
+        });
     }
 
-    const addSafe = async (): Promise<boolean> => {
-        return true
+    const addNewSafe = async (safe: string): Promise<any> => {
+        return getSafeList().then((r) => {
+            if (r.includes(safe)) {
+                throw Error('The safe is already in the list!');
+            }
+            return putFile('safes', [...r, safe].join("\n"));
+        })
     }
 
     const deleteSafe = async (): Promise<boolean> => {
         return true
     }
 
-
-    return [safes, fetchSafes, addSafe, deleteSafe];
+    return [safes, getSafeList, addNewSafe, deleteSafe];
 }
 
 export default useSafes;
