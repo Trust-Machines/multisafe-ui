@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import {useTheme} from '@mui/material';
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {grey} from '@mui/material/colors';
@@ -39,8 +38,8 @@ const WalletMenu = () => {
 }
 
 const Wallet = () => {
-    const [menu, setMenu] = useState(false)
-    const theme = useTheme()
+    const [menu, setMenu] = useState(false);
+    const theme = useTheme();
     const [appTheme] = useAppTheme();
     const [, , openAuth] = useUserSession();
     const address = useAddress();
