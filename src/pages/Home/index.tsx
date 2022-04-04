@@ -14,7 +14,7 @@ import AppMenu from '../../layout/AppMenu';
 
 
 const Home = (_: RouteComponentProps) => {
-    const [isSm] = useMediaBreakPoint();
+    const [isMd] = useMediaBreakPoint();
     const [t] = useTranslation();
     return <>
         <AppMenu/>
@@ -29,13 +29,13 @@ const Home = (_: RouteComponentProps) => {
                     alignItems: 'center'
                 }}>
                     <TextField sx={{
-                        width: 640,
+                        width: isMd ? '640px' : '100%',
                         marginRight: '6px'
                     }} label={t('Safe Address')} placeholder={t('Enter safe address and press enter')}/>
                 </Box>
             </Box>
             <Box sx={{marginTop: '40px'}}>
-                <ThemedBox sx={{padding: '20px', width: isSm ? '260px' : 'auto',}}>
+                <ThemedBox sx={{padding: '20px', width: isMd ? '260px' : 'auto',}}>
                     <Typography variant='h6' gutterBottom>{t('Don\'t have a safe?')}</Typography>
                     <Typography mb='40px'>{t('Create a safe with multiple owners')}{' '}</Typography>
                     <Button variant='contained'>{t('Create')}</Button>
