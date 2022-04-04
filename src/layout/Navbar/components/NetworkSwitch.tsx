@@ -13,7 +13,7 @@ const NetworkChip = (props: { label: string, onClick?: () => void }) => {
                  color={props.label === 'mainnet' ? 'primary' : 'default'} onClick={props.onClick}/>;
 }
 
-const NetworkMenu = () => {
+const NetworkMenu = (props: { onChange: () => void }) => {
     const [, , setNetwork] = useNetwork();
 
     return (
@@ -25,12 +25,14 @@ const NetworkMenu = () => {
         }}>
             <Box sx={{marginBottom: '6px'}}>
                 <NetworkChip label='mainnet' onClick={() => {
-                    setNetwork('mainnet')
+                    setNetwork('mainnet');
+                    props.onChange();
                 }}/>
             </Box>
             <Box>
                 <NetworkChip label='testnet' onClick={() => {
-                    setNetwork('testnet')
+                    setNetwork('testnet');
+                    props.onChange();
                 }}/>
             </Box>
         </ThemedBox>
@@ -62,7 +64,11 @@ const NetworkSwitch = () => {
                 }}>
                     <NetworkChip label={network}/>
                 </Box>
-                {menu && <NetworkMenu/>}
+                {menu && <NetworkMenu onChange={() => {
+                    setTimeout(() => {
+                        setMenu(false);
+                    }, 100);
+                }}/>}
             </Box>
         </ClickAwayListener>);
 }
