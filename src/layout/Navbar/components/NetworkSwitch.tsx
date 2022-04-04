@@ -7,7 +7,6 @@ import {grey} from '@mui/material/colors';
 
 import ThemedBox from '../../../components/ThemedBox';
 import useNetwork from '../../../hooks/useNetwork';
-import useAppTheme from '../../../hooks/useAppTheme';
 import {useTheme} from '@mui/material';
 
 
@@ -45,7 +44,6 @@ const NetworkMenu = (props: { onChange: () => void }) => {
 const NetworkSwitch = () => {
     const [menu, setMenu] = useState(false);
     const [network] = useNetwork();
-    const [appTheme] = useAppTheme();
     const theme = useTheme();
 
     return (
@@ -59,7 +57,7 @@ const NetworkSwitch = () => {
                 position: 'relative',
                 borderRight: `2px solid ${theme.palette.divider}`,
                 '&:hover': {
-                    background: appTheme === 'light' ? grey[50] : grey[800]
+                    background: theme.palette.mode === 'light' ? grey[50] : grey[800]
                 }
             }} onClick={() => {
                 setMenu(true);

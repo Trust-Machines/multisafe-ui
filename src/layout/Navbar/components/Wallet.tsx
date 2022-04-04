@@ -40,7 +40,6 @@ const WalletMenu = () => {
 const Wallet = () => {
     const [menu, setMenu] = useState(false);
     const theme = useTheme();
-    const [appTheme] = useAppTheme();
     const [, , openAuth] = useUserSession();
     const address = useAddress();
     const bnsName = useBnsName();
@@ -65,7 +64,7 @@ const Wallet = () => {
                 flexShrink: 0,
                 position: 'relative',
                 '&:hover': {
-                    background: appTheme === 'light' ? grey[50] : grey[800]
+                    background: theme.palette.mode === 'light' ? grey[50] : grey[800]
                 }
             }}>
                 <Box sx={{
@@ -76,7 +75,7 @@ const Wallet = () => {
                     padding: '0 20px',
                 }}>
                     <AccountBalanceWalletIcon sx={{
-                        color: appTheme === 'light' ? grey[800] : grey[50],
+                        color: theme.palette.mode === 'light' ? grey[800] : grey[50],
                         marginRight: '10px',
                         display: isSm ? 'block' : 'none'
                     }}/>
@@ -86,7 +85,7 @@ const Wallet = () => {
                         flexDirection: 'column',
                         fontSize: '90%',
                         '.first-line': {
-                            fontWeight: 600, color: appTheme === 'dark' ? grey[50] : 'inherit'
+                            fontWeight: 600, color: theme.palette.mode === 'dark' ? grey[50] : 'inherit'
                         },
                         '.second-line': {
                             color: theme.palette.primary.main
