@@ -3,9 +3,12 @@ import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import {grey} from '@mui/material/colors';
 
 import ThemedBox from '../../../components/ThemedBox';
 import useNetwork from '../../../hooks/useNetwork';
+import useAppTheme from '../../../hooks/useAppTheme';
+import {useTheme} from '@mui/material';
 
 
 const NetworkChip = (props: { label: string, onClick?: () => void }) => {
@@ -42,6 +45,8 @@ const NetworkMenu = (props: { onChange: () => void }) => {
 const NetworkSwitch = () => {
     const [menu, setMenu] = useState(false);
     const [network] = useNetwork();
+    const [appTheme] = useAppTheme();
+    const theme = useTheme();
 
     return (
         <ClickAwayListener onClickAway={() => {
@@ -49,9 +54,13 @@ const NetworkSwitch = () => {
         }}>
             <Box sx={{
                 flexShrink: 0,
-                width: '116px',
+                width: '100px',
                 height: '100%',
-                position: 'relative'
+                position: 'relative',
+                borderRight: `2px solid ${theme.palette.divider}`,
+                '&:hover': {
+                    background: appTheme === 'light' ? grey[50] : grey[800]
+                }
             }} onClick={() => {
                 setMenu(true);
             }}>
@@ -59,8 +68,8 @@ const NetworkSwitch = () => {
                     height: '100%',
                     display: 'flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     cursor: 'pointer',
-                    padding: '0 20px',
                 }}>
                     <NetworkChip label={network}/>
                 </Box>
