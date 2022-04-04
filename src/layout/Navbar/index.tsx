@@ -75,7 +75,7 @@ const Navbar = () => {
             display: 'flex',
             padding: '0 18px',
             position: 'relative',
-            zIndex: 1,
+            zIndex: 2,
             boxShadow: `${theme.palette.divider} 0 2px 4px 0`,
             background: appTheme === 'light' ? '#fff' : grey[900],
             userSelect: 'none'

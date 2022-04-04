@@ -1,17 +1,19 @@
 import React from 'react';
-import {Box} from '@mui/material';
+import {Box, useTheme} from '@mui/material';
 import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
 
 const AppMenu = (props: { children?: React.ReactNode }) => {
     const [,isMd] = useMediaBreakPoint();
+    const theme = useTheme();
 
-    const boxStyles = {
+    return <Box sx={{
         width: isMd ? '200px' : '100%',
         flexGrow: 0,
-        flexShrink: 0
-    }
-
-    return <Box sx={boxStyles}>{props.children}</Box>
+        flexShrink: 0,
+        display: 'flex',
+        boxShadow: `${theme.palette.divider} 1px 2px 10px 0px`,
+        zIndex: 1
+    }}>{props.children}</Box>
 }
 
 export default AppMenu;

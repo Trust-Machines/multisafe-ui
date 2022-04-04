@@ -3,9 +3,11 @@ import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 
 import useAppTheme from '../../../hooks/useAppTheme';
+import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
 
 const Brand = () => {
     const [appTheme] = useAppTheme();
+    const [isSm] = useMediaBreakPoint();
 
     return (
         <Box sx={{
@@ -29,7 +31,8 @@ const Brand = () => {
             <Box sx={{
                 fontSize: '1.3rem',
                 fontWeight: 600,
-                color: appTheme === 'light' ? grey[900] : grey[50]
+                color: appTheme === 'light' ? grey[900] : grey[50],
+                display: isSm ? 'block' : 'none'
             }}>MultiSafe</Box>
         </Box>
     );

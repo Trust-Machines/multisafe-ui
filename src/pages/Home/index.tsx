@@ -80,6 +80,7 @@ const Home = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();
 
     return <>
+        <AppMenu/>
         <AppContent>
             <Landing/>
         </AppContent>
