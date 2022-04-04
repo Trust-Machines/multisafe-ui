@@ -7,11 +7,11 @@ const AppContent = (props: { children: React.ReactNode }) => {
     const [theme] = useAppTheme();
 
     const boxStyles = {
-        bgcolor: theme === 'light' ? grey[100] : grey[900],
+        bgcolor: theme === 'light' ? grey[50] : grey[900],
         color: theme === 'light' ? grey[900] : grey[300],
-        height: 'calc(100% - 60px)',
+        height: 'calc(100% - 40px)',
         flexGrow: 1,
-        padding: '40px 20px 20px 20px',
+        padding: '20px',
         overflow: 'auto'
     }
 

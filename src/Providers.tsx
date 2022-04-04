@@ -15,7 +15,7 @@ const StoreDevToolsProvider: React.FC = ({children}) => {
 const themes = {
     'light': createTheme({
         palette: {
-            mode: 'light',
+            mode: 'light'
         },
     }),
     'dark': createTheme({

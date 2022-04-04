@@ -2,6 +2,7 @@ body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
 
 #root {
@@ -12,4 +13,8 @@ body {
     right: 0;
     top:0;
     bottom: 0;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }

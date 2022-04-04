@@ -11,18 +11,16 @@ import Create from './pages/Create';
 import Import from './pages/Import';
 
 function App() {
-    const [isMd] = useMediaBreakPoint();
+    const [,isMd] = useMediaBreakPoint();
 
     return (
         <AppWrapper>
             <Navbar/>
-            <Container maxWidth='lg' sx={{flexGrow: 1, display: 'flex'}}>
-                <Router style={{flexGrow: 1, display: 'flex', flexDirection: isMd ? 'row' : 'column'}}>
-                    <Home path='/'/>
-                    <Create path='/create'/>
-                    <Import path='/import'/>
-                </Router>
-            </Container>
+            <Router style={{flexGrow: 1, display: 'flex', flexDirection: isMd ? 'row' : 'column'}}>
+                <Home path='/'/>
+                <Create path='/create'/>
+                <Import path='/import'/>
+            </Router>
         </AppWrapper>
     );
 }
