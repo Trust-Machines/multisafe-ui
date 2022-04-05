@@ -7,20 +7,17 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {grey} from '@mui/material/colors';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-import useAppTheme from '../../../hooks/useAppTheme';
 import useUserSession from '../../../hooks/useUserSession';
 import useBnsName from '../../../hooks/useBnsName';
 import useAddress from '../../../hooks/useAddress';
 import useTranslation from '../../../hooks/useTranslation';
 import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
-import useNetwork from '../../../hooks/useNetwork';
 
 import ThemedBox from '../../../components/ThemedBox';
 
 import {truncateMiddle} from '../../../util';
 
 const WalletMenu = () => {
-    const [network] = useNetwork();
     const [t] = useTranslation();
     const [, , , signOut] = useUserSession();
 

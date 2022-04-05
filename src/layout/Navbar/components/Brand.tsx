@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
-import useAppTheme from '../../../hooks/useAppTheme';
 import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
 
 

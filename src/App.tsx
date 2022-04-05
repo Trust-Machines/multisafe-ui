@@ -1,6 +1,5 @@
 import React from 'react';
 import {Router} from '@reach/router';
-import {Container} from '@mui/material';
 
 import useMediaBreakPoint from './hooks/useMediaBreakPoint';
 
