@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useMemo, useState} from 'react';
 import {RouteComponentProps} from '@reach/router';
 
 import Typography from '@mui/material/Typography';
@@ -9,7 +9,7 @@ import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import {validateStacksAddress} from '@stacks/transactions';
 import AppContent from '../../layout/AppContent';
 import AppMenu from '../../layout/AppMenu';
 
@@ -35,14 +35,48 @@ const SafeName = (props: { onSubmit: (name: string) => void }) => {
     </Box>
 }
 
+
+const SafeOwnerInput = (props: { owner: string, deletable: boolean, autoFocus: boolean, dirty: boolean, onChange: (value: string) => void, onDelete: () => void }) => {
+    const [t] = useTranslation();
+    const isValid = useMemo(() => validateStacksAddress(props.owner), [props.owner]);
+    const showError = props.dirty && !isValid;
+    return <Box sx={{mb: '26px', display: 'flex'}}>
+        <WalletField
+            inputProps={{
+                value: props.owner,
+                label: t('Owner address'),
+                autoFocus: props.autoFocus,
+                onChange: (e) => {
+                    props.onChange(e.target.value)
+                },
+                error: showError,
+                helperText: showError ? t('Enter a valid Stacks wallet address') : ''
+            }}
+            onBnsResolve={(name) => {
+                props.onChange(name);
+            }}
+            isValid={isValid}
+        />
+        <Box sx={{width: '40px', p: '0 10px', display: 'flex', alignItems: 'center'}}>
+            {props.deletable ? <IconButton onClick={() => {
+                props.onDelete();
+            }}>
+                <DeleteIcon/>
+            </IconButton> : ''}
+        </Box>
+    </Box>
+}
+
+
 const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) => void }) => {
+    const [submitted, setSubmitted] = useState<boolean>(false);
     const [owners, setOwners] = useState<string[]>([""]);
     const [t] = useTranslation();
 
-    const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, i: number) => {
+    const updateOwner = (i: number, value: string) => {
         const nOwners = owners.map((o, j) => {
             if (j === i) {
-                return e.target.value;
+                return value;
             }
 
             return o;
@@ -64,20 +98,13 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
             sx={helpTextStyles}>{'Your Safe will have one or more owners. Add additional owners and specify how many of them have to confirm a transaction before it gets executed. In general, the more confirmations required, the more secure your Safe is.'}</Typography>
 
         {owners.map((x, i) => {
-            return <Box key={i} sx={{mb: '26px', display: 'flex'}}>
-                <WalletField sx={{flexGrow: 1}} label={t('Owner address')} autoFocus={i > 0} value={owners[i]}
-                           onChange={(e) => {
-                               console.log("change2")
-                               handleInputChange(e, i);
-                           }}/>
-                <Box sx={{width: '40px', p: '0 10px', display: 'flex', alignItems: 'center'}}>
-                    {i > 0 ? <IconButton onClick={() => {
-                        deleteOwner(i);
-                    }}>
-                        <DeleteIcon/>
-                    </IconButton> : ''}
-                </Box>
-            </Box>
+            return <SafeOwnerInput key={i} owner={owners[i]} deletable={i > 0} autoFocus={i > 0} dirty={submitted}
+                                   onChange={(value) => {
+                                       updateOwner(i, value);
+                                   }}
+                                   onDelete={() => {
+                                       deleteOwner(i);
+                                   }}/>
         })}
 
         <Box sx={{m: '20px', textAlign: 'center'}}>
@@ -87,6 +114,7 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
         <BoxFooter>
             <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
             <Button variant="contained" onClick={() => {
+                setSubmitted(true);
                 props.onSubmit(owners);
             }}>{t('Continue')}</Button>
         </BoxFooter>
