@@ -1,7 +1,7 @@
 import React from 'react'
 import {Provider} from 'jotai';
 import {useAtomDevtools} from 'jotai/devtools'
-import {ThemeProvider as MThemeProvider, createTheme} from '@mui/material';
+import {ThemeProvider as MThemeProvider, createTheme, ThemeOptions} from '@mui/material';
 
 import {networkAtom, appThemeAtom} from './store';
 import useAppTheme from './hooks/useAppTheme';
@@ -12,16 +12,22 @@ const StoreDevToolsProvider: React.FC = ({children}) => {
     return <>{children}</>;
 }
 
+
+const themeOptions: ThemeOptions = {
+    palette: {
+        mode: 'light'
+    }
+}
+
 const themes = {
     'light': createTheme({
-        palette: {
-            mode: 'light'
-        },
+        ...themeOptions
     }),
     'dark': createTheme({
+        ...themeOptions,
         palette: {
             mode: 'dark',
-        },
+        }
     })
 }
 
