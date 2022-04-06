@@ -1,9 +1,11 @@
 import React from 'react';
+import {useNavigate} from '@reach/router';
 import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
 import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
+
 
 
 const Brand = () => {
@@ -15,7 +17,10 @@ const Brand = () => {
             display: 'flex',
             alignItems: 'center',
             flexShrink: 0,
-            flexGrow: 0
+            flexGrow: 0,
+            cursor: 'pointer'
+        }} onClick={()=>{
+            window.location.href = '/';
         }}>
             <Box sx={{
                 width: '32px',

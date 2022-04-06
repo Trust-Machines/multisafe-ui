@@ -30,7 +30,7 @@ const useUserSession = (): [UserSession | null, UserData | null, () => void, () 
         }
 
         setUserSession(null);
-        userSession.signUserOut('/');
+        userSession.signUserOut();
     }
 
     return [userSession, userData, openAuth, signOut];
