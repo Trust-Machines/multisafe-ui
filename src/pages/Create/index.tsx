@@ -36,10 +36,20 @@ const SafeName = (props: { onSubmit: (name: string) => void }) => {
 }
 
 
-const SafeOwnerInput = (props: { owner: string, deletable: boolean, autoFocus: boolean, dirty: boolean, onChange: (value: string) => void, onDelete: () => void }) => {
+const SafeOwnerInput = (props: {
+    owner: string,
+    deletable: boolean,
+    autoFocus: boolean,
+    dirty: boolean,
+    onChange: (value: string) => void,
+    onDelete: () => void,
+    hasDuplicate: boolean
+}) => {
     const [t] = useTranslation();
     const isValid = useMemo(() => validateStacksAddress(props.owner), [props.owner]);
     const showError = props.dirty && !isValid;
+    const hasDuplicate = isValid && props.hasDuplicate;
+
     return <Box sx={{mb: '26px', display: 'flex'}}>
         <WalletField
             inputProps={{
@@ -49,8 +59,8 @@ const SafeOwnerInput = (props: { owner: string, deletable: boolean, autoFocus: b
                 onChange: (e) => {
                     props.onChange(e.target.value)
                 },
-                error: showError,
-                helperText: showError ? t('Enter a valid Stacks wallet address') : ''
+                error: showError || hasDuplicate,
+                helperText: showError || hasDuplicate ? (hasDuplicate ? t('Address already added') : t('Enter a valid Stacks wallet address')) : ''
             }}
             onBnsResolve={(name) => {
                 props.onChange(name);
@@ -74,14 +84,7 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
     const [t] = useTranslation();
 
     const updateOwner = (i: number, value: string) => {
-        const nOwners = owners.map((o, j) => {
-            if (j === i) {
-                return value;
-            }
-
-            return o;
-        });
-
+        const nOwners = owners.map((o, j) => j === i ? value : o);
         setOwners([...nOwners]);
     }
 
@@ -99,6 +102,7 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
 
         {owners.map((x, i) => {
             return <SafeOwnerInput key={i} owner={owners[i]} deletable={i > 0} autoFocus={i > 0} dirty={submitted}
+                                   hasDuplicate={owners.filter(x => x === owners[i]).length > 1}
                                    onChange={(value) => {
                                        updateOwner(i, value);
                                    }}
@@ -106,11 +110,9 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
                                        deleteOwner(i);
                                    }}/>
         })}
-
         <Box sx={{m: '20px', textAlign: 'center'}}>
             <Button onClick={addOwner}><AddIcon/> {t('Add another owner')}</Button>
         </Box>
-
         <BoxFooter>
             <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
             <Button variant="contained" onClick={() => {
