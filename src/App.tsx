@@ -5,9 +5,9 @@ import useMediaBreakPoint from './hooks/useMediaBreakPoint';
 
 import AppWrapper from './layout/AppWrapper'
 import Navbar from './layout/Navbar';
-import Home from './pages/Home';
-import Create from './pages/Create';
-import Import from './pages/Import';
+import Home from './views/Home';
+import Create from './views/Create';
+import Import from './views/Import';
 
 function App() {
     const [,isMd] = useMediaBreakPoint();

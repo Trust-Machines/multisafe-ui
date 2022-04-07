@@ -4,9 +4,9 @@ import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
-import Brand from './components/Brand';
-import Wallet from './components/Wallet';
-import NetworkSwitch from './components/NetworkSwitch';
+import Brand from './Components/Brand';
+import Wallet from './Components/Wallet';
+import NetworkSwitch from './Components/NetworkSwitch';
 
 
 const Navbar = () => {
