@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-14h3jy0"
+  >
+    <span>
+      children
+    </span>
+  </div>
+</div>
+`;
+
+exports[`2 Render with custom style 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-14k07pk"
+  >
+    <span>
+      children
+    </span>
+  </div>
+</div>
+`;
