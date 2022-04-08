@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-uewl2b"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-n1p23n-MuiTypography-root"
+    >
+      First, let's give your new safe a name. Your new safe will be created with this name and it will be stored on blockchain. Therefore, only alphanumeric characters and hyphens accepted.
+    </p>
+    <div
+      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+    >
+      <label
+        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="true"
+        for="mui-1"
+        id="mui-1-label"
+      >
+        Safe name
+      </label>
+      <div
+        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          aria-describedby="mui-1-helper-text"
+          aria-invalid="false"
+          class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-1"
+          maxlength="30"
+          placeholder="my-new-safe"
+          type="text"
+          value="my-safe-2"
+        />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-1in441m"
+          >
+            <span>
+              Safe name
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <p
+        class="MuiFormHelperText-root MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-focused MuiFormHelperText-filled css-1wc848c-MuiFormHelperText-root"
+        id="mui-1-helper-text"
+      >
+        <span
+          class="notranslate"
+        >
+          ​
+        </span>
+      </p>
+    </div>
+  </div>
+  <div
+    class="MuiBox-root css-1eq8oyx"
+  >
+    <button
+      class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-sghohy-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      Continue
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;

@@ -7,8 +7,8 @@ import useTranslation from '../../../hooks/use-translation';
 
 import BoxFooter from '../../../components/box-footer';
 
-const SafeName = (props: { onSubmit: (name: string) => void }) => {
-    const [name, setName] = useState<string>("");
+const SafeName = (props: { name: string, onSubmit: (name: string) => void }) => {
+    const [name, setName] = useState<string>(props.name);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>();
     const [t] = useTranslation();
@@ -35,11 +35,18 @@ const SafeName = (props: { onSubmit: (name: string) => void }) => {
                 fontSize: '90%',
                 color: 'text.secondary'
             }}>{'First, let\'s give your new safe a name. Your new safe will be created with this name and it will be stored on blockchain. Therefore, only alphanumeric characters and hyphens accepted.'}</Typography>
-            <TextField fullWidth label={t('Safe name')} placeholder={'my-new-safe'} autoFocus={true} value={name}
+            <TextField fullWidth
+                       label={t('Safe name')}
+                       placeholder={'my-new-safe'}
+                       autoFocus={true}
+                       value={name}
+                       error={error}
                        onChange={(e) => {
                            setName(e.target.value);
                        }}
-                       error={error}
+                       inputProps={{
+                           maxLength: 30
+                       }}
                        helperText={error ? t('Only alphanumeric characters and hyphens') : ' '}
                        inputRef={inputRef}
                        onKeyPress={(e) => {

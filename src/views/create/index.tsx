@@ -20,6 +20,7 @@ const Create = (_: RouteComponentProps) => {
     const [t] = useTranslation();
     const [step, setStep] = useState(0);
 
+    const [name, setName] = useState("");
 
     return <>
         <AppContent>
@@ -30,7 +31,8 @@ const Create = (_: RouteComponentProps) => {
                     <Step key={0}>
                         <StepLabel>Safe Name</StepLabel>
                         <StepContent>
-                            <SafeName onSubmit={() => {
+                            <SafeName name={name} onSubmit={(name) => {
+                                setName(name)
                                 setStep(step + 1);
                             }}/>
                         </StepContent>
