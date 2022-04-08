@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router} from '@reach/router';
 
-import useMediaBreakPoint from './hooks/useMediaBreakPoint';
+import useMediaBreakPoint from './hooks/use-media-break-point';
 
 import AppWrapper from './layout/app-wrapper'
 import Navbar from './layout/navbar';

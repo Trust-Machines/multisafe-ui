@@ -2,8 +2,8 @@ import {render} from '@testing-library/react';
 
 import NetworkSwitch, {NetworkMenu} from './NetworkSwitch';
 
-import useNetwork from '../../../hooks/useNetwork';
-jest.mock('../../../hooks/useNetwork');
+import useNetwork from '../../../hooks/use-network';
+jest.mock('../../../hooks/use-network');
 
 test('1 Default render', () => {
     (useNetwork as jest.Mock).mockReturnValue(['mainnet']);

@@ -11,10 +11,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {grey} from '@mui/material/colors';
 import {getAbi, ClarityAbi} from '@stacks/transactions';
 
-import useAddress from '../../hooks/useAddress';
-import useTranslation from '../../hooks/useTranslation';
-import useNetwork from '../../hooks/useNetwork';
-import useSafes from '../../hooks/useSafes';
+import useAddress from '../../hooks/use-address';
+import useTranslation from '../../hooks/use-translation';
+import useNetwork from '../../hooks/use-network';
+import useSafes from '../../hooks/use-safes';
 
 import {validateSafeAbi} from '../../helper';
 

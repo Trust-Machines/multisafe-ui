@@ -7,11 +7,11 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {grey} from '@mui/material/colors';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-import useUserSession from '../../../hooks/useUserSession';
-import useBnsName from '../../../hooks/useBnsName';
-import useAddress from '../../../hooks/useAddress';
-import useTranslation from '../../../hooks/useTranslation';
-import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
+import useUserSession from '../../../hooks/use-user-session';
+import useBnsName from '../../../hooks/use-bns-name';
+import useAddress from '../../../hooks/use-address';
+import useTranslation from '../../../hooks/use-translation';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
 import ThemedBox from '../../../components/themed-box';
 

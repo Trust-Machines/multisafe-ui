@@ -3,7 +3,7 @@ import {Box, Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
-import useTranslation from '../../../hooks/useTranslation';
+import useTranslation from '../../../hooks/use-translation';
 
 import BoxFooter from '../../../components/box-footer';
 

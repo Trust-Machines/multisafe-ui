@@ -4,7 +4,7 @@ import {useAtomDevtools} from 'jotai/devtools'
 import {ThemeProvider as MThemeProvider, createTheme, ThemeOptions} from '@mui/material';
 
 import {networkAtom, appThemeAtom} from './store';
-import useAppTheme from './hooks/useAppTheme';
+import useAppTheme from './hooks/use-app-theme';
 
 const StoreDevToolsProvider: React.FC = ({children}) => {
     useAtomDevtools(networkAtom, 'Network');

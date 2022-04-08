@@ -6,7 +6,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {grey} from '@mui/material/colors';
 
 import ThemedBox from '../../../components/themed-box';
-import useNetwork from '../../../hooks/useNetwork';
+import useNetwork from '../../../hooks/use-network';
 import {useTheme} from '@mui/material';
 
 

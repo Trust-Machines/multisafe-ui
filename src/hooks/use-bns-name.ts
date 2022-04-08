@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 
-import useAddress from './useAddress';
-import useNetwork from './useNetwork';
+import useAddress from './use-address';
+import useNetwork from './use-network';
 import {getBnsName} from '../api';
 
 const useBnsName = (): string | null => {

@@ -1,11 +1,11 @@
 import {render} from '@testing-library/react';
 
 import Wallet, {WalletMenu} from './Wallet';
-import useAddress from '../../../hooks/useAddress';
-import useBnsName from '../../../hooks/useBnsName';
+import useAddress from '../../../hooks/use-address';
+import useBnsName from '../../../hooks/use-bns-name';
 
-jest.mock('../../../hooks/useAddress');
-jest.mock('../../../hooks/useBnsName');
+jest.mock('../../../hooks/use-address');
+jest.mock('../../../hooks/use-bns-name');
 
 test('1 Default render', () => {
     const rendered = render(<Wallet/>);

@@ -1,5 +1,5 @@
-import useUserSession from './useUserSession';
-import useNetwork from './useNetwork';
+import useUserSession from './use-user-session';
+import useNetwork from './use-network';
 
 const useAddress = (): string | null => {
     const [, userData] = useUserSession();

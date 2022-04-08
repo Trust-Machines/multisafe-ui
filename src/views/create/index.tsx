@@ -7,13 +7,13 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 
-import useUserSession from '../../hooks/useUserSession';
-import useTranslation from '../../hooks/useTranslation';
+import useUserSession from '../../hooks/use-user-session';
+import useTranslation from '../../hooks/use-translation';
 
 import AppContent from '../../layout/app-content';
 import ThemedBox from '../../components/themed-box';
-import SafeName from './components/SafeName';
-import SafeOwners from './components/SafeOwners';
+import SafeName from './components/safe-name';
+import SafeOwners from './components/safe-owners';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();

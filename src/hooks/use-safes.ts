@@ -3,9 +3,9 @@ import {useAtom} from 'jotai';
 import {Storage} from '@stacks/storage';
 
 import {safesAtom} from '../store';
-import useAddress from './useAddress';
-import useUserSession from './useUserSession';
-import useStorage from './useStorage';
+import useAddress from './use-address';
+import useUserSession from './use-user-session';
+import useStorage from './use-storage';
 
 import {SafesState} from '../store/safes';
 

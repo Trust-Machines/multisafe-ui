@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import {resolveBnsName} from '../../api';
-import useNetwork from '../../hooks/useNetwork';
+import useNetwork from '../../hooks/use-network';
 
 interface WalletFieldProps {
     inputProps: StandardTextFieldProps;

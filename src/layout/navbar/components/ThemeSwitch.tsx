@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-import useAppTheme from '../../../hooks/useAppTheme';
-import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
+import useAppTheme from '../../../hooks/use-app-theme';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
 
 const ThemeSwitch = () => {

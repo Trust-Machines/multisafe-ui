@@ -1,4 +1,3 @@
-import useTranslation from '../../../hooks/useTranslation';
 import React, {useMemo, useState} from 'react';
 import {validateStacksAddress} from '@stacks/transactions';
 import {Box, Button} from '@mui/material';
@@ -7,6 +6,9 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
+
+import useTranslation from '../../../hooks/use-translation';
+
 import BoxFooter from '../../../components/box-footer';
 
 const SafeOwnerInput = (props: {

@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
-import useTranslation from '../../hooks/useTranslation';
+import useMediaBreakPoint from '../../hooks/use-media-break-point';
+import useTranslation from '../../hooks/use-translation';
 import ThemedBox from '../../components/themed-box';
 
 import AppContent from '../../layout/app-content';
