@@ -27,12 +27,13 @@ const Brand = () => {
                 height: '32px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                marginRight: '8px'
-            }}>
-                <img src="/logo.jpg" alt="Logo" style={{
+                marginRight: '8px',
+                'img': {
                     width: '100%',
                     height: '100%'
-                }}/>
+                }
+            }}>
+                <img src="/logo.jpg" alt='Logo'/>
             </Box>
             <Box sx={{
                 fontSize: '1.3rem',
