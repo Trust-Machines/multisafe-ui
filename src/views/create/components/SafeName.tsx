@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 
 import useTranslation from '../../../hooks/useTranslation';
 
-import BoxFooter from '../../../components/BoxFooter';
+import BoxFooter from '../../../components/box-footer';
 
 const SafeName = (props: { onSubmit: (name: string) => void }) => {
     const [name, setName] = useState<string>("");

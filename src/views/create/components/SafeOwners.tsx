@@ -2,12 +2,12 @@ import useTranslation from '../../../hooks/useTranslation';
 import React, {useMemo, useState} from 'react';
 import {validateStacksAddress} from '@stacks/transactions';
 import {Box, Button} from '@mui/material';
-import WalletField from '../../../components/WalletField';
+import WalletField from '../../../components/wallet-field';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
-import BoxFooter from '../../../components/BoxFooter';
+import BoxFooter from '../../../components/box-footer';
 
 const SafeOwnerInput = (props: {
     owner: string,

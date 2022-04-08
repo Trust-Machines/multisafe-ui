@@ -13,7 +13,7 @@ import useAddress from '../../../hooks/useAddress';
 import useTranslation from '../../../hooks/useTranslation';
 import useMediaBreakPoint from '../../../hooks/useMediaBreakPoint';
 
-import ThemedBox from '../../../components/ThemedBox';
+import ThemedBox from '../../../components/themed-box';
 
 import {truncateMiddle} from '../../../util';
 

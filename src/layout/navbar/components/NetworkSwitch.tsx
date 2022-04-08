@@ -5,7 +5,7 @@ import Chip from '@mui/material/Chip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {grey} from '@mui/material/colors';
 
-import ThemedBox from '../../../components/ThemedBox';
+import ThemedBox from '../../../components/themed-box';
 import useNetwork from '../../../hooks/useNetwork';
 import {useTheme} from '@mui/material';
 

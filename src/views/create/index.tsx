@@ -10,10 +10,10 @@ import StepContent from '@mui/material/StepContent';
 import useUserSession from '../../hooks/useUserSession';
 import useTranslation from '../../hooks/useTranslation';
 
-import AppContent from '../../layout/AppContent';
-import ThemedBox from '../../components/ThemedBox';
-import SafeName from './Components/SafeName';
-import SafeOwners from './Components/SafeOwners';
+import AppContent from '../../layout/app-content';
+import ThemedBox from '../../components/themed-box';
+import SafeName from './components/SafeName';
+import SafeOwners from './components/SafeOwners';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();

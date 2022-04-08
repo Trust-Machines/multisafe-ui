@@ -3,11 +3,11 @@ import {Router} from '@reach/router';
 
 import useMediaBreakPoint from './hooks/useMediaBreakPoint';
 
-import AppWrapper from './layout/AppWrapper'
-import Navbar from './layout/Navbar';
-import Home from './views/Home';
-import Create from './views/Create';
-import Import from './views/Import';
+import AppWrapper from './layout/app-wrapper'
+import Navbar from './layout/navbar';
+import Home from './views/home';
+import Create from './views/create';
+import Import from './views/import';
 
 function App() {
     const [,isMd] = useMediaBreakPoint();

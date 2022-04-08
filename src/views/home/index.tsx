@@ -7,9 +7,9 @@ import TextField from '@mui/material/TextField';
 
 import useMediaBreakPoint from '../../hooks/useMediaBreakPoint';
 import useTranslation from '../../hooks/useTranslation';
-import ThemedBox from '../../components/ThemedBox';
+import ThemedBox from '../../components/themed-box';
 
-import AppContent from '../../layout/AppContent';
+import AppContent from '../../layout/app-content';
 
 
 const Home = (_: RouteComponentProps) => {
