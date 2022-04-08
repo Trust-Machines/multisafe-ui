@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Default render 1`] = `
+exports[`1 Default render 1`] = `
 <div>
   <div
     class="MuiBox-root css-7lmw8c"
@@ -38,7 +38,7 @@ exports[`Default render 1`] = `
 </div>
 `;
 
-exports[`Render with address 1`] = `
+exports[`2 Render with address 1`] = `
 <div>
   <div
     class="MuiBox-root css-7lmw8c"
@@ -71,7 +71,7 @@ exports[`Render with address 1`] = `
 </div>
 `;
 
-exports[`Render with bns 1`] = `
+exports[`3 Render with bns 1`] = `
 <div>
   <div
     class="MuiBox-root css-7lmw8c"
@@ -105,6 +105,25 @@ exports[`Render with bns 1`] = `
         </span>
       </div>
     </div>
+  </div>
+</div>
+`;
+
+exports[`4 Default render WalletMenu 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-9kanww"
+  >
+    <button
+      class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      Logout
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
   </div>
 </div>
 `;

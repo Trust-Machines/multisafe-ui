@@ -17,7 +17,7 @@ import ThemedBox from '../../../components/ThemedBox';
 
 import {truncateMiddle} from '../../../util';
 
-const WalletMenu = () => {
+export const WalletMenu = () => {
     const [t] = useTranslation();
     const [, , , signOut] = useUserSession();
 
