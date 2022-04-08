@@ -73,7 +73,7 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
                 mb: '20px',
                 fontSize: '90%',
                 color: 'text.secondary'
-            }}>{'Your Safe will have one or more owners. Add additional owners and specify how many of them have to confirm a transaction before it gets executed. In general, the more confirmations required, the more secure your Safe is.'}</Typography>
+            }}>{'Your Safe will have one or more owners. You can add up to 20 owners.'}</Typography>
 
         {owners.map((x, i) => {
             return <SafeOwnerInput key={i} owner={owners[i]} deletable={i > 0} dirty={submitted}

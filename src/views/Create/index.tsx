@@ -20,6 +20,7 @@ const Create = (_: RouteComponentProps) => {
     const [t] = useTranslation();
     const [step, setStep] = useState(0);
 
+
     return <>
         <AppContent>
             <Typography variant='h4' fontWeight='700' mt='10px' gutterBottom>{t('Create Safe')}</Typography>
