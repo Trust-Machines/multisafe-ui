@@ -15,7 +15,7 @@ const NetworkChip = (props: { label: string, onClick?: () => void }) => {
                  color={props.label === 'mainnet' ? 'primary' : 'default'} onClick={props.onClick}/>;
 }
 
-const NetworkMenu = (props: { onChange: () => void }) => {
+export const NetworkMenu = (props: { onChange: () => void }) => {
     const [, , setNetwork] = useNetwork();
 
     return (

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render test 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-cumda7"
+  >
+    <span>
+      children
+    </span>
+  </div>
+</div>
+`;
