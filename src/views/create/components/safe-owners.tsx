@@ -1,28 +1,30 @@
 import React, {useMemo, useState} from 'react';
 import {validateStacksAddress} from '@stacks/transactions';
 import {Box, Button} from '@mui/material';
-import WalletField from '../../../components/wallet-field';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
+import {MAX_OWNERS} from '@trustmachines/multisafe-contracts';
 
 import useTranslation from '../../../hooks/use-translation';
 
+import WalletField from '../../../components/wallet-field';
 import BoxFooter from '../../../components/box-footer';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
-const SafeOwnerInput = (props: {
+export const SafeOwnerInput = (props: {
     owner: string,
     deletable: boolean,
     dirty: boolean,
     onChange: (value: string) => void,
     onDelete: () => void,
-    hasDuplicate: boolean
+    isDuplicate: boolean
 }) => {
     const [t] = useTranslation();
     const isValid = useMemo(() => validateStacksAddress(props.owner), [props.owner]);
     const showError = props.dirty && !isValid;
-    const hasDuplicate = isValid && props.hasDuplicate;
+    const hasDuplicate = isValid && props.isDuplicate;
 
     return <Box sx={{mb: '26px', display: 'flex'}}>
         <WalletField
@@ -52,10 +54,11 @@ const SafeOwnerInput = (props: {
 }
 
 
-const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) => void }) => {
+const SafeOwners = (props: { owners: string[], onBack: () => void, onSubmit: (owners: string[]) => void }) => {
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const [owners, setOwners] = useState<string[]>([""]);
+    const [owners, setOwners] = useState<string[]>(props.owners);
     const [t] = useTranslation();
+    const [isSm] = useMediaBreakPoint();
 
     const updateOwner = (i: number, value: string) => {
         const nOwners = owners.map((o, j) => j === i ? value : o);
@@ -63,7 +66,9 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
     }
 
     const addOwner = () => {
-        setOwners([...owners, '']);
+        if (owners.length <= MAX_OWNERS) {
+            setOwners([...owners, '']);
+        }
     }
 
     const deleteOwner = (i: number) => {
@@ -72,14 +77,18 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
 
     return <Box>
         <Typography sx={{
-                mb: '20px',
-                fontSize: '90%',
-                color: 'text.secondary'
-            }}>{'Your Safe will have one or more owners. You can add up to 20 owners.'}</Typography>
+            mb: '20px',
+            fontSize: '90%',
+            color: 'text.secondary'
+        }}>{'You can add up to 20 owners.'}</Typography>
 
         {owners.map((x, i) => {
-            return <SafeOwnerInput key={i} owner={owners[i]} deletable={i > 0} dirty={submitted}
-                                   hasDuplicate={owners.filter(x => x === owners[i]).length > 1}
+            const isDuplicate = owners.filter(x => x === owners[i]).length > 1 && owners.indexOf(x) < i;
+            return <SafeOwnerInput key={i}
+                                   owner={owners[i]}
+                                   deletable={i > 0}
+                                   dirty={submitted}
+                                   isDuplicate={isDuplicate}
                                    onChange={(value) => {
                                        updateOwner(i, value);
                                    }}
@@ -87,8 +96,12 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
                                        deleteOwner(i);
                                    }}/>
         })}
-        <Box sx={{m: '20px', textAlign: 'center'}}>
-            <Button onClick={addOwner}><AddIcon/> {t('Add another owner')}</Button>
+        <Box sx={{
+            m: '20px 0',
+            textAlign: isSm ? 'center' : 'left'
+        }}>
+            <Button onClick={addOwner} disabled={owners.length >= MAX_OWNERS}><AddIcon/> {t('Add another owner')}
+            </Button>
         </Box>
         <BoxFooter>
             <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
@@ -96,6 +109,7 @@ const SafeOwners = (props: { onBack: () => void, onSubmit: (owners: string[]) =>
                 setSubmitted(true);
                 const canSubmit = owners.map(x => validateStacksAddress(x)).filter(x => x).length === owners.length // all addresses are valid
                     && [...new Set(owners)].length === owners.length // and no duplicates;
+                    && owners.length <= MAX_OWNERS; // and max owners not exceeded
 
                 if (canSubmit) {
                     props.onSubmit(owners);

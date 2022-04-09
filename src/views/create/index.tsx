@@ -14,13 +14,16 @@ import AppContent from '../../layout/app-content';
 import ThemedBox from '../../components/themed-box';
 import SafeName from './components/safe-name';
 import SafeOwners from './components/safe-owners';
+import SafeConfirmations from './components/safe-confirmations';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();
     const [t] = useTranslation();
-    const [step, setStep] = useState(0);
 
-    const [name, setName] = useState("");
+    const [step, setStep] = useState<number>(0);
+    const [name, setName] = useState<string>("");
+    const [owners, setOwners] = useState<string[]>([""]);
+    const [confirmations, setConfirmations] = useState<number>(1);
 
     return <>
         <AppContent>
@@ -29,7 +32,7 @@ const Create = (_: RouteComponentProps) => {
             <ThemedBox sx={{maxWidth: '640px', mt: '40px', p: '20px'}}>
                 <Stepper activeStep={step} orientation="vertical">
                     <Step key={0}>
-                        <StepLabel>Safe Name</StepLabel>
+                        <StepLabel>{t('Safe Name')}</StepLabel>
                         <StepContent>
                             <SafeName name={name} onSubmit={(name) => {
                                 setName(name)
@@ -38,13 +41,15 @@ const Create = (_: RouteComponentProps) => {
                         </StepContent>
                     </Step>
                     <Step key={1}>
-                        <StepLabel>Owners</StepLabel>
+                        <StepLabel>{t('Owners')}</StepLabel>
                         <StepContent>
                             <SafeOwners
+                                owners={owners}
                                 onBack={() => {
                                     setStep(step - 1);
                                 }}
-                                onSubmit={() => {
+                                onSubmit={(owners) => {
+                                    setOwners(owners);
                                     setStep(step + 1);
                                 }}/>
                         </StepContent>
@@ -52,13 +57,17 @@ const Create = (_: RouteComponentProps) => {
                     <Step key={3}>
                         <StepLabel>Confirmation</StepLabel>
                         <StepContent>
-                            <SafeOwners
+                            <SafeConfirmations
+                                max={owners.length}
+                                value={confirmations}
                                 onBack={() => {
                                     setStep(step - 1);
                                 }}
-                                onSubmit={() => {
+                                onSubmit={(value) => {
+                                    setConfirmations(value);
                                     setStep(step + 1);
-                                }}/>
+                                }}
+                            />
                         </StepContent>
                     </Step>
 

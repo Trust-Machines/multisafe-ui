@@ -16,6 +16,8 @@ const Navbar = () => {
         <Box sx={{
             height: '54px',
             display: 'flex',
+            flexShrink: 0,
+            flexGrow: 0,
             padding: '0 18px',
             position: 'relative',
             zIndex: 2,
