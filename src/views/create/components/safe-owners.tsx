@@ -16,27 +16,33 @@ import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 export const SafeOwnerInput = (props: {
     owner: string,
     deletable: boolean,
-    dirty: boolean,
+    validateOwner: boolean,
     onChange: (value: string) => void,
     onDelete: () => void,
     isDuplicate: boolean
 }) => {
     const [t] = useTranslation();
     const isValid = useMemo(() => validateStacksAddress(props.owner), [props.owner]);
-    const showError = props.dirty && !isValid;
-    const hasDuplicate = isValid && props.isDuplicate;
+
+    let errorText = '';
+    if (props.validateOwner && !isValid) {
+        errorText = t('Enter a valid Stacks wallet address');
+    } else if (isValid && props.isDuplicate) {
+        errorText = t('Address already added');
+    }
 
     return <Box sx={{mb: '26px', display: 'flex'}}>
         <WalletField
             inputProps={{
                 value: props.owner,
                 label: t('Owner address'),
+                placeholder: t('Owner address'),
                 autoFocus: true,
                 onChange: (e) => {
                     props.onChange(e.target.value)
                 },
-                error: showError || hasDuplicate,
-                helperText: showError || hasDuplicate ? (hasDuplicate ? t('Address already added') : t('Enter a valid Stacks wallet address')) : ''
+                error: !!errorText,
+                helperText: errorText
             }}
             onBnsResolve={(name) => {
                 props.onChange(name);
@@ -87,7 +93,7 @@ const SafeOwners = (props: { owners: string[], onBack: () => void, onSubmit: (ow
             return <SafeOwnerInput key={i}
                                    owner={owners[i]}
                                    deletable={i > 0}
-                                   dirty={submitted}
+                                   validateOwner={submitted}
                                    isDuplicate={isDuplicate}
                                    onChange={(value) => {
                                        updateOwner(i, value);
