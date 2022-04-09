@@ -21,8 +21,8 @@ const Create = (_: RouteComponentProps) => {
     const [t] = useTranslation();
 
     const [step, setStep] = useState<number>(0);
-    const [name, setName] = useState<string>("");
-    const [owners, setOwners] = useState<string[]>([""]);
+    const [name, setName] = useState<string>('');
+    const [owners, setOwners] = useState<string[]>(['']);
     const [confirmations, setConfirmations] = useState<number>(1);
 
     return <>
@@ -30,7 +30,7 @@ const Create = (_: RouteComponentProps) => {
             <Typography variant='h4' fontWeight='700' mt='10px' gutterBottom>{t('Create Safe')}</Typography>
             <Typography variant='h6' fontWeight='500'>{t('Create a safe with multiple owners.')}</Typography>
             <ThemedBox sx={{maxWidth: '640px', mt: '40px', p: '20px'}}>
-                <Stepper activeStep={step} orientation="vertical">
+                <Stepper activeStep={step} orientation='vertical'>
                     <Step key={0}>
                         <StepLabel>{t('Safe Name')}</StepLabel>
                         <StepContent>
@@ -45,17 +45,19 @@ const Create = (_: RouteComponentProps) => {
                         <StepContent>
                             <SafeOwners
                                 owners={owners}
-                                onBack={() => {
+                                onBack={(owners) => {
+                                    setOwners(owners);
                                     setStep(step - 1);
                                 }}
                                 onSubmit={(owners) => {
                                     setOwners(owners);
                                     setStep(step + 1);
-                                }}/>
+                                }}
+                            />
                         </StepContent>
                     </Step>
                     <Step key={3}>
-                        <StepLabel>Confirmation</StepLabel>
+                        <StepLabel>{t('Confirmation Threshold')}</StepLabel>
                         <StepContent>
                             <SafeConfirmations
                                 max={owners.length}
@@ -63,16 +65,17 @@ const Create = (_: RouteComponentProps) => {
                                 onBack={() => {
                                     setStep(step - 1);
                                 }}
-                                onSubmit={(value) => {
-                                    setConfirmations(value);
+                                onNext={() => {
                                     setStep(step + 1);
+                                }}
+                                onChange={(value) => {
+                                    setConfirmations(value);
                                 }}
                             />
                         </StepContent>
                     </Step>
-
                     <Step key={4}>
-                        <StepLabel>Review</StepLabel>
+                        <StepLabel>{t('Review')}</StepLabel>
                         <StepContent>
 
                         </StepContent>

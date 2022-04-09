@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {validateStacksAddress} from '@stacks/transactions';
 import {Box, Button} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -60,7 +60,7 @@ export const SafeOwnerInput = (props: {
 }
 
 
-const SafeOwners = (props: { owners: string[], onBack: () => void, onSubmit: (owners: string[]) => void }) => {
+const SafeOwners = (props: { owners: string[], onBack: (owners: string[]) => void, onSubmit: (owners: string[]) => void }) => {
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [owners, setOwners] = useState<string[]>(props.owners);
     const [t] = useTranslation();
@@ -79,6 +79,12 @@ const SafeOwners = (props: { owners: string[], onBack: () => void, onSubmit: (ow
 
     const deleteOwner = (i: number) => {
         setOwners([...owners.filter((a, b) => b !== i)]);
+    }
+
+    const canSubmit = (): boolean => {
+        return owners.map(x => validateStacksAddress(x)).filter(x => x).length === owners.length // all addresses are valid
+            && [...new Set(owners)].length === owners.length // and no duplicates;
+            && owners.length <= MAX_OWNERS; // and max owners not exceeded
     }
 
     return <Box>
@@ -110,14 +116,15 @@ const SafeOwners = (props: { owners: string[], onBack: () => void, onSubmit: (ow
             </Button>
         </Box>
         <BoxFooter>
-            <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
+            <Button sx={{mr: '10px'}} onClick={() => {
+                setSubmitted(true);
+                if (canSubmit()) {
+                    props.onBack(owners);
+                }
+            }}>{t('Back')}</Button>
             <Button variant="contained" onClick={() => {
                 setSubmitted(true);
-                const canSubmit = owners.map(x => validateStacksAddress(x)).filter(x => x).length === owners.length // all addresses are valid
-                    && [...new Set(owners)].length === owners.length // and no duplicates;
-                    && owners.length <= MAX_OWNERS; // and max owners not exceeded
-
-                if (canSubmit) {
+                if (canSubmit()) {
                     props.onSubmit(owners);
                 }
             }}>{t('Continue')}</Button>
