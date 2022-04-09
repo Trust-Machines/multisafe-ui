@@ -1,7 +1,8 @@
-const useTranslation = (): [(k: string) => string] => {
+import {_t} from '../i18n';
 
-    const t = (k: string) => {
-        return k;
+const useTranslation = (): [(k: string, args?: {}) => string] => {
+    const t = (k: string, args = {}) => {
+        return _t(k, args);
     }
     return [t];
 }

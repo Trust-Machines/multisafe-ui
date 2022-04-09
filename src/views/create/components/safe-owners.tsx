@@ -80,7 +80,7 @@ const SafeOwners = (props: { owners: string[], onBack: () => void, onSubmit: (ow
             mb: '20px',
             fontSize: '90%',
             color: 'text.secondary'
-        }}>{'You can add up to 20 owners.'}</Typography>
+        }}>{t('You can add up to {{max}} owners.', {max: MAX_OWNERS})}</Typography>
 
         {owners.map((x, i) => {
             const isDuplicate = owners.filter(x => x === owners[i]).length > 1 && owners.indexOf(x) < i;
