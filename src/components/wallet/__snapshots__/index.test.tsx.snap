@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-1ea3lpy"
+  >
+    <div
+      class="icon"
+    >
+      <img
+        alt="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA2klEQVRYhe2Yyw3DMAxD5cIbdJBOU+/QGXLODN1BnaaDdAb3WstABIIOqoPeLfEHBEHQToqIdPlBVQWhtXY4zu53gVb/gRTIUlR1yOCj7NAGz74djrP7hXcwBbJU+8LL1NR7Ts197u9xOtiL4R1MgSzVZmr1WYySZ/FqwgucetBydsa8zId3MAWyVC8D19ftXAV9fLR6wjuYAlmKTCkYsZlAe8yb7/VseAdTIIubQQt6X7SgZ3t4B1Mgy5RBtKfQHvTW5zfJasILhHvQ3g/R/4P2X41HeAdTIMsX/aFGBwNvuGcAAAAASUVORK5CYII="
+      />
+    </div>
+    <div
+      class="address"
+    >
+      SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7
+    </div>
+    <a
+      class="link"
+      href="https://explorer.stacks.co/address/SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7?chain=mainnet"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1jm6t9j-MuiSvgIcon-root"
+        data-testid="LaunchIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+        />
+      </svg>
+    </a>
+  </div>
+</div>
+`;
