@@ -81,7 +81,7 @@ exports[`1 Default render 1`] = `
       </button>
     </div>
     <div
-      class="MuiBox-root css-1eq8oyx"
+      class="MuiBox-root css-4jc3c7"
     >
       <button
         class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1i3558q-MuiButtonBase-root-MuiButton-root"
@@ -284,7 +284,7 @@ exports[`2 Render with owners 1`] = `
       </button>
     </div>
     <div
-      class="MuiBox-root css-1eq8oyx"
+      class="MuiBox-root css-4jc3c7"
     >
       <button
         class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1i3558q-MuiButtonBase-root-MuiButton-root"
@@ -478,7 +478,7 @@ exports[`3 Render with wrong address 1`] = `
       </button>
     </div>
     <div
-      class="MuiBox-root css-1eq8oyx"
+      class="MuiBox-root css-4jc3c7"
     >
       <button
         class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1i3558q-MuiButtonBase-root-MuiButton-root"
@@ -687,7 +687,7 @@ exports[`4 Render with duplicate address 1`] = `
       </button>
     </div>
     <div
-      class="MuiBox-root css-1eq8oyx"
+      class="MuiBox-root css-4jc3c7"
     >
       <button
         class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1i3558q-MuiButtonBase-root-MuiButton-root"

@@ -60,7 +60,7 @@ exports[`1 Default render 1`] = `
     </div>
   </div>
   <div
-    class="MuiBox-root css-1eq8oyx"
+    class="MuiBox-root css-4jc3c7"
   >
     <button
       class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-sghohy-MuiButtonBase-root-MuiButton-root"
