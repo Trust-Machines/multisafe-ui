@@ -19,7 +19,7 @@ const SafeConfirmations = (props: { value: number, max: number, onBack: () => vo
             mb: '20px',
             fontSize: '90%',
             color: 'text.secondary'
-        }}>{t('Your Safe can have up to 20 owners.')}</Typography>
+        }}>{t('In general, the more confirmations required, the more secure your Safe is.')}</Typography>
 
         <Box sx={{pb: '20px'}}>
             <Select
@@ -30,7 +30,7 @@ const SafeConfirmations = (props: { value: number, max: number, onBack: () => vo
                 {options.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
             </Select>
         </Box>
-        <BoxFooter>
+        <BoxFooter sx={{pb: 0}}>
             <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
             <Button variant="contained" onClick={props.onNext}>{t('Continue')}</Button>
         </BoxFooter>

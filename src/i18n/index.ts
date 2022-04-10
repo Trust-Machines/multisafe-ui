@@ -28,6 +28,8 @@ i18n.on('languageChanged', function (lang) {
     moment.locale(lang);
 });
 
+export {i18n};
+
 export const _t = (k: string, args = {}) => {
     return i18n.t(k, args);
 };

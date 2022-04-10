@@ -56,7 +56,7 @@ const SafeName = (props: { name: string, onSubmit: (name: string) => void }) => 
                        }}
             />
         </Box>
-        <BoxFooter>
+        <BoxFooter sx={{pb: 0}}>
             <Button variant="contained" onClick={handleSubmit}>{t('Continue')}</Button>
         </BoxFooter>
     </>

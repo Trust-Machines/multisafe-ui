@@ -1,10 +1,10 @@
-import {_t} from '../i18n';
+import {_t, i18n} from '../i18n';
 
-const useTranslation = (): [(k: string, args?: {}) => string] => {
+const useTranslation = (): [(k: string, args?: {}) => string, typeof i18n] => {
     const t = (k: string, args = {}) => {
         return _t(k, args);
     }
-    return [t];
+    return [t, i18n];
 }
 
 export default useTranslation;

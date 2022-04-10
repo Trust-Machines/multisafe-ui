@@ -115,7 +115,7 @@ const SafeOwners = (props: { owners: string[], onBack: (owners: string[]) => voi
             <Button onClick={addOwner} disabled={owners.length >= MAX_OWNERS}><AddIcon/> {t('Add another owner')}
             </Button>
         </Box>
-        <BoxFooter>
+        <BoxFooter sx={{pb: 0}}>
             <Button sx={{mr: '10px'}} onClick={() => {
                 setSubmitted(true);
                 if (canSubmit()) {
