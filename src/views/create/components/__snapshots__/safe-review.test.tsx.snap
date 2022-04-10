@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-0"
+  >
+    <div
+      class="MuiBox-root css-156i07"
+    >
+      <div
+        class="review-section MuiBox-root css-1kp2kwa"
+      >
+        <div
+          class="review-section-title"
+        >
+          Details
+        </div>
+        <div
+          class="detail-section"
+        >
+          <div
+            class="section-title"
+          >
+            Name of new Safe
+          </div>
+          <div
+            class="section-info"
+          >
+            my-safe-2
+          </div>
+        </div>
+        <div
+          class="detail-section"
+        >
+          <div
+            class="section-title"
+          >
+            Confirmation threshold
+          </div>
+          <div
+            class="section-info"
+          >
+            2 out of 2 owners
+          </div>
+        </div>
+      </div>
+      <div
+        class="review-section MuiBox-root css-1r47yf"
+      >
+        <div
+          class="review-section-title"
+        >
+          2 Safe owners
+        </div>
+        <div
+          class="MuiBox-root css-fcuisq"
+        >
+          <div
+            class="icon"
+          >
+            <img
+              alt="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA2klEQVRYhe2Yyw3DMAxD5cIbdJBOU+/QGXLODN1BnaaDdAb3WstABIIOqoPeLfEHBEHQToqIdPlBVQWhtXY4zu53gVb/gRTIUlR1yOCj7NAGz74djrP7hXcwBbJU+8LL1NR7Ts197u9xOtiL4R1MgSzVZmr1WYySZ/FqwgucetBydsa8zId3MAWyVC8D19ftXAV9fLR6wjuYAlmKTCkYsZlAe8yb7/VseAdTIIubQQt6X7SgZ3t4B1Mgy5RBtKfQHvTW5zfJasILhHvQ3g/R/4P2X41HeAdTIMsX/aFGBwNvuGcAAAAASUVORK5CYII="
+            />
+          </div>
+          <div
+            class="address"
+          >
+            SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7
+          </div>
+          <a
+            class="link"
+            href="https://explorer.stacks.co/address/SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7?chain=mainnet"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1jm6t9j-MuiSvgIcon-root"
+              data-testid="LaunchIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+              />
+            </svg>
+          </a>
+        </div>
+        <div
+          class="MuiBox-root css-fcuisq"
+        >
+          <div
+            class="icon"
+          >
+            <img
+              alt="SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA3klEQVRYhe2XsQ0CMQxFHXRjULMKG2SB24CakpoNWMAbsAo1e0DL2ZK/rA/IhV+XSy75+vpy4qGqL/lgzikRqhrOI7L776jT/kALZFnsh8Pxuhlf1n24QTZTdny+PcP/yzvYAllcBh/30/bDGtc9ti6i88o72AJZXAYRqO4hspkt72ALZHEZzGYErWffl+UdbIEsw/YkFrbuITqDv6a8wMVmDGXCzmfrHFpv58s72AJZ0u9Bi+2jv015B1sgyxCR8C62GXN9bJLsfuUdbIEs7j2YvZvZngOdV97BFsjyBg2XSGPyfe0WAAAAAElFTkSuQmCC"
+            />
+          </div>
+          <div
+            class="address"
+          >
+            SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN
+          </div>
+          <a
+            class="link"
+            href="https://explorer.stacks.co/address/SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN?chain=mainnet"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1jm6t9j-MuiSvgIcon-root"
+              data-testid="LaunchIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root css-1bht99n"
+    >
+      You're about to create a new Safe on 
+      <strong>
+        Mainnet
+      </strong>
+       and will have to confirm a transaction with your currently connected wallet. The creation cost will be determined by your wallet.
+    </div>
+    <div
+      class="MuiBox-root css-4jc3c7"
+    >
+      <button
+        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1i3558q-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Back
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-sghohy-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Create
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
