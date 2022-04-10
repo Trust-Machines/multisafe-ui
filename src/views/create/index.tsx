@@ -25,6 +25,7 @@ const Create = (_: RouteComponentProps) => {
     const [name, setName] = useState<string>('');
     const [owners, setOwners] = useState<string[]>(['']);
     const [confirmations, setConfirmations] = useState<number>(1);
+    const boxSx = {maxWidth: '690px', p: '20px'};
 
     return <>
         <AppContent>
@@ -34,7 +35,7 @@ const Create = (_: RouteComponentProps) => {
                 <Step key={0}>
                     <StepLabel>{t('Safe Name')}</StepLabel>
                     <StepContent>
-                        <ThemedBox sx={{maxWidth: '640px', p: '20px'}}>
+                        <ThemedBox sx={boxSx}>
                             <SafeName name={name} onSubmit={(name) => {
                                 setName(name)
                                 setStep(step + 1);
@@ -45,59 +46,58 @@ const Create = (_: RouteComponentProps) => {
                 <Step key={1}>
                     <StepLabel>{t('Owners')}</StepLabel>
                     <StepContent>
-                        <ThemedBox sx={{maxWidth: '640px', p: '20px'}}>
-                        <SafeOwners
-                            owners={owners}
-                            onBack={(owners) => {
-                                setOwners(owners);
-                                setStep(step - 1);
-                            }}
-                            onSubmit={(owners) => {
-                                setOwners(owners);
-                                setStep(step + 1);
-                            }}
-                        />
+                        <ThemedBox sx={boxSx}>
+                            <SafeOwners
+                                owners={owners}
+                                onBack={(owners) => {
+                                    setOwners(owners);
+                                    setStep(step - 1);
+                                }}
+                                onSubmit={(owners) => {
+                                    setOwners(owners);
+                                    setStep(step + 1);
+                                }}
+                            />
                         </ThemedBox>
                     </StepContent>
                 </Step>
                 <Step key={3}>
                     <StepLabel>{t('Confirmation Threshold')}</StepLabel>
                     <StepContent>
-                        <ThemedBox sx={{maxWidth: '640px', p: '20px'}}>
-                        <SafeConfirmations
-                            max={owners.length}
-                            value={confirmations}
-                            onBack={() => {
-                                setStep(step - 1);
-                            }}
-                            onNext={() => {
-                                setStep(step + 1);
-                            }}
-                            onChange={(value) => {
-                                setConfirmations(value);
-                            }}
-                        />
+                        <ThemedBox sx={boxSx}>
+                            <SafeConfirmations
+                                max={owners.length}
+                                value={confirmations}
+                                onBack={() => {
+                                    setStep(step - 1);
+                                }}
+                                onNext={() => {
+                                    setStep(step + 1);
+                                }}
+                                onChange={(value) => {
+                                    setConfirmations(value);
+                                }}
+                            />
                         </ThemedBox>
                     </StepContent>
                 </Step>
                 <Step key={4}>
                     <StepLabel>{t('Review')}</StepLabel>
                     <StepContent>
-                        <ThemedBox sx={{maxWidth: '690px', p: '20px'}}>
-                        <SafeReview
-                            name={name}
-                            owners={owners}
-                            confirmations={confirmations}
-                            onBack={() => {
-                                setStep(step - 1);
-                            }}
-                            onNext={() => {
-                            }}/>
+                        <ThemedBox sx={boxSx}>
+                            <SafeReview
+                                name={name}
+                                owners={owners}
+                                confirmations={confirmations}
+                                onBack={() => {
+                                    setStep(step - 1);
+                                }}
+                                onNext={() => {
+                                }}/>
                         </ThemedBox>
                     </StepContent>
                 </Step>
             </Stepper>
-
         </AppContent>
     </>
 }
