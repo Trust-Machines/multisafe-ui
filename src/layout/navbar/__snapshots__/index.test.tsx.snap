@@ -65,13 +65,18 @@ exports[`1 Default render 1`] = `
         class="MuiBox-root css-1sfu4nm"
       >
         <div
-          class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-h046dh-MuiChip-root"
+          class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorSuccess MuiChip-clickable MuiChip-clickableColorSuccess MuiChip-filledSuccess css-afy8jx-MuiButtonBase-root-MuiChip-root"
+          role="button"
+          tabindex="0"
         >
           <span
             class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
           >
             mainnet
           </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
         </div>
       </div>
     </div>

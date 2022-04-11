@@ -152,7 +152,7 @@ exports[`1 Default render 1`] = `
         tabindex="0"
         type="button"
       >
-        Create
+        Connect Wallet
         <span
           class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
