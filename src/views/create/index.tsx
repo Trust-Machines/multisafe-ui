@@ -23,6 +23,7 @@ import SafeConfirmations from './components/safe-confirmations';
 import SafeReview from './components/safe-review';
 import useNetwork from '../../hooks/use-network';
 import {capitalize} from '../../util';
+import NetworkLabel from '../../components/network-label';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();
@@ -132,13 +133,13 @@ const Create = (_: RouteComponentProps) => {
                     <StepLabel>{t('Done')}</StepLabel>
                     <StepContent>
                         <ThemedBox sx={boxSx}>
-                          <Typography gutterBottom>
-                           <CheckBoxIcon />   Your new Safe being deployed to <strong>{capitalize(network)}</strong>
-                          </Typography>
 
-                            <Typography gutterBottom>
+                           <CheckBoxIcon />   Your new Safe being deployed to <NetworkLabel network={network} /> <br /><br /><br />
+
+
+
                          It may take a few minutes to complete. You can import it once deployment completes.
-                            </Typography>
+
 
                         </ThemedBox>
                     </StepContent>

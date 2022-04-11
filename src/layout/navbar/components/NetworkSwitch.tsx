@@ -22,13 +22,13 @@ export const NetworkMenu = (props: { onChange: () => void }) => {
             top: '60px',
         }}>
             <Box sx={{marginBottom: '6px'}}>
-                <NetworkLabel label='mainnet' onClick={() => {
+                <NetworkLabel network='mainnet' onClick={() => {
                     setNetwork('mainnet');
                     props.onChange();
                 }}/>
             </Box>
             <Box>
-                <NetworkLabel label='testnet' onClick={() => {
+                <NetworkLabel network='testnet' onClick={() => {
                     setNetwork('testnet');
                     props.onChange();
                 }}/>
@@ -65,7 +65,7 @@ const NetworkSwitch = () => {
                     justifyContent: 'center',
                     cursor: 'pointer',
                 }}>
-                    <NetworkLabel label={network}/>
+                    <NetworkLabel network={network} onClick={()=>{}}/>
                 </Box>
                 {menu && <NetworkMenu onChange={() => {
                     setTimeout(() => {
