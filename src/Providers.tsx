@@ -2,9 +2,12 @@ import React from 'react'
 import {Provider} from 'jotai';
 import {useAtomDevtools} from 'jotai/devtools'
 import {ThemeProvider as MThemeProvider, createTheme, ThemeOptions} from '@mui/material';
+import {Connect} from '@stacks/connect-react';
 
 import {networkAtom, appThemeAtom} from './store';
 import useAppTheme from './hooks/use-app-theme';
+
+import {baseAuthOptions} from './constants';
 
 const StoreDevToolsProvider: React.FC = ({children}) => {
     useAtomDevtools(networkAtom, 'Network');
@@ -40,9 +43,11 @@ const ThemeProvider: React.FC = ({children}) => {
 const Providers: React.FC = ({children}) => {
     return (
         <Provider>
-            <StoreDevToolsProvider>
-                <ThemeProvider>{children}</ThemeProvider>
-            </StoreDevToolsProvider>
+            <Connect authOptions={baseAuthOptions}>
+                <StoreDevToolsProvider>
+                    <ThemeProvider>{children}</ThemeProvider>
+                </StoreDevToolsProvider>
+            </Connect>
         </Provider>
     )
 }

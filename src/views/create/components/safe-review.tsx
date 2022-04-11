@@ -12,7 +12,10 @@ import Wallet from '../../../components/wallet';
 
 import useNetwork from '../../../hooks/use-network';
 
+import useAddress from '../../../hooks/use-address';
+
 import {capitalize} from '../../../util';
+import useUserSession from '../../../hooks/use-user-session';
 
 
 const SafeReview = (props: { name: string, owners: string[], confirmations: number, onBack: () => void, onNext: () => void, }) => {
@@ -20,6 +23,8 @@ const SafeReview = (props: { name: string, owners: string[], confirmations: numb
     const theme = useTheme();
     const [, isMd] = useMediaBreakPoint();
     const [network] = useNetwork();
+    const address = useAddress();
+    const [, , openAuth] = useUserSession();
 
     return <Box>
         <Box sx={{
@@ -102,7 +107,8 @@ const SafeReview = (props: { name: string, owners: string[], confirmations: numb
         </Box>
         <BoxFooter sx={{pb: 0}}>
             <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
-            <Button variant="contained" onClick={props.onNext}>{t('Create')}</Button>
+            {address && <Button variant="contained" onClick={props.onNext}>{t('Create')}</Button>}
+            {!address && <Button variant="contained" onClick={openAuth}>{t('Connect Wallet')}</Button>}
         </BoxFooter>
     </Box>
 }

@@ -1,19 +1,15 @@
 import React, {useState} from 'react';
 
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import {useTheme} from '@mui/material';
 import {grey} from '@mui/material/colors';
 
 import ThemedBox from '../../../components/themed-box';
+import NetworkLabel from '../../../components/network-label';
+
 import useNetwork from '../../../hooks/use-network';
-import {useTheme} from '@mui/material';
 
-
-const NetworkChip = (props: { label: string, onClick?: () => void }) => {
-    return <Chip sx={{cursor: 'pointer', textTransform: 'capitalize'}} label={props.label}
-                 color={props.label === 'mainnet' ? 'primary' : 'default'} onClick={props.onClick}/>;
-}
 
 export const NetworkMenu = (props: { onChange: () => void }) => {
     const [, , setNetwork] = useNetwork();
@@ -26,13 +22,13 @@ export const NetworkMenu = (props: { onChange: () => void }) => {
             top: '60px',
         }}>
             <Box sx={{marginBottom: '6px'}}>
-                <NetworkChip label='mainnet' onClick={() => {
+                <NetworkLabel label='mainnet' onClick={() => {
                     setNetwork('mainnet');
                     props.onChange();
                 }}/>
             </Box>
             <Box>
-                <NetworkChip label='testnet' onClick={() => {
+                <NetworkLabel label='testnet' onClick={() => {
                     setNetwork('testnet');
                     props.onChange();
                 }}/>
@@ -69,7 +65,7 @@ const NetworkSwitch = () => {
                     justifyContent: 'center',
                     cursor: 'pointer',
                 }}>
-                    <NetworkChip label={network}/>
+                    <NetworkLabel label={network}/>
                 </Box>
                 {menu && <NetworkMenu onChange={() => {
                     setTimeout(() => {

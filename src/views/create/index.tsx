@@ -6,10 +6,11 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+
 import {makeSafeContract} from '@trustmachines/multisafe-contracts';
-
-
 import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
+import {useConnect} from '@stacks/connect-react';
 
 import useUserSession from '../../hooks/use-user-session';
 import useTranslation from '../../hooks/use-translation';
@@ -21,17 +22,20 @@ import SafeOwners from './components/safe-owners';
 import SafeConfirmations from './components/safe-confirmations';
 import SafeReview from './components/safe-review';
 import useNetwork from '../../hooks/use-network';
+import {capitalize} from '../../util';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();
-    const [network] = useNetwork();
+    const [network, stacksNetwork] = useNetwork();
     const [t] = useTranslation();
 
-    const [step, setStep] = useState<number>(0);
+    const [step, setStep] = useState<number>(4);
     const [name, setName] = useState<string>('');
     const [owners, setOwners] = useState<string[]>(['']);
     const [confirmations, setConfirmations] = useState<number>(1);
+    const [txId, setTxId] = useState<string>('');
     const boxSx = {maxWidth: '690px', p: '20px'};
+    const {doContractDeploy} = useConnect();
 
     return <>
         <AppContent>
@@ -67,7 +71,7 @@ const Create = (_: RouteComponentProps) => {
                         </ThemedBox>
                     </StepContent>
                 </Step>
-                <Step key={3}>
+                <Step key={2}>
                     <StepLabel>{t('Confirmation Threshold')}</StepLabel>
                     <StepContent>
                         <ThemedBox sx={boxSx}>
@@ -87,7 +91,7 @@ const Create = (_: RouteComponentProps) => {
                         </ThemedBox>
                     </StepContent>
                 </Step>
-                <Step key={4}>
+                <Step key={3}>
                     <StepLabel>{t('Review')}</StepLabel>
                     <StepContent>
                         <ThemedBox sx={boxSx}>
@@ -104,7 +108,6 @@ const Create = (_: RouteComponentProps) => {
                                         return;
                                     }
 
-
                                     const code = makeSafeContract(
                                         safe,
                                         owners,
@@ -112,9 +115,31 @@ const Create = (_: RouteComponentProps) => {
                                         network
                                     );
 
-
-
+                                    doContractDeploy({
+                                        network: stacksNetwork,
+                                        contractName: name,
+                                        codeBody: code,
+                                        onFinish: data => {
+                                            setStep(step + 1);
+                                            setTxId(data.txId);
+                                        },
+                                    }).then();
                                 }}/>
+                        </ThemedBox>
+                    </StepContent>
+                </Step>
+                <Step key={4}>
+                    <StepLabel>{t('Done')}</StepLabel>
+                    <StepContent>
+                        <ThemedBox sx={boxSx}>
+                          <Typography gutterBottom>
+                           <CheckBoxIcon />   Your new Safe being deployed to <strong>{capitalize(network)}</strong>
+                          </Typography>
+
+                            <Typography gutterBottom>
+                         It may take a few minutes to complete. You can import it once deployment completes.
+                            </Typography>
+
                         </ThemedBox>
                     </StepContent>
                 </Step>
