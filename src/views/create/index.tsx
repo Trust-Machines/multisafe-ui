@@ -6,6 +6,10 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
+import {makeSafeContract} from '@trustmachines/multisafe-contracts';
+
+
+import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
 
 import useUserSession from '../../hooks/use-user-session';
 import useTranslation from '../../hooks/use-translation';
@@ -16,9 +20,11 @@ import SafeName from './components/safe-name';
 import SafeOwners from './components/safe-owners';
 import SafeConfirmations from './components/safe-confirmations';
 import SafeReview from './components/safe-review';
+import useNetwork from '../../hooks/use-network';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();
+    const [network] = useNetwork();
     const [t] = useTranslation();
 
     const [step, setStep] = useState<number>(0);
@@ -93,6 +99,21 @@ const Create = (_: RouteComponentProps) => {
                                     setStep(step - 1);
                                 }}
                                 onNext={() => {
+                                    if (!userData) {
+                                        openAuth();
+                                        return;
+                                    }
+
+
+                                    const code = makeSafeContract(
+                                        safe,
+                                        owners,
+                                        confirmations,
+                                        network
+                                    );
+
+
+
                                 }}/>
                         </ThemedBox>
                     </StepContent>
