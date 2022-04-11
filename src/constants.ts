@@ -1,11 +1,6 @@
-import {Network} from './store/network';
 import {AppConfig} from '@stacks/connect-react';
 
-export const BASE_NETWORKS: Network[] = ['mainnet', 'testnet'];
-
-
 export const appConfig = new AppConfig(['store_write', 'publish_data'], document.location.href);
-
 
 export const baseAuthOptions = {
     redirectTo: '/',

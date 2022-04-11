@@ -1,15 +1,15 @@
 import {atom} from 'jotai';
-import {BASE_NETWORKS} from '../constants';
 
-export type Network = 'mainnet' | 'testnet';
+import {NETWORK} from '@trustmachines/multisafe-contracts';
 
-const initial = (): Network => {
+const initial = (): NETWORK => {
     const s = localStorage.getItem('app_network');
-    if (s && BASE_NETWORKS.includes(s as Network)) {
-        return s as Network
+    const networks: NETWORK[] = ['mainnet', 'testnet'];
+    if (s && networks.includes(s as NETWORK)) {
+        return s as NETWORK
     }
 
     return 'mainnet';
 }
 
-export const networkAtom = atom<Network>(initial());
+export const networkAtom = atom<NETWORK>(initial());
