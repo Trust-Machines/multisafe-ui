@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {validateStacksAddress} from '@stacks/transactions';
 import {Box, Button} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -63,21 +63,25 @@ export const SafeOwnerInput = (props: {
 const SafeOwners = (props: { owners: string[], onBack: (owners: string[]) => void, onSubmit: (owners: string[]) => void }) => {
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [owners, setOwners] = useState<string[]>(props.owners);
+    const [modified, setModified] = useState<boolean>(false);
     const [t] = useTranslation();
     const [isSm] = useMediaBreakPoint();
 
     const updateOwner = (i: number, value: string) => {
+        setModified(true);
         const nOwners = owners.map((o, j) => j === i ? value : o);
         setOwners([...nOwners]);
     }
 
     const addOwner = () => {
+        setModified(true);
         if (owners.length <= MAX_OWNERS) {
             setOwners([...owners, '']);
         }
     }
 
     const deleteOwner = (i: number) => {
+        setModified(true);
         setOwners([...owners.filter((a, b) => b !== i)]);
     }
 
@@ -117,6 +121,10 @@ const SafeOwners = (props: { owners: string[], onBack: (owners: string[]) => voi
         </Box>
         <BoxFooter sx={{pb: 0}}>
             <Button sx={{mr: '10px'}} onClick={() => {
+                if (!modified) {
+                    props.onBack(owners);
+                    return;
+                }
                 setSubmitted(true);
                 if (canSubmit()) {
                     props.onBack(owners);
