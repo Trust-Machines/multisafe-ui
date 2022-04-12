@@ -6,14 +6,14 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-import {makeSafeContract} from '@trustmachines/multisafe-contracts';
+import {makeSafeContract, NETWORK} from '@trustmachines/multisafe-contracts';
 import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
 import {useConnect} from '@stacks/connect-react';
 
 import useUserSession from '../../hooks/use-user-session';
 import useTranslation from '../../hooks/use-translation';
+import useNetwork from '../../hooks/use-network';
 
 import AppContent from '../../layout/app-content';
 import ThemedBox from '../../components/themed-box';
@@ -21,9 +21,9 @@ import SafeName from './components/safe-name';
 import SafeOwners from './components/safe-owners';
 import SafeConfirmations from './components/safe-confirmations';
 import SafeReview from './components/safe-review';
-import useNetwork from '../../hooks/use-network';
-import {capitalize} from '../../util';
-import NetworkLabel from '../../components/network-label';
+import SafeSuccess from './components/safe-success';
+
+import {makeTxUrl} from '../../helper';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth, signOut] = useUserSession();
@@ -34,7 +34,8 @@ const Create = (_: RouteComponentProps) => {
     const [name, setName] = useState<string>('');
     const [owners, setOwners] = useState<string[]>(['']);
     const [confirmations, setConfirmations] = useState<number>(1);
-    const [txId, setTxId] = useState<string>('');
+    const [txUrl, setTxUrl] = useState<string>('');
+    const [deployedNetwork, setDeployedNetwork] = useState<NETWORK>(network);
     const boxSx = {maxWidth: '690px', p: '20px'};
     const {doContractDeploy} = useConnect();
 
@@ -122,7 +123,8 @@ const Create = (_: RouteComponentProps) => {
                                         codeBody: code,
                                         onFinish: data => {
                                             setStep(step + 1);
-                                            setTxId(data.txId);
+                                            setTxUrl(makeTxUrl(data.txId, network))
+                                            setDeployedNetwork(network);
                                         },
                                     }).then();
                                 }}/>
@@ -133,14 +135,7 @@ const Create = (_: RouteComponentProps) => {
                     <StepLabel>{t('Done')}</StepLabel>
                     <StepContent>
                         <ThemedBox sx={boxSx}>
-
-                           <CheckBoxIcon />   Your new Safe being deployed to <NetworkLabel network={network} /> <br /><br /><br />
-
-
-
-                         It may take a few minutes to complete. You can import it once deployment completes.
-
-
+                            <SafeSuccess txUrl={txUrl} network={deployedNetwork} />
                         </ThemedBox>
                     </StepContent>
                 </Step>

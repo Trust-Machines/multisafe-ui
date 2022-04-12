@@ -8,7 +8,7 @@ const NetworkLabel = (props: { network: NETWORK, onClick?: () => void }) => {
         textTransform: 'capitalize',
         borderRadius: '6px',
         height: '24px'
-    }} label={props.network} color={props.network === 'mainnet' ? 'success' : 'warning'} onClick={props.onClick}/>;
+    }} label={props.network} color={props.network === 'mainnet' ? 'primary' : 'default'} onClick={props.onClick}/>;
 }
 
 export default NetworkLabel;

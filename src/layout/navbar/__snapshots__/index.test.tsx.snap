@@ -65,7 +65,7 @@ exports[`1 Default render 1`] = `
         class="MuiBox-root css-1sfu4nm"
       >
         <div
-          class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorSuccess MuiChip-clickable MuiChip-clickableColorSuccess MuiChip-filledSuccess css-afy8jx-MuiButtonBase-root-MuiChip-root"
+          class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-8w4ikn-MuiButtonBase-root-MuiChip-root"
           role="button"
           tabindex="0"
         >
