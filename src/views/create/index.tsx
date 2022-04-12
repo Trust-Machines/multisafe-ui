@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {RouteComponentProps} from '@reach/router';
 
 import Typography from '@mui/material/Typography';
@@ -37,6 +37,12 @@ const Create = (_: RouteComponentProps) => {
     const [txUrl, setTxUrl] = useState<string>('');
     const {doContractDeploy} = useConnect();
     const boxSx = {maxWidth: '690px', p: '20px'};
+
+    useEffect(() => {
+        if (owners.length < confirmations) {
+            setConfirmations(owners.length);
+        }
+    }, [owners, confirmations]);
 
     return <>
         <AppContent>
