@@ -17,3 +17,14 @@ export const resolveBnsName = (network: StacksNetwork, name: string): Promise<st
         return r.address;
     });
 }
+
+export const getContractInfo = (network: StacksNetwork, address: string, name: string): Promise<{ tx_id: string } | null> => {
+    const contractId = `${address}.${name}`;
+    return fetch(`${network.coreApiUrl}/extended/v1/contract/${contractId}?unanchored=true`).then(r => r.json()).then(r => {
+        if (r.tx_id) {
+            return r;
+        }
+
+        return null;
+    });
+}

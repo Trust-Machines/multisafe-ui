@@ -4,21 +4,39 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import useTranslation from '../../../hooks/use-translation';
+import useNetwork from '../../../hooks/use-network';
+import useAddress from '../../../hooks/use-address';
 
 import BoxFooter from '../../../components/box-footer';
 
+import {getContractInfo} from '../../../api';
+
 const SafeName = (props: { name: string, onSubmit: (name: string) => void }) => {
+    const [, stacksNetwork] = useNetwork();
+    const address = useAddress();
     const [name, setName] = useState<string>(props.name);
+    const [available, setAvailable] = useState<boolean>(true);
     const [submitted, setSubmitted] = useState<boolean>(false);
+    const [inProgress, setInProgress] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>();
     const [t] = useTranslation();
 
     const isValid = /^[a-zA-Z0-9-]+$/.test(name);
-    const error = submitted && !isValid;
+    const error = (submitted && !isValid) || !available;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setSubmitted(true);
         if (isValid) {
+            if (address) {
+                setInProgress(true);
+                if (await getContractInfo(stacksNetwork, address, name).finally(() => {
+                    setInProgress(false);
+                })) {
+                    setAvailable(false);
+                    return;
+                }
+            }
+
             props.onSubmit(name);
             return;
         }
@@ -43,21 +61,23 @@ const SafeName = (props: { name: string, onSubmit: (name: string) => void }) => 
                        error={error}
                        onChange={(e) => {
                            setName(e.target.value);
+                           setSubmitted(false);
+                           setAvailable(true);
                        }}
                        inputProps={{
                            maxLength: 30
                        }}
-                       helperText={error ? t('Only alphanumeric characters and hyphens') : ' '}
+                       helperText={error ? (!isValid ? t('Only alphanumeric characters and hyphens') : t('This name is already in use')) : ' '}
                        inputRef={inputRef}
                        onKeyPress={(e) => {
                            if (e.key === 'Enter') {
-                               handleSubmit();
+                               handleSubmit().then();
                            }
                        }}
             />
         </Box>
         <BoxFooter sx={{pb: 0}}>
-            <Button variant="contained" onClick={handleSubmit}>{t('Continue')}</Button>
+            <Button variant="contained" onClick={handleSubmit} disabled={inProgress}>{t('Continue')}</Button>
         </BoxFooter>
     </>
 }
