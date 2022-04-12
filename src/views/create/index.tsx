@@ -6,10 +6,9 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
-
+import {useConnect} from '@stacks/connect-react';
 import {makeSafeContract, NETWORK} from '@trustmachines/multisafe-contracts';
 import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
-import {useConnect} from '@stacks/connect-react';
 
 import useUserSession from '../../hooks/use-user-session';
 import useTranslation from '../../hooks/use-translation';
@@ -26,18 +25,18 @@ import SafeSuccess from './components/safe-success';
 import {makeTxUrl} from '../../helper';
 
 const Create = (_: RouteComponentProps) => {
-    const [, userData, openAuth, signOut] = useUserSession();
+    const [, userData, openAuth] = useUserSession();
     const [network, stacksNetwork] = useNetwork();
     const [t] = useTranslation();
 
-    const [step, setStep] = useState<number>(4);
+    const [step, setStep] = useState<number>(0);
     const [name, setName] = useState<string>('');
     const [owners, setOwners] = useState<string[]>(['']);
     const [confirmations, setConfirmations] = useState<number>(1);
-    const [txUrl, setTxUrl] = useState<string>('');
     const [deployedNetwork, setDeployedNetwork] = useState<NETWORK>(network);
-    const boxSx = {maxWidth: '690px', p: '20px'};
+    const [txUrl, setTxUrl] = useState<string>('');
     const {doContractDeploy} = useConnect();
+    const boxSx = {maxWidth: '690px', p: '20px'};
 
     return <>
         <AppContent>
@@ -135,7 +134,7 @@ const Create = (_: RouteComponentProps) => {
                     <StepLabel>{t('Done')}</StepLabel>
                     <StepContent>
                         <ThemedBox sx={boxSx}>
-                            <SafeSuccess txUrl={txUrl} network={deployedNetwork} />
+                            <SafeSuccess txUrl={txUrl} network={deployedNetwork}/>
                         </ThemedBox>
                     </StepContent>
                 </Step>
