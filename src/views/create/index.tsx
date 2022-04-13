@@ -23,6 +23,7 @@ import SafeReview from './components/safe-review';
 import SafeSuccess from './components/safe-success';
 
 import {makeTxUrl} from '../../helper';
+import useToast from '../../hooks/use-toast';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth] = useUserSession();
@@ -37,6 +38,7 @@ const Create = (_: RouteComponentProps) => {
     const [txUrl, setTxUrl] = useState<string>('');
     const {doContractDeploy} = useConnect();
     const boxSx = {maxWidth: '690px', p: '20px'};
+    const [, showToast] = useToast();
 
     useEffect(() => {
         if (owners.length < confirmations) {
@@ -134,6 +136,7 @@ const Create = (_: RouteComponentProps) => {
                                     }).then();
                                 }}
                                 onConflict={() => {
+                                    showToast(t('This safe name is already in use. Please enter another name.'), 'error');
                                     setStep(0);
                                 }}/>
                         </ThemedBox>

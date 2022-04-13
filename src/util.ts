@@ -6,3 +6,8 @@ export const truncateMiddle = (s: string, cut: number): string => {
 export const capitalize = (s: string): string => {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+export const randStr = (): string => {
+    return Math.random().toString(36).replace('0.', '').toString();
+}
+

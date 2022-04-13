@@ -32,6 +32,7 @@ const SafeReview = (props: { name: string, owners: string[], confirmations: numb
     const [, , openAuth] = useUserSession();
 
     const onNext = async () => {
+        setInProgress(true);
         if (await getContractInfo(stacksNetwork, address!, props.name).finally(() => {
             setInProgress(false);
         })) {
