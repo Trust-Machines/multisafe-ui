@@ -132,6 +132,9 @@ const Create = (_: RouteComponentProps) => {
                                             setDeployedNetwork(network);
                                         },
                                     }).then();
+                                }}
+                                onConflict={() => {
+                                    setStep(0);
                                 }}/>
                         </ThemedBox>
                     </StepContent>

@@ -8,6 +8,7 @@ test('1 Default render', () => {
                                         confirmations={2}
                                         onBack={() => {}}
                                         onNext={() => {}}
+                                        onConflict={() => {}}
     />);
     expect(rendered.container).toMatchSnapshot()
 });
