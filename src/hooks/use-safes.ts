@@ -1,6 +1,5 @@
-import {useEffect, useMemo} from 'react';
+import {useEffect} from 'react';
 import {useAtom} from 'jotai';
-import {Storage} from '@stacks/storage';
 
 import {safesAtom} from '../store';
 import useAddress from './use-address';
@@ -9,7 +8,7 @@ import useStorage from './use-storage';
 
 import {SafesState} from '../store/safes';
 
-const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) => Promise<any>, () => Promise<boolean>] => {
+const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) => Promise<any>] => {
     const address = useAddress();
     const [userSession] = useUserSession();
     const [safes, setSafes] = useAtom(safesAtom);
@@ -22,27 +21,9 @@ const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) =>
                 setSafes({loading: false, safes: r.map((x) => ({name: x}))});
             });
         }
-    }, [address])
 
-    /*
-    //const storage = new Storage({ userSession });
-
-
-    const fetchSafes = async (): Promise<boolean> => {
-        if (!storage) {
-            return false;
-        }
-
-
-        storage.getFile('safes.txt').then(r => {
-            //  console.log(r)
-        }).catch((e: Error) => {
-            console.log(e.name === 'DoesNotExist')
-        })
-
-
-        return true
-    } */
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [address]);
 
     const getSafeList = async (): Promise<string[]> => {
         return getFile('safes').then(r => {
@@ -59,11 +40,7 @@ const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) =>
         })
     }
 
-    const deleteSafe = async (): Promise<boolean> => {
-        return true
-    }
-
-    return [safes, getSafeList, addNewSafe, deleteSafe];
+    return [safes, getSafeList, addNewSafe];
 }
 
 export default useSafes;

@@ -9,4 +9,4 @@ export interface SafesState {
     safes: Safe[]
 }
 
-export const safesAtom = atom<SafesState>({loading: false, safes: []});
+export const safesAtom = atom<SafesState>({loading: true, safes: []});

@@ -27,7 +27,7 @@ const Import = (_: RouteComponentProps) => {
     const [t] = useTranslation();
     const navigate = useNavigate();
     const [, stacksNetwork] = useNetwork();
-    const [, getSafeList, setSafeList] = useSafes();
+    const [, getSafeList] = useSafes();
 
     useEffect(() => {
         if (!address) {
@@ -79,17 +79,6 @@ const Import = (_: RouteComponentProps) => {
             notifyError(t('The safe is already imported'))
             return;
         }
-
-        //setSafeList([...safeList, safeAddress.trim()])
-
-
-        /*
-
-        addSafe(safeAddress).then(r => {
-            //console.log(r);
-        })
-
-         */
     }
 
     return <>

@@ -3,14 +3,13 @@ import {RouteComponentProps, useNavigate} from '@reach/router';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 
 import useMediaBreakPoint from '../../hooks/use-media-break-point';
 import useTranslation from '../../hooks/use-translation';
+
 import ThemedBox from '../../components/themed-box';
-
 import AppContent from '../../layout/app-content';
-
+import Load from './components/load';
 
 const Home = (_: RouteComponentProps) => {
     const [isMd] = useMediaBreakPoint();
@@ -23,16 +22,7 @@ const Home = (_: RouteComponentProps) => {
             <Typography variant='h6'
                         fontWeight='500'>{t('MultiSafe is the most secure platform for storing your STX digital assets.')}</Typography>
             <Box sx={{marginTop: '40px'}}>
-                <Typography variant='h6' fontWeight='400' gutterBottom>{t('Load Existing Safe')}</Typography>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center'
-                }}>
-                    <TextField sx={{
-                        width: isMd ? '640px' : '100%',
-                        marginRight: '6px'
-                    }} label={t('Safe Address')} placeholder={t('Enter safe address or select and press enter')}/>
-                </Box>
+                 <Load />
             </Box>
             <Box sx={{marginTop: '40px'}}>
                 <ThemedBox sx={{padding: '20px', width: isMd ? '260px' : 'auto',}}>

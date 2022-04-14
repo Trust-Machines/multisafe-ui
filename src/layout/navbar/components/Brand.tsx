@@ -1,11 +1,9 @@
 import React from 'react';
-import {useNavigate} from '@reach/router';
 import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
 import useMediaBreakPoint from '../../../hooks/use-media-break-point';
-
 
 
 const Brand = () => {
