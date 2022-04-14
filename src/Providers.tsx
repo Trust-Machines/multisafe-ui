@@ -6,7 +6,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import {Connect} from '@stacks/connect-react';
 
-import {networkAtom, appThemeAtom} from './store';
+import {networkAtom, uiAtom} from './store';
 import useAppTheme from './hooks/use-app-theme';
 import useToast from './hooks/use-toast';
 
@@ -14,7 +14,7 @@ import {baseAuthOptions} from './constants';
 
 const StoreDevToolsProvider: React.FC = ({children}) => {
     useAtomDevtools(networkAtom, 'Network');
-    useAtomDevtools(appThemeAtom, 'App Theme');
+    useAtomDevtools(uiAtom, 'UI');
     return <>{children}</>;
 }
 
