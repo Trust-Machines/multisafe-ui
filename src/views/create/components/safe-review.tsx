@@ -112,7 +112,7 @@ const SafeReview = (props: { name: string, owners: string[], confirmations: numb
         }}>
             <Trans
                 i18n={i18n}
-                defaults="You're about to create a new Safe on <0>{{network}}</0> and will have to confirm a transaction with your currently connected wallet. The creation cost will be determined by your wallet."
+                defaults="You're about to create a new Safe on <0>{{network}}</0> and will have to confirm a transaction with your wallet. The creation cost will be determined by your wallet."
                 values={{network: capitalize(network)}}
                 components={[<strong/>]}
             />
