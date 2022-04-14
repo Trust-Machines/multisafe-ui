@@ -5,7 +5,7 @@ export type ToastType = null | 'error' | 'warning' | 'info' | 'success';
 
 export interface Toast {
     message: null | string,
-    type: null | 'error' | 'warning' | 'info' | 'success'
+    type: ToastType
 }
 
 export interface UIState {

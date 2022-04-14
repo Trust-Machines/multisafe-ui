@@ -1,25 +1,20 @@
 import React, {useState} from 'react';
 import {Trans} from 'react-i18next'
-
 import {Box, Button, useTheme} from '@mui/material';
-import Snackbar from '@mui/material/Snackbar';
-
-
 import {grey} from '@mui/material/colors';
-
-import useTranslation from '../../../hooks/use-translation';
-import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
 import BoxFooter from '../../../components/box-footer';
 import Wallet from '../../../components/wallet';
 
+import useTranslation from '../../../hooks/use-translation';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 import useNetwork from '../../../hooks/use-network';
-
 import useAddress from '../../../hooks/use-address';
+import useUserSession from '../../../hooks/use-user-session';
+
+import {getContractInfo} from '../../../api';
 
 import {capitalize} from '../../../util';
-import useUserSession from '../../../hooks/use-user-session';
-import {getContractInfo} from '../../../api';
 
 
 const SafeReview = (props: { name: string, owners: string[], confirmations: number, onBack: () => void, onNext: () => void, onConflict: () => void, }) => {
