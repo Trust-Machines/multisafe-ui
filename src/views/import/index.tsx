@@ -71,6 +71,7 @@ const Import = (_: RouteComponentProps) => {
             return
         }
 
+        /*
         const safeList = await getSafeList();
 
         console.log(safeList);
@@ -79,6 +80,8 @@ const Import = (_: RouteComponentProps) => {
             notifyError(t('The safe is already imported'))
             return;
         }
+
+         */
     }
 
     return <>

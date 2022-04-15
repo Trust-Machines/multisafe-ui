@@ -18,7 +18,6 @@ const StoreDevToolsProvider: React.FC = ({children}) => {
     return <>{children}</>;
 }
 
-
 const themeOptions: ThemeOptions = {
     palette: {
         mode: 'light'

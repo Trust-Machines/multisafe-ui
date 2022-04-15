@@ -5,29 +5,31 @@ import {safesAtom} from '../store';
 import useAddress from './use-address';
 import useUserSession from './use-user-session';
 import useStorage from './use-storage';
+import useNetwork from './use-network';
 
 import {SafesState} from '../store/safes';
 
-const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) => Promise<any>] => {
+const useSafes = (): [SafesState, (safe: string) => Promise<any>] => {
     const address = useAddress();
     const [userSession] = useUserSession();
     const [safes, setSafes] = useAtom(safesAtom);
     const [getFile, putFile] = useStorage(userSession);
+    const [network] = useNetwork();
 
     useEffect(() => {
-        setSafes({loading: !!address, safes: []});
+        setSafes({loading: !!address, list: []});
         if (address) {
-            getSafeList().then(r => {
-                setSafes({loading: false, safes: r.map((x) => ({name: x}))});
+            getSafeList().then(safes => {
+                setSafes({loading: false, list: safes});
             });
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [address]);
+    }, [address, network]);
 
     const getSafeList = async (): Promise<string[]> => {
-        return getFile('safes').then(r => {
-            return r.split("\n");
+        return getFile(`safes_${network}`).then(r => {
+            return r.split("\n").filter(x => x.trim());
         });
     }
 
@@ -36,11 +38,14 @@ const useSafes = (): [SafesState, () => Promise<string[]>, (safeList: string) =>
             if (r.includes(safe)) {
                 throw Error('The safe is already in the list!');
             }
-            return putFile('safes', [...r, safe].join("\n"));
+            const newSafes = [...r, safe];
+            return putFile(`safes_${network}`, newSafes.join("\n")).then(() => {
+                setSafes({...safes, list: newSafes});
+            })
         })
     }
 
-    return [safes, getSafeList, addNewSafe];
+    return [safes, addNewSafe];
 }
 
 export default useSafes;
