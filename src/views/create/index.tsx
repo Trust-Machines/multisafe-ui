@@ -13,7 +13,9 @@ import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
 import useUserSession from '../../hooks/use-user-session';
 import useTranslation from '../../hooks/use-translation';
 import useNetwork from '../../hooks/use-network';
+import useToast from '../../hooks/use-toast';
 
+import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import ThemedBox from '../../components/themed-box';
 import SafeName from './components/safe-name';
@@ -23,7 +25,6 @@ import SafeReview from './components/safe-review';
 import SafeSuccess from './components/safe-success';
 
 import {makeTxUrl} from '../../helper';
-import useToast from '../../hooks/use-toast';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth] = useUserSession();
@@ -47,6 +48,7 @@ const Create = (_: RouteComponentProps) => {
     }, [owners, confirmations]);
 
     return <>
+        <Navbar/>
         <AppContent>
             <Typography variant='h4' fontWeight='700' mt='10px' gutterBottom>{t('Create Safe')}</Typography>
             <Typography variant='h6' fontWeight='500'>{t('Create a safe with multiple owners.')}</Typography>

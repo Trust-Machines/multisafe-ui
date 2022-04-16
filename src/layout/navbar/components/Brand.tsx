@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from '@reach/router';
 import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
@@ -9,6 +10,7 @@ import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 const Brand = () => {
     const theme = useTheme();
     const [isSm] = useMediaBreakPoint();
+    const navigate = useNavigate();
 
     return (
         <Box sx={{
@@ -18,7 +20,7 @@ const Brand = () => {
             flexGrow: 0,
             cursor: 'pointer'
         }} onClick={()=>{
-            window.location.href = '/';
+            navigate('/').then();
         }}>
             <Box sx={{
                 width: '32px',
