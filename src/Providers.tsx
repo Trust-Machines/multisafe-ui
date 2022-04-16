@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback, useEffect} from 'react'
 import {Provider} from 'jotai';
 import {useAtomDevtools} from 'jotai/devtools'
 import {ThemeProvider as MThemeProvider, createTheme, ThemeOptions} from '@mui/material';
@@ -11,6 +11,9 @@ import useAppTheme from './hooks/use-app-theme';
 import useToast from './hooks/use-toast';
 
 import {baseAuthOptions} from './constants';
+import useSafes from './hooks/use-safes';
+import useAddress from './hooks/use-address';
+import useNetwork from './hooks/use-network';
 
 const StoreDevToolsProvider: React.FC = ({children}) => {
     useAtomDevtools(networkAtom, 'Network');
@@ -54,13 +57,26 @@ const ToastProvider: React.FC = ({children}) => {
     </>;
 }
 
+const SafesProvider: React.FC = ({children}) => {
+    const [, fetchSafes] = useSafes();
+    const address = useAddress();
+    const [network] = useNetwork();
+
+    useEffect(() => {
+        fetchSafes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [address, network]);
+
+    return <>{children}</>;
+}
+
 const Providers: React.FC = ({children}) => {
     return (
         <Provider>
             <Connect authOptions={baseAuthOptions}>
                 <StoreDevToolsProvider>
                     <ThemeProvider>
-                        <ToastProvider>{children}</ToastProvider>
+                        <ToastProvider> <SafesProvider>{children} </SafesProvider> </ToastProvider>
                     </ThemeProvider>
                 </StoreDevToolsProvider>
             </Connect>

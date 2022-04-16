@@ -30,7 +30,7 @@ const Recent = () => {
         <Typography variant='h6' gutterBottom>{t('Recently used')}</Typography>
         {safes.list.map((i, n) => {
             const [address, name] = i.split(".");
-            return <Box sx={{
+            return <Box key={i} sx={{
                 cursor: 'pointer',
                 padding: '6px',
                 marginBottom: n === safes.list.length - 1 ? null : '16px',

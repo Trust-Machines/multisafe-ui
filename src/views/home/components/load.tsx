@@ -19,7 +19,7 @@ const Load = () => {
     const [inProgress, setInProgress] = useState(false);
     const [isMd] = useMediaBreakPoint();
     const [t] = useTranslation();
-    const [safes, addNewSafe] = useSafes();
+    const [safes, ,addNewSafe] = useSafes();
     const [, stacksNetwork] = useNetwork();
 
     const notifyError = (s: string) => {
