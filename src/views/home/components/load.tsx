@@ -19,7 +19,7 @@ const Load = () => {
     const [error, setError] = useState('');
     const [inProgress, setInProgress] = useState(false);
     const [t] = useTranslation();
-    const [, , addNewSafe] = useSafes();
+    const [, , upsertSafe] = useSafes();
     const [, stacksNetwork] = useNetwork();
 
     const notifyError = (s: string) => {
@@ -61,7 +61,7 @@ const Load = () => {
             return;
         }
 
-        await addNewSafe(safe);
+        await upsertSafe(safe);
         setInProgress(false);
     }
 

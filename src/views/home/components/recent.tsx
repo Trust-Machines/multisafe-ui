@@ -16,7 +16,7 @@ const Recent = () => {
     const [, isMd] = useMediaBreakPoint();
     const [t] = useTranslation();
     const navigate = useNavigate();
-    const [safes,] = useSafes();
+    const [safes, , upsertSafe] = useSafes();
     const theme = useTheme();
 
     if (safes.list.length === 0) {
@@ -40,6 +40,7 @@ const Recent = () => {
                     bgcolor: 'transparent'
                 }
             }} onClick={() => {
+                upsertSafe(i).then();
                 navigate(`/safe/${i}`).then();
             }}>
                 <Box sx={{fontWeight: 'bold'}}>{name}</Box>
