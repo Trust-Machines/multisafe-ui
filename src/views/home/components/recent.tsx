@@ -2,6 +2,7 @@ import React from 'react';
 import {useNavigate} from '@reach/router';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
@@ -47,6 +48,13 @@ const Recent = () => {
                 <Box sx={{fontSize: '90%', overflowWrap: 'break-word'}}>{address}</Box>
             </Box>
         })}
+        <Box sx={{
+            marginTop: '13px'
+        }}>
+            <Button variant='outlined' onClick={() => {
+                navigate('/create').then();
+            }}>{t('Create new Safe')}</Button>
+        </Box>
     </ThemedBox>
 }
 
