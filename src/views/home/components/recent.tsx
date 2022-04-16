@@ -33,10 +33,11 @@ const Recent = () => {
             return <Box key={i} sx={{
                 cursor: 'pointer',
                 padding: '6px',
-                marginBottom: n === safes.list.length - 1 ? null : '16px',
+                marginBottom: n === safes.list.length - 1 ? null : '6px',
                 borderRadius: '4px',
+                bgcolor: theme.palette.mode === 'light' ? grey[50] : grey[900],
                 ':hover': {
-                    bgcolor: theme.palette.mode === 'light' ? grey[50] : grey[900]
+                    bgcolor: 'transparent'
                 }
             }} onClick={() => {
                 navigate(`/safe/${i}`).then();
