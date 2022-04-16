@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import {useNavigate} from '@reach/router';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -21,6 +21,7 @@ const Load = () => {
     const [t] = useTranslation();
     const [, , upsertSafe] = useSafes();
     const [, stacksNetwork] = useNetwork();
+    const navigate = useNavigate();
 
     const notifyError = (s: string) => {
         setError(s);
@@ -63,6 +64,7 @@ const Load = () => {
 
         await upsertSafe(safe);
         setInProgress(false);
+        navigate(`/safe/${safe}`).then();
     }
 
     return <>
