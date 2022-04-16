@@ -1,13 +1,10 @@
 import React from 'react';
-import {RouteComponentProps, useNavigate} from '@reach/router';
+import {RouteComponentProps} from '@reach/router';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 
 import useMediaBreakPoint from '../../hooks/use-media-break-point';
 import useTranslation from '../../hooks/use-translation';
-import useSafes from '../../hooks/use-safes';
-import ThemedBox from '../../components/themed-box';
 import AppContent from '../../layout/app-content';
 import Load from './components/load';
 import Create from './components/create';
@@ -17,8 +14,6 @@ import Recent from './components/recent';
 const Home = (_: RouteComponentProps) => {
     const [isSm, isMd] = useMediaBreakPoint();
     const [t] = useTranslation();
-    const navigate = useNavigate();
-    const [safes,] = useSafes();
 
     return <>
         <AppContent>
