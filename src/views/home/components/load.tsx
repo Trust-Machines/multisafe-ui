@@ -3,23 +3,23 @@ import React, {useState} from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import InputAdornment from '@mui/material/InputAdornment';
+import CircularProgress from '@mui/material/CircularProgress';
+import {ClarityAbi, getAbi} from '@stacks/transactions';
 
 import useTranslation from '../../../hooks/use-translation';
-import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 import useSafes from '../../../hooks/use-safes';
-import {ClarityAbi, getAbi} from '@stacks/transactions';
-import {validateSafeAbi} from '../../../helper';
 import useNetwork from '../../../hooks/use-network';
+
+import {validateSafeAbi} from '../../../helper';
 
 const Load = () => {
     const inputRef = React.useRef<HTMLInputElement>();
     const [safeAddress, setSafeAddress] = useState('');
     const [error, setError] = useState('');
     const [inProgress, setInProgress] = useState(false);
-    const [isMd] = useMediaBreakPoint();
     const [t] = useTranslation();
-    const [safes, ,addNewSafe] = useSafes();
+    const [, , addNewSafe] = useSafes();
     const [, stacksNetwork] = useNetwork();
 
     const notifyError = (s: string) => {
@@ -80,7 +80,9 @@ const Load = () => {
                 onChange={handleChange}
                 error={error !== ''}
                 helperText={error || ' '}
-                inputProps={{
+                InputProps={{
+                    endAdornment: inProgress ?
+                        <InputAdornment position="end"> <CircularProgress color="primary"/></InputAdornment> : null,
                     readOnly: inProgress
                 }}
                 onKeyDown={(e) => {
