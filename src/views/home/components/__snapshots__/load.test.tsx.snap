@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <h6
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-cxmfqi-MuiTypography-root"
+  >
+    Load Existing Safe
+  </h6>
+  <div
+    class="MuiBox-root css-70qvj9"
+  >
+    <div
+      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+      spellcheck="false"
+    >
+      <label
+        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="true"
+        for="mui-1"
+        id="mui-1-label"
+      >
+        Safe Address
+      </label>
+      <div
+        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          aria-describedby="mui-1-helper-text"
+          aria-invalid="false"
+          autocomplete="off"
+          class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-1"
+          placeholder="Enter safe address and press enter"
+          type="text"
+          value=""
+        />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-1in441m"
+          >
+            <span>
+              Safe Address
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <p
+        class="MuiFormHelperText-root MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-focused css-1wc848c-MuiFormHelperText-root"
+        id="mui-1-helper-text"
+      >
+        <span
+          class="notranslate"
+        >
+          ​
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;
