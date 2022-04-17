@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 
-import NetworkSwitch, {NetworkMenu} from './NetworkSwitch';
+import NetworkSwitch, {NetworkMenu} from './network-switch';
 
 import useNetwork from '../../../hooks/use-network';
 jest.mock('../../../hooks/use-network');

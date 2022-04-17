@@ -1,4 +1,4 @@
-import Brand from './Brand';
+import Brand from './brand';
 import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
 import {renderWithRouter} from '../../../helper/test-helper';

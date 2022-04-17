@@ -6,10 +6,10 @@ import {useTheme} from '@mui/material';
 
 import useMediaBreakPoint from '../../hooks/use-media-break-point';
 
-import Brand from './components/Brand';
-import Wallet from './components/Wallet';
-import NetworkSwitch from './components/NetworkSwitch';
-import ThemeSwitch from './components/ThemeSwitch';
+import Brand from './components/brand';
+import Wallet from './components/wallet';
+import NetworkSwitch from './components/network-switch';
+import ThemeSwitch from './components/theme-switch';
 
 const Navbar = () => {
     const theme = useTheme();

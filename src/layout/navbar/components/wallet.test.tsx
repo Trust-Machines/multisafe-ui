@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 
-import Wallet, {WalletMenu} from './Wallet';
+import Wallet, {WalletMenu} from './wallet';
 import useAddress from '../../../hooks/use-address';
 import useBnsName from '../../../hooks/use-bns-name';
 
