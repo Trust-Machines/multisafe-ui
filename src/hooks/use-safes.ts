@@ -22,6 +22,8 @@ const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] =>
             getSafeList().then(safes => {
                 setSafes({loading: false, list: safes, init: true});
             });
+        } else {
+            setSafes({...safes, init: true});
         }
     }
 
