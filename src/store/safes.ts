@@ -2,7 +2,8 @@ import {atom} from 'jotai';
 
 export interface SafesState {
     loading: boolean,
-    list: string[]
+    list: string[],
+    init: boolean
 }
 
-export const safesAtom = atom<SafesState>({loading: false, list: []});
+export const safesAtom = atom<SafesState>({loading: false, list: [], init: false});

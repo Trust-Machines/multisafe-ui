@@ -17,10 +17,10 @@ const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] =>
     const [network] = useNetwork();
 
     const fetchSafes = () => {
-        setSafes({loading: !!address, list: []});
+        setSafes({...safes, loading: !!address, list: []});
         if (address) {
             getSafeList().then(safes => {
-                setSafes({loading: false, list: safes});
+                setSafes({loading: false, list: safes, init: true});
             });
         }
     }
