@@ -9,7 +9,7 @@ import useMediaBreakPoint from '../../hooks/use-media-break-point';
 import Brand from './components/Brand';
 import Wallet from './components/Wallet';
 import NetworkSwitch from './components/NetworkSwitch';
-
+import ThemeSwitch from './components/ThemeSwitch';
 
 const Navbar = () => {
     const theme = useTheme();
@@ -38,6 +38,7 @@ const Navbar = () => {
             }}>
                 <Wallet/>
                 <NetworkSwitch/>
+                <ThemeSwitch />
             </Box>
         </Box>
     );
