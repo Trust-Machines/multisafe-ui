@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {grey} from '@mui/material/colors';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 import useUserSession from '../../../hooks/use-user-session';
 import useBnsName from '../../../hooks/use-bns-name';
@@ -14,13 +15,15 @@ import useTranslation from '../../../hooks/use-translation';
 import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
 import ThemedBox from '../../../components/themed-box';
-
+import CopyToClipboard from '../../../components/copy-clipboard';
 import {truncateMiddle} from '../../../util';
 
 export const WalletMenu = () => {
+    const address = useAddress();
     const [t] = useTranslation();
     const [, , , signOut] = useUserSession();
     const [isSm] = useMediaBreakPoint();
+    const theme = useTheme()
 
     return (
         <ThemedBox sx={{
@@ -29,6 +32,23 @@ export const WalletMenu = () => {
             left: '0',
             top: isSm ? '60px' : '46px',
         }}>
+            <Box sx={{
+                m: '10px 0 20px 0',
+                display: 'flex',
+                'span': {
+                    display: 'inline-flex',
+                    cursor: 'pointer',
+                    alignItems: 'center',
+                    fontSize: '96%',
+                    ':hover': {
+                        color: theme.palette.primary.main
+                    }
+                },
+            }}>
+              <CopyToClipboard copy={address!}>
+                  <span><ContentCopyIcon fontSize='small' sx={{mr: '6px'}}/>{t('Copy Address')}</span>
+              </CopyToClipboard>
+            </Box>
             <Button variant="contained" sx={{width: '100%'}} onClick={signOut}>{t('Logout')}</Button>
         </ThemedBox>
     )
