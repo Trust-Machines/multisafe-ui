@@ -72,7 +72,6 @@ const Wallet = () => {
                     padding: '0 20px',
                 }}>
                     <AccountBalanceWalletIcon sx={{
-                        color: theme.palette.mode === 'light' ? grey[800] : grey[50],
                         marginRight: '10px',
                         display: isSm ? 'block' : 'none'
                     }}/>

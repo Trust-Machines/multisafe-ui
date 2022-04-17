@@ -8,7 +8,6 @@ const AppContent = (props: { children: React.ReactNode }) => {
 
     const boxStyles = {
         bgcolor: theme.palette.mode === 'light' ? grey[50] : grey[900],
-        color: theme.palette.mode === 'light' ? grey[900] : grey[300],
         height: 'calc(100% - 40px)',
         flexGrow: 1,
         padding: '20px',
