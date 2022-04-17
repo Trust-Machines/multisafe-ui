@@ -3,7 +3,7 @@
 exports[`1 Default render 1`] = `
 <div>
   <div
-    class="MuiBox-root css-176ksq4"
+    class="MuiBox-root css-1r6mtiz"
   >
     <div
       class="MuiBox-root css-qvss5s"
@@ -14,7 +14,7 @@ exports[`1 Default render 1`] = `
       />
     </div>
     <div
-      class="MuiBox-root css-1yy7psm"
+      class="MuiBox-root css-1dx8jfp"
     >
       MultiSafe
     </div>
@@ -36,7 +36,7 @@ exports[`2 Hide brand text 1`] = `
       />
     </div>
     <div
-      class="MuiBox-root css-vuk6w6"
+      class="MuiBox-root css-1dx8jfp"
     >
       MultiSafe
     </div>

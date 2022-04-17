@@ -3,10 +3,10 @@
 exports[`1 Default render 1`] = `
 <div>
   <div
-    class="MuiBox-root css-1h7cp6k"
+    class="MuiBox-root css-hoayk1"
   >
     <div
-      class="MuiBox-root css-176ksq4"
+      class="MuiBox-root css-1r6mtiz"
     >
       <div
         class="MuiBox-root css-qvss5s"
@@ -17,7 +17,7 @@ exports[`1 Default render 1`] = `
         />
       </div>
       <div
-        class="MuiBox-root css-1yy7psm"
+        class="MuiBox-root css-1dx8jfp"
       >
         MultiSafe
       </div>
@@ -26,57 +26,61 @@ exports[`1 Default render 1`] = `
       class="flex-grow"
     />
     <div
-      class="MuiBox-root css-7lmw8c"
+      class="MuiBox-root css-ls0mhy"
     >
       <div
-        class="MuiBox-root css-198xhax"
+        class="MuiBox-root css-7lmw8c"
       >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1o05ccb-MuiSvgIcon-root"
-          data-testid="AccountBalanceWalletIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
-          />
-        </svg>
         <div
-          class="MuiBox-root css-x1k79c"
+          class="MuiBox-root css-198xhax"
         >
-          <span
-            class="first-line"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1o05ccb-MuiSvgIcon-root"
+            data-testid="AccountBalanceWalletIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            Not connected
-          </span>
-          <span
-            class="second-line"
+            <path
+              d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+            />
+          </svg>
+          <div
+            class="MuiBox-root css-x1k79c"
           >
-            Connect Wallet
-          </span>
+            <span
+              class="first-line"
+            >
+              Not connected
+            </span>
+            <span
+              class="second-line"
+            >
+              Connect Wallet
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      class="MuiBox-root css-1n1j97o"
-    >
       <div
-        class="MuiBox-root css-1sfu4nm"
+        class="MuiBox-root css-1n1j97o"
       >
         <div
-          class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-8w4ikn-MuiButtonBase-root-MuiChip-root"
-          role="button"
-          tabindex="0"
+          class="MuiBox-root css-1sfu4nm"
         >
-          <span
-            class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-8w4ikn-MuiButtonBase-root-MuiChip-root"
+            role="button"
+            tabindex="0"
           >
-            mainnet
-          </span>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
+            <span
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            >
+              mainnet
+            </span>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
         </div>
       </div>
     </div>

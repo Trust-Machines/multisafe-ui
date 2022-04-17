@@ -112,7 +112,7 @@ exports[`3 Render with bns 1`] = `
 exports[`4 Default render WalletMenu 1`] = `
 <div>
   <div
-    class="MuiBox-root css-9kanww"
+    class="MuiBox-root css-9x36y4"
   >
     <button
       class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
