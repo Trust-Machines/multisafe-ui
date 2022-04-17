@@ -20,14 +20,14 @@ import {truncateMiddle} from '../../../util';
 export const WalletMenu = () => {
     const [t] = useTranslation();
     const [, , , signOut] = useUserSession();
-
+    const [isSm] = useMediaBreakPoint();
 
     return (
         <ThemedBox sx={{
             position: 'absolute',
             width: 'calc(100% - 20px)',
             left: '0',
-            top: '60px',
+            top: isSm ? '60px' : '46px',
         }}>
             <Button variant="contained" sx={{width: '100%'}} onClick={signOut}>{t('Logout')}</Button>
         </ThemedBox>

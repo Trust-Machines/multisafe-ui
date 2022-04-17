@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
+import useMediaBreakPoint from '../../hooks/use-media-break-point';
+
 import Brand from './components/Brand';
 import Wallet from './components/Wallet';
 import NetworkSwitch from './components/NetworkSwitch';
@@ -11,11 +13,13 @@ import NetworkSwitch from './components/NetworkSwitch';
 
 const Navbar = () => {
     const theme = useTheme();
+    const [isSm] = useMediaBreakPoint();
 
     return (
         <Box sx={{
-            height: '54px',
+            height: isSm ? '54px' : null,
             display: 'flex',
+            flexDirection: isSm ? 'row' : 'column',
             flexShrink: 0,
             flexGrow: 0,
             padding: '0 18px',
@@ -27,8 +31,14 @@ const Navbar = () => {
         }}>
             <Brand/>
             <div className="flex-grow"/>
-            <Wallet/>
-            <NetworkSwitch/>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: isSm ? null : 'center',
+                height:isSm ? null: '40px'
+            }}>
+                <Wallet/>
+                <NetworkSwitch/>
+            </Box>
         </Box>
     );
 }

@@ -5,21 +5,22 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import {useTheme} from '@mui/material';
 import {grey} from '@mui/material/colors';
 
+import useNetwork from '../../../hooks/use-network';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
+
 import ThemedBox from '../../../components/themed-box';
 import NetworkLabel from '../../../components/network-label';
 
-import useNetwork from '../../../hooks/use-network';
-
-
 export const NetworkMenu = (props: { onChange: () => void }) => {
     const [, , setNetwork] = useNetwork();
+    const [isSm] = useMediaBreakPoint();
 
     return (
         <ThemedBox sx={{
             position: 'absolute',
             width: 'calc(100% - 20px)',
             left: '0',
-            top: '60px',
+            top: isSm ? '60px' : '46px',
         }}>
             <Box sx={{marginBottom: '6px'}}>
                 <NetworkLabel network='mainnet' onClick={() => {
@@ -65,7 +66,8 @@ const NetworkSwitch = () => {
                     justifyContent: 'center',
                     cursor: 'pointer',
                 }}>
-                    <NetworkLabel network={network} onClick={()=>{}}/>
+                    <NetworkLabel network={network} onClick={() => {
+                    }}/>
                 </Box>
                 {menu && <NetworkMenu onChange={() => {
                     setTimeout(() => {
