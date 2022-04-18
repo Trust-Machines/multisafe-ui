@@ -26,17 +26,21 @@ const Brand = () => {
             navigate('/').then();
         }}>
             <Box sx={{
-                width: '32px',
-                height: '32px',
+                width: '40px',
+                height: '40px',
                 borderRadius: '50%',
                 overflow: 'hidden',
                 marginRight: '8px',
+                background: '#F9A3A5',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 'img': {
-                    width: '100%',
-                    height: '100%'
+                    width: '32px',
+                    height: '32px'
                 }
             }}>
-                <img src="/logo.jpg" alt='Logo'/>
+                <img src="/logo.png" alt='Logo'/>
             </Box>
             <Box sx={{
                 fontSize: '1.3rem',
