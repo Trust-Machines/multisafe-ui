@@ -1,35 +1,47 @@
 import {useAtom} from 'jotai';
 
-import {safeAtom} from '../store';
-import {SafeState} from '../store/safe';
+import {safeAtom,} from '../store';
+import {SafeState, initial} from '../store/safe';
 
 import useNetwork from './use-network';
 import useSenderAddress from './use-sender-address';
 
 import * as api from '../api';
 
-const useSafes = (): [SafeState | null, (safe: string) => void] => {
+const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);
     const [, stacksNetwork] = useNetwork();
     const sender = useSenderAddress();
 
-    const fetchSafeData = (address: string) => {
+    const fetchSafeData = async (safeAddress: string) => {
         const promises: [Promise<number>, Promise<string>, Promise<string[]>, Promise<number>, Promise<api.AddressBalance>] = [
-            api.getSafeNonce(stacksNetwork, address, sender),
-            api.getSafeVersion(stacksNetwork, address, sender),
-            api.getSafeOwners(stacksNetwork, address, sender),
-            api.getSafeMinConfirmation(stacksNetwork, address, sender),
-            api.getContractBalances(stacksNetwork, address)
-        ]
+            api.getSafeNonce(stacksNetwork, safeAddress, sender),
+            api.getSafeVersion(stacksNetwork, safeAddress, sender),
+            api.getSafeOwners(stacksNetwork, safeAddress, sender),
+            api.getSafeMinConfirmation(stacksNetwork, safeAddress, sender),
+            api.getContractBalances(stacksNetwork, safeAddress)
+        ];
 
-        setSafe({...safe, loading: true});
-        Promise.all(promises).then(resp => {
-            const [nonce, version, owners, minConfirmation, balances] = resp;
-            setSafe({...safe, nonce, version, owners, minConfirmation, stxBalance: balances.stx.balance})
-            return api.getSafeTransactions(stacksNetwork, address, nonce, sender)
-        }).then(r => {
-            console.log(r)
-        })
+        const [address, name] = safeAddress.split('.');
+        setSafe({...safe, loading: true, address, name, init: true});
+
+        const resp = await Promise.all(promises);
+        const [nonce, version, owners, minConfirmation, balances] = resp;
+        const transactions = await api.getSafeTransactions(stacksNetwork, safeAddress, nonce, sender);
+
+        setSafe({
+            loading: false,
+            address,
+            name,
+            nonce,
+            version,
+            owners,
+            minConfirmation,
+            stxBalance: balances.stx.balance,
+            transactions,
+            init: true,
+        });
+
     }
 
     return [safe, fetchSafeData]

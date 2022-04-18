@@ -78,7 +78,7 @@ export const getSafeMinConfirmation = (network: StacksNetwork, safe: string, sen
     });
 }
 
-export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce: number, senderAddress: string):Promise<SafeTransaction> => {
+export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce: number, senderAddress: string):Promise<SafeTransaction[]> => {
     const txIds: number[] = [];
     for (let x = nonce - 1; x >= 0; x--) {
         txIds.push(x);
