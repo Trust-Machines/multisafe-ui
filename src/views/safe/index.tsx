@@ -70,10 +70,10 @@ const Safe = (_: RouteComponentProps) => {
                     textAlign: 'center',
                 }}>
                     <CopyToClipboard copy={safe.fullAddress}>
-                        <ContentCopyIcon fontSize="small" color="disabled" sx={{mr: '6px'}}/>
+                        <ContentCopyIcon color="disabled" sx={{mr: '12px', fontSize: '15px'}}/>
                     </CopyToClipboard>
                     <a href={makeTxUrl(safe.fullAddress, network)} target="_blank" rel="noreferrer">
-                        <OpenInNewIcon fontSize="small" color="disabled"/>
+                        <OpenInNewIcon color="disabled" sx={{fontSize: '15px'}}/>
                     </a>
                 </Box>
             </AppMenu>
