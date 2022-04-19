@@ -10,7 +10,7 @@ exports[`1 Default render 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1o05ccb-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
         data-testid="AccountBalanceWalletIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ exports[`2 Render with address 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1o05ccb-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
         data-testid="AccountBalanceWalletIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -81,7 +81,7 @@ exports[`3 Render with bns 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1o05ccb-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
         data-testid="AccountBalanceWalletIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -114,6 +114,24 @@ exports[`4 Default render WalletMenu 1`] = `
   <div
     class="MuiBox-root css-9x36y4"
   >
+    <div
+      class="MuiBox-root css-eg13y7"
+    >
+      <span>
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-5oa1ix-MuiSvgIcon-root"
+          data-testid="ContentCopyIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+          />
+        </svg>
+        Copy Address
+      </span>
+    </div>
     <button
       class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
       tabindex="0"

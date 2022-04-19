@@ -10,7 +10,6 @@ const AppMenu = (props: { children?: React.ReactNode }) => {
         width: isMd ? '200px' : '100%',
         flexGrow: 0,
         flexShrink: 0,
-        display: 'flex',
         boxShadow: `${theme.palette.divider} 1px 2px 10px 0px`,
         zIndex: 1
     }}>{props.children}</Box>

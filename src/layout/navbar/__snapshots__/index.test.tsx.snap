@@ -9,11 +9,11 @@ exports[`1 Default render 1`] = `
       class="MuiBox-root css-1r6mtiz"
     >
       <div
-        class="MuiBox-root css-qvss5s"
+        class="MuiBox-root css-wxdvxx"
       >
         <img
           alt="Logo"
-          src="/logo.jpg"
+          src="/logo.png"
         />
       </div>
       <div
@@ -36,7 +36,7 @@ exports[`1 Default render 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1o05ccb-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
             data-testid="AccountBalanceWalletIcon"
             focusable="false"
             viewBox="0 0 24 24"

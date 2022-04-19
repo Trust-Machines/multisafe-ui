@@ -54,7 +54,7 @@ exports[`1 Default render 1`] = `
           2 Safe owners
         </div>
         <div
-          class="MuiBox-root css-fcuisq"
+          class="MuiBox-root css-1ethbx3"
         >
           <div
             class="icon"
@@ -62,6 +62,7 @@ exports[`1 Default render 1`] = `
             <img
               alt="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA2klEQVRYhe2Yyw3DMAxD5cIbdJBOU+/QGXLODN1BnaaDdAb3WstABIIOqoPeLfEHBEHQToqIdPlBVQWhtXY4zu53gVb/gRTIUlR1yOCj7NAGz74djrP7hXcwBbJU+8LL1NR7Ts197u9xOtiL4R1MgSzVZmr1WYySZ/FqwgucetBydsa8zId3MAWyVC8D19ftXAV9fLR6wjuYAlmKTCkYsZlAe8yb7/VseAdTIIubQQt6X7SgZ3t4B1Mgy5RBtKfQHvTW5zfJasILhHvQ3g/R/4P2X41HeAdTIMsX/aFGBwNvuGcAAAAASUVORK5CYII="
+              style="border-radius: 50%;"
             />
           </div>
           <div
@@ -89,7 +90,7 @@ exports[`1 Default render 1`] = `
           </a>
         </div>
         <div
-          class="MuiBox-root css-fcuisq"
+          class="MuiBox-root css-1ethbx3"
         >
           <div
             class="icon"
@@ -97,6 +98,7 @@ exports[`1 Default render 1`] = `
             <img
               alt="SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA3klEQVRYhe2XsQ0CMQxFHXRjULMKG2SB24CakpoNWMAbsAo1e0DL2ZK/rA/IhV+XSy75+vpy4qGqL/lgzikRqhrOI7L776jT/kALZFnsh8Pxuhlf1n24QTZTdny+PcP/yzvYAllcBh/30/bDGtc9ti6i88o72AJZXAYRqO4hspkt72ALZHEZzGYErWffl+UdbIEsw/YkFrbuITqDv6a8wMVmDGXCzmfrHFpv58s72AJZ0u9Bi+2jv015B1sgyxCR8C62GXN9bJLsfuUdbIEs7j2YvZvZngOdV97BFsjyBg2XSGPyfe0WAAAAAElFTkSuQmCC"
+              style="border-radius: 50%;"
             />
           </div>
           <div

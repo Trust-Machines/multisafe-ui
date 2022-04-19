@@ -6,11 +6,11 @@ exports[`1 Default render 1`] = `
     class="MuiBox-root css-1r6mtiz"
   >
     <div
-      class="MuiBox-root css-qvss5s"
+      class="MuiBox-root css-wxdvxx"
     >
       <img
         alt="Logo"
-        src="/logo.jpg"
+        src="/logo.png"
       />
     </div>
     <div
@@ -28,11 +28,11 @@ exports[`2 Hide brand text 1`] = `
     class="MuiBox-root css-176ksq4"
   >
     <div
-      class="MuiBox-root css-qvss5s"
+      class="MuiBox-root css-wxdvxx"
     >
       <img
         alt="Logo"
-        src="/logo.jpg"
+        src="/logo.png"
       />
     </div>
     <div
