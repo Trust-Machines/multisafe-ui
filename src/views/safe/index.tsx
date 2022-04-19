@@ -8,6 +8,7 @@ import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import AppMenu from '../../layout/app-menu';
 
+
 const Safe = (_: RouteComponentProps) => {
     const params = useParams();
     const [safes] = useSafes();
@@ -20,17 +21,17 @@ const Safe = (_: RouteComponentProps) => {
 
     console.log(safe)
 
-    if(!safe.init){
+    if (!safe.init) {
         return null;
     }
 
 
-
     return <>
         <Navbar/>
-
-        <AppContent>
-
+        <AppContent sx={{p: 0, flexDirection: 'row'}}>
+            <AppMenu>
+                Menu
+            </AppMenu>
         </AppContent>
     </>
 }
