@@ -23,7 +23,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
         ];
 
         const [address, name] = safeAddress.split('.');
-        setSafe({...safe, loading: true, address, name, init: true});
+        setSafe({...safe, loading: true, address, name, fullAddress: safeAddress, init: true});
 
         const resp = await Promise.all(promises);
         const [nonce, version, owners, minConfirmation, balances] = resp;
@@ -33,6 +33,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             loading: false,
             address,
             name,
+            fullAddress: safeAddress,
             nonce,
             version,
             owners,

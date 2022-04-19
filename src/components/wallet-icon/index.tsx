@@ -6,9 +6,10 @@ const WalletIcon = (props: { address: string }) => {
     const icon = useMemo(() => {
         return createIcon({
             seed: props.address,
-            color: '#000',
-            bgcolor: '#aaa',
-            size: 10
+            color: '#1f2123',
+            bgcolor: '#ebab40',
+            spotcolor: '#5240f4',
+            size: 10,
         }).toDataURL()
     }, [props.address]);
 
