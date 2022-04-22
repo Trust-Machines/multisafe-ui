@@ -9,7 +9,7 @@ import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 
 const Brand = () => {
     const theme = useTheme();
-    const [isSm] = useMediaBreakPoint();
+    const [isSm, isMd] = useMediaBreakPoint();
     const navigate = useNavigate();
 
     return (
@@ -21,8 +21,9 @@ const Brand = () => {
             cursor: 'pointer',
             justifyContent: isSm ? null : 'center',
             mb: isSm ? null : '10px',
-            height: isSm ? null : '52px'
-        }} onClick={()=>{
+            height: isSm ? null : '52px',
+            marginLeft: isSm && !isMd ? '40px' : null
+        }} onClick={() => {
             navigate('/').then();
         }}>
             <Box sx={{

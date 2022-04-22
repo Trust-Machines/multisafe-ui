@@ -8,6 +8,7 @@ import useSafe from '../../hooks/use-safe';
 import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
+import {Box} from '@mui/material';
 
 const Safe = (_: RouteComponentProps) => {
     const params = useParams();
@@ -33,6 +34,8 @@ const Safe = (_: RouteComponentProps) => {
         <Navbar/>
         <AppContent sx={{p: 0, flexDirection: 'row'}}>
             <SafeMenu section=""/>
+
+            <Box sx={{p: '20px', zIndex:1}}>ewfwefew</Box>
         </AppContent>
     </>
 }
