@@ -18,7 +18,7 @@ export interface SafeState {
     owners: string[],
     minConfirmation: number,
     nonce: number,
-    stxBalance: string,
+    balance: string,
     transactions: SafeTransaction[],
     init: boolean
 }
@@ -32,7 +32,7 @@ export const initial: SafeState = {
     owners: [],
     minConfirmation: 0,
     nonce: -1,
-    stxBalance: "",
+    balance: "",
     transactions: [],
     init: false
 }

@@ -38,7 +38,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             version,
             owners,
             minConfirmation,
-            stxBalance: balances.stx.balance,
+            balance: balances.stx.balance,
             transactions,
             init: true,
         });
