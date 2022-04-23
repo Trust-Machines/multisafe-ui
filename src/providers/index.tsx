@@ -4,6 +4,7 @@ import {Connect} from '@stacks/connect-react';
 
 import DevToolsProvider from './dev-tools';
 import ThemeProvider from './theme';
+import ModalProvider from './modal';
 import ToastProvider from './toast';
 import SafesProvider from './safes';
 
@@ -15,9 +16,11 @@ const Providers: React.FC = ({children}) => {
             <Connect authOptions={baseAuthOptions}>
                 <DevToolsProvider>
                     <ThemeProvider>
-                        <ToastProvider>
-                            <SafesProvider>{children}</SafesProvider>
-                        </ToastProvider>
+                        <ModalProvider>
+                            <ToastProvider>
+                                <SafesProvider>{children}</SafesProvider>
+                            </ToastProvider>
+                        </ModalProvider>
                     </ThemeProvider>
                 </DevToolsProvider>
             </Connect>

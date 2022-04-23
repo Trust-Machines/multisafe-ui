@@ -8,9 +8,12 @@ export interface Toast {
     type: ToastType
 }
 
+export type Modal = JSX.Element | null;
+
 export interface UIState {
     theme: PaletteMode
-    toast: Toast
+    toast: Toast,
+    modal: Modal
 }
 
 const initialTheme = (): PaletteMode => {
@@ -26,5 +29,6 @@ export const uiAtom = atom<UIState>({
     toast: {
         message: null,
         type: null
-    }
+    },
+    modal: null
 });
