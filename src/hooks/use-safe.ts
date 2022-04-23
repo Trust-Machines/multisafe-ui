@@ -1,7 +1,8 @@
 import {useAtom} from 'jotai';
+import BigNumber from 'bignumber.js';
 
 import {safeAtom,} from '../store';
-import {SafeState, initial} from '../store/safe';
+import {SafeState} from '../store/safe';
 
 import useNetwork from './use-network';
 import useSenderAddress from './use-sender-address';
@@ -38,7 +39,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             version,
             owners,
             minConfirmation,
-            balance: balances.stx.balance,
+            balance: new BigNumber(balances.stx.balance),
             transactions,
             init: true,
         });

@@ -12,7 +12,7 @@ import TollIcon from '@mui/icons-material/Toll';
 import {Box, useTheme} from '@mui/material';
 import ScreenHeader from './helper';
 import useSafe from '../../../../hooks/use-safe';
-import FormattedBalance from '../../../../components/formatted-balance';
+import FormattedBN from '../../../../components/formatted-bn';
 
 const CoinsScreen = () => {
     const [safe,] = useSafe();
@@ -53,7 +53,7 @@ const CoinsScreen = () => {
                                 }}/>
                                 <Typography>{row.symbol}</Typography>
                             </TableCell>
-                            <TableCell align="right"><FormattedBalance value={row.balance} decimals={6}/></TableCell>
+                            <TableCell align="right"><FormattedBN bn={row.balance} decimals={6}/></TableCell>
                             <TableCell align="right">{row.value}</TableCell>
                         </TableRow>
                     ))}

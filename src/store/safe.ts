@@ -1,4 +1,5 @@
 import {atom} from 'jotai';
+import BigNumber from 'bignumber.js';
 
 export interface SafeTransaction {
     id: number,
@@ -18,7 +19,7 @@ export interface SafeState {
     owners: string[],
     minConfirmation: number,
     nonce: number,
-    balance: string,
+    balance: BigNumber,
     transactions: SafeTransaction[],
     init: boolean
 }
@@ -32,7 +33,7 @@ export const initial: SafeState = {
     owners: [],
     minConfirmation: 0,
     nonce: -1,
-    balance: "",
+    balance: new BigNumber("0"),
     transactions: [],
     init: false
 }
