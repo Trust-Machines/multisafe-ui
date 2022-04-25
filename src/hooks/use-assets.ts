@@ -29,7 +29,11 @@ const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => P
 
     const getAssetList = async (): Promise<(FTAsset | NFTAsset)[]> => {
         return getFile(`assets_${network}`).then(r => {
-            return JSON.parse(r);
+            try {
+                return JSON.parse(r);
+            } catch (e) {
+                return [];
+            }
         });
     }
 

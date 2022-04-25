@@ -6,7 +6,7 @@ import DevToolsProvider from './dev-tools';
 import ThemeProvider from './theme';
 import ModalProvider from './modal';
 import ToastProvider from './toast';
-import SafesProvider from './safes';
+import UserDataProvider from './user-data';
 
 import {baseAuthOptions} from '../constants';
 
@@ -18,7 +18,7 @@ const Providers: React.FC = ({children}) => {
                     <ThemeProvider>
                         <ModalProvider>
                             <ToastProvider>
-                                <SafesProvider>{children}</SafesProvider>
+                                <UserDataProvider>{children}</UserDataProvider>
                             </ToastProvider>
                         </ModalProvider>
                     </ThemeProvider>
