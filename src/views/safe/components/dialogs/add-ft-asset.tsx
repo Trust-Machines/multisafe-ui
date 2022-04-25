@@ -18,7 +18,7 @@ import useToast from '../../../../hooks/use-toast';
 import CloseModal from '../../../../components/close-modal';
 import {callReadOnly} from '../../../../api';
 
-export default function Deposit() {
+const AddFtAsset = () => {
     const inputRef = useRef<HTMLInputElement>();
     const [asset, setAsset] = useState<string>('');
     const [inProgress, setInProgress] = useState<boolean>(false);
@@ -27,7 +27,7 @@ export default function Deposit() {
     const [, stacksNetwork] = useNetwork();
     const address = useAddress();
     const [, , addAsset] = useAssets();
-    const [, showMessage] = useToast()
+    const [, showMessage] = useToast();
     const [t] = useTranslation();
 
     const handleClose = () => {
@@ -78,15 +78,16 @@ export default function Deposit() {
         <>
             <DialogTitle>{t('Add Asset')}<CloseModal onClick={handleClose}/></DialogTitle>
             <DialogContent>
-                <Box sx={{p: '20px'}}>
-                    <TextField autoFocus inputRef={inputRef} label="Enter token address" value={asset} fullWidth
+                <Box sx={{pt: '10px'}}>
+                    <TextField autoFocus inputRef={inputRef} label={t('Enter token address')} value={asset} fullWidth
                                onChange={handleInputChange} error={error !== ''}
                                helperText={error || ' '}
                                InputProps={{
                                    autoComplete: "off",
                                    endAdornment: inProgress ?
-                                       <InputAdornment position="end"> <CircularProgress
-                                           color="primary"/></InputAdornment> : null,
+                                       <InputAdornment position="end">
+                                           <CircularProgress color="primary"/>
+                                       </InputAdornment> : null,
                                    readOnly: inProgress
                                }}
                     />
@@ -99,3 +100,5 @@ export default function Deposit() {
         </>
     );
 }
+
+export default AddFtAsset;
