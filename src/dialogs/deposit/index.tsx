@@ -6,9 +6,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import useModal from '../../hooks/use-modal';
+import useTranslation from '../../hooks/use-translation';
 
 export default function DepositDialog() {
     const [, showModal] = useModal()
+    const [t] = useTranslation();
 
     const handleClose = () => {
         showModal(null);
@@ -16,7 +18,7 @@ export default function DepositDialog() {
 
     return (
         <>
-            <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+            <DialogTitle>{t('Deposit')}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
                     Let Google help apps determine location. This means sending anonymous

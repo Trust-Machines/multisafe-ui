@@ -34,7 +34,7 @@ const CoinsScreen = () => {
             symbol: "STX",
             balance: safe.balance,
             value: "",
-            logo: "/tokens/stx.png"
+            logo: "/tokens/STX.svg"
         },
     ];
     return <>
