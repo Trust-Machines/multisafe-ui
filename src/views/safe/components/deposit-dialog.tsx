@@ -1,12 +1,15 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import useModal from '../../hooks/use-modal';
-import useTranslation from '../../hooks/use-translation';
+import useModal from '../../../hooks/use-modal';
+import useTranslation from '../../../hooks/use-translation';
+
+import TokenSelect from './token-select';
 
 export default function DepositDialog() {
     const [, showModal] = useModal()
@@ -21,8 +24,12 @@ export default function DepositDialog() {
             <DialogTitle>{t('Deposit')}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
+                    <Box sx={{
+                        minHeight: '300px',
+                        p: '20px'
+                    }}>
+                        <TokenSelect />
+                    </Box>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

@@ -13,13 +13,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useTheme} from '@mui/material';
 import ScreenHeader from './helper';
-import useSafe from '../../../../hooks/use-safe';
-import FormattedBN from '../../../../components/formatted-bn';
-import DepositDialog from '../../../../dialogs/deposit';
-import useModal from '../../../../hooks/use-modal';
-import useTranslation from '../../../../hooks/use-translation';
+import useSafe from '../../../hooks/use-safe';
+import FormattedBN from '../../../components/formatted-bn';
+import DepositDialog from '../components/deposit-dialog';
+import useModal from '../../../hooks/use-modal';
+import useTranslation from '../../../hooks/use-translation';
 
-const CoinsScreen = () => {
+const TokensSection = () => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
@@ -76,4 +76,4 @@ const CoinsScreen = () => {
     </>
 }
 
-export default CoinsScreen;
+export default TokensSection;
