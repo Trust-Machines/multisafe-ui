@@ -15,17 +15,15 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const ModalProvider: React.FC = ({children}) => {
-    const [modal, setModal] = useModal();
+    const [modal,] = useModal();
     return <>
         {children}
         {modal && (
             <Dialog
                 open={true}
                 TransitionComponent={Transition}
-                keepMounted
-                onClose={() => {
-                    setModal(null);
-                }}
+                fullWidth
+                disableEscapeKeyDown={false}
             >
                 {modal}
             </Dialog>

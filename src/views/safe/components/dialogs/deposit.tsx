@@ -6,12 +6,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import useModal from '../../../hooks/use-modal';
-import useTranslation from '../../../hooks/use-translation';
+import useModal from '../../../../hooks/use-modal';
+import useTranslation from '../../../../hooks/use-translation';
 
-import TokenSelect from './token-select';
+import TokenSelect from '../token-select';
 
-export default function DepositDialog() {
+export default function Deposit() {
     const [, showModal] = useModal()
     const [t] = useTranslation();
 
@@ -28,7 +28,7 @@ export default function DepositDialog() {
                         minHeight: '300px',
                         p: '20px'
                     }}>
-                        <TokenSelect />
+                        <TokenSelect/>
                     </Box>
                 </DialogContentText>
             </DialogContent>

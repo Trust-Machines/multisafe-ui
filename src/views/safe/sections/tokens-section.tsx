@@ -15,7 +15,8 @@ import {useTheme} from '@mui/material';
 import ScreenHeader from './helper';
 import useSafe from '../../../hooks/use-safe';
 import FormattedBN from '../../../components/formatted-bn';
-import DepositDialog from '../components/deposit-dialog';
+import Deposit from '../components/dialogs/deposit';
+import AddFtAsset from '../components/dialogs/add-ft-asset';
 import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
 
@@ -24,8 +25,8 @@ const TokensSection = () => {
     const [, showModal] = useModal()
     const [t] = useTranslation();
 
-    const depositClicked = ()=>{
-        showModal(<DepositDialog/>);
+    const addAssetClicked = ()=>{
+        showModal(<AddFtAsset/>);
     }
 
     const data = [
@@ -39,7 +40,7 @@ const TokensSection = () => {
     ];
     return <>
         <ScreenHeader title="Coins" icon={<TollIcon/>}>
-            <Button onClick={depositClicked} variant="contained">{t('Deposit')}</Button>
+            <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
         </ScreenHeader>
         <TableContainer component={Paper}>
             <Table sx={{width: '100%'}} aria-label="simple table">
