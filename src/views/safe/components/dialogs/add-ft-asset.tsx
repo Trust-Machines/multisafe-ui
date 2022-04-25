@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
@@ -22,6 +22,7 @@ export default function Deposit() {
     const inputRef = useRef<HTMLInputElement>();
     const [asset, setAsset] = useState<string>('');
     const [inProgress, setInProgress] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
     const [, showModal] = useModal();
     const [, stacksNetwork] = useNetwork();
     const address = useAddress();
@@ -32,6 +33,11 @@ export default function Deposit() {
     const handleClose = () => {
         showModal(null);
     };
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setAsset(e.target.value.trim());
+        setError('');
+    }
 
     const onSubmit = async () => {
         if (asset === '') {
@@ -44,11 +50,14 @@ export default function Deposit() {
         let decimals;
 
         setInProgress(true);
+        setError('');
+
         try {
             name = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-name`, [], address!)).value;
             symbol = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-symbol`, [], address!)).value;
             decimals = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-decimals`, [], address!)).value;
         } catch (e) {
+            setError(t("Couldn't fetch token information"));
             setInProgress(false);
             return;
         }
@@ -71,9 +80,8 @@ export default function Deposit() {
             <DialogContent>
                 <Box sx={{p: '20px'}}>
                     <TextField autoFocus inputRef={inputRef} label="Enter token address" value={asset} fullWidth
-                               onChange={(e) => {
-                                   setAsset(e.target.value.trim())
-                               }}
+                               onChange={handleInputChange} error={error !== ''}
+                               helperText={error || ' '}
                                InputProps={{
                                    autoComplete: "off",
                                    endAdornment: inProgress ?
