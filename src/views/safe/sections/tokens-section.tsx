@@ -19,11 +19,14 @@ import Deposit from '../components/dialogs/deposit';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
+import useAssets from '../../../hooks/use-assets';
 
 const TokensSection = () => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
+    const [assets] = useAssets();
+    console.log(assets)
 
     const addAssetClicked = ()=>{
         showModal(<AddFtAsset/>);
