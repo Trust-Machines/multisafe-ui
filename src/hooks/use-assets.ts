@@ -9,7 +9,7 @@ import useStorage from './use-storage';
 import useNetwork from './use-network';
 
 
-const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => Promise<any>] => {
+const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => Promise<any>, () => FTAsset[], () => NFTAsset[]] => {
     const address = useAddress();
     const [userSession] = useUserSession();
     const [assets, setAssets] = useAtom(assetsAtom);
@@ -47,7 +47,23 @@ const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => P
         })
     }
 
-    return [assets, fetchAssets, addAsset];
+    const getFTAssets = (): FTAsset[] => {
+        function isRule(a: (FTAsset | NFTAsset)): a is FTAsset {
+            return a.type === 'ft';
+        }
+
+        return assets.list.filter(isRule);
+    }
+
+    const getNFTAssets = (): NFTAsset[] => {
+        function isRule(a: (FTAsset | NFTAsset)): a is NFTAsset {
+            return a.type === 'nft';
+        }
+
+        return assets.list.filter(isRule);
+    }
+
+    return [assets, fetchAssets, addAsset, getFTAssets, getNFTAssets];
 }
 
 export default useAssets;

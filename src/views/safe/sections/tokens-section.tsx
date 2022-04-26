@@ -25,22 +25,13 @@ const TokensSection = () => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
-    const [assets] = useAssets();
-    console.log(assets)
+
 
     const addAssetClicked = ()=>{
         showModal(<AddFtAsset/>);
     }
 
-    const data = [
-        {
-            address: "",
-            symbol: "STX",
-            balance: safe.balance,
-            value: "",
-            logo: "/tokens/STX.svg"
-        },
-    ];
+
     return <>
         <ScreenHeader title="Coins" icon={<TollIcon/>}>
             <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
@@ -55,23 +46,23 @@ const TokensSection = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
+                    {safe.ftBalances.map((ft) => (
                         <TableRow
-                            key={row.address}
+                            key={ft.asset.address}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                             <TableCell component="th" scope="row" sx={{
                                 display: 'flex',
                                 alignItems: 'center'
                             }}>
-                                <Box component="img" src={row.logo} sx={{
+                                <Box component="img" src={`/tokens/${ft.asset.address}.svg`} sx={{
                                     width: '24px',
                                     height: '24px',
                                     mr: '6px'
                                 }}/>
-                                <Typography>{row.symbol}</Typography>
+                                <Typography>{ft.asset.symbol}</Typography>
                             </TableCell>
-                            <TableCell align="right"><FormattedBN bn={row.balance} decimals={6}/></TableCell>
-                            <TableCell align="right">{row.value}</TableCell>
+                            <TableCell align="right"><FormattedBN bn={ft.balance} decimals={6}/></TableCell>
+                            <TableCell align="right">0</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

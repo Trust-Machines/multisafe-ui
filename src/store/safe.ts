@@ -1,5 +1,6 @@
 import {atom} from 'jotai';
 import BigNumber from 'bignumber.js';
+import {FTAsset} from './assets';
 
 export interface SafeTransaction {
     id: number,
@@ -8,6 +9,17 @@ export interface SafeTransaction {
     confirmed: boolean,
     paramP: string,
     paramU: number
+}
+
+export interface SafeFtBalance {
+    asset: FTAsset,
+    balance: string
+}
+
+export interface SafeNFtBalance {
+    asset: FTAsset,
+    balance: string,
+    ids: number[]
 }
 
 export interface SafeState {
@@ -20,6 +32,8 @@ export interface SafeState {
     minConfirmation: number,
     nonce: number,
     balance: BigNumber,
+    ftBalances: SafeFtBalance[]
+    nftBalances: SafeNFtBalance[],
     transactions: SafeTransaction[],
     init: boolean
 }
@@ -34,6 +48,8 @@ export const initial: SafeState = {
     minConfirmation: 0,
     nonce: -1,
     balance: new BigNumber("0"),
+    ftBalances: [],
+    nftBalances: [],
     transactions: [],
     init: false
 }
