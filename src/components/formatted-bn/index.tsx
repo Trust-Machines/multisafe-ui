@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
+import {formatUnits} from '../../helper';
 
 const FormattedBN = (props: { bn: BigNumber | string, decimals: number }) => {
-    const bn = typeof props.bn === 'string' ? new BigNumber(props.bn) : props.bn;
-    const formatted = bn.dividedBy(10 ** props.decimals);
+    const formatted = formatUnits(props.bn, props.decimals);
 
     return <span>{formatted.toFormat().toString()}</span>;
 }

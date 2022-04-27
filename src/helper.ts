@@ -1,5 +1,6 @@
 import {ClarityAbi} from '@stacks/transactions';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
+import BigNumber from 'bignumber.js';
 
 export const validateSafeAbi = (abi: ClarityAbi) => {
     const publicFns = [
@@ -20,6 +21,15 @@ export const validateSafeAbi = (abi: ClarityAbi) => {
     return true;
 }
 
-export const makeTxUrl = ( txId: string, network: NETWORK) => {
+export const makeTxUrl = (txId: string, network: NETWORK) => {
     return `https://explorer.stacks.co/txid/${txId}?chain=${network}`;
+}
+
+export const formatUnits = (value: BigNumber | string, decimals: number): BigNumber => {
+    const bn = typeof value === 'string' ? new BigNumber(value) : value;
+    return bn.dividedBy(10 ** decimals);
+}
+
+export const parseUnits = (value: string, decimals: number): BigNumber => {
+    return new BigNumber(value).multipliedBy(10 ** decimals);
 }

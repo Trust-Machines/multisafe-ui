@@ -19,55 +19,80 @@ import Deposit from '../components/dialogs/deposit';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
-import useAssets from '../../../hooks/use-assets';
+import {FTAsset} from '../../../store/assets';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const TokensSection = () => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
 
+    if (safe.loading) {
+        return <Box sx={{
+            display: 'flex',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}><CircularProgress/></Box>
+    }
 
-    const addAssetClicked = ()=>{
+    const addAssetClicked = () => {
         showModal(<AddFtAsset/>);
     }
 
+    const depositClicked = (asset: FTAsset) => {
+        showModal(<Deposit asset={asset}/>);
+    }
 
     return <>
         <ScreenHeader title="Coins" icon={<TollIcon/>}>
             <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
         </ScreenHeader>
-        <TableContainer component={Paper}>
-            <Table sx={{width: '100%'}} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>ASSET</TableCell>
-                        <TableCell align="right">BALANCE</TableCell>
-                        <TableCell align="right">VALUE</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {safe.ftBalances.map((ft) => (
-                        <TableRow
-                            key={ft.asset.address}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                            <TableCell component="th" scope="row" sx={{
-                                display: 'flex',
-                                alignItems: 'center'
-                            }}>
-                                <Box component="img" src={`/tokens/${ft.asset.address}.svg`} sx={{
-                                    width: '24px',
-                                    height: '24px',
-                                    mr: '6px'
-                                }}/>
-                                <Typography>{ft.asset.symbol}</Typography>
-                            </TableCell>
-                            <TableCell align="right"><FormattedBN bn={ft.balance} decimals={6}/></TableCell>
-                            <TableCell align="right">0</TableCell>
+        <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
+            <TableContainer component={Paper}>
+                <Table sx={{width: '100%'}} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ASSET</TableCell>
+                            <TableCell align="right">BALANCE</TableCell>
+                            <TableCell align="right">VALUE</TableCell>
+                            <TableCell align="right" width="120"/>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {safe.ftBalances.map((ft) => (
+                            <TableRow
+                                key={ft.asset.address}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                <TableCell component="th" scope="row">
+                                    <Box sx={{
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}>
+                                        <Box component="img" src={`/tokens/${ft.asset.address}.svg`} sx={{
+                                            width: '24px',
+                                            height: '24px',
+                                            mr: '6px'
+                                        }}/>
+                                        <Typography>{ft.asset.symbol}</Typography>
+                                    </Box>
+                                </TableCell>
+                                <TableCell align="right"><FormattedBN bn={ft.balance} decimals={6}/></TableCell>
+                                <TableCell align="right">0</TableCell>
+                                <TableCell align="right">
+                                    <Button size="small" onClick={() => {
+                                        depositClicked(ft.asset)
+                                    }} variant="outlined">
+                                        {t('Deposit')}
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Box>
     </>
 }
 
