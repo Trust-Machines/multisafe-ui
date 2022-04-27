@@ -24,10 +24,10 @@ import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import {FTAsset} from '../../../../store/assets';
 import CloseModal from '../../../../components/close-modal';
-import {parseUnits} from '../../../../helper';
+import {parseUnits, checkAmountInput} from '../../../../helper';
+
 
 export default function Deposit(props: { asset: FTAsset }) {
-    const inputRef = useRef<HTMLInputElement>();
     const [, showModal] = useModal();
     const address = useAddress();
     const [t] = useTranslation();
@@ -35,9 +35,9 @@ export default function Deposit(props: { asset: FTAsset }) {
     const {doSTXTransfer, doContractCall} = useConnect();
     const [safe,] = useSafe();
     const [, stacksNetwork] = useNetwork();
-
+    const inputRef = useRef<HTMLInputElement>();
     const [error, setError] = useState<string>('');
-    const [amount, setAmount] = useState<string>('1');
+    const [amount, setAmount] = useState<string>('0.0');
     const [memo, setMemo] = useState<string>('');
 
     const handleClose = () => {
@@ -45,7 +45,6 @@ export default function Deposit(props: { asset: FTAsset }) {
     };
 
     const handleSend = () => {
-
         const sendAmount = parseUnits(amount, asset.decimals).toString();
 
         if (asset.address === 'STX') {
@@ -78,7 +77,11 @@ export default function Deposit(props: { asset: FTAsset }) {
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setAmount(e.target.value.trim());
+        const {value} = e.target;
+        if (checkAmountInput(value)) {
+            setAmount(value);
+        }
+
         setError('');
     }
 
@@ -98,6 +101,9 @@ export default function Deposit(props: { asset: FTAsset }) {
                                helperText={error || ' '}
                                inputProps={{
                                    autoComplete: "off",
+                                   autoCorrect: "off",
+                                   spellCheck: "false",
+                                   maxLength: "20"
                                }}
                                InputProps={{
                                    endAdornment: <InputAdornment position="end">{asset.symbol}</InputAdornment>
@@ -106,7 +112,6 @@ export default function Deposit(props: { asset: FTAsset }) {
                     <TextField inputRef={inputRef} label={t('Memo')} value={memo} fullWidth
                                onChange={handleMemoChange}
                                inputProps={{
-                                   autoComplete: "off",
                                    maxLength: 34
                                }}
                     />

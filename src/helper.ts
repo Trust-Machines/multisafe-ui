@@ -1,6 +1,7 @@
 import {ClarityAbi} from '@stacks/transactions';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
 import BigNumber from 'bignumber.js';
+import {escapeRegExp} from './util';
 
 export const validateSafeAbi = (abi: ClarityAbi) => {
     const publicFns = [
@@ -32,4 +33,18 @@ export const formatUnits = (value: BigNumber | string, decimals: number): BigNum
 
 export const parseUnits = (value: string, decimals: number): BigNumber => {
     return new BigNumber(value).multipliedBy(10 ** decimals);
+}
+
+export const checkAmountInput = (amount: string) => {
+    const re = RegExp(`^\\d*(?:\\\\[.])?\\d*$`);
+
+    if(!re.test(escapeRegExp(amount))){
+        return false;
+    }
+
+    if(amount.indexOf('.') !== -1){
+        return amount.split('.')[1].length <= 6;
+    }
+
+    return true;
 }
