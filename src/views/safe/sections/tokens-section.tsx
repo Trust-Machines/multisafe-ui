@@ -21,7 +21,7 @@ import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
 import {FTAsset} from '../../../store/assets';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import TokenLogo from '../../../components/token-logo';
 
 const TokensSection = () => {
     const [safe,] = useSafe();
@@ -70,11 +70,7 @@ const TokensSection = () => {
                                         display: 'flex',
                                         alignItems: 'center'
                                     }}>
-                                        <Box component="img" src={`/tokens/${ft.asset.address}.svg`} sx={{
-                                            width: '24px',
-                                            height: '24px',
-                                            mr: '6px'
-                                        }}/>
+                                        <TokenLogo address={ft.asset.address} sx={{mr: '6px'}} />
                                         <Typography>{ft.asset.symbol}</Typography>
                                     </Box>
                                 </TableCell>
