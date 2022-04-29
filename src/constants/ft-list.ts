@@ -1,11 +1,13 @@
+import {FTAsset} from '../store/assets';
 
-export interface FToken {
-    address: string
-    symbol: string,
-}
-
-const list: FToken[] = [
-
+const list: FTAsset[] = [
+    {
+        address: "SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-token",
+        name: "",
+        symbol: "",
+        decimals: 6,
+        type: 'ft'
+    }
 ]
 
 export default list;
