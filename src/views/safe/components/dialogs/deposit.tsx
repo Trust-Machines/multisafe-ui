@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {TextField} from '@mui/material';
+import DialogContentText from '@mui/material/DialogContentText';
+import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import {FinishedTxData, useConnect} from '@stacks/connect-react';
 import {
@@ -13,8 +14,11 @@ import {
     bufferCVFromString,
     noneCV,
     someCV,
-    standardPrincipalCV
-
+    standardPrincipalCV,
+    contractPrincipalCV,
+    FungibleConditionCode,
+    createAssetInfo,
+    makeStandardFungiblePostCondition
 } from '@stacks/transactions';
 
 import useSafe from '../../../../hooks/use-safe';
@@ -24,57 +28,27 @@ import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import {FTAsset} from '../../../../store/assets';
 import CloseModal from '../../../../components/close-modal';
-import {parseUnits, checkAmountInput} from '../../../../helper';
+import {parseUnits, checkAmountInput, makeTxUrl} from '../../../../helper';
 
 
 export default function Deposit(props: { asset: FTAsset }) {
-    const [, showModal] = useModal();
-    const address = useAddress();
     const [t] = useTranslation();
-    const {asset} = props;
-    const {doSTXTransfer, doContractCall} = useConnect();
+    const [, showModal] = useModal();
+    const [network, stacksNetwork] = useNetwork();
+    const address = useAddress();
     const [safe,] = useSafe();
-    const [, stacksNetwork] = useNetwork();
+    const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [error, setError] = useState<string>('');
     const [amount, setAmount] = useState<string>('0.0');
     const [memo, setMemo] = useState<string>('');
+    const [txId, setTxId] = useState<string>('');
+
+    const {doSTXTransfer, doContractCall} = useConnect();
 
     const handleClose = () => {
         showModal(null);
     };
-
-    const handleSend = () => {
-        const sendAmount = parseUnits(amount, asset.decimals).toString();
-
-        if (asset.address === 'STX') {
-            doSTXTransfer({
-                recipient: safe.fullAddress,
-                amount: sendAmount,
-                network: stacksNetwork,
-                memo: memo,
-                onFinish: (data) => {
-                    console.log(data);
-                },
-            }).then();
-            return;
-        }
-
-        const [contractAddress, contractName] = asset.address.split('.');
-        const memoArg = memo !== '' ? someCV(bufferCVFromString(memo)) : noneCV();
-        doContractCall({
-            network: stacksNetwork,
-            contractAddress,
-            contractName,
-            functionName: 'transfer',
-            functionArgs: [
-                uintCV(parseUnits(amount, asset.decimals).toString()),
-                standardPrincipalCV(address!),
-                memoArg
-            ],
-            postConditionMode: PostConditionMode.Allow
-        }).then()
-    }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {value} = e.target;
@@ -89,38 +63,109 @@ export default function Deposit(props: { asset: FTAsset }) {
         setMemo(e.target.value);
     }
 
+    const handleSend = () => {
+        if (asset.address === 'STX') {
+            sendStx();
+            return;
+        }
+
+        sendToken();
+    }
+
+    const sendStx = () => {
+        doSTXTransfer({
+            recipient: safe.fullAddress,
+            amount: parseUnits(amount, asset.decimals).toString(),
+            network: stacksNetwork,
+            memo: memo,
+            onFinish: (data) => {
+                onFinish(data);
+            },
+        }).then();
+    }
+
+    const sendToken = () => {
+        const sendAmount = parseUnits(amount, asset.decimals).toString();
+        const [contractAddress, contractName] = asset.address.split('.');
+        const memoArg = memo !== '' ? someCV(bufferCVFromString(memo)) : noneCV();
+        doContractCall({
+            network: stacksNetwork,
+            contractAddress,
+            contractName,
+            functionName: 'transfer',
+            functionArgs: [
+                uintCV(sendAmount),
+                standardPrincipalCV(address!),
+                contractPrincipalCV(safe.address, safe.name),
+                memoArg
+            ],
+            postConditionMode: PostConditionMode.Deny,
+            postConditions: [
+                makeStandardFungiblePostCondition(
+                    address!,
+                    FungibleConditionCode.Equal,
+                    sendAmount,
+                    createAssetInfo(contractAddress, contractName, asset.name),
+                )
+            ],
+            onFinish: (data) => {
+                onFinish(data);
+            },
+        }).then();
+    }
+
+    const onFinish = (data: FinishedTxData) => {
+        setTxId(data.txId);
+    }
+
+    let dialogBody = <>
+        <TextField autoFocus inputRef={inputRef} label={t('Enter amount')} value={amount} fullWidth
+                   onChange={handleInputChange} error={error !== ''}
+                   helperText={error || ' '}
+                   inputProps={{
+                       autoComplete: "off",
+                       autoCorrect: "off",
+                       spellCheck: "false",
+                       maxLength: "20"
+                   }}
+                   InputProps={{
+                       endAdornment: <InputAdornment position="end">{asset.symbol}</InputAdornment>
+                   }}
+        />
+        <TextField inputRef={inputRef} label={t('Memo')} value={memo} fullWidth
+                   onChange={handleMemoChange}
+                   inputProps={{
+                       maxLength: 34
+                   }}
+        />
+    </>;
+
+    let dialogActions = <>
+        <Button onClick={handleClose}>{t('Cancel')}</Button>
+        <Button onClick={handleSend}>{t('Send')}</Button>
+    </>;
+
+    if (txId) {
+        dialogBody = <DialogContentText>
+            <Box sx={{mb: '12px'}}>{t('Transaction broadcasted.')}</Box>
+            <Box>
+                <a href={makeTxUrl(txId, network)} target='_blank' rel='noreferrer'>
+                    {t('View on Blockchain Explorer')}
+                </a>
+            </Box>
+        </DialogContentText>;
+        dialogActions = <><Button onClick={handleClose}>{t('Close')}</Button></>;
+    }
+
     return (
         <>
             <DialogTitle>{t(`Deposit {{symbol}}`, {symbol: asset.symbol})}
                 <CloseModal onClick={handleClose}/>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{pt: '10px'}}>
-                    <TextField autoFocus inputRef={inputRef} label={t('Enter amount')} value={amount} fullWidth
-                               onChange={handleInputChange} error={error !== ''}
-                               helperText={error || ' '}
-                               inputProps={{
-                                   autoComplete: "off",
-                                   autoCorrect: "off",
-                                   spellCheck: "false",
-                                   maxLength: "20"
-                               }}
-                               InputProps={{
-                                   endAdornment: <InputAdornment position="end">{asset.symbol}</InputAdornment>
-                               }}
-                    />
-                    <TextField inputRef={inputRef} label={t('Memo')} value={memo} fullWidth
-                               onChange={handleMemoChange}
-                               inputProps={{
-                                   maxLength: 34
-                               }}
-                    />
-                </Box>
+                <Box sx={{pt: '10px'}}>{dialogBody}</Box>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose}>{t('Cancel')}</Button>
-                <Button onClick={handleSend}>{t('Send')}</Button>
-            </DialogActions>
+            <DialogActions>{dialogActions}</DialogActions>
         </>
     );
 }
