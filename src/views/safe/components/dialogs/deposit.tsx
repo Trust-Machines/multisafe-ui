@@ -64,18 +64,25 @@ export default function Deposit(props: { asset: FTAsset }) {
     }
 
     const handleSend = () => {
-        if (asset.address === 'STX') {
-            sendStx();
+        const sendAmount = parseUnits(amount, asset.decimals);
+
+        if (isNaN(sendAmount.toNumber())) {
+            inputRef.current!.focus();
             return;
         }
 
-        sendToken();
+        if (asset.address === 'STX') {
+            sendStx(sendAmount.toString());
+            return;
+        }
+
+        sendToken(sendAmount.toString());
     }
 
-    const sendStx = () => {
+    const sendStx = (amount: string) => {
         doSTXTransfer({
             recipient: safe.fullAddress,
-            amount: parseUnits(amount, asset.decimals).toString(),
+            amount: amount,
             network: stacksNetwork,
             memo: memo,
             onFinish: (data) => {
@@ -84,8 +91,7 @@ export default function Deposit(props: { asset: FTAsset }) {
         }).then();
     }
 
-    const sendToken = () => {
-        const sendAmount = parseUnits(amount, asset.decimals).toString();
+    const sendToken = (amount: string) => {
         const [contractAddress, contractName] = asset.address.split('.');
         const memoArg = memo !== '' ? someCV(bufferCVFromString(memo)) : noneCV();
         doContractCall({
@@ -94,7 +100,7 @@ export default function Deposit(props: { asset: FTAsset }) {
             contractName,
             functionName: 'transfer',
             functionArgs: [
-                uintCV(sendAmount),
+                uintCV(amount),
                 standardPrincipalCV(address!),
                 contractPrincipalCV(safe.address, safe.name),
                 memoArg
@@ -104,7 +110,7 @@ export default function Deposit(props: { asset: FTAsset }) {
                 makeStandardFungiblePostCondition(
                     address!,
                     FungibleConditionCode.Equal,
-                    sendAmount,
+                    amount,
                     createAssetInfo(contractAddress, contractName, asset.name),
                 )
             ],
@@ -132,7 +138,7 @@ export default function Deposit(props: { asset: FTAsset }) {
                        endAdornment: <InputAdornment position="end">{asset.symbol}</InputAdornment>
                    }}
         />
-        <TextField inputRef={inputRef} label={t('Memo')} value={memo} fullWidth
+        <TextField label={t('Memo')} value={memo} fullWidth
                    onChange={handleMemoChange}
                    inputProps={{
                        maxLength: 34
