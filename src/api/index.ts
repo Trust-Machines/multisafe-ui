@@ -1,6 +1,7 @@
 import {StacksNetwork} from '@stacks/network';
 import {callReadOnlyFunction, ClarityValue, cvToJSON, cvToValue, listCV, uintCV} from '@stacks/transactions';
 import {SafeTransaction} from '../store/safe';
+import ftList from '../constants/ft-list';
 
 export const getBnsName = (network: StacksNetwork, address: string): Promise<string | null> => {
     return fetch(`${network.coreApiUrl}/v1/addresses/stacks/${address}`).then(r => r.json()).then(r => {
@@ -103,7 +104,12 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
     });
 }
 
-export const getFTInfo = (network: StacksNetwork, address: string, senderAddress: string): Promise<{ address: string, name: string, symbol: string, decimals: number }> => {
+export const getFTInfo = async (network: StacksNetwork, address: string, senderAddress: string): Promise<{ address: string, name: string, symbol: string, decimals: number }> => {
+    const inList = ftList.find(x => x.address === address);
+    if (inList) {
+        return inList;
+    }
+
     return Promise.all([
         callReadOnly(network, `${address}.get-name`, [], senderAddress),
         callReadOnly(network, `${address}.get-symbol`, [], senderAddress),
