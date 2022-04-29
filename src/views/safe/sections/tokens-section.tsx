@@ -74,7 +74,7 @@ const TokensSection = () => {
                                         <Typography>{ft.asset.symbol}</Typography>
                                     </Box>
                                 </TableCell>
-                                <TableCell align="right"><FormattedBN bn={ft.balance} decimals={6}/></TableCell>
+                                <TableCell align="right"><FormattedBN bn={ft.balance} decimals={ft.asset.decimals}/></TableCell>
                                 <TableCell align="right">0</TableCell>
                                 <TableCell align="right">
                                     <Button size="small" onClick={() => {

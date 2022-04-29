@@ -1,5 +1,5 @@
 import {StacksNetwork} from '@stacks/network';
-import {callReadOnlyFunction, ClarityValue, cvToJSON, listCV, uintCV} from '@stacks/transactions';
+import {callReadOnlyFunction, ClarityValue, cvToJSON, cvToValue, listCV, uintCV} from '@stacks/transactions';
 import {SafeTransaction} from '../store/safe';
 
 export const getBnsName = (network: StacksNetwork, address: string): Promise<string | null> => {
@@ -34,7 +34,8 @@ export const getContractInfo = (network: StacksNetwork, address: string, name: s
 export interface AddressBalance {
     stx: {
         balance: string
-    }
+    },
+    fungible_tokens: Record<string, { balance: string }>
 }
 
 export const getContractBalances = (network: StacksNetwork, address: string): Promise<AddressBalance> => {
@@ -78,7 +79,7 @@ export const getSafeMinConfirmation = (network: StacksNetwork, safe: string, sen
     });
 }
 
-export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce: number, senderAddress: string):Promise<SafeTransaction[]> => {
+export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce: number, senderAddress: string): Promise<SafeTransaction[]> => {
     const txIds: number[] = [];
     for (let x = nonce - 1; x >= 0; x--) {
         txIds.push(x);
@@ -100,4 +101,19 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
             }
         });
     });
+}
+
+export const getFTInfo = (network: StacksNetwork, address: string, senderAddress: string): Promise<{ address: string, name: string, symbol: string, decimals: number }> => {
+    return Promise.all([
+        callReadOnly(network, `${address}.get-name`, [], senderAddress),
+        callReadOnly(network, `${address}.get-symbol`, [], senderAddress),
+        callReadOnly(network, `${address}.get-decimals`, [], senderAddress)
+    ]).then(r => {
+        return {
+            address,
+            name: cvToValue(r[0]).value,
+            symbol: cvToValue(r[1]).value,
+            decimals: Number(cvToValue(r[2]).value)
+        }
+    })
 }

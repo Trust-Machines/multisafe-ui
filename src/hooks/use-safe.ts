@@ -9,6 +9,7 @@ import useSenderAddress from './use-sender-address';
 
 import * as api from '../api';
 import useAssets from './use-assets';
+import {getFTInfo} from '../api';
 
 const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);
@@ -17,7 +18,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const sender = useSenderAddress();
 
     const fetchSafeData = async (safeAddress: string) => {
-        const promises: [Promise<number>, Promise<string>, Promise<string[]>, Promise<number>, Promise<api.AddressBalance>] = [
+        let promises: [Promise<number>, Promise<string>, Promise<string[]>, Promise<number>, Promise<api.AddressBalance>] = [
             api.getSafeNonce(stacksNetwork, safeAddress, sender),
             api.getSafeVersion(stacksNetwork, safeAddress, sender),
             api.getSafeOwners(stacksNetwork, safeAddress, sender),
@@ -45,10 +46,33 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             }
         ];
 
+        const ftKeys = Object.keys(balances.fungible_tokens);
+
+        await Promise.all(
+            ftKeys.map(f => getFTInfo(stacksNetwork, f.split(':')[0], sender))
+        ).then(resp => {
+            return resp.map((r, i): SafeFtBalance => ({
+                asset: {
+                    address: r.address,
+                    name: r.name,
+                    symbol: r.symbol,
+                    decimals: r.decimals,
+                    type: 'ft'
+                },
+                balance: balances.fungible_tokens[ftKeys.find(x => x.startsWith(r.address))!].balance
+            }))
+        }).then(r => {
+            ftBalances = [...ftBalances, ...r]
+        })
+
+
+        /*
         ftBalances.push(...getFtAssets().map(a => ({
             asset: a,
             balance: '0'
         })));
+
+         */
 
         const nftBalances: SafeNFtBalance[] = getFtAssets().map(a => ({
             asset: a,
