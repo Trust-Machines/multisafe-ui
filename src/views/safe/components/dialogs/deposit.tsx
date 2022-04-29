@@ -114,25 +114,27 @@ export default function Deposit(props: { asset: FTAsset }) {
     }
 
     let dialogBody = <>
-        <CurrencyField
-            isDecimal={asset.decimals > 0}
-            symbol={asset.symbol}
-            onChange={(a) => {
-                setAmount(a);
-            }}
-            fieldProps={{
-                autoFocus: true,
-                inputRef: inputRef,
-                label: t('Enter amount'),
-                value: amount,
-                fullWidth: true,
-                inputProps: {
-                    autoComplete: "off",
-                    autoCorrect: "off",
-                    spellCheck: "false",
-                    maxLength: "20"
-                }
-            }}/>
+        <Box sx={{mb: '10px'}}>
+            <CurrencyField
+                isDecimal={asset.decimals > 0}
+                symbol={asset.symbol}
+                onChange={(a) => {
+                    setAmount(a);
+                }}
+                fieldProps={{
+                    autoFocus: true,
+                    inputRef: inputRef,
+                    label: t('Enter amount'),
+                    value: amount,
+                    fullWidth: true,
+                    inputProps: {
+                        autoComplete: "off",
+                        autoCorrect: "off",
+                        spellCheck: "false",
+                        maxLength: "20"
+                    }
+                }}/>
+        </Box>
         <TextField label={t('Memo')} value={memo} fullWidth
                    onChange={handleMemoChange}
                    inputProps={{
