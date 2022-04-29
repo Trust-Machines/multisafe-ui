@@ -43,7 +43,6 @@ export default function Deposit(props: { asset: FTAsset }) {
     const [amount, setAmount] = useState<string>('0.0');
     const [memo, setMemo] = useState<string>('');
     const [txId, setTxId] = useState<string>('');
-
     const {doSTXTransfer, doContractCall} = useConnect();
 
     const handleClose = () => {

@@ -55,7 +55,7 @@ const AddFtAsset = () => {
         try {
             name = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-name`, [], address!)).value;
             symbol = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-symbol`, [], address!)).value;
-            decimals = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-decimals`, [], address!)).value;
+            decimals = Number(cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-decimals`, [], address!)).value);
         } catch (e) {
             setError(t("Couldn't fetch token information"));
             setInProgress(false);
