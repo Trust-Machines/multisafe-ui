@@ -6,7 +6,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import {FinishedTxData, useConnect} from '@stacks/connect-react';
 import {
     PostConditionMode,
@@ -28,7 +27,8 @@ import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import {FTAsset} from '../../../../store/assets';
 import CloseModal from '../../../../components/close-modal';
-import {parseUnits, checkAmountInput, makeTxUrl} from '../../../../helper';
+import CurrencyField from '../../../../components/currency-field';
+import {parseUnits, makeTxUrl} from '../../../../helper';
 
 
 export default function Deposit(props: { asset: FTAsset }) {
@@ -39,8 +39,7 @@ export default function Deposit(props: { asset: FTAsset }) {
     const [safe,] = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
-    const [error, setError] = useState<string>('');
-    const [amount, setAmount] = useState<string>('0.0');
+    const [amount, setAmount] = useState<string>('');
     const [memo, setMemo] = useState<string>('');
     const [txId, setTxId] = useState<string>('');
     const {doSTXTransfer, doContractCall} = useConnect();
@@ -48,15 +47,6 @@ export default function Deposit(props: { asset: FTAsset }) {
     const handleClose = () => {
         showModal(null);
     };
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target;
-        if (checkAmountInput(value)) {
-            setAmount(value);
-        }
-
-        setError('');
-    }
 
     const handleMemoChange = (e: ChangeEvent<HTMLInputElement>) => {
         setMemo(e.target.value);
@@ -124,19 +114,25 @@ export default function Deposit(props: { asset: FTAsset }) {
     }
 
     let dialogBody = <>
-        <TextField autoFocus inputRef={inputRef} label={t('Enter amount')} value={amount} fullWidth
-                   onChange={handleInputChange} error={error !== ''}
-                   helperText={error || ' '}
-                   inputProps={{
-                       autoComplete: "off",
-                       autoCorrect: "off",
-                       spellCheck: "false",
-                       maxLength: "20"
-                   }}
-                   InputProps={{
-                       endAdornment: <InputAdornment position="end">{asset.symbol}</InputAdornment>
-                   }}
-        />
+        <CurrencyField
+            isDecimal={asset.decimals > 0}
+            symbol={asset.symbol}
+            onChange={(a) => {
+                setAmount(a);
+            }}
+            fieldProps={{
+                autoFocus: true,
+                inputRef: inputRef,
+                label: t('Enter amount'),
+                value: amount,
+                fullWidth: true,
+                inputProps: {
+                    autoComplete: "off",
+                    autoCorrect: "off",
+                    spellCheck: "false",
+                    maxLength: "20"
+                }
+            }}/>
         <TextField label={t('Memo')} value={memo} fullWidth
                    onChange={handleMemoChange}
                    inputProps={{

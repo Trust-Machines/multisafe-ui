@@ -35,16 +35,20 @@ export const parseUnits = (value: string, decimals: number): BigNumber => {
     return new BigNumber(value).multipliedBy(10 ** decimals);
 }
 
-export const checkAmountInput = (amount: string) => {
+export const checkDecimalAmount = (input: string) => {
     const re = RegExp(`^\\d*(?:\\\\[.])?\\d*$`);
 
-    if(!re.test(escapeRegExp(amount))){
+    if (!re.test(escapeRegExp(input))) {
         return false;
     }
 
-    if(amount.indexOf('.') !== -1){
-        return amount.split('.')[1].length <= 6;
+    if (input.indexOf('.') !== -1) {
+        return input.split('.')[1].length <= 6;
     }
 
     return true;
+}
+
+export const checkAmount = (input: string) => {
+    return RegExp(/^\d+$/).test(input)
 }
