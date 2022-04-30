@@ -1,7 +1,7 @@
 import {useAtom} from 'jotai';
 
 import {assetsAtom} from '../store';
-import {AssetsState, FTAsset, NFTAsset} from '../store/assets';
+import {AssetsState, FTListItem, NFTListItem, ListItem} from '../store/assets';
 
 import useAddress from './use-address';
 import useUserSession from './use-user-session';
@@ -9,7 +9,7 @@ import useStorage from './use-storage';
 import useNetwork from './use-network';
 
 
-const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => Promise<any>, () => FTAsset[], () => NFTAsset[]] => {
+const useAssets = (): [AssetsState, () => void, (asset: ListItem) => Promise<any>, () => FTListItem[], () => NFTListItem[]] => {
     const address = useAddress();
     const [userSession] = useUserSession();
     const [assets, setAssets] = useAtom(assetsAtom);
@@ -27,7 +27,7 @@ const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => P
         }
     }
 
-    const getAssetList = async (): Promise<(FTAsset | NFTAsset)[]> => {
+    const getAssetList = async (): Promise<ListItem[]> => {
         return getFile(`assets_${network}`).then(r => {
             try {
                 return JSON.parse(r);
@@ -37,7 +37,7 @@ const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => P
         });
     }
 
-    const addAsset = async (asset: NFTAsset | FTAsset): Promise<any> => {
+    const addAsset = async (asset: ListItem): Promise<any> => {
         return getAssetList().then((r) => {
 
             const newAssets = [asset, ...r.filter(x => x.address !== asset.address)];
@@ -47,16 +47,16 @@ const useAssets = (): [AssetsState, () => void, (asset: NFTAsset | FTAsset) => P
         })
     }
 
-    const getFTAssets = (): FTAsset[] => {
-        function isRule(a: (FTAsset | NFTAsset)): a is FTAsset {
+    const getFTAssets = (): FTListItem[] => {
+        function isRule(a: ListItem): a is FTListItem {
             return a.type === 'ft';
         }
 
         return assets.list.filter(isRule);
     }
 
-    const getNFTAssets = (): NFTAsset[] => {
-        function isRule(a: (FTAsset | NFTAsset)): a is NFTAsset {
+    const getNFTAssets = (): NFTListItem[] => {
+        function isRule(a: ListItem): a is NFTListItem {
             return a.type === 'nft';
         }
 

@@ -25,7 +25,7 @@ import useNetwork from '../../../../hooks/use-network';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
-import {FTAsset} from '../../../../store/assets';
+import {FTAsset} from '../../../../types';
 import CloseModal from '../../../../components/close-modal';
 import CurrencyField from '../../../../components/currency-field';
 import {parseUnits, makeTxUrl} from '../../../../helper';

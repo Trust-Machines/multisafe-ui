@@ -19,7 +19,7 @@ import Deposit from '../components/dialogs/deposit';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
-import {FTAsset} from '../../../store/assets';
+import {FTAsset} from '../../../types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TokenLogo from '../../../components/token-logo';
 

@@ -1,23 +1,20 @@
 import {atom} from 'jotai';
 
+import {FTAsset, NFTAsset} from '../types';
 
-export interface FTAsset {
-    address: string,
-    name: string
-    symbol: string,
-    decimals: number,
+export interface FTListItem extends FTAsset {
     type: "ft"
 }
 
-export interface NFTAsset {
-    address: string,
-    name: string,
+export interface NFTListItem extends NFTAsset {
     type: "nft"
 }
 
+export type ListItem = FTListItem | NFTListItem;
+
 export interface AssetsState {
     loading: boolean,
-    list: (FTAsset | NFTAsset)[],
+    list: ListItem[],
     init: boolean
 }
 

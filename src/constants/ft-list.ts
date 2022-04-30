@@ -1,4 +1,6 @@
-const list: { address: string, name: string, symbol: string, decimals: number }[] = [
+import {FTAsset} from '../types';
+
+const list: FTAsset[] = [
     {
         address: "SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-token",
         name: "Arkadiko Token",

@@ -40,7 +40,6 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
                     name: 'STX',
                     symbol: 'STX',
                     decimals: 6,
-                    type: 'ft'
                 },
                 balance: balances.stx.balance
             }
@@ -57,7 +56,6 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
                     name: r.name,
                     symbol: r.symbol,
                     decimals: r.decimals,
-                    type: 'ft'
                 },
                 balance: balances.fungible_tokens[ftKeys.find(x => x.startsWith(r.address))!].balance
             }))
