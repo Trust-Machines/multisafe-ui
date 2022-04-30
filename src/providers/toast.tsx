@@ -9,7 +9,7 @@ const ToastProvider: React.FC = ({children}) => {
     return <>
         {children}
         {(toast.message && toast.type) && (
-            <Snackbar open onClose={hideMessage} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
+            <Snackbar open onClose={hideMessage} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
                 <Alert onClose={hideMessage} severity={toast.type} sx={{width: '100%'}}>{toast.message}</Alert>
             </Snackbar>
         )}

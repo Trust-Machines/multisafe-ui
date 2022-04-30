@@ -1,22 +1,21 @@
 import {useEffect} from 'react';
 import {useAtom} from 'jotai';
-import {uiAtom} from '../store';
+import {themeAtom} from '../store';
 import {PaletteMode} from '@mui/material';
 
 const useAppTheme = (): [PaletteMode, () => void] => {
-    const [ui, setUi] = useAtom(uiAtom);
-
+    const [theme, setTheme] = useAtom(themeAtom);
     useEffect(() => {
-        document.body.style.background = ui.theme === 'dark' ? '#3b3b3b' : '#ffffff';
-    }, [ui.theme]);
+        document.body.style.background = theme === 'dark' ? '#3b3b3b' : '#ffffff';
+    }, [theme]);
 
     const toggleAppTheme = () => {
-        const theme = ui.theme === 'dark' ? 'light' : 'dark';
-        setUi({...ui, theme});
-        localStorage.setItem('app_theme', theme)
+        const newTheme = theme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+        localStorage.setItem('app_theme', newTheme);
     }
 
-    return [ui.theme, toggleAppTheme];
+    return [theme, toggleAppTheme];
 }
 
 export default useAppTheme;

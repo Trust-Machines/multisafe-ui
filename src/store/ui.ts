@@ -10,12 +10,6 @@ export interface Toast {
 
 export type Modal = JSX.Element | null;
 
-export interface UIState {
-    theme: PaletteMode
-    toast: Toast,
-    modal: Modal
-}
-
 const initialTheme = (): PaletteMode => {
     const s = localStorage.getItem('app_theme');
     if (s && ['dark', 'ligth'].includes(s)) {
@@ -24,11 +18,6 @@ const initialTheme = (): PaletteMode => {
     return 'light'
 }
 
-export const uiAtom = atom<UIState>({
-    theme: initialTheme(),
-    toast: {
-        message: null,
-        type: null
-    },
-    modal: null
-});
+export const themeAtom = atom<PaletteMode>(initialTheme());
+export const toastAtom = atom<Toast>({message: null, type: null});
+export const modalAtom = atom<Modal>(null);

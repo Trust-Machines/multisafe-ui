@@ -3,4 +3,4 @@ export {userSessionAtom, userDataAtom} from './user-session';
 export {safesAtom} from './safes';
 export {safeAtom} from './safe';
 export {assetsAtom} from './assets';
-export {uiAtom} from './ui';
+export {themeAtom, toastAtom, modalAtom} from './ui';

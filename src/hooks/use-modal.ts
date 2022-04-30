@@ -1,15 +1,15 @@
 import {useAtom} from 'jotai';
-import {uiAtom} from '../store';
+import {modalAtom} from '../store';
 import {Modal} from '../store/ui';
 
 const useModal = (): [Modal, (modal: Modal) => void] => {
-    const [ui, setUi] = useAtom(uiAtom);
+    const [modal, setModal] = useAtom(modalAtom);
 
     const showModal = (modal: Modal) => {
-        setUi({...ui, modal});
+        setModal(modal);
     }
 
-    return [ui.modal, showModal];
+    return [modal, showModal];
 }
 
 export default useModal;

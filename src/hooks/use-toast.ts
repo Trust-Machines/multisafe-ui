@@ -1,27 +1,27 @@
 import {useRef} from 'react';
 import {useAtom} from 'jotai';
-import {uiAtom} from '../store';
+import {toastAtom} from '../store';
 import {Toast, ToastType} from '../store/ui';
 
 const useToast = (): [Toast, (message: string, type: ToastType, timeout?: number) => void, () => void] => {
-    const [ui, setUi] = useAtom(uiAtom);
+    const [toast, setToast] = useAtom(toastAtom);
     let timer = useRef<any>();
 
     const hideMessage = () => {
-        setUi({...ui, toast: {message: null, type: null}});
+        setToast({message: null, type: null});
     }
 
     const showMessage = (message: string, type: ToastType, timeout: number = 5000) => {
         clearTimeout(timer.current);
 
-        setUi({...ui, toast: {message, type}});
+        setToast({message, type});
 
         timer.current = setTimeout(() => {
             hideMessage();
         }, timeout);
     };
 
-    return [ui.toast, showMessage, hideMessage]
+    return [toast, showMessage, hideMessage]
 }
 
 export default useToast;
