@@ -7,7 +7,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {TextField} from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import CircularProgress from '@mui/material/CircularProgress';
-import {cvToValue} from '@stacks/transactions';
 
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
@@ -16,7 +15,8 @@ import useAddress from '../../../../hooks/use-address';
 import useAssets from '../../../../hooks/use-assets';
 import useToast from '../../../../hooks/use-toast';
 import CloseModal from '../../../../components/close-modal';
-import {callReadOnly} from '../../../../api';
+import {getFTInfo} from '../../../../api';
+import {FTAsset} from '../../../../types';
 
 const AddFtAsset = () => {
     const inputRef = useRef<HTMLInputElement>();
@@ -45,17 +45,12 @@ const AddFtAsset = () => {
             return;
         }
 
-        let name;
-        let symbol;
-        let decimals;
-
         setInProgress(true);
         setError('');
 
+        let ftInfo: FTAsset;
         try {
-            name = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-name`, [], address!)).value;
-            symbol = cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-symbol`, [], address!)).value;
-            decimals = Number(cvToValue(await callReadOnly(stacksNetwork, `${asset}.get-decimals`, [], address!)).value);
+            ftInfo = await getFTInfo(stacksNetwork, asset, address!);
         } catch (e) {
             setError(t("Couldn't fetch token information"));
             setInProgress(false);
@@ -63,14 +58,20 @@ const AddFtAsset = () => {
         }
 
         try {
-            await addAsset({address: asset, name, symbol, decimals, type: 'ft'});
+            await addAsset({
+                address: asset,
+                name: ftInfo.name,
+                symbol: ftInfo.symbol,
+                decimals: ftInfo.decimals,
+                type: 'ft'
+            });
         } catch (e) {
             return;
         } finally {
             setInProgress(false);
         }
 
-        showMessage(t('{{symbol}} added', {symbol}), 'success');
+        showMessage(t('{{symbol}} added', {symbol: ftInfo.symbol}), 'success');
         handleClose();
     }
 
