@@ -117,7 +117,12 @@ exports[`4 Default render WalletMenu 1`] = `
     <div
       class="MuiBox-root css-eg13y7"
     >
-      <span>
+      <span
+        aria-label="Copied"
+        class=""
+        data-mui-internal-clone-element="true"
+        style="cursor: pointer;"
+      >
         <svg
           aria-hidden="true"
           class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-5oa1ix-MuiSvgIcon-root"
