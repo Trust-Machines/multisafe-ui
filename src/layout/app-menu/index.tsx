@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Box, useTheme} from '@mui/material';
 import useMediaBreakPoint from '../../hooks/use-media-break-point';
 import MenuIcon from '@mui/icons-material/Menu';
+import {grey} from '@mui/material/colors';
 
 const AppMenu = (props: { children?: React.ReactNode }) => {
     const [, isMd] = useMediaBreakPoint();
@@ -38,9 +39,7 @@ const AppMenu = (props: { children?: React.ReactNode }) => {
             flexGrow: 0,
             flexShrink: 0,
             boxShadow: `${theme.palette.divider} 1px 2px 10px 0px`,
-            background: '#fff',
-
-
+            bgcolor: theme.palette.mode === 'light' ? '#fff' : grey[900]
         }}>{props.children}</Box>
     </>
 }
