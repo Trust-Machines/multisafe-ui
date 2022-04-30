@@ -56,7 +56,6 @@ const TokensSection = () => {
                         <TableRow>
                             <TableCell>ASSET</TableCell>
                             <TableCell align="right">BALANCE</TableCell>
-                            <TableCell align="right">VALUE</TableCell>
                             <TableCell align="right" width="120"/>
                         </TableRow>
                     </TableHead>
@@ -75,7 +74,7 @@ const TokensSection = () => {
                                     </Box>
                                 </TableCell>
                                 <TableCell align="right"><FormattedBN bn={ft.balance} decimals={ft.asset.decimals}/></TableCell>
-                                <TableCell align="right">0</TableCell>
+
                                 <TableCell align="right">
                                     <Button size="small" onClick={() => {
                                         depositClicked(ft.asset)
