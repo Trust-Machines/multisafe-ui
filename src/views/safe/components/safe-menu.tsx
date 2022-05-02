@@ -22,13 +22,17 @@ import CopyToClipboard from '../../../components/copy-clipboard';
 import {truncateMiddle} from '../../../util';
 import {makeTxUrl} from '../../../helper';
 
-
-const ListItemLink = (props: {title: string, to: string}) => {
+const ListItem = (props: { selected: boolean, to: string, children: React.ReactNode }) => {
     const [safe] = useSafe();
     const navigate = useNavigate();
-    return <ListItemText onClick={() => {
-        navigate(`/safe/${safe.fullAddress}${props.to}`).then();
-    }} primary={props.title}/>
+
+    return <ListItemButton
+        onClick={() => {
+            navigate(`/safe/${safe.fullAddress}${props.to}`).then();
+        }}
+        selected={props.selected}>
+        {props.children}
+    </ListItemButton>
 }
 
 const SafeMenu = (props: { section: string }) => {
@@ -36,7 +40,6 @@ const SafeMenu = (props: { section: string }) => {
     const theme = useTheme();
     const [network] = useNetwork();
     const [t] = useTranslation();
-
 
 
     return <>
@@ -90,36 +93,36 @@ const SafeMenu = (props: { section: string }) => {
                 </Box>
             </Box>
             <List component='nav'>
-                <ListItemButton selected={props.section === ''}>
+                <ListItem selected={props.section === ''} to="">
                     <ListItemIcon>
                         <TollIcon/>
                     </ListItemIcon>
-                    <ListItemLink title={t('Coins')} to=""/>
-                </ListItemButton>
-                <ListItemButton selected={props.section === 'nft'}>
+                    <ListItemText primary={t('Coins')}/>
+                </ListItem>
+                <ListItem selected={props.section === 'nft'} to="/nft">
                     <ListItemIcon>
                         <DiamondIcon/>
                     </ListItemIcon>
-                    <ListItemLink title={t('NFTs')} to="/nft"/>
-                </ListItemButton>
-                <ListItemButton selected={props.section === 'transactions'}>
+                    <ListItemText primary={t('NFTs')}/>
+                </ListItem>
+                <ListItem selected={props.section === 'transactions'} to="/transactions">
                     <ListItemIcon>
                         <SwapVertIcon/>
                     </ListItemIcon>
-                    <ListItemLink title={t('Transactions')} to="/transactions"/>
-                </ListItemButton>
-                <ListItemButton selected={props.section === 'owners'}>
+                    <ListItemText primary={t('Transactions')}/>
+                </ListItem>
+                <ListItem selected={props.section === 'owners'} to="/owners">
                     <ListItemIcon>
                         <GroupsIcon/>
                     </ListItemIcon>
-                    <ListItemLink title={t('Owners')} to="/owners"/>
-                </ListItemButton>
-                <ListItemButton selected={props.section === 'policy'}>
+                    <ListItemText primary={t('Owners')}/>
+                </ListItem>
+                <ListItem selected={props.section === 'policy'} to="/policy">
                     <ListItemIcon>
                         <FactCheckIcon/>
                     </ListItemIcon>
-                    <ListItemLink title={t('Policy')} to="/policy"/>
-                </ListItemButton>
+                    <ListItemText primary={t('Policy')}/>
+                </ListItem>
             </List>
         </AppMenu>
     </>

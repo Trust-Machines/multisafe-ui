@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {RouteComponentProps, useParams} from '@reach/router';
+import {RouteComponentProps, useParams, useLocation} from '@reach/router';
 import {useNavigate} from '@reach/router';
 
 import {Box} from '@mui/material';
@@ -16,16 +16,24 @@ import Tokens from './sections/tokens';
 
 const Safe = (_: RouteComponentProps) => {
     const params = useParams();
+    const location = useLocation();
     const [safes] = useSafes();
     const [safe, fetchSafeData] = useSafe();
     const navigate = useNavigate();
-    // console.log()
+
+    const path = location.pathname.split("/").at(-1);
+    const section = path === params.safeId ? '' : path!;
+
+    console.log(section)
 
     useEffect(() => {
-        if (safes.list.includes(params.safeId)) {
-            fetchSafeData(params.safeId)
-        } else {
+        if (!safes.list.includes(params.safeId)) {
             navigate('/').then();
+            return;
+        }
+
+        if (safe.fullAddress !== params.safeId) {
+            fetchSafeData(params.safeId);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -37,10 +45,10 @@ const Safe = (_: RouteComponentProps) => {
     return <>
         <Navbar/>
         <AppContent sx={{p: 0, flexDirection: 'row',}}>
-            <SafeMenu section=""/>
+            <SafeMenu section={section}/>
 
-            <Box sx={{p: '20px', zIndex:1, flexGrow: 1}}>
-                <Tokens />
+            <Box sx={{p: '20px', zIndex: 1, flexGrow: 1}}>
+                <Tokens/>
             </Box>
         </AppContent>
     </>
