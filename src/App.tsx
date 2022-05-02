@@ -13,6 +13,10 @@ function App() {
                 <Home path='/'/>
                 <Create path='/create'/>
                 <Safe path='/safe/:safeId'/>
+                <Safe path='/safe/:safeId/nft'/>
+                <Safe path='/safe/:safeId/transactions'/>
+                <Safe path='/safe/:safeId/owners'/>
+                <Safe path='/safe/:safeId/policy'/>
             </Router>
         </AppWrapper>
     );

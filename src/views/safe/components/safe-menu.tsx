@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from '@reach/router';
 import {Box, Button, Typography, useTheme} from '@mui/material';
 import List from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
@@ -21,11 +22,23 @@ import CopyToClipboard from '../../../components/copy-clipboard';
 import {truncateMiddle} from '../../../util';
 import {makeTxUrl} from '../../../helper';
 
+
+const ListItemLink = (props: {title: string, to: string}) => {
+    const [safe] = useSafe();
+    const navigate = useNavigate();
+    return <ListItemText onClick={() => {
+        navigate(`/safe/${safe.fullAddress}${props.to}`).then();
+    }} primary={props.title}/>
+}
+
 const SafeMenu = (props: { section: string }) => {
     const [safe] = useSafe();
     const theme = useTheme();
     const [network] = useNetwork();
     const [t] = useTranslation();
+
+
+
     return <>
         <AppMenu>
             <Box sx={{
@@ -81,31 +94,31 @@ const SafeMenu = (props: { section: string }) => {
                     <ListItemIcon>
                         <TollIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={t('Coins')}/>
+                    <ListItemLink title={t('Coins')} to=""/>
                 </ListItemButton>
                 <ListItemButton selected={props.section === 'nft'}>
                     <ListItemIcon>
                         <DiamondIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={t('NFTs')}/>
+                    <ListItemLink title={t('NFTs')} to="/nft"/>
                 </ListItemButton>
                 <ListItemButton selected={props.section === 'transactions'}>
                     <ListItemIcon>
                         <SwapVertIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={t('Transactions')}/>
+                    <ListItemLink title={t('Transactions')} to="/transactions"/>
                 </ListItemButton>
                 <ListItemButton selected={props.section === 'owners'}>
                     <ListItemIcon>
                         <GroupsIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={t('Owners')}/>
+                    <ListItemLink title={t('Owners')} to="/owners"/>
                 </ListItemButton>
                 <ListItemButton selected={props.section === 'policy'}>
                     <ListItemIcon>
                         <FactCheckIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={t('Policy')}/>
+                    <ListItemLink title={t('Policy')} to="/policy"/>
                 </ListItemButton>
             </List>
         </AppMenu>
