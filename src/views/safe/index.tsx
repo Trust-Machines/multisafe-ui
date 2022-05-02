@@ -3,6 +3,7 @@ import {RouteComponentProps, useParams, useLocation} from '@reach/router';
 import {useNavigate} from '@reach/router';
 
 import {Box} from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import useSafes from '../../hooks/use-safes';
 import useSafe from '../../hooks/use-safe';
@@ -12,6 +13,10 @@ import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
 
 import Tokens from './sections/tokens';
+import NFTs from './sections/nfts';
+import Transactions from './sections/transactions';
+import Owners from './sections/owners';
+import Policy from './sections/policy';
 
 
 const Safe = (_: RouteComponentProps) => {
@@ -23,8 +28,6 @@ const Safe = (_: RouteComponentProps) => {
 
     const path = location.pathname.split("/").at(-1);
     const section = path === params.safeId ? '' : path!;
-
-    console.log(section)
 
     useEffect(() => {
         if (!safes.list.includes(params.safeId)) {
@@ -42,13 +45,26 @@ const Safe = (_: RouteComponentProps) => {
         return null;
     }
 
+    if (safe.loading) {
+        return <Box sx={{
+            display: 'flex',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}><CircularProgress/></Box>
+    }
+
     return <>
         <Navbar/>
         <AppContent sx={{p: 0, flexDirection: 'row',}}>
             <SafeMenu section={section}/>
 
             <Box sx={{p: '20px', zIndex: 1, flexGrow: 1}}>
-                <Tokens/>
+                {section === '' && <Tokens/>}
+                {section === 'nft' && <NFTs/>}
+                {section === 'transactions' && <Transactions/>}
+                {section === 'owners' && <Owners/>}
+                {section === 'policy' && <Policy/>}
             </Box>
         </AppContent>
     </>
