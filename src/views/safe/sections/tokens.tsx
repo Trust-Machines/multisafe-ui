@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import useSafe from '../../../hooks/use-safe';
 import FormattedBN from '../../../components/formatted-bn';
-import Deposit from '../components/dialogs/deposit';
+import DepositFt from '../components/dialogs/deposit-ft';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
@@ -39,7 +39,7 @@ const Tokens = () => {
     }
 
     const depositClicked = (asset: FTAsset) => {
-        showModal(<Deposit asset={asset}/>);
+        showModal(<DepositFt asset={asset}/>);
     }
 
     return <>
