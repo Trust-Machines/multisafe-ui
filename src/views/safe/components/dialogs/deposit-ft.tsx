@@ -1,18 +1,15 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
-import TextField from '@mui/material/TextField';
 import {FinishedTxData, useConnect} from '@stacks/connect-react';
 import {
     PostConditionMode,
     uintCV,
-    bufferCVFromString,
     noneCV,
-    someCV,
     standardPrincipalCV,
     contractPrincipalCV,
     FungibleConditionCode,
@@ -40,17 +37,13 @@ export default function DepositFt(props: { asset: FTAsset }) {
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [amount, setAmount] = useState<string>('');
-    const [memo, setMemo] = useState<string>('');
+
     const [txId, setTxId] = useState<string>('');
     const {doSTXTransfer, doContractCall} = useConnect();
 
     const handleClose = () => {
         showModal(null);
     };
-
-    const handleMemoChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setMemo(e.target.value);
-    }
 
     const handleSend = () => {
         const sendAmount = parseUnits(amount, asset.decimals);
@@ -73,7 +66,7 @@ export default function DepositFt(props: { asset: FTAsset }) {
             recipient: safe.fullAddress,
             amount: amount,
             network: stacksNetwork,
-            memo: memo,
+            memo: "",
             onFinish: (data) => {
                 onFinish(data);
             },
@@ -82,7 +75,6 @@ export default function DepositFt(props: { asset: FTAsset }) {
 
     const sendToken = (amount: string) => {
         const [contractAddress, contractName] = asset.address.split('.');
-        const memoArg = memo !== '' ? someCV(bufferCVFromString(memo)) : noneCV();
         doContractCall({
             network: stacksNetwork,
             contractAddress,
@@ -92,7 +84,7 @@ export default function DepositFt(props: { asset: FTAsset }) {
                 uintCV(amount),
                 standardPrincipalCV(address!),
                 contractPrincipalCV(safe.address, safe.name),
-                memoArg
+                noneCV()
             ],
             postConditionMode: PostConditionMode.Deny,
             postConditions: [
@@ -114,33 +106,25 @@ export default function DepositFt(props: { asset: FTAsset }) {
     }
 
     let dialogBody = <>
-        <Box sx={{mb: '10px'}}>
-            <CurrencyField
-                isDecimal={asset.decimals > 0}
-                symbol={asset.symbol}
-                onChange={(a) => {
-                    setAmount(a);
-                }}
-                fieldProps={{
-                    autoFocus: true,
-                    inputRef: inputRef,
-                    label: t('Enter amount'),
-                    value: amount,
-                    fullWidth: true,
-                    inputProps: {
-                        autoComplete: "off",
-                        autoCorrect: "off",
-                        spellCheck: "false",
-                        maxLength: "20"
-                    }
-                }}/>
-        </Box>
-        <TextField label={t('Memo')} value={memo} fullWidth
-                   onChange={handleMemoChange}
-                   inputProps={{
-                       maxLength: 34
-                   }}
-        />
+        <CurrencyField
+            isDecimal={asset.decimals > 0}
+            symbol={asset.symbol}
+            onChange={(a) => {
+                setAmount(a);
+            }}
+            fieldProps={{
+                autoFocus: true,
+                inputRef: inputRef,
+                label: t('Enter amount'),
+                value: amount,
+                fullWidth: true,
+                inputProps: {
+                    autoComplete: "off",
+                    autoCorrect: "off",
+                    spellCheck: "false",
+                    maxLength: "20"
+                }
+            }}/>
     </>;
 
     let dialogActions = <>

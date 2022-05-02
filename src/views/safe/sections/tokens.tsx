@@ -9,21 +9,25 @@ import Paper from '@mui/material/Paper';
 import TollIcon from '@mui/icons-material/Toll';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import useSafe from '../../../hooks/use-safe';
-import FormattedBN from '../../../components/formatted-bn';
-import DepositFt from '../components/dialogs/deposit-ft';
-import AddFtAsset from '../components/dialogs/add-ft-asset';
 import useModal from '../../../hooks/use-modal';
 import useTranslation from '../../../hooks/use-translation';
-import {FTAsset} from '../../../types';
-import CircularProgress from '@mui/material/CircularProgress';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
+import FormattedBN from '../../../components/formatted-bn';
 import TokenLogo from '../../../components/token-logo';
+import DepositFt from '../components/dialogs/deposit-ft';
+import AddFtAsset from '../components/dialogs/add-ft-asset';
 import SectionHeader from '../components/section-header';
+import {FTAsset} from '../../../types';
+
 
 const Tokens = () => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
+    const [, isMd] = useMediaBreakPoint();
 
     if (safe.loading) {
         return <Box sx={{
@@ -51,9 +55,11 @@ const Tokens = () => {
                 <Table sx={{width: '100%'}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>ASSET</TableCell>
-                            <TableCell align="right">BALANCE</TableCell>
-                            <TableCell align="right" width="120"/>
+                            <TableCell>{t('ASSET')}</TableCell>
+                            <TableCell align="right">{t('BALANCE')}</TableCell>
+                            <TableCell sx={{
+                                width: isMd ? '200px' : null
+                            }}/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -66,18 +72,33 @@ const Tokens = () => {
                                         display: 'flex',
                                         alignItems: 'center'
                                     }}>
-                                        <TokenLogo address={ft.asset.address} sx={{mr: '6px'}} />
+                                        <TokenLogo address={ft.asset.address} sx={{mr: '6px'}}/>
                                         <Typography>{ft.asset.symbol}</Typography>
                                     </Box>
                                 </TableCell>
-                                <TableCell align="right"><FormattedBN bn={ft.balance} decimals={ft.asset.decimals}/></TableCell>
-
                                 <TableCell align="right">
-                                    <Button size="small" onClick={() => {
-                                        depositClicked(ft.asset)
-                                    }} variant="outlined">
-                                        {t('Deposit')}
-                                    </Button>
+                                    <FormattedBN bn={ft.balance} decimals={ft.asset.decimals}/>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Box sx={{
+                                        display: 'flex',
+                                        flexDirection: isMd ? 'row' : 'column',
+                                        justifyContent: 'flex-end'
+                                    }}>
+                                        <Button size="small" sx={{
+                                            mr: isMd ? '6px' : null,
+                                            mb: isMd ? null : '6px'
+                                        }} onClick={() => {
+                                            depositClicked(ft.asset)
+                                        }} variant="outlined">
+                                            {t('Deposit')}
+                                        </Button>
+                                        <Button size="small" onClick={() => {
+
+                                        }} variant="outlined">
+                                            {t('Withdraw')}
+                                        </Button>
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}
