@@ -1,6 +1,4 @@
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,8 +9,6 @@ import Paper from '@mui/material/Paper';
 import TollIcon from '@mui/icons-material/Toll';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import {useTheme} from '@mui/material';
-import ScreenHeader from './helper';
 import useSafe from '../../../hooks/use-safe';
 import FormattedBN from '../../../components/formatted-bn';
 import Deposit from '../components/dialogs/deposit';
@@ -22,8 +18,9 @@ import useTranslation from '../../../hooks/use-translation';
 import {FTAsset} from '../../../types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TokenLogo from '../../../components/token-logo';
+import SectionHeader from '../components/section-header';
 
-const TokensSection = () => {
+const Tokens = () => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
@@ -46,9 +43,9 @@ const TokensSection = () => {
     }
 
     return <>
-        <ScreenHeader title="Coins" icon={<TollIcon/>}>
+        <SectionHeader title="Coins" icon={<TollIcon/>}>
             <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
-        </ScreenHeader>
+        </SectionHeader>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
             <TableContainer component={Paper}>
                 <Table sx={{width: '100%'}} aria-label="simple table">
@@ -91,4 +88,4 @@ const TokensSection = () => {
     </>
 }
 
-export default TokensSection;
+export default Tokens;

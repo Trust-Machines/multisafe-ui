@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import {Box, useTheme} from '@mui/material';
 
-const ScreenHeader = (props: { title: string, icon: JSX.Element, children: JSX.Element }) => {
+const SectionHeader = (props: { title: string, icon: JSX.Element, children: JSX.Element }) => {
     const theme = useTheme();
     const icon = React.cloneElement(props.icon, {
         sx: {
@@ -23,4 +23,4 @@ const ScreenHeader = (props: { title: string, icon: JSX.Element, children: JSX.E
     </Box>
 }
 
-export default ScreenHeader;
+export default SectionHeader;

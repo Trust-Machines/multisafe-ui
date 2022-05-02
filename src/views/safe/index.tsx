@@ -11,7 +11,7 @@ import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
 
-import TokensSection from './sections/tokens-section';
+import Tokens from './sections/tokens';
 
 
 const Safe = (_: RouteComponentProps) => {
@@ -40,7 +40,7 @@ const Safe = (_: RouteComponentProps) => {
             <SafeMenu section=""/>
 
             <Box sx={{p: '20px', zIndex:1, flexGrow: 1}}>
-                <TokensSection />
+                <Tokens />
             </Box>
         </AppContent>
     </>
