@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import {Box, useTheme} from '@mui/material';
 
-const SectionHeader = (props: { title: string, icon: JSX.Element, children: React.ReactNode }) => {
+const SectionHeader = (props: { title: string, icon: JSX.Element, children?: React.ReactNode }) => {
     const theme = useTheme();
     const icon = React.cloneElement(props.icon, {
         sx: {
