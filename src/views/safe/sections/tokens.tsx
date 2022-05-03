@@ -22,10 +22,12 @@ import WithdrawFt from '../components/dialogs/withdraw-ft';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
+import useAddress from '../../../hooks/use-address';
 
 
 const Tokens = () => {
     const [safe,] = useSafe();
+    const address = useAddress();
     const [, showModal] = useModal()
     const [t] = useTranslation();
     const [, isMd] = useMediaBreakPoint();
@@ -38,6 +40,8 @@ const Tokens = () => {
             justifyContent: 'center'
         }}><CircularProgress/></Box>
     }
+
+    const isOwner = address && safe.owners.includes(address)
 
     const addAssetClicked = () => {
         showModal(<AddFtAsset/>);
@@ -90,18 +94,20 @@ const Tokens = () => {
                                         flexDirection: isMd ? 'row' : 'column',
                                         justifyContent: 'flex-end'
                                     }}>
-                                        <Button size="small" sx={{
-                                            mr: isMd ? '6px' : null,
-                                            mb: isMd ? null : '6px'
-                                        }} onClick={() => {
+                                        {isOwner && (
+                                            <Button size="small" sx={{
+                                                mr: isMd ? '6px' : null,
+                                                mb: isMd ? null : '6px'
+                                            }} onClick={() => {
+                                                withdrawClicked(ft.asset)
+                                            }} variant="outlined">
+                                                {t('Withdraw')}
+                                            </Button>
+                                        )}
+                                        <Button size="small" onClick={() => {
                                             depositClicked(ft.asset)
                                         }} variant="outlined">
                                             {t('Deposit')}
-                                        </Button>
-                                        <Button size="small" onClick={() => {
-                                            withdrawClicked(ft.asset)
-                                        }} variant="outlined">
-                                            {t('Withdraw')}
                                         </Button>
                                     </Box>
                                 </TableCell>
