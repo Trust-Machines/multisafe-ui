@@ -28,7 +28,7 @@ import CurrencyField from '../../../../components/currency-field';
 import {parseUnits, makeTxUrl} from '../../../../helper';
 
 
-export default function DepositFt(props: { asset: FTAsset }) {
+const DepositFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const [network, stacksNetwork] = useNetwork();
@@ -156,3 +156,5 @@ export default function DepositFt(props: { asset: FTAsset }) {
         </>
     );
 }
+
+export default DepositFt;

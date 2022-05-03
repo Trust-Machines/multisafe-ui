@@ -18,6 +18,7 @@ import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 import FormattedBN from '../../../components/formatted-bn';
 import TokenLogo from '../../../components/token-logo';
 import DepositFt from '../components/dialogs/deposit-ft';
+import WithdrawFt from '../components/dialogs/withdraw-ft';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
@@ -44,6 +45,10 @@ const Tokens = () => {
 
     const depositClicked = (asset: FTAsset) => {
         showModal(<DepositFt asset={asset}/>);
+    }
+
+    const withdrawClicked = (asset: FTAsset) => {
+        showModal(<WithdrawFt asset={asset}/>);
     }
 
     return <>
@@ -94,7 +99,7 @@ const Tokens = () => {
                                             {t('Deposit')}
                                         </Button>
                                         <Button size="small" onClick={() => {
-
+                                            withdrawClicked(ft.asset)
                                         }} variant="outlined">
                                             {t('Withdraw')}
                                         </Button>

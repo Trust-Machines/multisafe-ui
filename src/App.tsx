@@ -13,7 +13,7 @@ function App() {
                 <Home path='/'/>
                 <Create path='/create'/>
                 <Safe path='/safe/:safeId'/>
-                {['nft', 'transactions', 'owners', 'policy'].map((a) => <Safe path={`/safe/:safeId/${a}`}/>)}
+                {['nft', 'transactions', 'owners', 'policy'].map((a) => <Safe key={a} path={`/safe/:safeId/${a}`}/>)}
             </Router>
         </AppWrapper>
     );
