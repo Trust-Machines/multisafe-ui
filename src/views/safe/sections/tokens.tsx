@@ -41,7 +41,7 @@ const Tokens = () => {
         }}><CircularProgress/></Box>
     }
 
-    const isOwner = address && safe.owners.includes(address)
+    const isOwner = address && safe.owners.includes(address);
 
     const addAssetClicked = () => {
         showModal(<AddFtAsset/>);
@@ -61,7 +61,7 @@ const Tokens = () => {
         </SectionHeader>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
             <TableContainer component={Paper}>
-                <Table sx={{width: '100%'}} aria-label="simple table">
+                <Table sx={{width: '100%'}}>
                     <TableHead>
                         <TableRow>
                             <TableCell>{t('ASSET')}</TableCell>
