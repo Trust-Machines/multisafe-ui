@@ -8,7 +8,7 @@ const Owners = () => {
     const [t] = useTranslation();
 
     return <>
-        <SectionHeader title={t('NFTs')} icon={<GroupsIcon/>}>
+        <SectionHeader title={t('Owners')} icon={<GroupsIcon/>}>
 
         </SectionHeader>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
