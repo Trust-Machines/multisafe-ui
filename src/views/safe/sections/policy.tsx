@@ -33,7 +33,7 @@ const Policy = () => {
                     {options.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
                 </Select>
             </Box>
-            <Button variant="contained" disabled={safe.minConfirmation === threshold}>Update</Button>
+            <Button variant="contained" disabled={safe.minConfirmation === threshold}>{t('Update')}</Button>
         </Box>
     </>
 }
