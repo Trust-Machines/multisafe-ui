@@ -16,7 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import useModal from '../../../hooks/use-modal';
 import AddOwner from '../components/dialogs/add-owner';
-
+import ConfirmDialog from '../../../components/confirm-dialog';
 
 const Owners = () => {
     const [safe,] = useSafe();
@@ -28,6 +28,10 @@ const Owners = () => {
 
     const addOwnerClicked = () => {
         showModal(<AddOwner/>);
+    }
+
+    const deleteOwnerClicked = () => {
+        showModal(<ConfirmDialog/>);
     }
 
     return <>
@@ -57,7 +61,7 @@ const Owners = () => {
                                 </TableCell>
                                 <TableCell align="right">
                                     {isOwner && (
-                                        <IconButton>
+                                        <IconButton onClick={deleteOwnerClicked}>
                                             <DeleteIcon/>
                                         </IconButton>
                                     )}
