@@ -15,3 +15,19 @@ exports[`2 formatUnits 2`] = `"120000"`;
 exports[`2 formatUnits 3`] = `"1.256"`;
 
 exports[`2 formatUnits 4`] = `"11"`;
+
+exports[`3 checkDecimalAmount 1`] = `false`;
+
+exports[`3 checkDecimalAmount 2`] = `true`;
+
+exports[`3 checkDecimalAmount 3`] = `true`;
+
+exports[`3 checkDecimalAmount 4`] = `true`;
+
+exports[`3 checkDecimalAmount 5`] = `true`;
+
+exports[`3 checkDecimalAmount 6`] = `false`;
+
+exports[`4 checkAmount 1`] = `true`;
+
+exports[`4 checkAmount 2`] = `false`;

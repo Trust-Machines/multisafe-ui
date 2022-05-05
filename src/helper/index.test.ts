@@ -1,5 +1,4 @@
-import {formatUnits, parseUnits} from './';
-
+import {formatUnits, parseUnits, checkDecimalAmount, checkAmount} from './';
 
 
 test('1 parseUnits', () => {
@@ -16,3 +15,16 @@ test('2 formatUnits', () => {
     expect(formatUnits("11", 0)).toMatchSnapshot();
 });
 
+test('3 checkDecimalAmount', () => {
+    expect(checkDecimalAmount(" ")).toMatchSnapshot();
+    expect(checkDecimalAmount("0.1")).toMatchSnapshot();
+    expect(checkDecimalAmount("43")).toMatchSnapshot();
+    expect(checkDecimalAmount("100.23")).toMatchSnapshot();
+    expect(checkDecimalAmount("100.123456")).toMatchSnapshot();
+    expect(checkDecimalAmount("100.1234567")).toMatchSnapshot();
+});
+
+test('4 checkAmount', () => {
+    expect(checkAmount("100")).toMatchSnapshot();
+    expect(checkAmount("1.1")).toMatchSnapshot();
+});
