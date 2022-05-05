@@ -133,7 +133,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
     </>;
 
     if (txId) {
-        dialogBody = <DialogContentText>
+        dialogBody = <DialogContentText component="div">
             <Box sx={{mb: '12px'}}>{t('Transaction broadcasted.')}</Box>
             <Box>
                 <a href={makeTxUrl(txId, network)} target='_blank' rel='noreferrer'>
