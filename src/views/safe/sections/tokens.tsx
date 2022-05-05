@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
+import useAddress from '../../../hooks/use-address';
 import useTranslation from '../../../hooks/use-translation';
 import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 import FormattedBN from '../../../components/formatted-bn';
@@ -22,7 +23,6 @@ import WithdrawFt from '../components/dialogs/withdraw-ft';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
-import useAddress from '../../../hooks/use-address';
 
 
 const Tokens = () => {
