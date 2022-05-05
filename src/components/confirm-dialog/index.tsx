@@ -4,9 +4,10 @@ import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import {DialogContentText} from '@mui/material';
-import CloseModal from '../close-modal';
+
 import useTranslation from '../../hooks/use-translation';
 import useModal from '../../hooks/use-modal';
+import CloseModal from '../close-modal';
 
 const ConfirmDialog = () => {
     const [t] = useTranslation();
