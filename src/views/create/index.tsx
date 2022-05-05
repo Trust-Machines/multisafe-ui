@@ -24,7 +24,7 @@ import SafeConfirmations from './components/safe-confirmations';
 import SafeReview from './components/safe-review';
 import SafeSuccess from './components/safe-success';
 
-import {makeTxUrl} from '../../helper';
+import {makeTxUrl} from '../../api/helper';
 
 const Create = (_: RouteComponentProps) => {
     const [, userData, openAuth] = useUserSession();

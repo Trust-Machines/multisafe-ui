@@ -11,7 +11,7 @@ import useTranslation from '../../../hooks/use-translation';
 import useSafes from '../../../hooks/use-safes';
 import useNetwork from '../../../hooks/use-network';
 
-import {validateSafeAbi} from '../../../helper';
+import {validateSafeAbi} from '../../../api/helper';
 
 const Load = () => {
     const inputRef = React.useRef<HTMLInputElement>();

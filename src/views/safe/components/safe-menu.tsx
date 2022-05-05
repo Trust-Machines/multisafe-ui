@@ -20,7 +20,7 @@ import AppMenu from '../../../layout/app-menu';
 import WalletIcon from '../../../components/wallet-icon';
 import CopyToClipboard from '../../../components/copy-clipboard';
 import {truncateMiddle} from '../../../util';
-import {makeTxUrl} from '../../../helper';
+import {makeTxUrl} from '../../../api/helper';
 
 const ListItem = (props: { selected: boolean, to: string, children: React.ReactNode }) => {
     const [safe] = useSafe();

@@ -25,8 +25,8 @@ import useTranslation from '../../../../hooks/use-translation';
 import {FTAsset} from '../../../../types';
 import CloseModal from '../../../../components/close-modal';
 import CurrencyField from '../../../../components/currency-field';
-import {parseUnits, makeTxUrl} from '../../../../helper';
-
+import {parseUnits} from '../../../../helper';
+import {makeTxUrl} from '../../../../api/helper';
 
 const DepositFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
