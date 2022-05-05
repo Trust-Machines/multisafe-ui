@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 parseUnits 1`] = `"1256000"`;
+
+exports[`1 parseUnits 2`] = `"120000000000"`;
+
+exports[`1 parseUnits 3`] = `"125600000"`;
+
+exports[`1 parseUnits 4`] = `"11"`;
+
+exports[`2 formatUnits 1`] = `"1.256"`;
+
+exports[`2 formatUnits 2`] = `"120000"`;
+
+exports[`2 formatUnits 3`] = `"1.256"`;
+
+exports[`2 formatUnits 4`] = `"11"`;
