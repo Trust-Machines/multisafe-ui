@@ -23,7 +23,7 @@ const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] =>
                 setSafes({loading: false, list: safes, init: true});
             });
         } else {
-            setSafes({...safes, init: true});
+            setSafes({...safes, list:[], init: true});
         }
     }
 
