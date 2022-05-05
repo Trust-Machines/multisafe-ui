@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <img
+    class="MuiBox-root css-9uy14h"
+    src="/tokens/0x234234234234.svg"
+  />
+</div>
+`;
