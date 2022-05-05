@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import {Box, useTheme} from '@mui/material';
+import Box from '@mui/material/Box';
+import {useTheme} from '@mui/material';
 
 const SectionHeader = (props: { title: string, icon: JSX.Element, children?: React.ReactNode }) => {
     const theme = useTheme();
