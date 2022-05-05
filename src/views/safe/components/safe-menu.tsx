@@ -15,14 +15,14 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-import useSafe from '../../../../hooks/use-safe';
-import useNetwork from '../../../../hooks/use-network';
-import useTranslation from '../../../../hooks/use-translation';
-import AppMenu from '../../../../layout/app-menu';
-import WalletIcon from '../../../../components/wallet-icon';
-import CopyToClipboard from '../../../../components/copy-clipboard';
-import {truncateMiddle} from '../../../../util';
-import {makeTxUrl} from '../../../../api/helper';
+import useSafe from '../../../hooks/use-safe';
+import useNetwork from '../../../hooks/use-network';
+import useTranslation from '../../../hooks/use-translation';
+import AppMenu from '../../../layout/app-menu';
+import WalletIcon from '../../../components/wallet-icon';
+import CopyToClipboard from '../../../components/copy-clipboard';
+import {truncateMiddle} from '../../../util';
+import {makeTxUrl} from '../../../api/helper';
 
 const MenuListItem = (props: { selected: boolean, to: string, children: React.ReactNode }) => {
     const [safe] = useSafe();
