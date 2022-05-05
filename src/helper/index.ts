@@ -1,7 +1,7 @@
 import {ClarityAbi} from '@stacks/transactions';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
 import BigNumber from 'bignumber.js';
-import {escapeRegExp} from './util';
+import {escapeRegExp} from '../util';
 
 export const validateSafeAbi = (abi: ClarityAbi) => {
     const publicFns = [
