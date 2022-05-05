@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Render with 6 decimals 1`] = `
+<div>
+  <span>
+    1.1371
+  </span>
+</div>
+`;
+
+exports[`2 Render with 8 decimals 1`] = `
+<div>
+  <span>
+    11.0009
+  </span>
+</div>
+`;
