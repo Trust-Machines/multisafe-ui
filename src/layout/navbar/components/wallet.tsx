@@ -18,12 +18,12 @@ import ThemedBox from '../../../components/themed-box';
 import CopyToClipboard from '../../../components/copy-clipboard';
 import {truncateMiddle} from '../../../util';
 
-export const WalletMenu = () => {
+export const WalletMenu = (props: {onSignOut: () => void}) => {
     const address = useAddress();
     const [t] = useTranslation();
     const [, , , signOut] = useUserSession();
     const [isSm] = useMediaBreakPoint();
-    const theme = useTheme()
+    const theme = useTheme();
 
     return (
         <ThemedBox sx={{
@@ -49,7 +49,11 @@ export const WalletMenu = () => {
                   <span><ContentCopyIcon fontSize='small' sx={{mr: '6px'}}/>{t('Copy Address')}</span>
               </CopyToClipboard>
             </Box>
-            <Button variant="contained" sx={{width: '100%'}} onClick={signOut}>{t('Logout')}</Button>
+            <Button variant="contained" sx={{width: '100%'}} onClick={(e)=>{
+                e.stopPropagation();
+                signOut();
+                props.onSignOut();
+            }}>{t('Logout')}</Button>
         </ThemedBox>
     )
 }
@@ -121,7 +125,9 @@ const Wallet = () => {
                         )}
                     </Box>
                 </Box>
-                {address && menu && <WalletMenu/>}
+                {address && menu && <WalletMenu onSignOut={()=>{
+                    setMenu(false);
+                }}/>}
             </Box>
         </ClickAwayListener>
     );
