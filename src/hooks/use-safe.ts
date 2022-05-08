@@ -10,6 +10,8 @@ import useSenderAddress from './use-sender-address';
 import * as api from '../api';
 import useAssets from './use-assets';
 
+import ftList from '../constants/ft-list';
+
 const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);
     const [, stacksNetwork] = useNetwork();
@@ -17,35 +19,33 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const sender = useSenderAddress();
 
     const fetchSafeData = async (safeAddress: string) => {
-        let promises: [Promise<api.SafeInfo>, Promise<api.AddressBalance>] = [
-            api.getSafeInfo(stacksNetwork, safeAddress, sender),
-            api.getContractBalances(stacksNetwork, safeAddress)
-        ];
-
         const [address, name] = safeAddress.split('.');
         setSafe({...safe, loading: true, address, name, fullAddress: safeAddress, init: true});
 
-        const resp = await Promise.all(promises);
-        const [safeInfo, balances] = resp;
+        let [safeInfo, balances] = await Promise.all([
+            api.getSafeInfo(stacksNetwork, safeAddress, sender),
+            api.getContractBalances(stacksNetwork, safeAddress)
+        ]);
+
         const {nonce, version, owners, threshold} = safeInfo;
+
         const transactions = await api.getSafeTransactions(stacksNetwork, safeAddress, nonce, sender);
 
-        // build fungible token balances
-        let ftBalances: SafeFtBalance[] = [
-            {
-                asset: {
-                    address: 'STX',
-                    name: 'STX',
-                    symbol: 'STX',
-                    decimals: 6,
-                },
-                balance: balances.stx.balance
-            }
-        ];
+        // Build fungible token balances
+        // Start with STX
+        const stxBalance: SafeFtBalance = {
+            asset: {
+                address: 'STX',
+                name: 'STX',
+                symbol: 'STX',
+                decimals: 6,
+            },
+            balance: balances.stx.balance
+        };
 
+        // Collect all fungible token balances from api response
         const ftKeys = Object.keys(balances.fungible_tokens);
-
-        await Promise.all(
+        const ftBalancesApi: SafeFtBalance[] = await Promise.all(
             ftKeys.map(f => api.getFTInfo(stacksNetwork, f.split(':')[0], sender))
         ).then(resp => {
             return resp.map((r, i): SafeFtBalance => ({
@@ -57,16 +57,25 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
                 },
                 balance: balances.fungible_tokens[ftKeys.find(x => x.startsWith(r.address))!].balance
             }))
-        }).then(r => {
-            ftBalances = [...ftBalances, ...r];
-        })
+        });
 
-        ftBalances = [
-            ...ftBalances,
-            ...getFtAssets()
-                .filter(x => ftBalances.find(y => y.asset.address === x.address) === undefined)
+        // User defined tokens
+        const ftBalancesCustom: SafeFtBalance[] = getFtAssets()
+            .filter(x => ftBalancesApi.find(y => y.asset.address === x.address) === undefined)
+            .map(x => ({asset: x, balance: "0"}))
+
+        // Merge all tokens. Append default token list in the end.
+        const ftBalances: SafeFtBalance[] = [
+            stxBalance,
+            ...ftBalancesApi,
+            ...ftBalancesCustom,
+            ...ftList
+                .filter(x =>
+                    ftBalancesApi.find(y => y.asset.address === x.address) === undefined &&
+                    ftBalancesCustom.find(y => y.asset.address === x.address) === undefined
+                )
                 .map(x => ({asset: x, balance: "0"}))
-        ]
+        ];
 
         // build non-fungible token balances
         let nftBalances: SafeNFtBalance[] = getFtAssets().map(a => ({
