@@ -65,7 +65,7 @@ const AddOwner = () => {
                 noneCV(),
             ],
             onFinish: (data) => {
-
+                console.log(data)
             }
         }).then()
     }
