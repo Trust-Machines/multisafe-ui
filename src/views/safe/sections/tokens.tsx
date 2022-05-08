@@ -13,7 +13,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
-import useAddress from '../../../hooks/use-address';
 import useTranslation from '../../../hooks/use-translation';
 import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 import FormattedBN from '../../../components/formatted-bn';
@@ -25,9 +24,8 @@ import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
 
 
-const Tokens = () => {
+const Tokens = (props: {readOnly: boolean}) => {
     const [safe,] = useSafe();
-    const address = useAddress();
     const [, showModal] = useModal()
     const [t] = useTranslation();
     const [, isMd] = useMediaBreakPoint();
@@ -40,8 +38,6 @@ const Tokens = () => {
             justifyContent: 'center'
         }}><CircularProgress/></Box>
     }
-
-    const isOwner = address && safe.owners.includes(address);
 
     const addAssetClicked = () => {
         showModal(<AddFtAsset/>);
@@ -94,7 +90,7 @@ const Tokens = () => {
                                         flexDirection: isMd ? 'row' : 'column',
                                         justifyContent: 'flex-end'
                                     }}>
-                                        {isOwner && (
+                                        {!props.readOnly && (
                                             <Button size="small" sx={{
                                                 mr: isMd ? '6px' : null,
                                                 mb: isMd ? null : '6px'

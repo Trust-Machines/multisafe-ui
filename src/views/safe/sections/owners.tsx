@@ -1,8 +1,5 @@
 import GroupsIcon from '@mui/icons-material/Groups';
 import Box from '@mui/material/Box';
-import useTranslation from '../../../hooks/use-translation';
-import SectionHeader from '../components/section-header';
-import useSafe from '../../../hooks/use-safe';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -11,20 +8,21 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import useAddress from '../../../hooks/use-address';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+
+import useTranslation from '../../../hooks/use-translation';
+import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
+import SectionHeader from '../components/section-header';
 import AddOwner from '../components/dialogs/add-owner';
 import ConfirmDialog from '../../../components/confirm-dialog';
 import Wallet from '../../../components/wallet';
-const Owners = () => {
+
+const Owners = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
-    const address = useAddress();
     const [t] = useTranslation();
     const [, showModal] = useModal();
-
-    const isOwner = address && safe.owners.includes(address);
 
     const addOwnerClicked = () => {
         showModal(<AddOwner/>);
@@ -57,10 +55,10 @@ const Owners = () => {
                                     {t(`Owner ${i + 1}`)}
                                 </TableCell>
                                 <TableCell component="th" scope="row">
-                                    <Wallet address={o} />
+                                    <Wallet address={o}/>
                                 </TableCell>
                                 <TableCell align="right">
-                                    {isOwner && (
+                                    {!props.readOnly && (
                                         <IconButton onClick={deleteOwnerClicked}>
                                             <DeleteIcon/>
                                         </IconButton>

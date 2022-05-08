@@ -4,7 +4,7 @@ import useTranslation from '../../../hooks/use-translation';
 import SectionHeader from '../components/section-header';
 
 
-const NFTs = () => {
+const NFTs = (props: {readOnly: boolean}) => {
     const [t] = useTranslation();
 
     return <>

@@ -6,6 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import useSafes from '../../hooks/use-safes';
 import useSafe from '../../hooks/use-safe';
+import useAddress from '../../hooks/use-address';
 import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
@@ -19,6 +20,7 @@ import Policy from './sections/policy';
 const SafeContent = (props: { section: string }) => {
     const [safe] = useSafe();
     const {section} = props;
+    const address = useAddress();
 
     if (safe.loading) {
         return <Box sx={{
@@ -29,12 +31,13 @@ const SafeContent = (props: { section: string }) => {
         }}><CircularProgress/></Box>
     }
 
+    const sectionProps = {readOnly: !(address && safe.owners.includes(address))}
     return <>
-        {section === '' && <Tokens/>}
-        {section === 'nft' && <NFTs/>}
-        {section === 'transactions' && <Transactions/>}
-        {section === 'owners' && <Owners/>}
-        {section === 'policy' && <Policy/>}
+        {section === '' && <Tokens {...sectionProps}/>}
+        {section === 'nft' && <NFTs {...sectionProps}/>}
+        {section === 'transactions' && <Transactions {...sectionProps}/>}
+        {section === 'owners' && <Owners {...sectionProps}/>}
+        {section === 'policy' && <Policy {...sectionProps}/>}
     </>
 }
 

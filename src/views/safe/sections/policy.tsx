@@ -9,7 +9,7 @@ import React, {useState} from 'react';
 import useSafe from '../../../hooks/use-safe';
 
 
-const Policy = () => {
+const Policy = (props: {readOnly: boolean}) => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
     const [threshold, setThreshold] = useState<number>(safe.threshold);
