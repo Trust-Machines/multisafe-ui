@@ -5,7 +5,7 @@ export const validateSafeAbi = (abi: ClarityAbi) => {
     const publicFns = [
         'add-owner',
         'remove-owner',
-        'set-min-confirmation',
+        'set-threshold',
         'submit',
         'confirm',
         'revoke'

@@ -76,7 +76,7 @@ export const getSafeOwners = (network: StacksNetwork, safe: string, senderAddres
 }
 
 export const getSafeMinConfirmation = (network: StacksNetwork, safe: string, senderAddress: string): Promise<number> => {
-    return callReadOnly(network, `${safe}.get-min-confirmation`, [], senderAddress).then(r => {
+    return callReadOnly(network, `${safe}.get-threshold`, [], senderAddress).then(r => {
         return Number(cvToJSON(r).value);
     });
 }
