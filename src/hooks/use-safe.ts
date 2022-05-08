@@ -17,11 +17,8 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const sender = useSenderAddress();
 
     const fetchSafeData = async (safeAddress: string) => {
-        let promises: [Promise<number>, Promise<string>, Promise<string[]>, Promise<number>, Promise<api.AddressBalance>] = [
-            api.getSafeNonce(stacksNetwork, safeAddress, sender),
-            api.getSafeVersion(stacksNetwork, safeAddress, sender),
-            api.getSafeOwners(stacksNetwork, safeAddress, sender),
-            api.getSafeMinConfirmation(stacksNetwork, safeAddress, sender),
+        let promises: [Promise<api.SafeInfo>, Promise<api.AddressBalance>] = [
+            api.getSafeInfo(stacksNetwork, safeAddress, sender),
             api.getContractBalances(stacksNetwork, safeAddress)
         ];
 
@@ -29,7 +26,8 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
         setSafe({...safe, loading: true, address, name, fullAddress: safeAddress, init: true});
 
         const resp = await Promise.all(promises);
-        const [nonce, version, owners, minConfirmation, balances] = resp;
+        const [safeInfo, balances] = resp;
+        const {nonce, version, owners, threshold} = safeInfo;
         const transactions = await api.getSafeTransactions(stacksNetwork, safeAddress, nonce, sender);
 
         // build fungible token balances
@@ -85,7 +83,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             nonce,
             version,
             owners,
-            minConfirmation,
+            threshold,
             balance: new BigNumber(balances.stx.balance),
             ftBalances,
             nftBalances,

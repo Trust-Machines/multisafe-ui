@@ -29,7 +29,7 @@ export interface SafeState {
     fullAddress: string,
     version: string,
     owners: string[],
-    minConfirmation: number,
+    threshold: number,
     nonce: number,
     balance: BigNumber,
     ftBalances: SafeFtBalance[]
@@ -45,7 +45,7 @@ export const initial: SafeState = {
     fullAddress: "",
     version: "",
     owners: [],
-    minConfirmation: 0,
+    threshold: 0,
     nonce: -1,
     balance: new BigNumber("0"),
     ftBalances: [],

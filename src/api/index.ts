@@ -57,27 +57,22 @@ export const callReadOnly = (network: StacksNetwork, path: string, functionArgs:
     })
 }
 
-export const getSafeVersion = (network: StacksNetwork, safe: string, senderAddress: string): Promise<string> => {
-    return callReadOnly(network, `${safe}.get-version`, [], senderAddress).then(r => {
-        return cvToJSON(r).value
-    });
+export interface SafeInfo {
+    version: string,
+    owners: string[],
+    threshold: number,
+    nonce: number
 }
 
-export const getSafeNonce = (network: StacksNetwork, safe: string, senderAddress: string): Promise<number> => {
-    return callReadOnly(network, `${safe}.get-nonce`, [], senderAddress).then(r => {
-        return Number(cvToJSON(r).value);
-    });
-}
-
-export const getSafeOwners = (network: StacksNetwork, safe: string, senderAddress: string): Promise<string[]> => {
-    return callReadOnly(network, `${safe}.get-owners`, [], senderAddress).then(r => {
-        return cvToJSON(r).value.map((x: any) => x.value);
-    });
-}
-
-export const getSafeMinConfirmation = (network: StacksNetwork, safe: string, senderAddress: string): Promise<number> => {
-    return callReadOnly(network, `${safe}.get-threshold`, [], senderAddress).then(r => {
-        return Number(cvToJSON(r).value);
+export const getSafeInfo = (network: StacksNetwork, safe: string, senderAddress: string): Promise<SafeInfo> => {
+    return callReadOnly(network, `${safe}.get-info`, [], senderAddress).then(r => {
+        const js = cvToJSON(r);
+        return {
+            version: js.value.version.value,
+            owners: js.value.owners.value.map((x: any) => x.value),
+            threshold: Number(js.value.threshold.value),
+            nonce: Number(js.value.nonce.value),
+        }
     });
 }
 

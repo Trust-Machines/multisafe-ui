@@ -12,7 +12,7 @@ import useSafe from '../../../hooks/use-safe';
 const Policy = () => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
-    const [threshold, setThreshold] = useState<number>(safe.minConfirmation);
+    const [threshold, setThreshold] = useState<number>(safe.threshold);
 
     const handleChange = (event: SelectChangeEvent) => {
         setThreshold(Number(event.target.value));
@@ -33,7 +33,7 @@ const Policy = () => {
                     {options.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
                 </Select>
             </Box>
-            <Button variant="contained" disabled={safe.minConfirmation === threshold}>{t('Update')}</Button>
+            <Button variant="contained" disabled={safe.threshold === threshold}>{t('Update')}</Button>
         </Box>
     </>
 }
