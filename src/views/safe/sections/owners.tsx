@@ -17,7 +17,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import useModal from '../../../hooks/use-modal';
 import AddOwner from '../components/dialogs/add-owner';
 import ConfirmDialog from '../../../components/confirm-dialog';
-
+import Wallet from '../../../components/wallet';
 const Owners = () => {
     const [safe,] = useSafe();
     const address = useAddress();
@@ -43,7 +43,7 @@ const Owners = () => {
                 <Table sx={{width: '100%'}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>{t('OWNER')}</TableCell>
+                            <TableCell>{t('NAME')}</TableCell>
                             <TableCell>{t('ADDRESS')}</TableCell>
                             <TableCell width="90"/>
                         </TableRow>
@@ -57,7 +57,7 @@ const Owners = () => {
                                     {t(`Owner ${i + 1}`)}
                                 </TableCell>
                                 <TableCell component="th" scope="row">
-                                    {o}
+                                    <Wallet address={o} />
                                 </TableCell>
                                 <TableCell align="right">
                                     {isOwner && (
