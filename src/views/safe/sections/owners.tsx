@@ -34,7 +34,7 @@ const Owners = (props: { readOnly: boolean }) => {
 
     return <>
         <SectionHeader title={t('Owners')} icon={<GroupsIcon/>}>
-            <Button onClick={addOwnerClicked} variant="contained">{t('Add Owner')}</Button>
+            {!props.readOnly && <Button onClick={addOwnerClicked} variant="contained">{t('Add Owner')}</Button>}
         </SectionHeader>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
             <TableContainer component={Paper}>
