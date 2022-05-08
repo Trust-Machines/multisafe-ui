@@ -25,5 +25,5 @@ export const checkDecimalAmount = (input: string) => {
 }
 
 export const checkAmount = (input: string) => {
-    return RegExp(/^\d+$/).test(input)
+    return RegExp(/^(\s*|\d+)$/).test(input)
 }
