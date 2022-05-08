@@ -101,7 +101,7 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
 }
 
 export const getFTInfo = async (network: StacksNetwork, address: string, senderAddress: string): Promise<FTAsset> => {
-    const inList = ftList.find(x => x.address === address);
+    const inList = ftList[network.isMainnet() ? 'mainnet' : 'testnet'].find(x => x.address === address);
     if (inList) {
         return inList;
     }

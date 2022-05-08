@@ -14,7 +14,7 @@ import ftList from '../constants/ft-list';
 
 const useSafes = (): [SafeState, (safeAddress: string) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);
-    const [, stacksNetwork] = useNetwork();
+    const [network, stacksNetwork] = useNetwork();
     const [, , , getFtAssets] = useAssets();
     const sender = useSenderAddress();
 
@@ -59,17 +59,17 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             }))
         });
 
-        // User defined tokens
+        // User defined fungible tokens
         const ftBalancesCustom: SafeFtBalance[] = getFtAssets()
             .filter(x => ftBalancesApi.find(y => y.asset.address === x.address) === undefined)
             .map(x => ({asset: x, balance: "0"}))
 
-        // Merge all tokens. Append default token list in the end.
+        // Merge all fungible tokens. Append default token list in the end.
         const ftBalances: SafeFtBalance[] = [
             stxBalance,
             ...ftBalancesApi,
             ...ftBalancesCustom,
-            ...ftList
+            ...ftList[network]
                 .filter(x =>
                     ftBalancesApi.find(y => y.asset.address === x.address) === undefined &&
                     ftBalancesCustom.find(y => y.asset.address === x.address) === undefined
