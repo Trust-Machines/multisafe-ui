@@ -28,7 +28,7 @@ const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] =>
     }
 
     const getSafeList = async (): Promise<string[]> => {
-        return getFile(`safes_${network}`).then(r => {
+        return getFile(`safes_${network}_1`).then(r => {
             return r.split("\n").filter(x => x.trim());
         });
     }
@@ -36,7 +36,7 @@ const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] =>
     const upsertSafe = async (safe: string): Promise<any> => {
         return getSafeList().then((r) => {
             const newSafes = [safe, ...r.filter(x => x !== safe)];
-            return putFile(`safes_${network}`, newSafes.join("\n")).then(() => {
+            return putFile(`safes_${network}_1`, newSafes.join("\n")).then(() => {
                 setSafes({...safes, list: newSafes});
             })
         })
