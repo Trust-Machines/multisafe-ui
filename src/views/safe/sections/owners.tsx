@@ -54,7 +54,7 @@ const Owners = (props: { readOnly: boolean }) => {
                                 <TableCell component="th" scope="row">
                                     {t(`Owner ${i + 1}`)}
                                 </TableCell>
-                                <TableCell component="th" scope="row">
+                                <TableCell scope="row">
                                     <Wallet address={o}/>
                                 </TableCell>
                                 <TableCell align="right">
