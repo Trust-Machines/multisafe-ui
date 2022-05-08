@@ -1,9 +1,9 @@
-import {useMemo} from 'react';
 import {useAtom} from 'jotai';
-import {StacksMainnet, StacksNetwork, StacksTestnet} from '@stacks/network';
+import {StacksNetwork} from '@stacks/network';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
 
 import {networkAtom} from '../store';
+import {getStacksNetwork} from '../helper';
 
 const useNetwork = (): [NETWORK, StacksNetwork, (n: NETWORK) => void] => {
     const [network, setNetwork_] = useAtom(networkAtom);
@@ -13,7 +13,7 @@ const useNetwork = (): [NETWORK, StacksNetwork, (n: NETWORK) => void] => {
         localStorage.setItem('app_network', n)
     }
 
-    const stacksNetwork = useMemo(() => network === 'mainnet' ? new StacksMainnet() : new StacksTestnet(), [network]);
+    const stacksNetwork = getStacksNetwork(network)
 
     return [network, stacksNetwork, setNetwork];
 }

@@ -1,4 +1,7 @@
 import BigNumber from 'bignumber.js';
+import {NETWORK} from '@trustmachines/multisafe-contracts';
+import {StacksNetwork} from '@stacks/network';
+import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
 
 export const formatUnits = (value: BigNumber | string, decimals: number): BigNumber => {
@@ -26,4 +29,8 @@ export const checkDecimalAmount = (input: string) => {
 
 export const checkAmount = (input: string) => {
     return RegExp(/^(\s*|\d+)$/).test(input)
+}
+
+export const getStacksNetwork = (n: NETWORK): StacksNetwork => {
+    return NETWORKS[n];
 }

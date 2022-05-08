@@ -1,21 +1,26 @@
-import {FTAsset} from '../../../../types';
-import DialogTitle from '@mui/material/DialogTitle';
-import CloseModal from '../../../../components/close-modal';
+import React, {useRef, useState} from 'react';
+import {contractPrincipalCV, noneCV, standardPrincipalCV, validateStacksAddress} from '@stacks/transactions';
 import DialogContent from '@mui/material/DialogContent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
-import React, {useRef, useState} from 'react';
+import DialogTitle from '@mui/material/DialogTitle';
+import {useConnect} from '@stacks/connect-react';
+import {DEPLOYER} from '@trustmachines/multisafe-contracts';
+
 import useTranslation from '../../../../hooks/use-translation';
 import useModal from '../../../../hooks/use-modal';
-import WalletField from '../../../../components/wallet-field';
-import {validateStacksAddress} from '@stacks/transactions';
 import useSafe from '../../../../hooks/use-safe';
+import useNetwork from '../../../../hooks/use-network';
+import WalletField from '../../../../components/wallet-field';
+import CloseModal from '../../../../components/close-modal';
 
 const AddOwner = () => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
+    const [network, stacksNetwork] = useNetwork();
+    const {doContractCall} = useConnect();
     const inputRef = useRef<HTMLInputElement>();
     const [owner, setOwner] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
@@ -45,7 +50,24 @@ const AddOwner = () => {
             return;
         }
 
+        doContractCall({
+            network: stacksNetwork,
+            contractAddress: safe.address,
+            contractName: safe.name,
+            functionName: 'submit',
+            functionArgs: [
+                contractPrincipalCV(DEPLOYER[network], 'add-owner'),
+                contractPrincipalCV(safe.address, safe.name),
+                contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+                contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+                standardPrincipalCV(owner),
+                noneCV(),
+                noneCV(),
+            ],
+            onFinish: (data) => {
 
+            }
+        }).then()
     }
 
     const dialogBody = <>

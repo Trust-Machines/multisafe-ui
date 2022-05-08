@@ -32,7 +32,7 @@ test('1 Render & Submit', () => {
     (useSafe as jest.Mock).mockReturnValue([{address: 'SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7', name: 'my-safe'}]);
     (useAddress as jest.Mock).mockReturnValue('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7');
 
-    const rendered = renderWithRouter(<DepositFt asset={assets[0]}/>);
+    const rendered = renderWithRouter(<DepositFt asset={assets["mainnet"][0]}/>);
     expect(rendered.container).toMatchSnapshot();
     fireEvent.change(screen.getByLabelText('Enter amount'), {target: {value: '1200'}});
     fireEvent.click(screen.getByText('Send'));
