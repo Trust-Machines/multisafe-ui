@@ -32,6 +32,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
         const [nonce, version, owners, minConfirmation, balances] = resp;
         const transactions = await api.getSafeTransactions(stacksNetwork, safeAddress, nonce, sender);
 
+        // build fungible token balances
         let ftBalances: SafeFtBalance[] = [
             {
                 asset: {
@@ -69,7 +70,8 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
                 .map(x => ({asset: x, balance: "0"}))
         ]
 
-        const nftBalances: SafeNFtBalance[] = getFtAssets().map(a => ({
+        // build non-fungible token balances
+        let nftBalances: SafeNFtBalance[] = getFtAssets().map(a => ({
             asset: a,
             balance: '0',
             ids: []
