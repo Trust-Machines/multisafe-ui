@@ -60,7 +60,7 @@ const Owners = (props: { readOnly: boolean }) => {
                                 <TableCell align="right">
                                     {!props.readOnly && (
                                         <IconButton onClick={deleteOwnerClicked}>
-                                            <DeleteIcon/>
+                                            <DeleteIcon fontSize="small"/>
                                         </IconButton>
                                     )}
                                 </TableCell>
