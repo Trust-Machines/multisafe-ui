@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {contractPrincipalCV, noneCV, standardPrincipalCV, validateStacksAddress} from '@stacks/transactions';
+import {contractPrincipalCV, noneCV, someCV, standardPrincipalCV, validateStacksAddress} from '@stacks/transactions';
 import DialogContent from '@mui/material/DialogContent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -60,7 +60,7 @@ const AddOwner = () => {
                 contractPrincipalCV(safe.address, safe.name),
                 contractPrincipalCV(DEPLOYER[network], 'ft-none'),
                 contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-                standardPrincipalCV(owner),
+                someCV(standardPrincipalCV(owner)),
                 noneCV(),
                 noneCV(),
             ],
