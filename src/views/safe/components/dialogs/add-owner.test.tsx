@@ -1,0 +1,62 @@
+import {fireEvent, screen} from '@testing-library/react';
+import AddOwner from './add-owner';
+import {renderWithRouter} from '../../../../helper/test-helper';
+import useSafe from '../../../../hooks/use-safe';
+import useAddress from '../../../../hooks/use-address';
+
+jest.mock('../../../../hooks/use-safe');
+jest.mock('../../../../hooks/use-address');
+jest.mock('@stacks/connect-react', () => {
+    const original = jest.requireActual('@stacks/connect-react');
+    return {
+        ...original,
+        useConnect: () => {
+            return {
+                doSTXTransfer: () => {
+
+                },
+                doContractCall: (options: any) => {
+                    options.onFinish({txId: '0x234234234'});
+
+                    return new Promise((res) => {
+                        res({})
+                    });
+                }
+            }
+        }
+    };
+});
+
+test('1 Render & Submit', () => {
+    (useSafe as jest.Mock).mockReturnValue([
+        {
+            address: 'SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7',
+            name: 'my-safe',
+            owners: ['SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7', 'SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN']
+        }
+    ]);
+    (useAddress as jest.Mock).mockReturnValue('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7');
+
+    // Render
+    const rendered = renderWithRouter(<AddOwner/>);
+    expect(rendered.container).toMatchSnapshot();
+
+    // Invalid address. Should show error message.
+    fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP3XD8'}});
+    fireEvent.click(screen.getByText('Submit'));
+    expect(rendered.container).toMatchSnapshot();
+
+    // Should clear error message on address change.
+    fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2'}});
+    expect(rendered.container).toMatchSnapshot();
+
+    // Entered address is already in owner list. Should show error message.
+    fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN'}});
+    fireEvent.click(screen.getByText('Submit'));
+    expect(rendered.container).toMatchSnapshot();
+
+    // Should show success screen.
+    fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2N7SK0W83NJSZHFH8HH31ZT3DXJG7NFE5VYT9SJ'}});
+    fireEvent.click(screen.getByText('Submit'));
+    expect(rendered.container).toMatchSnapshot();
+});

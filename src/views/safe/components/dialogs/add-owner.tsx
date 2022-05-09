@@ -50,6 +50,7 @@ const AddOwner = () => {
 
         if (!isValid || error) {
             inputRef.current?.focus();
+
             return;
         }
 
@@ -99,24 +100,22 @@ const AddOwner = () => {
 
     let dialogActions = <>
         <Button onClick={handleClose}>{t('Cancel')}</Button>
-        <Button onClick={handleSave}>{t('Add')}</Button>
+        <Button onClick={handleSave}>{t('Submit')}</Button>
     </>;
 
     if (txId) {
-        if (txId) {
-            dialogBody = <DialogContentText component="div">
-                <Box sx={{mb: '12px'}}>{t('A new transaction submitted to add the new owner.')}</Box>
-                <Box sx={{mb: '12px'}}>
-                    {t('It will be available under Transactions section in a few minutes for other owners\' approvals.')}
-                </Box>
-                <Box>
-                    <a href={makeTxUrl(txId, network)} target='_blank' rel='noreferrer'>
-                        {t('View on Blockchain Explorer')}
-                    </a>
-                </Box>
-            </DialogContentText>;
-            dialogActions = <><Button onClick={handleClose}>{t('Close')}</Button></>;
-        }
+        dialogBody = <DialogContentText component="div">
+            <Box sx={{mb: '12px'}}>{t('A new transaction submitted to add the new owner.')}</Box>
+            <Box sx={{mb: '12px'}}>
+                {t('It will be available under Transactions section in a few minutes for other owners\' approvals.')}
+            </Box>
+            <Box>
+                <a href={makeTxUrl(txId, network)} target='_blank' rel='noreferrer'>
+                    {t('View on Blockchain Explorer')}
+                </a>
+            </Box>
+        </DialogContentText>;
+        dialogActions = <><Button onClick={handleClose}>{t('Close')}</Button></>;
     }
 
     return (
