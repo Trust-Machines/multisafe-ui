@@ -5,6 +5,7 @@ import {FTAsset} from '../types';
 export interface SafeTransaction {
     id: number,
     executor: string,
+    threshold: number,
     confirmations: string[],
     confirmed: boolean,
     paramP: string,

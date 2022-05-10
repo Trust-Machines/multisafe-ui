@@ -88,13 +88,15 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
     const args = [listCV([...txIds.map(x => uintCV(x))])];
     return callReadOnly(network, `${safe}.get-transactions`, args, senderAddress).then(r => {
         return cvToJSON(r).value.map((x: any, i: number) => {
+
             return {
                 id: txIds[i],
                 confirmations: x.value.confirmations.value.map((c: any) => c.value),
                 confirmed: x.value.confirmed.value,
                 executor: x.value.executor.value,
-                paramP: x.value['param-p'].value,
-                paramU: x.value['param-u'].value
+                threshold: Number(x.value.threshold.value),
+                paramP: x.value['param-p'].value ? x.value['param-p'].value.value : null,
+                paramU: x.value['param-u'].value ? x.value['param-u'].value.value : null
             }
         });
     });
