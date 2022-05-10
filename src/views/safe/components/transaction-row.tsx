@@ -2,7 +2,9 @@ import useSafe from '../../../hooks/use-safe';
 import useTranslation from '../../../hooks/use-translation';
 import ThemedBox from '../../../components/themed-box';
 import {SafeTransaction} from '../../../store/safe';
-import {Box} from '@mui/material';
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import Chip from '@mui/material/Chip';
 import {grey} from '@mui/material/colors';
 import {detectTransactionType} from '../../../helper';
 import Wallet from '../../../components/wallet';
@@ -50,8 +52,8 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
             width: '40px',
             borderTopLeftRadius: '6px',
             borderBottomLeftRadius: '6px',
-            background: grey[100],
-            color: grey[400]
+            background: grey[200],
+            color: grey[500]
         }}>
             {`#${transaction.id}`}
         </Box>
@@ -64,26 +66,35 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
             <Box sx={{mb: '18px'}}>
                 <TransactionInfo transaction={transaction}/>
             </Box>
-            <Box>
-                <Box component="span" sx={{
+            <Box sx={{display: 'flex', alignItems: 'center', height: '24px'}}>
+                <Box component="a" href="#" sx={{
+                    textDecoration: 'none',
                     borderBottom: `1px dotted ${grey[500]}`,
                     cursor: 'pointer',
                     color: grey[700]
-                }} onClick={() => {
+                }} onClick={(e: any) => {
+                    e.preventDefault();
                     setShowConfirmations(!showConfirmations);
+
                 }}>
                     {t('{{confirmations}}/{{threshold}} confirmations', {
                         confirmations: transaction.confirmations.length,
                         threshold: transaction.threshold
                     })}
                 </Box>
-                {showConfirmations &&
-                <Box sx={{mt: '10px', fontSize: '96%'}}>
-                    {transaction.confirmations.map(x => {
-                        return <Box sx={{mb: '4px'}}>{t('Owner {{owner}}', {owner: safe.owners.indexOf(x) + 1})}</Box>
-                    })}
-                </Box>
-                }
+                {showConfirmations && (
+                    <>
+                        {transaction.confirmations.map(x => {
+                            return <Box component="span" sx={{m: '0 6px'}} key={x}>
+                                <Tooltip title={x} placement="bottom">
+                                    <Chip sx={{m: '0 6px'}}
+                                          label={t('Owner {{owner}}', {owner: safe.owners.indexOf(x) + 1})}
+                                          size="small"/>
+                                </Tooltip>
+                            </Box>
+                        })}
+                    </>
+                )}
             </Box>
         </Box>
     </ThemedBox>
