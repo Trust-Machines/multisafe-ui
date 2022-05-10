@@ -5,10 +5,14 @@ import {SafeTransaction} from '../../../store/safe';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Chip from '@mui/material/Chip';
-import {grey} from '@mui/material/colors';
+import {grey, green} from '@mui/material/colors';
+import CheckIcon from '@mui/icons-material/Check';
+
 import {detectTransactionType} from '../../../helper';
 import Wallet from '../../../components/wallet';
 import {useState} from 'react';
+import useAddress from '../../../hooks/use-address';
+import {Button} from '@mui/material';
 
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
@@ -33,11 +37,42 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     }
 }
 
+const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
+    const [t] = useTranslation();
+    const address = useAddress();
+    const [safe,] = useSafe();
+    const {transaction, readOnly} = props;
+
+    const boxSx = {mt: '18px'};
+
+    if (transaction.confirmed || !readOnly) {
+        if (transaction.confirmed) {
+            return <Box sx={boxSx}>
+                <Chip size="small" icon={<CheckIcon/>} label={t('Confirmed')} color="primary"/>
+            </Box>
+        }
+
+        if (!readOnly) {
+            if (transaction.confirmations.includes(address!)) {
+                return <Box sx={boxSx}>
+                    <Button variant="contained">{t('Revoke')}</Button>
+                </Box>
+            }
+
+            return <Box sx={boxSx}>
+                <Button variant="contained">{t('Approve')}</Button>
+            </Box>
+        }
+    }
+
+    return null;
+}
+
 const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
     const [t] = useTranslation();
     const [safe,] = useSafe();
     const [showConfirmations, setShowConfirmations] = useState<boolean>(false);
-    const {transaction} = props;
+    const {transaction, readOnly} = props;
 
     return <ThemedBox sx={{
         display: 'flex',
@@ -61,7 +96,7 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
             display: 'flex',
             flexDirection: 'column',
             flexGrow: 1,
-            p: '10px'
+            p: '10px 14px'
         }}>
             <Box sx={{mb: '18px'}}>
                 <TransactionInfo transaction={transaction}/>
@@ -75,7 +110,6 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
                 }} onClick={(e: any) => {
                     e.preventDefault();
                     setShowConfirmations(!showConfirmations);
-
                 }}>
                     {t('{{confirmations}}/{{threshold}} confirmations', {
                         confirmations: transaction.confirmations.length,
@@ -96,6 +130,7 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
                     </>
                 )}
             </Box>
+            <TransactionActions transaction={transaction} readOnly={readOnly}/>
         </Box>
     </ThemedBox>
 }
