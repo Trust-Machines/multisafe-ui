@@ -32,6 +32,11 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
                 <Box sx={titleSx}>{t('Add new owner')}</Box>
                 <Wallet address={transaction.paramP}/>
             </>
+        case 'set-threshold':
+            return <>
+                <Box sx={titleSx}>{t('Set confirmation threshold as {{u}}', {u:transaction.paramU})}</Box>
+
+            </>
         default:
             return <></>
     }
@@ -76,7 +81,8 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
 
     return <ThemedBox sx={{
         display: 'flex',
-        p: 0
+        p: 0,
+        mb: '20px'
     }}>
         <Box sx={{
             display: 'flex',
