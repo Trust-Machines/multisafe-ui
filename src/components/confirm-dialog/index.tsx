@@ -9,7 +9,7 @@ import useTranslation from '../../hooks/use-translation';
 import useModal from '../../hooks/use-modal';
 import CloseModal from '../close-modal';
 
-const ConfirmDialog = () => {
+const ConfirmDialog = (props: {onConfirm: () => void}) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
 
@@ -18,6 +18,7 @@ const ConfirmDialog = () => {
     };
 
     const handleConfirm = () => {
+        props.onConfirm();
         showModal(null);
     }
 

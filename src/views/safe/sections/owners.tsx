@@ -18,18 +18,49 @@ import SectionHeader from '../components/section-header';
 import AddOwner from '../components/dialogs/add-owner';
 import ConfirmDialog from '../../../components/confirm-dialog';
 import Wallet from '../../../components/wallet';
+import {contractPrincipalCV, noneCV, someCV, standardPrincipalCV, uintCV} from '@stacks/transactions';
+import {DEPLOYER} from '@trustmachines/multisafe-contracts';
+import RemoveOwner from '../components/dialogs/remove-owner';
+import React from 'react';
+import {useConnect} from '@stacks/connect-react';
+import useNetwork from '../../../hooks/use-network';
 
 const Owners = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
+    const {doContractCall} = useConnect();
+    const [network, stacksNetwork] = useNetwork();
 
     const addOwnerClicked = () => {
         showModal(<AddOwner/>);
     }
 
-    const deleteOwnerClicked = () => {
-        showModal(<ConfirmDialog/>);
+    const deleteOwnerClicked = (owner: string) => {
+        showModal(<ConfirmDialog onConfirm={() => {
+            handleSubmit(owner);
+        }}/>);
+    }
+
+    const handleSubmit = (owner: string) => {
+        doContractCall({
+            network: stacksNetwork,
+            contractAddress: safe.address,
+            contractName: safe.name,
+            functionName: 'submit',
+            functionArgs: [
+                contractPrincipalCV(DEPLOYER[network], 'remove-owner'),
+                contractPrincipalCV(safe.address, safe.name),
+                contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+                contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+                someCV(standardPrincipalCV(owner)),
+                noneCV(),
+                noneCV(),
+            ],
+            onFinish: (data) => {
+                showModal(<RemoveOwner txId={data.txId} owner={owner}/>);
+            }
+        }).then()
     }
 
     return <>
@@ -59,7 +90,9 @@ const Owners = (props: { readOnly: boolean }) => {
                                 </TableCell>
                                 <TableCell align="right">
                                     {!props.readOnly && (
-                                        <IconButton onClick={deleteOwnerClicked}>
+                                        <IconButton onClick={() => {
+                                            deleteOwnerClicked(o)
+                                        }}>
                                             <DeleteIcon fontSize="small"/>
                                         </IconButton>
                                     )}
