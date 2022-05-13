@@ -37,6 +37,11 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
                 <Box sx={titleSx}>{t('Set confirmation threshold as {{u}}', {u:transaction.paramU})}</Box>
 
             </>
+        case 'remove-owner':
+            return <>
+                <Box sx={titleSx}>{t('Remove owner')}</Box>
+                <Wallet address={transaction.paramP}/>
+            </>
         default:
             return <></>
     }
