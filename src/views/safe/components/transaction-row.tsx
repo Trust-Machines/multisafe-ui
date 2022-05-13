@@ -80,6 +80,21 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
         }).then()
     }
 
+    const revoke = () => {
+        doContractCall({
+            network: stacksNetwork,
+            contractAddress: safe.address,
+            contractName: safe.name,
+            functionName: 'revoke',
+            functionArgs: [
+                uintCV(transaction.id)
+            ],
+            onFinish: (data) => {
+                // TODO: Show a modal
+            }
+        }).then()
+    }
+
     if (transaction.confirmed || !readOnly) {
         if (transaction.confirmed) {
             return <Box sx={boxSx}>
@@ -90,7 +105,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
         if (!readOnly) {
             if (transaction.confirmations.includes(address!)) {
                 return <Box sx={boxSx}>
-                    <Button variant="contained">{t('Revoke')}</Button>
+                    <Button variant="contained" onClick={revoke}>{t('Revoke')}</Button>
                 </Box>
             }
 
