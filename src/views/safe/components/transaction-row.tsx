@@ -13,6 +13,10 @@ import Wallet from '../../../components/wallet';
 import {useState} from 'react';
 import useAddress from '../../../hooks/use-address';
 import {Button} from '@mui/material';
+import {contractPrincipalCV, uintCV} from '@stacks/transactions';
+import useNetwork from '../../../hooks/use-network';
+import {useConnect} from '@stacks/connect-react';
+import {contractPrincipalCVFromString} from '../../../helper';
 
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
@@ -34,7 +38,7 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
             </>
         case 'set-threshold':
             return <>
-                <Box sx={titleSx}>{t('Set confirmation threshold as {{u}}', {u:transaction.paramU})}</Box>
+                <Box sx={titleSx}>{t('Set confirmation threshold as {{u}}', {u: transaction.paramU})}</Box>
 
             </>
         case 'remove-owner':
@@ -50,10 +54,31 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
 const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
     const [t] = useTranslation();
     const address = useAddress();
+    const [, stacksNetwork] = useNetwork();
+    const {doContractCall} = useConnect();
     const [safe,] = useSafe();
     const {transaction, readOnly} = props;
 
     const boxSx = {mt: '18px'};
+
+    const confirm = () => {
+        doContractCall({
+            network: stacksNetwork,
+            contractAddress: safe.address,
+            contractName: safe.name,
+            functionName: 'confirm',
+            functionArgs: [
+                uintCV(transaction.id),
+                contractPrincipalCVFromString(transaction.executor),
+                contractPrincipalCV(safe.address, safe.name),
+                contractPrincipalCVFromString(transaction.paramFt),
+                contractPrincipalCVFromString(transaction.paramNft),
+            ],
+            onFinish: (data) => {
+                // TODO: Show a modal
+            }
+        }).then()
+    }
 
     if (transaction.confirmed || !readOnly) {
         if (transaction.confirmed) {
@@ -70,7 +95,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
             }
 
             return <Box sx={boxSx}>
-                <Button variant="contained">{t('Approve')}</Button>
+                <Button variant="contained" onClick={confirm}>{t('Confirm')}</Button>
             </Box>
         }
     }

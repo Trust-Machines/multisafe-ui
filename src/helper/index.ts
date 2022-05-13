@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import {DEPLOYERS, NETWORK} from '@trustmachines/multisafe-contracts';
 import {StacksNetwork} from '@stacks/network';
+import {contractPrincipalCV} from '@stacks/transactions';
 import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
 import {SafeTransaction} from '../store/safe';
@@ -65,4 +66,9 @@ export const detectTransactionType = (transaction: SafeTransaction): Transaction
     }
 
     return null;
+}
+
+export const contractPrincipalCVFromString = (s: string) => {
+    const [a, b] = s.split(".");
+    return contractPrincipalCV(a, b);
 }

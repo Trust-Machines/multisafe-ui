@@ -8,6 +8,8 @@ export interface SafeTransaction {
     threshold: number,
     confirmations: string[],
     confirmed: boolean,
+    paramFt: string,
+    paramNft: string,
     paramP: string,
     paramU: number
 }

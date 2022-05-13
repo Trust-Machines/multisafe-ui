@@ -95,6 +95,8 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
                 confirmed: x.value.confirmed.value,
                 executor: x.value.executor.value,
                 threshold: Number(x.value.threshold.value),
+                paramFt: x.value['param-ft'].value,
+                paramNft: x.value['param-nft'].value,
                 paramP: x.value['param-p'].value ? x.value['param-p'].value.value : null,
                 paramU: x.value['param-u'].value ? x.value['param-u'].value.value : null
             }
