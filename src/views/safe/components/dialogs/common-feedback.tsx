@@ -12,21 +12,23 @@ import useNetwork from '../../../../hooks/use-network';
 import CloseModal from '../../../../components/close-modal';
 import {makeTxUrl} from '../../../../api/helper';
 
-const RemoveOwner = (props: { txId: string, owner: string }) => {
+const CommonTxFeedbackDialog = (props: { txId: string, title: React.ReactNode, description: React.ReactNode, requiresConfirmation?: boolean, }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const [network] = useNetwork();
-    const {txId, owner} = props;
+    const {txId, title, description, requiresConfirmation} = props;
 
     const handleClose = () => {
         showModal(null);
     };
 
     const dialogBody = <DialogContentText component="div">
-        <Box sx={{mb: '12px'}}>{t('A new transaction submitted to delete owner {{o}}', {o: owner})}</Box>
-        <Box sx={{mb: '12px'}}>
-            {t('It will be available under Transactions section in a few minutes for other owners\' approvals.')}
-        </Box>
+        <Box sx={{mb: '12px'}}>{description}</Box>
+        {requiresConfirmation && (
+            <Box sx={{mb: '12px'}}>
+                {t('It will be available under Transactions section in a few minutes for other owners\' approvals.')}
+            </Box>
+        )}
         <Box>
             <a href={makeTxUrl(txId, network)} target='_blank' rel='noreferrer'>
                 {t('View on Blockchain Explorer')}
@@ -37,7 +39,7 @@ const RemoveOwner = (props: { txId: string, owner: string }) => {
 
     return (
         <>
-            <DialogTitle>{t(`Delete Owner`)}
+            <DialogTitle>{title}
                 <CloseModal onClick={handleClose}/>
             </DialogTitle>
             <DialogContent>
@@ -48,4 +50,4 @@ const RemoveOwner = (props: { txId: string, owner: string }) => {
     );
 }
 
-export default RemoveOwner;
+export default CommonTxFeedbackDialog;

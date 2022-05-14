@@ -1,3 +1,4 @@
+import React from 'react';
 import GroupsIcon from '@mui/icons-material/Groups';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,20 +11,19 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {contractPrincipalCV, noneCV, someCV, standardPrincipalCV} from '@stacks/transactions';
+import {useConnect} from '@stacks/connect-react';
+import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 
 import useTranslation from '../../../hooks/use-translation';
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
+import useNetwork from '../../../hooks/use-network';
 import SectionHeader from '../components/section-header';
 import AddOwner from '../components/dialogs/add-owner';
 import ConfirmDialog from '../../../components/confirm-dialog';
+import CommonTxFeedbackDialog from '../components/dialogs/common-feedback';
 import Wallet from '../../../components/wallet';
-import {contractPrincipalCV, noneCV, someCV, standardPrincipalCV, uintCV} from '@stacks/transactions';
-import {DEPLOYER} from '@trustmachines/multisafe-contracts';
-import RemoveOwner from '../components/dialogs/remove-owner';
-import React from 'react';
-import {useConnect} from '@stacks/connect-react';
-import useNetwork from '../../../hooks/use-network';
 
 const Owners = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
@@ -38,11 +38,11 @@ const Owners = (props: { readOnly: boolean }) => {
 
     const deleteOwnerClicked = (owner: string) => {
         showModal(<ConfirmDialog onConfirm={() => {
-            handleSubmit(owner);
+            handleDelete(owner);
         }}/>);
     }
 
-    const handleSubmit = (owner: string) => {
+    const handleDelete = (owner: string) => {
         doContractCall({
             network: stacksNetwork,
             contractAddress: safe.address,
@@ -58,7 +58,12 @@ const Owners = (props: { readOnly: boolean }) => {
                 noneCV(),
             ],
             onFinish: (data) => {
-                showModal(<RemoveOwner txId={data.txId} owner={owner}/>);
+                showModal(<CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={t('Delete Owner')}
+                    description={t('A new transaction submitted to remove owner {{o}}', {o: owner})}
+                    requiresConfirmation={true}
+                />);
             }
         }).then()
     }

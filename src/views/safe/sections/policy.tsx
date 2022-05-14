@@ -10,12 +10,11 @@ import {useConnect} from '@stacks/connect-react';
 import {contractPrincipalCV, noneCV, someCV, uintCV} from '@stacks/transactions';
 
 import useTranslation from '../../../hooks/use-translation';
-
 import useNetwork from '../../../hooks/use-network';
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
 import SectionHeader from '../components/section-header';
-import SetThreshold from '../components/dialogs/set-threshold';
+import CommonTxFeedbackDialog from '../components/dialogs/common-feedback';
 
 const Policy = (props: { readOnly: boolean }) => {
     const {readOnly} = props;
@@ -47,7 +46,12 @@ const Policy = (props: { readOnly: boolean }) => {
                 noneCV(),
             ],
             onFinish: (data) => {
-                showModal(<SetThreshold txId={data.txId}/>);
+                showModal(<CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={t('Confirmation Threshold')}
+                    description={t('A new transaction submitted to update confirmation threshold.')}
+                    requiresConfirmation
+                />);
             }
         }).then()
     }
