@@ -15,6 +15,7 @@ import NFTs from './sections/nfts';
 import Transactions from './sections/transactions';
 import Owners from './sections/owners';
 import Policy from './sections/policy';
+import PendingTxs from './pending-txs';
 
 
 const SafeContent = (props: { section: string }) => {
@@ -75,6 +76,8 @@ const Safe = (_: RouteComponentProps) => {
                 <SafeContent section={section}/>
             </Box>
         </AppContent>
+
+        <PendingTxs />
     </>
 }
 

@@ -4,6 +4,21 @@ import {SafeTransaction} from '../store/safe';
 import ftList from '../constants/ft-list';
 import {FTAsset} from '../types';
 
+export const getAccountMemPool = (network: StacksNetwork, account: string): Promise<{
+    tx_id: string,
+    contract_call?: {
+        contract_id: string,
+        function_name: string,
+        function_args: {
+            name: string
+            repr: string
+            type: string
+        } []
+    }
+}[]> => {
+    return fetch(`${network.coreApiUrl}/extended/v1/tx/mempool?sender_address=${account}`).then(r => r.json()).then(r => r.results);
+}
+
 export const getBnsName = (network: StacksNetwork, address: string): Promise<string | null> => {
     return fetch(`${network.coreApiUrl}/v1/addresses/stacks/${address}`).then(r => r.json()).then(r => {
         if (r.names.length > 0) {

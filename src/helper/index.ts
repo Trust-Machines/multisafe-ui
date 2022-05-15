@@ -38,29 +38,29 @@ export const getStacksNetwork = (n: NETWORK): StacksNetwork => {
     return NETWORKS[n];
 }
 
-export const detectTransactionType = (transaction: SafeTransaction): TransactionType => {
+export const detectTransactionType = (executor: string): TransactionType => {
     for (const d of DEPLOYERS) {
-        if (`${d}.add-owner` === transaction.executor) {
+        if (`${d}.add-owner` === executor) {
             return 'add-owner';
         }
 
-        if (`${d}.remove-owner` === transaction.executor) {
+        if (`${d}.remove-owner` === executor) {
             return 'remove-owner';
         }
 
-        if (`${d}.set-threshold` === transaction.executor) {
+        if (`${d}.set-threshold` === executor) {
             return 'set-threshold';
         }
 
-        if (`${d}.transfer-stx` === transaction.executor) {
+        if (`${d}.transfer-stx` === executor) {
             return 'transfer-stx';
         }
 
-        if (`${d}.transfer-sip-009` === transaction.executor) {
+        if (`${d}.transfer-sip-009` === executor) {
             return 'transfer-sip-009';
         }
 
-        if (`${d}.transfer-sip-010` === transaction.executor) {
+        if (`${d}.transfer-sip-010` === executor) {
             return 'transfer-sip-010';
         }
     }

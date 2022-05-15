@@ -22,7 +22,7 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
     const {transaction} = props;
 
-    const txType = detectTransactionType(transaction);
+    const txType = detectTransactionType(transaction.executor);
 
     const titleSx = {
         fontWeight: 'bold',
