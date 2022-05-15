@@ -5,13 +5,13 @@ import {grey} from '@mui/material/colors';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import useAddress from '../../hooks/use-address';
-import usePendingTxs from '../../hooks/use-pending-txs';
-import useNetwork from '../../hooks/use-network';
-import useTranslation from '../../hooks/use-translation';
-import {PendingTx} from '../../store/pending-txs';
-import {makeTxUrl} from '../../api/helper';
-import {detectTransactionType} from '../../helper';
+import useAddress from '../../../hooks/use-address';
+import usePendingTxs from '../../../hooks/use-pending-txs';
+import useNetwork from '../../../hooks/use-network';
+import useTranslation from '../../../hooks/use-translation';
+import {PendingTx} from '../../../store/pending-txs';
+import {makeTxUrl} from '../../../api/helper';
+import {detectTransactionType} from '../../../helper';
 
 const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
     const {tx} = props;

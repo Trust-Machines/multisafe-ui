@@ -10,12 +10,12 @@ import useAddress from '../../hooks/use-address';
 import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
+import PendingTxs from './components/pending-txs';
 import Tokens from './sections/tokens';
 import NFTs from './sections/nfts';
 import Transactions from './sections/transactions';
 import Owners from './sections/owners';
 import Policy from './sections/policy';
-import PendingTxs from './pending-txs';
 
 
 const SafeContent = (props: { section: string }) => {
