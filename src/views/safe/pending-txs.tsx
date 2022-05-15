@@ -1,17 +1,19 @@
-import useAddress from '../../hooks/use-address';
 import {useEffect} from 'react';
-import usePendingTxs from '../../hooks/use-pending-txs';
-import {Box} from '@mui/material';
+import Box from '@mui/material/Box';
+import {SxProps} from '@mui/system';
 import {grey} from '@mui/material/colors';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CircularProgress from '@mui/material/CircularProgress';
+
+import useAddress from '../../hooks/use-address';
+import usePendingTxs from '../../hooks/use-pending-txs';
+import useNetwork from '../../hooks/use-network';
 import useTranslation from '../../hooks/use-translation';
 import {PendingTx} from '../../store/pending-txs';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {makeTxUrl} from '../../api/helper';
-import useNetwork from '../../hooks/use-network';
 import {detectTransactionType} from '../../helper';
 
-const PendingTxRow = (props: { tx: PendingTx }) => {
+const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
     const {tx} = props;
     const [t] = useTranslation();
     const [network] = useNetwork();
@@ -54,6 +56,7 @@ const PendingTxRow = (props: { tx: PendingTx }) => {
         padding: '6px',
         display: 'flex',
         alignItems: 'center',
+        ...props.sx
     }}>
         <>{msg}</>
         <Box component="a"
@@ -83,7 +86,6 @@ const PendingTxs = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     if (!address || txs.length === 0) {
         return null;
     }
@@ -92,7 +94,7 @@ const PendingTxs = () => {
 
     return <Box sx={{
         position: 'absolute',
-        width: '260px',
+        width: '270px',
         height: '30px',
         color: grey[200],
         bottom: '10px',
@@ -109,7 +111,9 @@ const PendingTxs = () => {
             borderRadius: '6px',
             p: '0 6px',
         }}>
-            {txs.map(t => <PendingTxRow tx={t} key={t.txHash}/>)}
+            {txs.map((t, i) => <PendingTxRow tx={t} key={t.txHash} sx={{
+                borderBottom: i !== txs.length - 1 ? `1px dotted ${grey[400]}` : null,
+            }}/>)}
         </Box>
         <Box sx={{
             fontSize: '90%',
