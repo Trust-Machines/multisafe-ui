@@ -1,19 +1,21 @@
-import useSafe from '../../../hooks/use-safe';
-import useTranslation from '../../../hooks/use-translation';
-import ThemedBox from '../../../components/themed-box';
-import {SafeTransaction} from '../../../store/safe';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Chip from '@mui/material/Chip';
 import {grey} from '@mui/material/colors';
 import CheckIcon from '@mui/icons-material/Check';
-
-import {detectTransactionType} from '../../../helper';
-import Wallet from '../../../components/wallet';
-import {useState} from 'react';
-import useAddress from '../../../hooks/use-address';
 import {Button} from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import useAddress from '../../../hooks/use-address';
 import useSafeCalls from '../../../hooks/use-safe-call';
+import usePendingTxs from '../../../hooks/use-pending-txs';
+import useSafe from '../../../hooks/use-safe';
+import useTranslation from '../../../hooks/use-translation';
+import ThemedBox from '../../../components/themed-box';
+import Wallet from '../../../components/wallet';
+import {detectTransactionType} from '../../../helper';
+import {SafeTransaction} from '../../../store/safe';
 
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
@@ -52,9 +54,12 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
     const [t] = useTranslation();
     const address = useAddress();
     const {safeConfirmTxCall, safeRevokeTxCall} = useSafeCalls();
+    const [pendingTxs] = usePendingTxs();
     const {transaction, readOnly} = props;
 
     const boxSx = {mt: '18px'};
+    const progressIcon = <CircularProgress size={16} color="info" sx={{mr: '8px'}}/>;
+
 
     const confirm = () => {
         safeConfirmTxCall(transaction).then(data => {
@@ -77,13 +82,20 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
 
         if (!readOnly) {
             if (transaction.confirmations.includes(address!)) {
+                const revoking = pendingTxs.find(x => x.fn === 'revoke' && x.txId === transaction.id) !== undefined;
+
                 return <Box sx={boxSx}>
-                    <Button variant="contained" onClick={revoke}>{t('Revoke')}</Button>
+                    <Button variant="contained" disabled={revoking} onClick={revoke}>
+                        {revoking && progressIcon}{t('Revoke')}
+                    </Button>
                 </Box>
             }
 
+            const confirming = pendingTxs.find(x => x.fn === 'confirm' && x.txId === transaction.id) !== undefined;
             return <Box sx={boxSx}>
-                <Button variant="contained" onClick={confirm}>{t('Confirm')}</Button>
+                <Button variant="contained" disabled={confirming} onClick={confirm}>
+                    {confirming && progressIcon}{t('Confirm')}
+                </Button>
             </Box>
         }
     }
