@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import {SxProps} from '@mui/system';
 import {grey} from '@mui/material/colors';
@@ -79,6 +79,7 @@ const PendingTxs = () => {
     const address = useAddress();
     const [txs, syncTxs] = usePendingTxs();
     const [t] = useTranslation();
+    const [detail, setDetail] = useState<boolean>(false);
 
     useEffect(() => {
         syncTxs();
@@ -99,7 +100,7 @@ const PendingTxs = () => {
     const msg = txs.length === 1 ? t('1 pending blockchain interaction') : t('{{n}} pending blockchain interactions', {n: txs.length});
 
     return <Box sx={{
-        position: 'absolute',
+        position: 'fixed',
         width: '270px',
         height: '30px',
         color: grey[200],
@@ -108,32 +109,38 @@ const PendingTxs = () => {
         zIndex: '2',
         userSelect: 'none'
     }}>
-        <Box sx={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: '36px',
-            background: grey[800],
-            borderRadius: '6px',
-            p: '0 6px',
-        }}>
-            {txs.map((t, i) => <PendingTxRow tx={t} key={t.txHash} sx={{
-                borderBottom: i !== txs.length - 1 ? `1px dotted ${grey[400]}` : null,
-            }}/>)}
-        </Box>
-        <Box sx={{
-            fontSize: '90%',
-            display: 'flex',
-            alignItems: 'center',
-            cursor: 'pointer',
-            height: '100%',
-            p: '0 6px',
-            borderRadius: '6px',
-            background: grey[800],
-            ':hover': {
-                background: grey[700],
-            }
-        }}>
+        {detail && (
+            <Box sx={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: '36px',
+                background: grey[800],
+                borderRadius: '6px',
+                p: '0 6px',
+            }}>
+                {txs.map((t, i) => <PendingTxRow tx={t} key={t.txHash} sx={{
+                    borderBottom: i !== txs.length - 1 ? `1px dotted ${grey[400]}` : null,
+                }}/>)}
+            </Box>
+        )}
+        <Box
+            onClick={() => {
+                setDetail(!detail);
+            }}
+            sx={{
+                fontSize: '90%',
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+                height: '100%',
+                p: '0 6px',
+                borderRadius: '6px',
+                background: grey[800],
+                ':hover': {
+                    background: grey[700],
+                }
+            }}>
             <CircularProgress size={16} color="info" sx={{mr: '8px'}}/> {msg}
         </Box>
     </Box>;
