@@ -11,14 +11,11 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {contractPrincipalCV, noneCV, someCV, standardPrincipalCV} from '@stacks/transactions';
-import {useConnect} from '@stacks/connect-react';
-import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 
 import useTranslation from '../../../hooks/use-translation';
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
-import useNetwork from '../../../hooks/use-network';
+import useSafeCalls from '../../../hooks/use-safe-call';
 import SectionHeader from '../components/section-header';
 import AddOwner from '../components/dialogs/add-owner';
 import ConfirmDialog from '../../../components/confirm-dialog';
@@ -29,8 +26,7 @@ const Owners = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const {doContractCall} = useConnect();
-    const [network, stacksNetwork] = useNetwork();
+    const [, safeRemoveOwnerCall] = useSafeCalls();
 
     const addOwnerClicked = () => {
         showModal(<AddOwner/>);
@@ -43,29 +39,14 @@ const Owners = (props: { readOnly: boolean }) => {
     }
 
     const handleDelete = (owner: string) => {
-        doContractCall({
-            network: stacksNetwork,
-            contractAddress: safe.address,
-            contractName: safe.name,
-            functionName: 'submit',
-            functionArgs: [
-                contractPrincipalCV(DEPLOYER[network], 'remove-owner'),
-                contractPrincipalCV(safe.address, safe.name),
-                contractPrincipalCV(DEPLOYER[network], 'ft-none'),
-                contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-                someCV(standardPrincipalCV(owner)),
-                noneCV(),
-                noneCV(),
-            ],
-            onFinish: (data) => {
-                showModal(<CommonTxFeedbackDialog
-                    txId={data.txId}
-                    title={t('Delete Owner')}
-                    description={t('A new transaction submitted to remove owner {{o}}', {o: owner})}
-                    requiresConfirmation={true}
-                />);
-            }
-        }).then()
+        safeRemoveOwnerCall(owner).then(data => {
+            showModal(<CommonTxFeedbackDialog
+                txId={data.txId}
+                title={t('Delete Owner')}
+                description={t('A new transaction submitted to remove owner {{o}}', {o: owner})}
+                requiresConfirmation={true}
+            />);
+        })
     }
 
     return <>

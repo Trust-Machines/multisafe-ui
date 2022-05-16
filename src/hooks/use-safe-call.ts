@@ -5,7 +5,7 @@ import useNetwork from './use-network';
 import useSafe from './use-safe';
 import usePendingTxs from './use-pending-txs';
 
-const useSafeCalls = (): [(owner: string) => Promise<FinishedTxData>] => {
+const useSafeCalls = (): [(owner: string) => Promise<FinishedTxData>, (owner: string) => Promise<FinishedTxData>] => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
     const [safe,] = useSafe();
@@ -35,7 +35,17 @@ const useSafeCalls = (): [(owner: string) => Promise<FinishedTxData>] => {
         noneCV(),
     ])
 
-    return [safeAddOwnerCall];
+    const safeRemoveOwnerCall  = (owner: string) => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'remove-owner'),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+        contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+        someCV(standardPrincipalCV(owner)),
+        noneCV(),
+        noneCV(),
+    ])
+
+    return [safeAddOwnerCall, safeRemoveOwnerCall];
 }
 
 export default useSafeCalls;
