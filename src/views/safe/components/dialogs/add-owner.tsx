@@ -19,7 +19,7 @@ const AddOwner = () => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
 
-    const [addOwner,] = useSafeCalls()
+    const {safeAddOwnerCall} = useSafeCalls()
     const inputRef = useRef<HTMLInputElement>();
     const [owner, setOwner] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
@@ -49,7 +49,7 @@ const AddOwner = () => {
             return;
         }
 
-        addOwner(owner).then((data) => {
+        safeAddOwnerCall(owner).then((data) => {
             showModal(<CommonTxFeedbackDialog txId={data.txId} title={t(`Add Owner`)} requiresConfirmation
                                               description={t('A new transaction submitted to add the new owner.')}/>);
         });

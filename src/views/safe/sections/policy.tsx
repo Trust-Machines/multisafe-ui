@@ -5,14 +5,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
-import {DEPLOYER} from '@trustmachines/multisafe-contracts';
-import {useConnect} from '@stacks/connect-react';
-import {contractPrincipalCV, noneCV, someCV, uintCV} from '@stacks/transactions';
 
 import useTranslation from '../../../hooks/use-translation';
-import useNetwork from '../../../hooks/use-network';
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
+import useSafeCalls from '../../../hooks/use-safe-call';
 import SectionHeader from '../components/section-header';
 import CommonTxFeedbackDialog from '../components/dialogs/common-feedback';
 
@@ -21,9 +18,8 @@ const Policy = (props: { readOnly: boolean }) => {
 
     const [safe,] = useSafe();
     const [t] = useTranslation();
-    const [network, stacksNetwork] = useNetwork();
-    const [, showModal] = useModal()
-    const {doContractCall} = useConnect();
+    const [, showModal] = useModal();
+    const {safeSetThresholdCall} = useSafeCalls();
     const [threshold, setThreshold] = useState<number>(safe.threshold);
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -31,29 +27,14 @@ const Policy = (props: { readOnly: boolean }) => {
     };
 
     const handleSubmit = () => {
-        doContractCall({
-            network: stacksNetwork,
-            contractAddress: safe.address,
-            contractName: safe.name,
-            functionName: 'submit',
-            functionArgs: [
-                contractPrincipalCV(DEPLOYER[network], 'set-threshold'),
-                contractPrincipalCV(safe.address, safe.name),
-                contractPrincipalCV(DEPLOYER[network], 'ft-none'),
-                contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-                noneCV(),
-                someCV(uintCV(threshold)),
-                noneCV(),
-            ],
-            onFinish: (data) => {
-                showModal(<CommonTxFeedbackDialog
-                    txId={data.txId}
-                    title={t('Confirmation Threshold')}
-                    description={t('A new transaction submitted to update confirmation threshold.')}
-                    requiresConfirmation
-                />);
-            }
-        }).then()
+        safeSetThresholdCall(threshold).then(data => {
+            showModal(<CommonTxFeedbackDialog
+                txId={data.txId}
+                title={t('Confirmation Threshold')}
+                description={t('A new transaction submitted to update confirmation threshold.')}
+                requiresConfirmation
+            />);
+        });
     }
 
     const options = [...Array(safe.owners.length).keys()].map(x => x + 1);

@@ -26,7 +26,7 @@ const Owners = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const [, safeRemoveOwnerCall] = useSafeCalls();
+    const {safeRemoveOwnerCall} = useSafeCalls();
 
     const addOwnerClicked = () => {
         showModal(<AddOwner/>);
