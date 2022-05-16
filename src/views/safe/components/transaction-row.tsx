@@ -5,7 +5,7 @@ import {SafeTransaction} from '../../../store/safe';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Chip from '@mui/material/Chip';
-import {grey, green} from '@mui/material/colors';
+import {grey} from '@mui/material/colors';
 import CheckIcon from '@mui/icons-material/Check';
 
 import {detectTransactionType} from '../../../helper';
@@ -13,10 +13,7 @@ import Wallet from '../../../components/wallet';
 import {useState} from 'react';
 import useAddress from '../../../hooks/use-address';
 import {Button} from '@mui/material';
-import {contractPrincipalCV, uintCV} from '@stacks/transactions';
-import useNetwork from '../../../hooks/use-network';
-import {useConnect} from '@stacks/connect-react';
-import {contractPrincipalCVFromString} from '../../../helper';
+import useSafeCalls from '../../../hooks/use-safe-call';
 
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
@@ -54,45 +51,21 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
 const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
     const [t] = useTranslation();
     const address = useAddress();
-    const [, stacksNetwork] = useNetwork();
-    const {doContractCall} = useConnect();
-    const [safe,] = useSafe();
+    const {safeConfirmTxCall, safeRevokeTxCall} = useSafeCalls();
     const {transaction, readOnly} = props;
 
     const boxSx = {mt: '18px'};
 
     const confirm = () => {
-        doContractCall({
-            network: stacksNetwork,
-            contractAddress: safe.address,
-            contractName: safe.name,
-            functionName: 'confirm',
-            functionArgs: [
-                uintCV(transaction.id),
-                contractPrincipalCVFromString(transaction.executor),
-                contractPrincipalCV(safe.address, safe.name),
-                contractPrincipalCVFromString(transaction.paramFt),
-                contractPrincipalCVFromString(transaction.paramNft),
-            ],
-            onFinish: (data) => {
-                // TODO: Show a modal
-            }
-        }).then()
+        safeConfirmTxCall(transaction).then(data => {
+            // TODO: Show a modal
+        })
     }
 
     const revoke = () => {
-        doContractCall({
-            network: stacksNetwork,
-            contractAddress: safe.address,
-            contractName: safe.name,
-            functionName: 'revoke',
-            functionArgs: [
-                uintCV(transaction.id)
-            ],
-            onFinish: (data) => {
-                // TODO: Show a modal
-            }
-        }).then()
+        safeRevokeTxCall(transaction.id).then(data => {
+            // TODO: Show a modal
+        })
     }
 
     if (transaction.confirmed || !readOnly) {

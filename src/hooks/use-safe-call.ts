@@ -4,11 +4,15 @@ import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 import useNetwork from './use-network';
 import useSafe from './use-safe';
 import usePendingTxs from './use-pending-txs';
+import {contractPrincipalCVFromString} from '../helper';
+import {SafeTransaction} from '../store/safe';
 
 const useSafeCalls = (): {
     safeAddOwnerCall: (owner: string) => Promise<FinishedTxData>,
     safeRemoveOwnerCall: (owner: string) => Promise<FinishedTxData>,
-    safeSetThresholdCall: (threshold: number) => Promise<FinishedTxData>
+    safeSetThresholdCall: (threshold: number) => Promise<FinishedTxData>,
+    safeConfirmTxCall: (transaction: SafeTransaction) => Promise<FinishedTxData>,
+    safeRevokeTxCall: (txId: number) => Promise<FinishedTxData>,
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -59,7 +63,19 @@ const useSafeCalls = (): {
         noneCV(),
     ]);
 
-    return {safeAddOwnerCall, safeRemoveOwnerCall, safeSetThresholdCall};
+    const safeConfirmTxCall = (transaction: SafeTransaction) => doSafeCall('confirm', [
+        uintCV(transaction.id),
+        contractPrincipalCVFromString(transaction.executor),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCVFromString(transaction.paramFt),
+        contractPrincipalCVFromString(transaction.paramNft),
+    ]);
+
+    const safeRevokeTxCall = (txId: number) => doSafeCall('revoke', [
+        uintCV(txId)
+    ]);
+
+    return {safeAddOwnerCall, safeRemoveOwnerCall, safeSetThresholdCall, safeConfirmTxCall, safeRevokeTxCall};
 }
 
 export default useSafeCalls;
