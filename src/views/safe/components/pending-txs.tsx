@@ -4,8 +4,6 @@ import {SxProps} from '@mui/system';
 import {grey} from '@mui/material/colors';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CircularProgress from '@mui/material/CircularProgress';
-import {connectWebSocketClient, StacksApiWebSocketClient} from '@stacks/blockchain-api-client';
-
 
 import useAddress from '../../../hooks/use-address';
 import usePendingTxs from '../../../hooks/use-pending-txs';
@@ -14,7 +12,6 @@ import useTranslation from '../../../hooks/use-translation';
 import {PendingTx} from '../../../store/pending-txs';
 import {makeTxUrl} from '../../../api/helper';
 import {detectTransactionType} from '../../../helper';
-import useSafe from '../../../hooks/use-safe';
 
 const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
     const {tx} = props;
@@ -80,13 +77,17 @@ const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
 
 const PendingTxs = () => {
     const address = useAddress();
-    const [safe,] = useSafe();
-    const [, stacksNetwork] = useNetwork();
     const [txs, syncTxs] = usePendingTxs();
     const [t] = useTranslation();
 
     useEffect(() => {
         syncTxs();
+
+        const int = setInterval(() => {
+            syncTxs();
+        }, 5000);
+
+        return () => clearInterval(int);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
