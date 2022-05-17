@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import useSafes from '../../hooks/use-safes';
 import useSafe from '../../hooks/use-safe';
 import useAddress from '../../hooks/use-address';
+import usePendingTxs from '../../hooks/use-pending-txs';
 import Navbar from '../../layout/navbar';
 import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
@@ -58,6 +59,7 @@ const Safe = (_: RouteComponentProps) => {
             return;
         }
 
+        // Don't re-fetch on router updates.
         if (safe.fullAddress !== params.safeId) {
             fetchSafeData(params.safeId);
         }
@@ -77,7 +79,7 @@ const Safe = (_: RouteComponentProps) => {
             </Box>
         </AppContent>
 
-        <PendingTxs />
+        <PendingTxs/>
     </>
 }
 
