@@ -5,13 +5,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import useTranslation from '../../../hooks/use-translation';
 import useSafe from '../../../hooks/use-safe';
 import useModal from '../../../hooks/use-modal';
 import useSafeCalls from '../../../hooks/use-safe-call';
+import usePendingTxs from '../../../hooks/use-pending-txs';
 import SectionHeader from '../components/section-header';
 import CommonTxFeedbackDialog from '../components/dialogs/common-feedback';
+import {detectTransactionType} from '../../../helper';
 
 const Policy = (props: { readOnly: boolean }) => {
     const {readOnly} = props;
@@ -20,6 +23,7 @@ const Policy = (props: { readOnly: boolean }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const {safeSetThresholdCall} = useSafeCalls();
+    const [pendingTxs] = usePendingTxs();
     const [threshold, setThreshold] = useState<number>(safe.threshold);
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -38,6 +42,7 @@ const Policy = (props: { readOnly: boolean }) => {
     }
 
     const options = [...Array(safe.owners.length).keys()].map(x => x + 1);
+    const pendingTx = pendingTxs.find(x => x.fn === 'submit' && detectTransactionType(x.executor) === 'set-threshold') !== undefined;
 
     return <>
         <SectionHeader title={t('Policy')} icon={<FactCheckIcon/>}/>
@@ -53,8 +58,13 @@ const Policy = (props: { readOnly: boolean }) => {
                     {options.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
                 </Select>
             </Box>
-            {!readOnly && <Button variant="contained" disabled={safe.threshold === threshold}
-                                  onClick={handleSubmit}>{t('Update')}</Button>}
+            {!readOnly && (
+                <Button variant="contained" disabled={safe.threshold === threshold || pendingTx}
+                        onClick={handleSubmit}>
+                    {pendingTx && <CircularProgress size={16} color="info" sx={{mr: '8px'}}/>}
+                    {t('Update')}
+                </Button>
+            )}
         </Box>
     </>
 }
