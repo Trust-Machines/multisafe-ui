@@ -38,7 +38,6 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
         case 'set-threshold':
             return <>
                 <Box sx={titleSx}>{t('Set confirmation threshold as {{u}}', {u: transaction.paramU})}</Box>
-
             </>
         case 'remove-owner':
             return <>
@@ -141,9 +140,12 @@ const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolea
                 <Box component="a" href="#" sx={{
                     textDecoration: 'none',
                     borderBottom: `1px dotted ${grey[500]}`,
-                    cursor: 'pointer',
+                    cursor: transaction.confirmations.length > 0 ? 'pointer' : 'default',
                     color: grey[700]
                 }} onClick={(e: any) => {
+                    if (transaction.confirmations.length === 0) {
+                        return;
+                    }
                     e.preventDefault();
                     setShowConfirmations(!showConfirmations);
                 }}>
