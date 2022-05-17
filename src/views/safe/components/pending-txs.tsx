@@ -4,6 +4,7 @@ import {SxProps} from '@mui/system';
 import {grey} from '@mui/material/colors';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CircularProgress from '@mui/material/CircularProgress';
+import {useTheme} from '@mui/material';
 
 import useAddress from '../../../hooks/use-address';
 import usePendingTxs from '../../../hooks/use-pending-txs';
@@ -13,9 +14,11 @@ import {PendingTx} from '../../../store/pending-txs';
 import {makeTxUrl} from '../../../api/helper';
 import {detectTransactionType} from '../../../helper';
 
+
 const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
     const {tx} = props;
     const [t] = useTranslation();
+    const theme = useTheme();
     const [network] = useNetwork();
 
     let msg = '';
@@ -61,7 +64,7 @@ const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
         <>{msg}</>
         <Box component="a"
              sx={{
-                 color: grey[200],
+                 color: theme.palette.mode === 'light' ? grey[200] : grey[600],
                  ml: '6px',
                  display: 'inline-flex',
                  alignItems: 'center',
@@ -79,6 +82,7 @@ const PendingTxs = () => {
     const address = useAddress();
     const [txs, syncTxs] = usePendingTxs();
     const [t] = useTranslation();
+    const theme = useTheme();
     const [detail, setDetail] = useState<boolean>(false);
 
     useEffect(() => {
@@ -103,7 +107,7 @@ const PendingTxs = () => {
         position: 'fixed',
         width: '270px',
         height: '30px',
-        color: grey[200],
+        color: theme.palette.mode === 'light' ? grey[200] : grey[700],
         bottom: '10px',
         right: '10px',
         zIndex: '2',
@@ -115,7 +119,7 @@ const PendingTxs = () => {
                 left: 0,
                 right: 0,
                 bottom: '36px',
-                background: grey[800],
+                background: theme.palette.mode === 'light' ? grey[800] : grey[200],
                 borderRadius: '6px',
                 p: '0 6px',
             }}>
@@ -136,9 +140,9 @@ const PendingTxs = () => {
                 height: '100%',
                 p: '0 6px',
                 borderRadius: '6px',
-                background: grey[800],
+                background: theme.palette.mode === 'light' ? grey[800] : grey[200],
                 ':hover': {
-                    background: grey[700],
+                    background: theme.palette.mode === 'light' ? grey[700] : grey[400]
                 }
             }}>
             <CircularProgress size={16} color="info" sx={{mr: '8px'}}/> {msg}

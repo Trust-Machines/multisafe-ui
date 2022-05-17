@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Chip from '@mui/material/Chip';
@@ -12,8 +12,10 @@ import useSafeCalls from '../../../hooks/use-safe-call';
 import usePendingTxs from '../../../hooks/use-pending-txs';
 import useSafe from '../../../hooks/use-safe';
 import useTranslation from '../../../hooks/use-translation';
+import useModal from '../../../hooks/use-modal';
 import ThemedBox from '../../../components/themed-box';
 import Wallet from '../../../components/wallet';
+import CommonTxFeedbackDialog from './dialogs/common-feedback';
 import {detectTransactionType} from '../../../helper';
 import {SafeTransaction} from '../../../store/safe';
 
@@ -54,6 +56,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
     const address = useAddress();
     const {safeConfirmTxCall, safeRevokeTxCall} = useSafeCalls();
     const [pendingTxs] = usePendingTxs();
+    const [, showModal] = useModal();
     const {transaction, readOnly} = props;
 
     const boxSx = {mt: '18px'};
@@ -62,13 +65,19 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
 
     const confirm = () => {
         safeConfirmTxCall(transaction).then(data => {
-            // TODO: Show a modal
+            showModal(<CommonTxFeedbackDialog
+                txId={data.txId}
+                title={t(`Confirm`)}
+                description={t('Please note that it may take a few minutes to finalize your request.')}/>);
         })
     }
 
     const revoke = () => {
         safeRevokeTxCall(transaction.id).then(data => {
-            // TODO: Show a modal
+            showModal(<CommonTxFeedbackDialog
+                txId={data.txId}
+                title={t(`Revoke`)}
+                description={t('Please note that it may take a few minutes to finalize your request.')}/>);
         })
     }
 
