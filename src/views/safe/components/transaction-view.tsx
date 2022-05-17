@@ -103,7 +103,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
     return null;
 }
 
-const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
+const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
     const [t] = useTranslation();
     const [safe,] = useSafe();
     const [showConfirmations, setShowConfirmations] = useState<boolean>(false);
@@ -171,4 +171,4 @@ const TransactionRow = (props: { transaction: SafeTransaction, readOnly: boolean
     </ThemedBox>
 }
 
-export default TransactionRow;
+export default TransactionView;

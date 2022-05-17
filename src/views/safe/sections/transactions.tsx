@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import useTranslation from '../../../hooks/use-translation';
 import SectionHeader from '../components/section-header';
 import useSafe from '../../../hooks/use-safe';
-import TransactionRow from '../components/transaction-row';
+import TransactionView from '../components/transaction-view';
 
 
 const Transactions = (props: { readOnly: boolean }) => {
@@ -21,7 +21,7 @@ const Transactions = (props: { readOnly: boolean }) => {
 
     return <>
         {header}
-        {safe.transactions.map(t => <TransactionRow key={t.id} transaction={t} readOnly={props.readOnly}/>)}
+        {safe.transactions.map(t => <TransactionView key={t.id} transaction={t} readOnly={props.readOnly}/>)}
     </>
 }
 
