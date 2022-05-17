@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Chip from '@mui/material/Chip';
 import {grey} from '@mui/material/colors';
 import CheckIcon from '@mui/icons-material/Check';
-import {Button} from '@mui/material';
+import {Button, useTheme} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import useAddress from '../../../hooks/use-address';
@@ -114,6 +114,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
 const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
     const [t] = useTranslation();
     const [safe,] = useSafe();
+    const theme = useTheme();
     const [showConfirmations, setShowConfirmations] = useState<boolean>(false);
     const {transaction, readOnly} = props;
 
@@ -131,8 +132,8 @@ const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolea
             width: '40px',
             borderTopLeftRadius: '6px',
             borderBottomLeftRadius: '6px',
-            background: grey[200],
-            color: grey[500]
+            background: theme.palette.mode === 'light' ? grey[200] : grey[900],
+            color: theme.palette.mode === 'light' ? grey[500] : grey[300]
         }}>
             {`#${transaction.id}`}
         </Box>
@@ -150,7 +151,7 @@ const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolea
                     textDecoration: 'none',
                     borderBottom: `1px dotted ${grey[500]}`,
                     cursor: transaction.confirmations.length > 0 ? 'pointer' : 'default',
-                    color: grey[700]
+                    color: theme.palette.mode === 'light' ? grey[700] : grey[300]
                 }} onClick={(e: any) => {
                     if (transaction.confirmations.length === 0) {
                         return;
