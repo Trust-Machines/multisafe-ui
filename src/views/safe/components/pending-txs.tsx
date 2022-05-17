@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Box from '@mui/material/Box';
 import {SxProps} from '@mui/system';
 import {grey} from '@mui/material/colors';
@@ -10,7 +10,7 @@ import useAddress from '../../../hooks/use-address';
 import usePendingTxs from '../../../hooks/use-pending-txs';
 import useNetwork from '../../../hooks/use-network';
 import useTranslation from '../../../hooks/use-translation';
-import {PendingTx} from '../../../store/pending-txs';
+import {PendingTx, PendingTxsState} from '../../../store/pending-txs';
 import {makeTxUrl} from '../../../api/helper';
 import {detectTransactionType} from '../../../helper';
 
@@ -85,11 +85,18 @@ const PendingTxs = () => {
     const theme = useTheme();
     const [detail, setDetail] = useState<boolean>(false);
 
+    const txsRef = useRef<PendingTxsState>([]);
+    useEffect(() => {
+        txsRef.current = txs;
+    }, [txs]);
+
     useEffect(() => {
         syncTxs();
 
         const int = setInterval(() => {
-            syncTxs();
+            if (txsRef.current.length > 0) {
+                syncTxs();
+            }
         }, 5000);
 
         return () => clearInterval(int);
