@@ -14,6 +14,8 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import {grey} from '@mui/material/colors';
 
 import useSafe from '../../../hooks/use-safe';
 import useNetwork from '../../../hooks/use-network';
@@ -38,10 +40,17 @@ const MenuListItem = (props: { selected: boolean, to: string, children: React.Re
 }
 
 const SafeMenu = (props: { section: string }) => {
-    const [safe] = useSafe();
+    const [safe, fetchSafeData] = useSafe();
     const theme = useTheme();
     const [network] = useNetwork();
     const [t] = useTranslation();
+
+    const iconSx = {
+        color: grey[400],
+        ':hover': {
+            color: grey[300],
+        }
+    }
 
     return <>
         <AppMenu>
@@ -77,14 +86,34 @@ const SafeMenu = (props: { section: string }) => {
                 </Box>
                 <Box sx={{
                     marginTop: '10px',
-                    textAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
                     <CopyToClipboard copy={safe.fullAddress}>
-                        <ContentCopyIcon color='disabled' sx={{mr: '12px', fontSize: '15px'}}/>
+                        <ContentCopyIcon sx={{
+                            mr: '12px',
+                            fontSize: '15px',
+                            ...iconSx
+                        }}/>
                     </CopyToClipboard>
-                    <a href={makeTxUrl(safe.fullAddress, network)} target='_blank' rel='noreferrer'>
-                        <OpenInNewIcon color='disabled' sx={{fontSize: '15px'}}/>
-                    </a>
+                    <Box component="a" href={makeTxUrl(safe.fullAddress, network)}
+                         sx={{display: 'flex', alignItems: 'center'}} target='_blank' rel='noreferrer'>
+                        <OpenInNewIcon sx={{
+                            fontSize: '15px',
+                            mr: '12px',
+                            ...iconSx
+                        }}/>
+                    </Box>
+                    <Box sx={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}
+                         onClick={() => {
+                             fetchSafeData(safe.fullAddress);
+                         }}>
+                        <RefreshIcon sx={{
+                            fontSize: '18px',
+                            ...iconSx
+                        }}/>
+                    </Box>
                 </Box>
             </Box>
             <List component='nav'>
