@@ -54,9 +54,4 @@ test('1 Render & Submit', () => {
     fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN'}});
     fireEvent.click(screen.getByText('Submit'));
     expect(rendered.container).toMatchSnapshot();
-
-    // Should show success screen.
-    fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2N7SK0W83NJSZHFH8HH31ZT3DXJG7NFE5VYT9SJ'}});
-    fireEvent.click(screen.getByText('Submit'));
-    expect(rendered.container).toMatchSnapshot();
 });
