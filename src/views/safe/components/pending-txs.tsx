@@ -10,6 +10,8 @@ import useAddress from '../../../hooks/use-address';
 import usePendingTxs from '../../../hooks/use-pending-txs';
 import useNetwork from '../../../hooks/use-network';
 import useTranslation from '../../../hooks/use-translation';
+import usePrevious from '../../../hooks/use-previous';
+import useSafe from '../../../hooks/use-safe';
 import {PendingTx, PendingTxsState} from '../../../store/pending-txs';
 import {makeTxUrl} from '../../../api/helper';
 import {detectTransactionType} from '../../../helper';
@@ -81,6 +83,8 @@ const PendingTxRow = (props: { tx: PendingTx, sx?: SxProps }) => {
 const PendingTxs = () => {
     const address = useAddress();
     const [txs, syncTxs] = usePendingTxs();
+    const prevTxs = usePrevious(txs);
+    const [safe, fetchSafeData] = useSafe();
     const [t] = useTranslation();
     const theme = useTheme();
     const [detail, setDetail] = useState<boolean>(false);
@@ -104,11 +108,21 @@ const PendingTxs = () => {
     }, []);
 
 
+    useEffect(() => {
+        // Refresh the safe once a tx finalizes
+        if (prevTxs && prevTxs.length > txs.length) {
+            fetchSafeData(safe.fullAddress);
+            // TODO integrate desktop notifications
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [txs]);
+
+
     if (!address || txs.length === 0) {
         return null;
     }
 
-    const msg = txs.length === 1 ? t('1 pending blockchain interaction') : t('{{n}} pending blockchain interactions', {n: txs.length});
+    const msg = txs.length === 1 ? t('1 pending blockchain response') : t('{{n}} pending blockchain response', {n: txs.length});
 
     return <Box sx={{
         position: 'fixed',
