@@ -99,7 +99,7 @@ exports[`1 Render 1`] = `
         class="MuiBox-root css-wdzsr9"
       >
         <div
-          class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1dzy0sw-MuiChip-root"
+          class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorInfo MuiChip-outlinedInfo css-rofncn-MuiChip-root"
         >
           <span
             class="MuiChip-label MuiChip-labelSmall css-wjsjww-MuiChip-label"

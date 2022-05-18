@@ -126,7 +126,7 @@ const SafeMenu = (props: { section: string }) => {
                     textAlign: 'center',
                     height: '24px'
                 }}>
-                    {!safe.loading && isReadOnly ? (<Chip variant="outlined" size="small" label={t('Readonly')}/>) : ''}
+                    {!safe.loading && isReadOnly ? (<Chip color="info" variant="outlined" size="small" label={t('Readonly')}/>) : ''}
                     {ownerNo ? (
                         <Chip color="success" size="small" variant="outlined" label={t('Owner {{o}}', {o: ownerNo})}/>
                     ) : ''}
