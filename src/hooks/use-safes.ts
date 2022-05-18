@@ -4,16 +4,14 @@ import {safesAtom} from '../store';
 import {SafesState} from '../store/safes';
 
 import useAddress from './use-address';
-import useUserSession from './use-user-session';
 import useStorage from './use-storage';
 import useNetwork from './use-network';
 
 
 const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] => {
     const address = useAddress();
-    const [userSession] = useUserSession();
     const [safes, setSafes] = useAtom(safesAtom);
-    const [getFile, putFile] = useStorage(userSession);
+    const [getFile, putFile] = useStorage();
     const [network] = useNetwork();
 
     const fetchSafes = () => {

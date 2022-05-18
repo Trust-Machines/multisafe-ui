@@ -4,16 +4,14 @@ import {assetsAtom} from '../store';
 import {AssetsState, FTListItem, NFTListItem, ListItem} from '../store/assets';
 
 import useAddress from './use-address';
-import useUserSession from './use-user-session';
 import useStorage from './use-storage';
 import useNetwork from './use-network';
 
 
 const useAssets = (): [AssetsState, () => void, (asset: ListItem) => Promise<any>, () => FTListItem[], () => NFTListItem[]] => {
     const address = useAddress();
-    const [userSession] = useUserSession();
     const [assets, setAssets] = useAtom(assetsAtom);
-    const [getFile, putFile] = useStorage(userSession);
+    const [getFile, putFile] = useStorage();
     const [network] = useNetwork();
 
     const fetchAssets = () => {
