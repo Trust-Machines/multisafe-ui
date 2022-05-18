@@ -16,10 +16,12 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import {grey} from '@mui/material/colors';
+import Chip from '@mui/material/Chip';
 
 import useSafe from '../../../hooks/use-safe';
 import useNetwork from '../../../hooks/use-network';
 import useTranslation from '../../../hooks/use-translation';
+import useAddress from '../../../hooks/use-address';
 import AppMenu from '../../../layout/app-menu';
 import WalletIcon from '../../../components/wallet-icon';
 import CopyToClipboard from '../../../components/copy-clipboard';
@@ -44,6 +46,7 @@ const SafeMenu = (props: { section: string }) => {
     const theme = useTheme();
     const [network] = useNetwork();
     const [t] = useTranslation();
+    const address = useAddress();
 
     const iconSx = {
         color: grey[400],
@@ -51,6 +54,9 @@ const SafeMenu = (props: { section: string }) => {
             color: grey[300],
         }
     }
+
+    const isReadOnly = !address || !safe.owners.includes(address);
+    const ownerNo = address && safe.owners.includes(address) ? safe.owners.indexOf(address) + 1 : 0;
 
     return <>
         <AppMenu>
@@ -114,6 +120,16 @@ const SafeMenu = (props: { section: string }) => {
                             ...iconSx
                         }}/>
                     </Box>
+                </Box>
+                <Box sx={{
+                    marginTop: '10px',
+                    textAlign: 'center',
+                    height: '24px'
+                }}>
+                    {!safe.loading && isReadOnly ? (<Chip variant="outlined" size="small" label={t('Readonly')}/>) : ''}
+                    {ownerNo ? (
+                        <Chip color="success" size="small" variant="outlined" label={t('Owner {{o}}', {o: ownerNo})}/>
+                    ) : ''}
                 </Box>
             </Box>
             <List component='nav'>
