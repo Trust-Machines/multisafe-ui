@@ -21,7 +21,7 @@ import CommonTxFeedbackDialog from './common-feedback';
 const WithdrawFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const {safeTransferFtCall} = useSafeCalls();
+    const {safeTransferFtCall, safeTransferStxCall} = useSafeCalls();
     const {asset} = props;
     const amountInputRef = useRef<HTMLInputElement>();
     const recipientInputRef = useRef<HTMLInputElement>();
@@ -77,12 +77,19 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
             return;
         }
 
-        safeTransferFtCall(asset.address, recipient, amount, memo).then((data) => {
-            showModal(<CommonTxFeedbackDialog txId={data.txId} title={dialogTitle} requiresConfirmation
-                                              description={t('A new transaction submitted to transfer {{a}} {{f}}', {
-                                                  a: amount,
-                                                  f: asset.symbol
-                                              })}/>);
+        const promise = asset.symbol === 'STX' ?
+            safeTransferStxCall(recipient, sendAmount.toString(), memo) :
+            safeTransferFtCall(asset.address, recipient, sendAmount.toString(), memo);
+
+        promise.then((data) => {
+            showModal(<CommonTxFeedbackDialog
+                txId={data.txId}
+                title={dialogTitle}
+                requiresConfirmation
+                description={t('A new transaction submitted to transfer {{a}} {{f}}', {
+                    a: amount,
+                    f: asset.symbol
+                })}/>);
         });
     }
 

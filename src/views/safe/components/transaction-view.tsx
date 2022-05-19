@@ -54,14 +54,28 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
                 <Box sx={titleSx}>{t('Remove owner')}</Box>
                 <Wallet address={transaction.paramP}/>
             </>
-        case 'transfer-sip-010':
-            let asset = safe.ftBalances.find(x => x.asset.address === transaction.paramFt)!.asset;
-            const amountFormatted = formatUnits(transaction.paramU.toString(), asset.decimals).toString();
+        case 'transfer-stx': {
+            const amount = formatUnits(transaction.paramU.toString(), 6).toString();
             return <>
-                <Box sx={titleSx}>{t('Transfer {{a}} {{s}}', {a: amountFormatted, s: asset.symbol})}</Box>
+                <Box sx={titleSx}>{t('Transfer {{a}} STX', {a: amount})}</Box>
                 <Wallet address={transaction.paramP}/>
                 <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
             </>
+        }
+        case 'transfer-sip-010': {
+            let asset = safe.ftBalances.find(x => x.asset.address === transaction.paramFt)?.asset;
+            // Once an address starts to hold an asset it always stays on api.
+            // Putting a control here for potential api updates in the future.
+            if (!asset) {
+                return null;
+            }
+            const amount = formatUnits(transaction.paramU.toString(), asset.decimals).toString();
+            return <>
+                <Box sx={titleSx}>{t('Transfer {{a}} {{s}}', {a: amount, s: asset.symbol})}</Box>
+                <Wallet address={transaction.paramP}/>
+                <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
+            </>
+        }
         default:
             return <></>
     }

@@ -22,7 +22,8 @@ const useSafeCalls = (): {
     safeSetThresholdCall: (threshold: number) => Promise<FinishedTxData>,
     safeConfirmTxCall: (transaction: SafeTransaction) => Promise<FinishedTxData>,
     safeRevokeTxCall: (txId: number) => Promise<FinishedTxData>,
-    safeTransferFtCall: (ft: string, amount: string, recipient: string, memo: string) => Promise<FinishedTxData>
+    safeTransferFtCall: (ft: string, amount: string, recipient: string, memo: string) => Promise<FinishedTxData>,
+    safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -96,13 +97,24 @@ const useSafeCalls = (): {
         someCV(bufferCVFromString(memo)),
     ]);
 
+    const safeTransferStxCall = (recipient: string, amount: string, memo: string) => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'transfer-stx'),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+        contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+        someCV(standardPrincipalCV(recipient)),
+        someCV(uintCV(amount)),
+        someCV(bufferCVFromString(memo)),
+    ]);
+
     return {
         safeAddOwnerCall,
         safeRemoveOwnerCall,
         safeSetThresholdCall,
         safeConfirmTxCall,
         safeRevokeTxCall,
-        safeTransferFtCall
+        safeTransferFtCall,
+        safeTransferStxCall
     };
 }
 
