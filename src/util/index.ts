@@ -14,3 +14,11 @@ export const randStr = (): string => {
 export const escapeRegExp = (string: string): string => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
 }
+
+export const hexToAscii = (hex: string): string => {
+    let r = [];
+    for (let i = 0; i < hex.length - 1; i += 2) {
+        r.push(String.fromCharCode(parseInt(hex.charAt(i) + hex.charAt(i + 1), 16)));
+    }
+    return r.join('');
+}

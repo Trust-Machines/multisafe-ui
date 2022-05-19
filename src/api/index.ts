@@ -1,5 +1,12 @@
 import {StacksNetwork} from '@stacks/network';
-import {callReadOnlyFunction, ClarityValue, cvToJSON, cvToValue, listCV, uintCV} from '@stacks/transactions';
+import {
+    callReadOnlyFunction,
+    ClarityValue,
+    cvToJSON,
+    cvToValue,
+    listCV,
+    uintCV
+} from '@stacks/transactions';
 import {SafeTransaction} from '../store/safe';
 import ftList from '../constants/ft-list';
 import {FTAsset} from '../types';
@@ -113,7 +120,8 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
                 paramFt: x.value['param-ft'].value,
                 paramNft: x.value['param-nft'].value,
                 paramP: x.value['param-p'].value ? x.value['param-p'].value.value : null,
-                paramU: x.value['param-u'].value ? x.value['param-u'].value.value : null
+                paramU: x.value['param-u'].value ? x.value['param-u'].value.value : null,
+                paramB: x.value['param-b'].value ? x.value['param-b'].value.value : null,
             }
         });
     });

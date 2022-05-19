@@ -11,7 +11,8 @@ export interface SafeTransaction {
     paramFt: string,
     paramNft: string,
     paramP: string,
-    paramU: number
+    paramU: number,
+    paramB: string,
 }
 
 export interface SafeFtBalance {

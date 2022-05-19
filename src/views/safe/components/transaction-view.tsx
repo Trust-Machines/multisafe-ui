@@ -16,19 +16,27 @@ import useModal from '../../../hooks/use-modal';
 import ThemedBox from '../../../components/themed-box';
 import Wallet from '../../../components/wallet';
 import CommonTxFeedbackDialog from './dialogs/common-feedback';
-import {detectTransactionType} from '../../../helper';
+import {detectTransactionType, formatUnits} from '../../../helper';
 import {SafeTransaction} from '../../../store/safe';
+import {hexToAscii} from '../../../util';
 
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
+    const theme = useTheme();
+    const [safe,] = useSafe();
     const {transaction} = props;
-
     const txType = detectTransactionType(transaction.executor);
 
     const titleSx = {
         fontWeight: 'bold',
         fontSize: '110%',
         mb: '12px'
+    }
+
+    const memoSx = {
+        mt: '12px',
+        fontSize: '90%',
+        color: theme.palette.mode === 'light' ? grey[700] : grey[300]
     }
 
     switch (txType) {
@@ -45,6 +53,14 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
             return <>
                 <Box sx={titleSx}>{t('Remove owner')}</Box>
                 <Wallet address={transaction.paramP}/>
+            </>
+        case 'transfer-sip-010':
+            let asset = safe.ftBalances.find(x => x.asset.address === transaction.paramFt)!.asset;
+            const amountFormatted = formatUnits(transaction.paramU.toString(), asset.decimals).toString();
+            return <>
+                <Box sx={titleSx}>{t('Transfer {{a}} {{s}}', {a: amountFormatted, s: asset.symbol})}</Box>
+                <Wallet address={transaction.paramP}/>
+                <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
             </>
         default:
             return <></>

@@ -1,5 +1,14 @@
 import {FinishedTxData, useConnect} from '@stacks/connect-react';
-import {ClarityValue, contractPrincipalCV, noneCV, someCV, standardPrincipalCV, uintCV} from '@stacks/transactions';
+import {
+    bufferCVFromString,
+    ClarityValue,
+    contractPrincipalCV,
+    noneCV,
+    PostConditionMode,
+    someCV,
+    standardPrincipalCV,
+    uintCV
+} from '@stacks/transactions';
 import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 import useNetwork from './use-network';
 import useSafe from './use-safe';
@@ -13,6 +22,7 @@ const useSafeCalls = (): {
     safeSetThresholdCall: (threshold: number) => Promise<FinishedTxData>,
     safeConfirmTxCall: (transaction: SafeTransaction) => Promise<FinishedTxData>,
     safeRevokeTxCall: (txId: number) => Promise<FinishedTxData>,
+    safeTransferFtCall: (ft: string, amount: string, recipient: string, memo: string) => Promise<FinishedTxData>
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -26,6 +36,7 @@ const useSafeCalls = (): {
             contractName: safe.name,
             functionName: fn,
             functionArgs: args,
+            postConditionMode: PostConditionMode.Allow,
             onFinish: (data) => {
                 resolve(data);
                 syncPendingTxs();
@@ -75,7 +86,24 @@ const useSafeCalls = (): {
         uintCV(txId)
     ]);
 
-    return {safeAddOwnerCall, safeRemoveOwnerCall, safeSetThresholdCall, safeConfirmTxCall, safeRevokeTxCall};
+    const safeTransferFtCall = (ft: string, recipient: string, amount: string, memo: string) => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'transfer-sip-010'),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCVFromString(ft),
+        contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+        someCV(standardPrincipalCV(recipient)),
+        someCV(uintCV(amount)),
+        someCV(bufferCVFromString(memo)),
+    ]);
+
+    return {
+        safeAddOwnerCall,
+        safeRemoveOwnerCall,
+        safeSetThresholdCall,
+        safeConfirmTxCall,
+        safeRevokeTxCall,
+        safeTransferFtCall
+    };
 }
 
 export default useSafeCalls;
