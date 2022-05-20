@@ -22,3 +22,5 @@ export const NETWORKS: Record<NETWORK, StacksNetwork> = {
     'mainnet': new StacksMainnet(),
     'testnet': new StacksTestnet()
 }
+
+export const TX_PER_PAGE = 5;

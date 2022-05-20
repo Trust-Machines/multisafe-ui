@@ -39,6 +39,8 @@ export interface SafeState {
     ftBalances: SafeFtBalance[]
     nftBalances: SafeNFtBalance[],
     transactions: SafeTransaction[],
+    totalPages: number,
+    page: number,
     init: boolean
 }
 
@@ -55,6 +57,8 @@ export const initial: SafeState = {
     ftBalances: [],
     nftBalances: [],
     transactions: [],
+    totalPages: 1,
+    page: 1,
     init: false
 }
 

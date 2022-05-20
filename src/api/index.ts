@@ -10,6 +10,7 @@ import {
 import {SafeTransaction} from '../store/safe';
 import ftList from '../constants/ft-list';
 import {FTAsset} from '../types';
+import {TX_PER_PAGE} from '../constants';
 
 export const getAccountMemPool = (network: StacksNetwork, account: string): Promise<{
     tx_id: string,
@@ -103,7 +104,7 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
     for (let x = nonce - 1; x >= 0; x--) {
         txIds.push(x);
 
-        if (txIds.length === 20) {
+        if (txIds.length === TX_PER_PAGE) {
             break;
         }
     }

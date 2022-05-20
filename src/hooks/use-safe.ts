@@ -11,8 +11,9 @@ import * as api from '../api';
 import useAssets from './use-assets';
 
 import ftList from '../constants/ft-list';
+import {TX_PER_PAGE} from '../constants';
 
-const useSafes = (): [SafeState, (safeAddress: string) => void] => {
+const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);
     const [network, stacksNetwork] = useNetwork();
     const [, , , getFtAssets] = useAssets();
@@ -97,11 +98,19 @@ const useSafes = (): [SafeState, (safeAddress: string) => void] => {
             ftBalances,
             nftBalances,
             transactions,
+            totalPages: Math.ceil(nonce / TX_PER_PAGE) || 1,
+            page: 1,
             init: true,
         });
     }
 
-    return [safe, fetchSafeData]
+    const scrollTransactions = async (page: number) => {
+        const nonce = (safe.nonce - (TX_PER_PAGE * page)) + TX_PER_PAGE;
+        const transactions = await api.getSafeTransactions(stacksNetwork, safe.fullAddress, nonce, sender);
+        setSafe({...safe, transactions, page});
+    }
+
+    return [safe, fetchSafeData, scrollTransactions]
 }
 
 export default useSafes;
