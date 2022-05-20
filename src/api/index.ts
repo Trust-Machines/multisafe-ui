@@ -3,7 +3,6 @@ import {
     callReadOnlyFunction,
     ClarityValue,
     cvToJSON,
-    cvToValue,
     listCV,
     uintCV
 } from '@stacks/transactions';
@@ -128,22 +127,31 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
     });
 }
 
-export const getFTInfo = async (network: StacksNetwork, address: string, senderAddress: string): Promise<FTAsset> => {
+export const getFTInfo = async (network: StacksNetwork, address: string): Promise<FTAsset> => {
     const inList = ftList[network.isMainnet() ? 'mainnet' : 'testnet'].find(x => x.address === address);
     if (inList) {
         return inList;
     }
 
-    return Promise.all([
-        callReadOnly(network, `${address}.get-name`, [], senderAddress),
-        callReadOnly(network, `${address}.get-symbol`, [], senderAddress),
-        callReadOnly(network, `${address}.get-decimals`, [], senderAddress)
-    ]).then(r => {
-        return {
-            address,
-            name: cvToValue(r[0]).value,
-            symbol: cvToValue(r[1]).value,
-            decimals: Number(cvToValue(r[2]).value)
-        }
-    })
+    return fetch(`${network.coreApiUrl}/extended/v1/tokens/${address}/ft/metadata`)
+        .then(r => r.json())
+        .then(info => {
+            const [a, b] = address.split('.');
+            return fetch(`${network.coreApiUrl}/v2/contracts/source/${a}/${b}`)
+                .then(r => r.json())
+                .then(source => {
+
+                    // find first defined token from contract source code
+                    const ftMatches = /\((define-fungible-token ([^)]+))\)/.exec(source.source);
+                    const ref = ftMatches ? ftMatches[2] : '';
+
+                    return {
+                        address,
+                        name: info.name,
+                        symbol: info.symbol,
+                        decimals: info.decimals,
+                        ref
+                    }
+                })
+        });
 }

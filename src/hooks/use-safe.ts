@@ -40,6 +40,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
                 name: 'STX',
                 symbol: 'STX',
                 decimals: 6,
+                ref: 'STX'
             },
             balance: balances.stx.balance
         };
@@ -47,7 +48,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
         // Collect all fungible token balances from api response
         const ftKeys = Object.keys(balances.fungible_tokens);
         const ftBalancesApi: SafeFtBalance[] = await Promise.all(
-            ftKeys.map(f => api.getFTInfo(stacksNetwork, f.split(':')[0], sender))
+            ftKeys.map(f => api.getFTInfo(stacksNetwork, f.split(':')[0]))
         ).then(resp => {
             return resp.map((r, i): SafeFtBalance => ({
                 asset: {
@@ -55,6 +56,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
                     name: r.name,
                     symbol: r.symbol,
                     decimals: r.decimals,
+                    ref: r.ref
                 },
                 balance: balances.fungible_tokens[ftKeys.find(x => x.startsWith(r.address))!].balance
             }))

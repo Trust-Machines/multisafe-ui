@@ -92,7 +92,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
                     address!,
                     FungibleConditionCode.Equal,
                     amount,
-                    createAssetInfo(contractAddress, contractName, asset.name),
+                    createAssetInfo(contractAddress, contractName, asset.ref),
                 )
             ],
             onFinish: (data) => {

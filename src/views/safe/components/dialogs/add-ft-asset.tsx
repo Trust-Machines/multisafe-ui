@@ -11,7 +11,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import useNetwork from '../../../../hooks/use-network';
-import useAddress from '../../../../hooks/use-address';
 import useAssets from '../../../../hooks/use-assets';
 import useToast from '../../../../hooks/use-toast';
 import CloseModal from '../../../../components/close-modal';
@@ -25,7 +24,6 @@ const AddFtAsset = () => {
     const [error, setError] = useState<string>('');
     const [, showModal] = useModal();
     const [, stacksNetwork] = useNetwork();
-    const address = useAddress();
     const [, , addAsset] = useAssets();
     const [, showMessage] = useToast();
     const [t] = useTranslation();
@@ -50,7 +48,7 @@ const AddFtAsset = () => {
 
         let ftInfo: FTAsset;
         try {
-            ftInfo = await getFTInfo(stacksNetwork, asset, address!);
+            ftInfo = await getFTInfo(stacksNetwork, asset);
         } catch (e) {
             setError(t("Couldn't fetch token information"));
             setInProgress(false);
@@ -63,6 +61,7 @@ const AddFtAsset = () => {
                 name: ftInfo.name,
                 symbol: ftInfo.symbol,
                 decimals: ftInfo.decimals,
+                ref: ftInfo.ref,
                 type: 'ft'
             });
         } catch (e) {

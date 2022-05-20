@@ -2,7 +2,8 @@ export interface FTAsset {
     address: string,
     name: string,
     symbol: string,
-    decimals: number
+    decimals: number,
+    ref: string
 }
 
 export interface NFTAsset {
