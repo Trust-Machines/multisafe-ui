@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import useTranslation from '../../../hooks/use-translation';
 import SectionHeader from '../components/section-header';
 
-
-const NFTs = (props: {readOnly: boolean}) => {
+const NFTs = (props: { readOnly: boolean }) => {
     const [t] = useTranslation();
 
     return <>
@@ -12,7 +11,7 @@ const NFTs = (props: {readOnly: boolean}) => {
 
         </SectionHeader>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
-
+            {t('Coming soon...')}
         </Box>
     </>
 }
