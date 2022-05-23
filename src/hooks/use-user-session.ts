@@ -1,7 +1,5 @@
 import {useAtom} from 'jotai';
-import {FinishedAuthData} from '@stacks/connect-react';
-import {showConnect} from '@stacks/connect';
-import {UserSession, UserData} from '@stacks/connect-react';
+import {UserSession, UserData, FinishedAuthData, showConnect} from '@stacks/connect-react';
 import {userSessionAtom, userDataAtom} from '../store';
 
 import {appConfig, baseAuthOptions} from '../constants';
