@@ -26,7 +26,7 @@ test('3 Render with bns', () => {
 });
 
 test('4 Default render WalletMenu', () => {
-    const rendered = render(<WalletMenu/>);
+    const rendered = render(<WalletMenu onSignOut={()=>{}}/>);
     expect(rendered.container).toMatchSnapshot()
 });
 
