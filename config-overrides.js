@@ -19,10 +19,7 @@ module.exports = function override(config, env) {
     ...config.plugins,
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
-    }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
-    }),
+    })
   ];
 
   config.resolve.fallback = fallback;
