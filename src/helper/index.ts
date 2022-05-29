@@ -4,7 +4,6 @@ import {StacksNetwork} from '@stacks/network';
 import {contractPrincipalCV} from '@stacks/transactions';
 import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
-import {SafeTransaction} from '../store/safe';
 import {TransactionType} from '../types';
 
 export const formatUnits = (value: BigNumber | string, decimals: number): BigNumber => {
