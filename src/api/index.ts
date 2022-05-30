@@ -8,7 +8,8 @@ import {
 } from '@stacks/transactions';
 import {SafeTransaction} from '../store/safe';
 import ftList from '../constants/ft-list';
-import {FTAsset} from '../types';
+import nftList from '../constants/nft-list';
+import {FTAsset, NFTAsset} from '../types';
 import {TX_PER_PAGE} from '../constants';
 
 export const getAccountMemPool = (network: StacksNetwork, account: string): Promise<{
@@ -154,4 +155,29 @@ export const getFTInfo = async (network: StacksNetwork, address: string): Promis
                     }
                 })
         });
+}
+
+export const getNfTInfo = async (network: StacksNetwork, address: string): Promise<NFTAsset> => {
+    /*
+    const inList = nftList[network.isMainnet() ? 'mainnet' : 'testnet'].find(x => x.address === address);
+    if (inList) {
+        return inList;
+    }
+    */
+    const [account, contract] = address.split('.');
+    return fetch(`${network.coreApiUrl}/v2/contracts/source/${account}/${contract}`)
+        .then(r => r.json())
+        .then(source => {
+            // find first defined non fungible token from contract source code
+            const ftMatches = /\((define-non-fungible-token ([^\s]+))/.exec(source.source);
+            const ref = ftMatches ? ftMatches[2] : '';
+            if (!ref) {
+                throw new Error("Couldn't find token definition");
+            }
+            return {
+                address,
+                name: contract,
+                ref
+            }
+        })
 }

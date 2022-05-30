@@ -9,6 +9,7 @@ export interface FTAsset {
 export interface NFTAsset {
     address: string,
     name: string,
+    ref: string
 }
 
 export type TransactionType =
