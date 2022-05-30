@@ -17,6 +17,8 @@ import CloseModal from '../../../../components/close-modal';
 import {getNfTInfo} from '../../../../api';
 import {NFTAsset} from '../../../../types';
 
+
+// TODO: Merge this dialog with add-ft-asset dialog
 const AddNftAsset = () => {
     const inputRef = useRef<HTMLInputElement>();
     const [asset, setAsset] = useState<string>('');
