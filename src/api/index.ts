@@ -159,12 +159,11 @@ export const getFTInfo = async (network: StacksNetwork, address: string): Promis
 }
 
 export const getNfTInfo = async (network: StacksNetwork, address: string): Promise<NFTAsset> => {
-    /*
     const inList = nftList[network.isMainnet() ? 'mainnet' : 'testnet'].find(x => x.address === address);
     if (inList) {
         return inList;
     }
-    */
+
     const [account, contract] = address.split('.');
     return fetch(`${network.coreApiUrl}/v2/contracts/source/${account}/${contract}`)
         .then(r => r.json())

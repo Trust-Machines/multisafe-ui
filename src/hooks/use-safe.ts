@@ -93,11 +93,10 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
                     name: r.name,
                     ref: r.ref
                 },
-                balance: balances.non_fungible_tokens[ftKeys.find(x => x.startsWith(r.address))!].count,
+                balance: balances.non_fungible_tokens[nftKeys.find(x => x.startsWith(r.address))!].count,
                 ids: []
             }))
         });
-        console.log(nftBalancesApi)
 
         // build non-fungible token balances
         let nftBalancesCustom: SafeNFtBalance[] = getNFTAssets()
@@ -109,6 +108,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
             }));
 
         const nftBalances: SafeNFtBalance[] = [
+            ...nftBalancesApi,
             ...nftBalancesCustom,
             ...nftList[network]
                 .filter(x =>
