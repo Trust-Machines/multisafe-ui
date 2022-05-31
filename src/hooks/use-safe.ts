@@ -11,12 +11,14 @@ import * as api from '../api';
 import useAssets from './use-assets';
 
 import ftList from '../constants/ft-list';
+import nftList from '../constants/nft-list';
 import {TX_PER_PAGE} from '../constants';
+import {getNfTInfo} from '../api';
 
 const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);
     const [network, stacksNetwork] = useNetwork();
-    const [, , , getFtAssets] = useAssets();
+    const [, , , getFtAssets, getNFTAssets] = useAssets();
     const sender = useSenderAddress();
 
     const fetchSafeData = async (safeAddress: string) => {
@@ -65,7 +67,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
         // User defined fungible tokens
         const ftBalancesCustom: SafeFtBalance[] = getFtAssets()
             .filter(x => ftBalancesApi.find(y => y.asset.address === x.address) === undefined)
-            .map(x => ({asset: x, balance: "0"}))
+            .map(x => ({asset: x, balance: '0'}))
 
         // Merge all fungible tokens. Append default token list in the end.
         const ftBalances: SafeFtBalance[] = [
@@ -77,15 +79,44 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
                     ftBalancesApi.find(y => y.asset.address === x.address) === undefined &&
                     ftBalancesCustom.find(y => y.asset.address === x.address) === undefined
                 )
-                .map(x => ({asset: x, balance: "0"}))
+                .map(x => ({asset: x, balance: '0'}))
         ];
 
+        // Collect all non fungible token balances from api response
+        const nftKeys = Object.keys(balances.non_fungible_tokens);
+        const nftBalancesApi: SafeNFtBalance[] = await Promise.all(
+            nftKeys.map(f => api.getNfTInfo(stacksNetwork, f.split(':')[0]))
+        ).then(resp => {
+            return resp.map((r, i): SafeNFtBalance => ({
+                asset: {
+                    address: r.address,
+                    name: r.name,
+                    ref: r.ref
+                },
+                balance: balances.non_fungible_tokens[ftKeys.find(x => x.startsWith(r.address))!].count,
+                ids: []
+            }))
+        });
+        console.log(nftBalancesApi)
+
         // build non-fungible token balances
-        let nftBalances: SafeNFtBalance[] = getFtAssets().map(a => ({
-            asset: a,
-            balance: '0',
-            ids: []
-        }));
+        let nftBalancesCustom: SafeNFtBalance[] = getNFTAssets()
+            .filter(x => nftBalancesApi.find(y => y.asset.address === x.address) === undefined)
+            .map(a => ({
+                asset: a,
+                balance: '0',
+                ids: []
+            }));
+
+        const nftBalances: SafeNFtBalance[] = [
+            ...nftBalancesCustom,
+            ...nftList[network]
+                .filter(x =>
+                    nftBalancesApi.find(y => y.asset.address === x.address) === undefined &&
+                    nftBalancesCustom.find(y => y.asset.address === x.address) === undefined
+                )
+                .map(x => ({asset: x, balance: '0', ids: []}))
+        ];
 
         setSafe({
             loading: false,

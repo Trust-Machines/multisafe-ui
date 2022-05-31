@@ -60,7 +60,8 @@ export interface AddressBalance {
     stx: {
         balance: string
     },
-    fungible_tokens: Record<string, { balance: string }>
+    fungible_tokens: Record<string, { balance: string }>,
+    non_fungible_tokens: Record<string, { count: string }>,
 }
 
 export const getContractBalances = (network: StacksNetwork, address: string): Promise<AddressBalance> => {
@@ -180,4 +181,10 @@ export const getNfTInfo = async (network: StacksNetwork, address: string): Promi
                 ref
             }
         })
+}
+
+export const getNftHoldingsByIdentifier = (network: StacksNetwork, address: string, identifier: string): Promise<{ asset_identifier: string, value: { repr: string } }[]> => {
+    return fetch(`${network.coreApiUrl}/extended/v1/tokens/nft/holdings?principal=${address}&asset_identifiers=${identifier}&limit=200`)
+        .then(r => r.json())
+        .then(r => r.results)
 }

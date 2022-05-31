@@ -1,6 +1,6 @@
 import {atom} from 'jotai';
 import BigNumber from 'bignumber.js';
-import {FTAsset} from '../types';
+import {FTAsset, NFTAsset} from '../types';
 
 export interface SafeTransaction {
     id: number,
@@ -21,7 +21,7 @@ export interface SafeFtBalance {
 }
 
 export interface SafeNFtBalance {
-    asset: FTAsset,
+    asset: NFTAsset,
     balance: string,
     ids: number[]
 }
