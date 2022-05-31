@@ -56,7 +56,7 @@ const NFTs = (props: { readOnly: boolean }) => {
                                         display: 'flex',
                                         alignItems: 'center'
                                     }}>
-                                        <TokenLogo address={nft.asset.address} sx={{mr: '6px'}}/>
+                                        <TokenLogo address={nft.asset.address} sx={{mr: '6px'}} extension="png"/>
                                         <Typography>{nft.asset.name}</Typography>
                                     </Box>
                                 </TableCell>

@@ -15,19 +15,9 @@ const list: Record<NETWORK, NFTAsset[]> = {
             ref: 'bitcoin-monkeys'
         },
         {
-            address: 'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.bitcoin-birds',
-            name: 'Bitcoin Birds',
-            ref: 'bitcoin-birds'
-        },
-        {
             address: 'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-punks-v3',
             name: 'Stacks Punks V3',
             ref: 'stacks-punks'
-        },
-        {
-            address: 'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.megapont-robot-nft',
-            name: 'Megapont Robots',
-            ref: 'Megapont-Robot'
         },
         {
             address: 'SP3QSAJQ4EA8WXEDSRRKMZZ29NH91VZ6C5X88FGZQ.crashpunks-v2',
