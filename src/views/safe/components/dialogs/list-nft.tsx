@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Box from '@mui/material/Box';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -20,6 +20,7 @@ import {transformNftUri} from '../../../../helper';
 import {NFTAsset} from '../../../../types';
 
 const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) => {
+    const imgRef = useRef<HTMLImageElement>();
     const [t] = useTranslation();
     const [network, stacksNetwork] = useNetwork();
     const {asset, nftId, readOnly} = props;
@@ -85,10 +86,13 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
                     </Tooltip>
                 )}
             </Box>
-            <Box src={image} component="img" sx={{
+            <Box ref={imgRef} src={image} component="img" sx={{
                 width: '100%',
                 height: '100%'
-            }}/>
+            }} onError={() => {
+                imgRef.current!.src = '/nft-placeholder.png';
+            }}
+            />
         </Box>
     </Box>
 }
