@@ -187,3 +187,10 @@ export const getNftHoldingsByIdentifier = (network: StacksNetwork, address: stri
         .then(r => r.json())
         .then(r => r.results)
 }
+
+
+export const getNftTokenUri = (network: StacksNetwork, nftAddress: string, nftId: string, senderAddress: string): Promise<string> => {
+    return callReadOnly(network, `${nftAddress}.get-token-uri`, [uintCV(nftId)], senderAddress).then(r => {
+        return cvToJSON(r).value.value.value;
+    });
+}

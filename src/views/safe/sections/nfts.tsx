@@ -1,3 +1,4 @@
+import React from 'react';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -17,6 +18,7 @@ import AddNftAsset from '../components/dialogs/add-nft-asset';
 import SectionHeader from '../components/section-header';
 import TokenLogo from '../../../components/token-logo';
 import DepositNft from '../components/dialogs/deposit-nft';
+import ListNft from '../components/dialogs/list-nft';
 import {NFTAsset} from '../../../types';
 
 const NFTs = (props: { readOnly: boolean }) => {
@@ -30,6 +32,10 @@ const NFTs = (props: { readOnly: boolean }) => {
 
     const depositClicked = (asset: NFTAsset) => {
         showModal(<DepositNft asset={asset}/>);
+    }
+
+    const listClicked = (asset: NFTAsset) => {
+        showModal(<ListNft asset={asset} readOnly={props.readOnly}/>);
     }
 
     return <>
@@ -61,7 +67,14 @@ const NFTs = (props: { readOnly: boolean }) => {
                                     </Box>
                                 </TableCell>
                                 <TableCell align="right">
-                                    {nft.balance}
+                                    {nft.balance !== '0' ?
+                                        <Box component="a" href="#"
+                                             onClick={(e: React.MouseEvent) => {
+                                                 e.preventDefault();
+                                                 listClicked(nft.asset);
+                                             }}>
+                                            {nft.balance}
+                                        </Box> : '0'}
                                 </TableCell>
                                 <TableCell align="right">
                                     <Button size="small" onClick={() => {

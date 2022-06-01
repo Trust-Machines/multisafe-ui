@@ -71,3 +71,14 @@ export const contractPrincipalCVFromString = (s: string) => {
     const [a, b] = s.split(".");
     return contractPrincipalCV(a, b);
 }
+
+export const transformNftUri = (uri: string, nftId: string) => {
+
+    const u = uri.replace('{id}', nftId);
+
+    if (u.startsWith('ipfs://')) {
+        return u.replace('ipfs://', 'https://gateway.ipfs.io/ipfs/')
+    }
+
+    return uri;
+}
