@@ -68,13 +68,13 @@ const NFTs = (props: { readOnly: boolean }) => {
                                 </TableCell>
                                 <TableCell align="right">
                                     {nft.balance !== '0' ?
-                                        <Box component="a" href="#"
-                                             onClick={(e: React.MouseEvent) => {
-                                                 e.preventDefault();
-                                                 listClicked(nft.asset);
-                                             }}>
+                                        <Button
+                                            onClick={(e: React.MouseEvent) => {
+                                                e.preventDefault();
+                                                listClicked(nft.asset);
+                                            }}>
                                             {nft.balance}
-                                        </Box> : '0'}
+                                        </Button> : <Button disabled>0</Button>}
                                 </TableCell>
                                 <TableCell align="right">
                                     <Button size="small" onClick={() => {
