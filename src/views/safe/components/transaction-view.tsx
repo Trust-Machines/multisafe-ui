@@ -95,19 +95,23 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
 
     const confirm = () => {
         safeConfirmTxCall(transaction).then(data => {
-            showModal(<CommonTxFeedbackDialog
-                txId={data.txId}
-                title={t(`Confirm`)}
-                description={t('Please note that it may take a few minutes to finalize your request.')}/>);
+            showModal({
+                body: <CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={t(`Confirm`)}
+                    description={t('Please note that it may take a few minutes to finalize your request.')}/>
+            });
         })
     }
 
     const revoke = () => {
         safeRevokeTxCall(transaction.id).then(data => {
-            showModal(<CommonTxFeedbackDialog
-                txId={data.txId}
-                title={t(`Revoke`)}
-                description={t('Please note that it may take a few minutes to finalize your request.')}/>);
+            showModal({
+                body: <CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={t(`Revoke`)}
+                    description={t('Please note that it may take a few minutes to finalize your request.')}/>
+            });
         })
     }
 

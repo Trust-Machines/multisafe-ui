@@ -24,7 +24,7 @@ import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
 
 
-const Tokens = (props: {readOnly: boolean}) => {
+const Tokens = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
@@ -40,15 +40,15 @@ const Tokens = (props: {readOnly: boolean}) => {
     }
 
     const addAssetClicked = () => {
-        showModal(<AddFtAsset/>);
+        showModal({body: <AddFtAsset/>});
     }
 
     const depositClicked = (asset: FTAsset) => {
-        showModal(<DepositFt asset={asset}/>);
+        showModal({body: <DepositFt asset={asset}/>});
     }
 
     const withdrawClicked = (asset: FTAsset) => {
-        showModal(<WithdrawFt asset={asset}/>);
+        showModal({body: <WithdrawFt asset={asset}/>});
     }
 
     return <>

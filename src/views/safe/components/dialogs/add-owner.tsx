@@ -50,8 +50,8 @@ const AddOwner = () => {
         }
 
         safeAddOwnerCall(owner).then((data) => {
-            showModal(<CommonTxFeedbackDialog txId={data.txId} title={t(`Add Owner`)} requiresConfirmation
-                                              description={t('A new transaction submitted to add the new owner.')}/>);
+            showModal({body: <CommonTxFeedbackDialog txId={data.txId} title={t(`Add Owner`)} requiresConfirmation
+                                                     description={t('A new transaction submitted to add the new owner.')}/>});
         });
     }
 

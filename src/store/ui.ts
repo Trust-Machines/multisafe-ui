@@ -8,7 +8,7 @@ export interface Toast {
     type: ToastType
 }
 
-export type Modal = JSX.Element | null;
+export type Modal = {body: JSX.Element, fullScreen?: boolean} | null;
 
 const initialTheme = (): PaletteMode => {
     const s = localStorage.getItem('app_theme');

@@ -82,14 +82,16 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
             safeTransferFtCall(asset.address, recipient, sendAmount.toString(), memo);
 
         promise.then((data) => {
-            showModal(<CommonTxFeedbackDialog
-                txId={data.txId}
-                title={dialogTitle}
-                requiresConfirmation
-                description={t('A new transaction submitted to transfer {{a}} {{f}}', {
-                    a: amount,
-                    f: asset.symbol
-                })}/>);
+            showModal({
+                body: <CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={dialogTitle}
+                    requiresConfirmation
+                    description={t('A new transaction submitted to transfer {{a}} {{f}}', {
+                        a: amount,
+                        f: asset.symbol
+                    })}/>
+            });
         });
     }
 

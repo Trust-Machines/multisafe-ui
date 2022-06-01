@@ -27,15 +27,15 @@ const NFTs = (props: { readOnly: boolean }) => {
     const [, showModal] = useModal();
 
     const addAssetClicked = () => {
-        showModal(<AddNftAsset/>);
+        showModal({body: <AddNftAsset/>});
     }
 
     const depositClicked = (asset: NFTAsset) => {
-        showModal(<DepositNft asset={asset}/>);
+        showModal({body: <DepositNft asset={asset}/>});
     }
 
     const listClicked = (asset: NFTAsset) => {
-        showModal(<ListNft asset={asset} readOnly={props.readOnly}/>);
+        showModal({body: <ListNft asset={asset} readOnly={props.readOnly}/>, fullScreen: true});
     }
 
     return <>

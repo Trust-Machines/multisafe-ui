@@ -23,9 +23,10 @@ const ModalProvider: React.FC = ({children}) => {
                 open={true}
                 TransitionComponent={Transition}
                 fullWidth
+                fullScreen={modal.fullScreen || false}
                 disableEscapeKeyDown={false}
             >
-                {modal}
+                {modal.body}
             </Dialog>
         )}
     </>;

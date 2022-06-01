@@ -70,8 +70,10 @@ const DepositNft = (props: { asset: NFTAsset }) => {
                 )
             ],
             onFinish: (data) => {
-                showModal(<CommonTxFeedbackDialog txId={data.txId} title={dialogTitle} requiresConfirmation={false}
-                                                  description={t('Transaction broadcasted')}/>);
+                showModal({
+                    body: <CommonTxFeedbackDialog txId={data.txId} title={dialogTitle} requiresConfirmation={false}
+                                                  description={t('Transaction broadcasted')}/>
+                });
             },
         }).then();
     }

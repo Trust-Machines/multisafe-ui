@@ -29,23 +29,27 @@ const Owners = (props: { readOnly: boolean }) => {
     const {safeRemoveOwnerCall} = useSafeCalls();
 
     const addOwnerClicked = () => {
-        showModal(<AddOwner/>);
+        showModal({body: <AddOwner/>});
     }
 
     const deleteOwnerClicked = (owner: string) => {
-        showModal(<ConfirmDialog onConfirm={() => {
-            handleDelete(owner);
-        }}/>);
+        showModal({
+            body: <ConfirmDialog onConfirm={() => {
+                handleDelete(owner);
+            }}/>
+        });
     }
 
     const handleDelete = (owner: string) => {
         safeRemoveOwnerCall(owner).then(data => {
-            showModal(<CommonTxFeedbackDialog
-                txId={data.txId}
-                title={t('Delete Owner')}
-                description={t('A new transaction submitted to remove owner {{o}}', {o: owner})}
-                requiresConfirmation={true}
-            />);
+            showModal({
+                body: <CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={t('Delete Owner')}
+                    description={t('A new transaction submitted to remove owner {{o}}', {o: owner})}
+                    requiresConfirmation={true}
+                />
+            });
         })
     }
 

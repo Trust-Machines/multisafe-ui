@@ -32,12 +32,14 @@ const Policy = (props: { readOnly: boolean }) => {
 
     const handleSubmit = () => {
         safeSetThresholdCall(threshold).then(data => {
-            showModal(<CommonTxFeedbackDialog
-                txId={data.txId}
-                title={t('Confirmation Threshold')}
-                description={t('A new transaction submitted to update confirmation threshold.')}
-                requiresConfirmation
-            />);
+            showModal({
+                body: <CommonTxFeedbackDialog
+                    txId={data.txId}
+                    title={t('Confirmation Threshold')}
+                    description={t('A new transaction submitted to update confirmation threshold.')}
+                    requiresConfirmation
+                />
+            });
         });
     }
 
