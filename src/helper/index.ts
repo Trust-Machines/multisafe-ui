@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import {DEPLOYERS, NETWORK} from '@trustmachines/multisafe-contracts';
 import {StacksNetwork} from '@stacks/network';
-import {contractPrincipalCV} from '@stacks/transactions';
+import {contractPrincipalCV, validateStacksAddress} from '@stacks/transactions';
 import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
 import {TransactionType} from '../types';
@@ -38,28 +38,29 @@ export const getStacksNetwork = (n: NETWORK): StacksNetwork => {
 }
 
 export const detectTransactionType = (executor: string): TransactionType => {
+    const exec = executor.replace("'", '');
     for (const d of DEPLOYERS) {
-        if (`${d}.add-owner` === executor) {
+        if (`${d}.add-owner` === exec) {
             return 'add-owner';
         }
 
-        if (`${d}.remove-owner` === executor) {
+        if (`${d}.remove-owner` === exec) {
             return 'remove-owner';
         }
 
-        if (`${d}.set-threshold` === executor) {
+        if (`${d}.set-threshold` === exec) {
             return 'set-threshold';
         }
 
-        if (`${d}.transfer-stx` === executor) {
+        if (`${d}.transfer-stx` === exec) {
             return 'transfer-stx';
         }
 
-        if (`${d}.transfer-sip-009` === executor) {
+        if (`${d}.transfer-sip-009` === exec) {
             return 'transfer-sip-009';
         }
 
-        if (`${d}.transfer-sip-010` === executor) {
+        if (`${d}.transfer-sip-010` === exec) {
             return 'transfer-sip-010';
         }
     }
@@ -81,4 +82,23 @@ export const transformNftUri = (uri: string, nftId: string) => {
     }
 
     return uri;
+}
+
+export const isValidRecipient= (r: string) => {
+    if (r === '') {
+        return false;
+    }
+
+    if (validateStacksAddress(r)) {
+        return true;
+    }
+
+    try {
+        contractPrincipalCVFromString(r);
+        return true;
+    } catch (e) {
+
+    }
+
+    return false;
 }

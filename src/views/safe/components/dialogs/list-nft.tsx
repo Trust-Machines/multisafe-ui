@@ -14,6 +14,7 @@ import useNetwork from '../../../../hooks/use-network';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import CloseModal from '../../../../components/close-modal';
+import WithdrawNft from './withdraw-nft';
 import {getNftHoldingsByIdentifier, getNftTokenUri} from '../../../../api';
 import {NULL_ADDRESS} from '../../../../constants';
 import {transformNftUri} from '../../../../helper';
@@ -23,6 +24,7 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
     const imgRef = useRef<HTMLImageElement>();
     const [t] = useTranslation();
     const [network, stacksNetwork] = useNetwork();
+    const [, showModal] = useModal();
     const {asset, nftId, readOnly} = props;
     const [uri, setUri] = useState<string>('');
     const [image, setImage] = useState<string>('/nft-placeholder.png');
@@ -41,6 +43,10 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
             })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const withdrawClicked = () => {
+        showModal({body: <WithdrawNft asset={asset} nftId={nftId}/>});
+    }
 
     return <Box sx={{
         width: '260px',
@@ -74,8 +80,8 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
                 }
             }}>
                 {!readOnly && (
-                    <Tooltip title={t('Transfer')}>
-                        <Button variant="contained" sx={{mr: '6px'}}><SwapHorizIcon/></Button>
+                    <Tooltip title={t('Withdraw')}>
+                        <Button variant="contained" sx={{mr: '6px'}} onClick={withdrawClicked}><SwapHorizIcon/></Button>
                     </Tooltip>
                 )}
                 {uri && (

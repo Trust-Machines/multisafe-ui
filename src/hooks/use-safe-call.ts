@@ -23,7 +23,8 @@ const useSafeCalls = (): {
     safeConfirmTxCall: (transaction: SafeTransaction) => Promise<FinishedTxData>,
     safeRevokeTxCall: (txId: number) => Promise<FinishedTxData>,
     safeTransferFtCall: (ft: string, amount: string, recipient: string, memo: string) => Promise<FinishedTxData>,
-    safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>
+    safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>,
+    safeTransferNftCall: (nft: string, id: string, recipient: string) => Promise<FinishedTxData>,
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -107,6 +108,16 @@ const useSafeCalls = (): {
         someCV(bufferCVFromString(memo)),
     ]);
 
+    const safeTransferNftCall = (nft: string, id:string, recipient: string) => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'transfer-sip-009'),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+        contractPrincipalCVFromString(nft),
+        someCV(standardPrincipalCV(recipient)),
+        someCV(uintCV(id)),
+        noneCV(),
+    ]);
+
     return {
         safeAddOwnerCall,
         safeRemoveOwnerCall,
@@ -114,7 +125,8 @@ const useSafeCalls = (): {
         safeConfirmTxCall,
         safeRevokeTxCall,
         safeTransferFtCall,
-        safeTransferStxCall
+        safeTransferStxCall,
+        safeTransferNftCall
     };
 }
 

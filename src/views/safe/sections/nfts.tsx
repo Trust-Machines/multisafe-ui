@@ -20,6 +20,7 @@ import SectionHeader from '../components/section-header';
 import TokenLogo from '../../../components/token-logo';
 import DepositNft from '../components/dialogs/deposit-nft';
 import ListNft from '../components/dialogs/list-nft';
+import WithdrawNft from '../components/dialogs/withdraw-nft';
 import {NFTAsset} from '../../../types';
 
 const NFTs = (props: { readOnly: boolean }) => {
@@ -40,8 +41,8 @@ const NFTs = (props: { readOnly: boolean }) => {
         showModal({body: <ListNft asset={asset} readOnly={props.readOnly}/>, fullScreen: true});
     }
 
-    const withdrawClicked  = (asset: NFTAsset) => {
-
+    const withdrawClicked = (asset: NFTAsset) => {
+        showModal({body: <WithdrawNft asset={asset}/>});
     }
 
     return <>
