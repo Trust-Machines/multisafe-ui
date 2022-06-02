@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import useTranslation from '../../../hooks/use-translation';
 import useModal from '../../../hooks/use-modal';
 import useSafe from '../../../hooks/use-safe';
+import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 import AddNftAsset from '../components/dialogs/add-nft-asset';
 import SectionHeader from '../components/section-header';
 import TokenLogo from '../../../components/token-logo';
@@ -25,6 +26,7 @@ const NFTs = (props: { readOnly: boolean }) => {
     const [safe,] = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
+    const [, isMd] = useMediaBreakPoint();
 
     const addAssetClicked = () => {
         showModal({body: <AddNftAsset/>});
@@ -38,6 +40,10 @@ const NFTs = (props: { readOnly: boolean }) => {
         showModal({body: <ListNft asset={asset} readOnly={props.readOnly}/>, fullScreen: true});
     }
 
+    const withdrawClicked  = (asset: NFTAsset) => {
+
+    }
+
     return <>
         <SectionHeader title={t('NFTs')} icon={<DiamondIcon/>}>
             <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
@@ -49,7 +55,9 @@ const NFTs = (props: { readOnly: boolean }) => {
                         <TableRow>
                             <TableCell>{t('ASSET')}</TableCell>
                             <TableCell align="right">{t('BALANCE')}</TableCell>
-                            <TableCell/>
+                            <TableCell sx={{
+                                width: isMd ? '200px' : null
+                            }}/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -77,6 +85,16 @@ const NFTs = (props: { readOnly: boolean }) => {
                                         </Button> : <Button disabled>0</Button>}
                                 </TableCell>
                                 <TableCell align="right">
+                                    {!props.readOnly && (
+                                        <Button size="small" sx={{
+                                            mr: isMd ? '6px' : null,
+                                            mb: isMd ? null : '6px'
+                                        }} onClick={() => {
+                                            withdrawClicked(nft.asset)
+                                        }} variant="outlined">
+                                            {t('Withdraw')}
+                                        </Button>
+                                    )}
                                     <Button size="small" onClick={() => {
                                         depositClicked(nft.asset)
                                     }} variant="outlined">
