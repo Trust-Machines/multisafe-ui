@@ -62,6 +62,20 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
                 <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
             </>
         }
+        case 'transfer-sip-009': {
+            let asset = safe.nftBalances.find(x => x.asset.address === transaction.paramNft)?.asset;
+            // Once an address starts to hold an asset it always stays on api.
+            // Putting a control here for potential api updates in the future.
+            if (!asset) {
+                return null;
+            }
+
+            return <>
+                <Box sx={titleSx}>{t('Transfer {{a}} #{{i}}', {a: asset.name, i: transaction.paramU.toString()})}</Box>
+                <Wallet address={transaction.paramP}/>
+                <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
+            </>
+        }
         case 'transfer-sip-010': {
             let asset = safe.ftBalances.find(x => x.asset.address === transaction.paramFt)?.asset;
             // Once an address starts to hold an asset it always stays on api.
