@@ -9,7 +9,7 @@ export const baseAuthOptions = {
     manifestPath: '/manifest.json',
     appDetails: {
         name: 'MultiSafe',
-        icon: '/logo400.png',
+        icon: `${window.origin}/logo512.png`,
     },
 }
 
