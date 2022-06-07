@@ -6,9 +6,9 @@ The UI app of [MultiSafe](https://github.com/Trust-Machines/multisafe), a shared
 
 This application is dockerized so the easiest way to make it run is to follow the steps below and install it with Docker.
 
-> docker build -t msafe-ui .
+``` docker build -t msafe-ui . ```
 
-> docker run -p 3000:3000 msafe-ui
+``` docker run -p 3000:3000 msafe-ui ```
 
 Once the installation ends the app should be accessible on http://localhost:3000
 
