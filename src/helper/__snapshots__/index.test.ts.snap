@@ -64,3 +64,9 @@ Object {
   "type": 6,
 }
 `;
+
+exports[`7 transformNftUri 1`] = `"https://gateway.ipfs.io/ipfs/QmYTX3u58v2Ero2drdtqhL6rPE5qnv51EJZ6WSu3LKqUBN/crashpunks-3.json"`;
+
+exports[`7 transformNftUri 2`] = `"https://arweave.net/II4z2ziYyqG7-kWDa98lWGfjxRdYOx9Zdld9P_I_kzE/3.json"`;
+
+exports[`7 transformNftUri 3`] = `"https://api.satoshibles.com/token/btc/25"`;

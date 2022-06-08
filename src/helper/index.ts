@@ -74,17 +74,20 @@ export const contractPrincipalCVFromString = (s: string) => {
 }
 
 export const transformNftUri = (uri: string, nftId: string) => {
-
     const u = uri.replace('{id}', nftId);
 
     if (u.startsWith('ipfs://')) {
-        return u.replace('ipfs://', 'https://gateway.ipfs.io/ipfs/')
+        return u.replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
     }
 
-    return uri;
+    if (u.startsWith('ar://')) {
+        return u.replace('ar://', 'https://arweave.net/');
+    }
+
+    return u;
 }
 
-export const isValidRecipient= (r: string) => {
+export const isValidRecipient = (r: string) => {
     if (r === '') {
         return false;
     }
