@@ -43,7 +43,7 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
         case 'add-owner':
             return <>
                 <Box sx={titleSx}>{t('Add new owner')}</Box>
-                <Wallet address={transaction.paramP}/>
+                <Wallet address={transaction.paramP!}/>
             </>
         case 'set-threshold':
             return <>
@@ -52,13 +52,13 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
         case 'remove-owner':
             return <>
                 <Box sx={titleSx}>{t('Remove owner')}</Box>
-                <Wallet address={transaction.paramP}/>
+                <Wallet address={transaction.paramP!}/>
             </>
         case 'transfer-stx': {
-            const amount = formatUnits(transaction.paramU.toString(), 6).toString();
+            const amount = formatUnits(transaction.paramU!.toString(), 6).toString();
             return <>
                 <Box sx={titleSx}>{t('Transfer {{a}} STX', {a: amount})}</Box>
-                <Wallet address={transaction.paramP}/>
+                <Wallet address={transaction.paramP!}/>
                 <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
             </>
         }
@@ -71,8 +71,8 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
             }
 
             return <>
-                <Box sx={titleSx}>{t('Transfer {{a}} #{{i}}', {a: asset.name, i: transaction.paramU.toString()})}</Box>
-                <Wallet address={transaction.paramP}/>
+                <Box sx={titleSx}>{t('Transfer {{a}} #{{i}}', {a: asset.name, i: transaction.paramU!.toString()})}</Box>
+                <Wallet address={transaction.paramP!}/>
                 <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
             </>
         }
@@ -83,10 +83,10 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
             if (!asset) {
                 return null;
             }
-            const amount = formatUnits(transaction.paramU.toString(), asset.decimals).toString();
+            const amount = formatUnits(transaction.paramU!.toString(), asset.decimals).toString();
             return <>
                 <Box sx={titleSx}>{t('Transfer {{a}} {{s}}', {a: amount, s: asset.symbol})}</Box>
-                <Wallet address={transaction.paramP}/>
+                <Wallet address={transaction.paramP!}/>
                 <Box sx={memoSx}>{transaction.paramB ? hexToAscii(transaction.paramB) : ''}</Box>
             </>
         }

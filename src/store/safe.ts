@@ -10,9 +10,9 @@ export interface SafeTransaction {
     confirmed: boolean,
     paramFt: string,
     paramNft: string,
-    paramP: string,
-    paramU: number,
-    paramB: string,
+    paramP: string | null,
+    paramU: number | string | null,
+    paramB: string | null,
 }
 
 export interface SafeFtBalance {
