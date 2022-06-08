@@ -19,7 +19,7 @@ import FormattedBN from '../../../components/formatted-bn';
 import TokenLogo from '../../../components/token-logo';
 import DepositFt from '../components/dialogs/deposit-ft';
 import WithdrawFt from '../components/dialogs/withdraw-ft';
-import AddFtAsset from '../components/dialogs/add-ft-asset';
+import AddAsset from '../components/dialogs/add-asset';
 import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
 
@@ -40,7 +40,7 @@ const Tokens = (props: { readOnly: boolean }) => {
     }
 
     const addAssetClicked = () => {
-        showModal({body: <AddFtAsset/>});
+        showModal({body: <AddAsset type="ft"/>});
     }
 
     const depositClicked = (asset: FTAsset) => {

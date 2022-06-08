@@ -15,7 +15,7 @@ import useTranslation from '../../../hooks/use-translation';
 import useModal from '../../../hooks/use-modal';
 import useSafe from '../../../hooks/use-safe';
 import useMediaBreakPoint from '../../../hooks/use-media-break-point';
-import AddNftAsset from '../components/dialogs/add-nft-asset';
+import AddAsset from '../components/dialogs/add-asset';
 import SectionHeader from '../components/section-header';
 import TokenLogo from '../../../components/token-logo';
 import DepositNft from '../components/dialogs/deposit-nft';
@@ -30,7 +30,7 @@ const NFTs = (props: { readOnly: boolean }) => {
     const [, isMd] = useMediaBreakPoint();
 
     const addAssetClicked = () => {
-        showModal({body: <AddNftAsset/>});
+        showModal({body: <AddAsset type="nft"/>});
     }
 
     const depositClicked = (asset: NFTAsset) => {

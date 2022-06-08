@@ -1,7 +1,7 @@
-import AddFtAsset from './add-ft-asset';
+import AddAsset from './add-asset';
 import {renderWithRouter} from '../../../../helper/test-helper';
 
 test('1 Default Render', () => {
-    const view = renderWithRouter(<AddFtAsset/>);
+    const view = renderWithRouter(<AddAsset type="ft"/>);
     expect(view.container).toMatchSnapshot()
 });

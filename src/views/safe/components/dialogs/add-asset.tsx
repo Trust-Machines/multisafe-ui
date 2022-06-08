@@ -14,10 +14,10 @@ import useNetwork from '../../../../hooks/use-network';
 import useAssets from '../../../../hooks/use-assets';
 import useToast from '../../../../hooks/use-toast';
 import CloseModal from '../../../../components/close-modal';
-import {getFTInfo} from '../../../../api';
-import {FTAsset} from '../../../../types';
+import {getFTInfo, getNfTInfo} from '../../../../api';
+import {FTAsset, NFTAsset} from '../../../../types';
 
-const AddFtAsset = () => {
+const AddAsset = (props: { type: 'ft' | 'nft' }) => {
     const inputRef = useRef<HTMLInputElement>();
     const [asset, setAsset] = useState<string>('');
     const [inProgress, setInProgress] = useState<boolean>(false);
@@ -46,6 +46,15 @@ const AddFtAsset = () => {
         setInProgress(true);
         setError('');
 
+        if (props.type === 'ft') {
+            addFt().then();
+            return;
+        }
+
+        addNft().then();
+    }
+
+    const addFt = async () => {
         let ftInfo: FTAsset;
         try {
             ftInfo = await getFTInfo(stacksNetwork, asset);
@@ -71,6 +80,33 @@ const AddFtAsset = () => {
         }
 
         showMessage(t('{{symbol}} added', {symbol: ftInfo.symbol}), 'success');
+        handleClose();
+    }
+
+    const addNft = async () => {
+        let nftInfo: NFTAsset;
+        try {
+            nftInfo = await getNfTInfo(stacksNetwork, asset);
+        } catch (e) {
+            setError(t("Couldn't fetch token information"));
+            setInProgress(false);
+            return;
+        }
+
+        try {
+            await addAsset({
+                address: asset,
+                name: nftInfo.name,
+                ref: nftInfo.ref,
+                type: 'nft'
+            });
+        } catch (e) {
+            return;
+        } finally {
+            setInProgress(false);
+        }
+
+        showMessage(t('{{name}} added', {name: nftInfo.name}), 'success');
         handleClose();
     }
 
@@ -101,4 +137,4 @@ const AddFtAsset = () => {
     );
 }
 
-export default AddFtAsset;
+export default AddAsset;
