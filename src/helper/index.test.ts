@@ -4,7 +4,9 @@ import {
     checkDecimalAmount,
     checkAmount,
     detectTransactionType,
-    contractPrincipalCVFromString, transformNftUri
+    contractPrincipalCVFromString,
+    transformNftUri,
+    isValidRecipient
 } from './';
 import {DEPLOYERS} from '@trustmachines/multisafe-contracts';
 
@@ -55,4 +57,11 @@ test('7 transformNftUri', () => {
     expect(transformNftUri('ipfs://QmYTX3u58v2Ero2drdtqhL6rPE5qnv51EJZ6WSu3LKqUBN/crashpunks-{id}.json', '3')).toMatchSnapshot();
     expect(transformNftUri('ar://II4z2ziYyqG7-kWDa98lWGfjxRdYOx9Zdld9P_I_kzE/3.json', '15')).toMatchSnapshot();
     expect(transformNftUri('https://api.satoshibles.com/token/btc/{id}', '25')).toMatchSnapshot();
+});
+
+test('8 isValidRecipient', () => {
+    expect(isValidRecipient('')).toMatchSnapshot();
+    expect(isValidRecipient('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7')).toMatchSnapshot();
+    expect(isValidRecipient('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7.contract')).toMatchSnapshot();
+    expect(isValidRecipient('foo')).toMatchSnapshot();
 });
