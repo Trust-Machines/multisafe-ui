@@ -8,26 +8,26 @@ jest.mock('../../../hooks/use-address');
 jest.mock('../../../hooks/use-bns-name');
 
 test('1 Default render', () => {
-    const rendered = render(<Wallet/>);
-    expect(rendered.container).toMatchSnapshot()
+    const view = render(<Wallet/>);
+    expect(view.container).toMatchSnapshot()
 });
 
 test('2 Render with address', () => {
     (useAddress as jest.Mock).mockReturnValue('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7')
-    const rendered = render(<Wallet/>);
-    expect(rendered.container).toMatchSnapshot()
+    const view = render(<Wallet/>);
+    expect(view.container).toMatchSnapshot()
 });
 
 test('3 Render with bns', () => {
     (useAddress as jest.Mock).mockReturnValue('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7');
     (useBnsName as jest.Mock).mockReturnValue('tbb.btc')
-    const rendered = render(<Wallet/>);
-    expect(rendered.container).toMatchSnapshot()
+    const view = render(<Wallet/>);
+    expect(view.container).toMatchSnapshot()
 });
 
 test('4 Default render WalletMenu', () => {
-    const rendered = render(<WalletMenu onSignOut={()=>{}}/>);
-    expect(rendered.container).toMatchSnapshot()
+    const view = render(<WalletMenu onSignOut={()=>{}}/>);
+    expect(view.container).toMatchSnapshot()
 });
 
 

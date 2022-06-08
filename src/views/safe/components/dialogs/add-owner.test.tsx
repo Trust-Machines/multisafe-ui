@@ -38,20 +38,20 @@ test('1 Render & Submit', () => {
     (useAddress as jest.Mock).mockReturnValue('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7');
 
     // Render
-    const rendered = renderWithRouter(<AddOwner/>);
-    expect(rendered.container).toMatchSnapshot();
+    const view = renderWithRouter(<AddOwner/>);
+    expect(view.container).toMatchSnapshot();
 
     // Invalid address. Should show error message.
     fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP3XD8'}});
     fireEvent.click(screen.getByText('Submit'));
-    expect(rendered.container).toMatchSnapshot();
+    expect(view.container).toMatchSnapshot();
 
     // Should clear error message on address change.
     fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2'}});
-    expect(rendered.container).toMatchSnapshot();
+    expect(view.container).toMatchSnapshot();
 
     // Entered address is already in owner list. Should show error message.
     fireEvent.change(screen.getByLabelText('Owner address'), {target: {value: 'SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN'}});
     fireEvent.click(screen.getByText('Submit'));
-    expect(rendered.container).toMatchSnapshot();
+    expect(view.container).toMatchSnapshot();
 });
