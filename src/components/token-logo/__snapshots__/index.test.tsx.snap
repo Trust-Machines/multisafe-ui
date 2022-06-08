@@ -3,7 +3,7 @@
 exports[`1 Default render 1`] = `
 <div>
   <img
-    class="MuiBox-root css-9uy14h"
+    class="MuiBox-root css-1qlyvvp"
     src="/tokens/0x234234234234.svg"
   />
 </div>
