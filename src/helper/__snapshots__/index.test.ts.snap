@@ -47,3 +47,20 @@ exports[`5 detectTransactionType 6`] = `"transfer-sip-009"`;
 exports[`5 detectTransactionType 7`] = `"transfer-sip-010"`;
 
 exports[`5 detectTransactionType 8`] = `null`;
+
+exports[`6 contractPrincipalCVFromString 1`] = `
+Object {
+  "address": Object {
+    "hash160": "fad413a3b38e9cc64afb1bc0ecae4b948966785d",
+    "type": 0,
+    "version": 22,
+  },
+  "contractName": Object {
+    "content": "add-owner",
+    "lengthPrefixBytes": 1,
+    "maxLengthBytes": 128,
+    "type": 2,
+  },
+  "type": 6,
+}
+`;

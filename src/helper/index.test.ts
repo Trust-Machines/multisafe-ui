@@ -1,5 +1,12 @@
-import {formatUnits, parseUnits, checkDecimalAmount, checkAmount, detectTransactionType} from './';
-import {DEPLOYERS, NETWORK} from '@trustmachines/multisafe-contracts';
+import {
+    formatUnits,
+    parseUnits,
+    checkDecimalAmount,
+    checkAmount,
+    detectTransactionType,
+    contractPrincipalCVFromString
+} from './';
+import {DEPLOYERS} from '@trustmachines/multisafe-contracts';
 
 test('1 parseUnits', () => {
     expect(parseUnits("1.256", 6)).toMatchSnapshot();
@@ -38,4 +45,8 @@ test('5 detectTransactionType', () => {
     expect(detectTransactionType(`${DEPLOYERS[0]}.transfer-sip-009`)).toMatchSnapshot();
     expect(detectTransactionType(`${DEPLOYERS[0]}.transfer-sip-010`)).toMatchSnapshot();
     expect(detectTransactionType(`${DEPLOYERS[0]}.transfer-token`)).toMatchSnapshot();
+});
+
+test('6 contractPrincipalCVFromString', () => {
+    expect(contractPrincipalCVFromString(`SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7.add-owner`)).toMatchSnapshot();
 });
