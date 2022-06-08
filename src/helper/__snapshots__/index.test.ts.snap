@@ -31,3 +31,19 @@ exports[`3 checkDecimalAmount 6`] = `false`;
 exports[`4 checkAmount 1`] = `true`;
 
 exports[`4 checkAmount 2`] = `false`;
+
+exports[`5 detectTransactionType 1`] = `"add-owner"`;
+
+exports[`5 detectTransactionType 2`] = `null`;
+
+exports[`5 detectTransactionType 3`] = `"remove-owner"`;
+
+exports[`5 detectTransactionType 4`] = `"set-threshold"`;
+
+exports[`5 detectTransactionType 5`] = `"transfer-stx"`;
+
+exports[`5 detectTransactionType 6`] = `"transfer-sip-009"`;
+
+exports[`5 detectTransactionType 7`] = `"transfer-sip-010"`;
+
+exports[`5 detectTransactionType 8`] = `null`;
