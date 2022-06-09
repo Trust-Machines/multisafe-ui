@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import DialogContentText from '@mui/material/DialogContentText';
 import {FinishedTxData, useConnect} from '@stacks/connect-react';
 import {
     PostConditionMode,
@@ -22,23 +21,22 @@ import useNetwork from '../../../../hooks/use-network';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
-import {FTAsset} from '../../../../types';
 import CloseModal from '../../../../components/close-modal';
 import CurrencyField from '../../../../components/currency-field';
+import CommonTxFeedbackDialog from './common-feedback';
 import {parseUnits} from '../../../../helper';
-import {makeTxUrl} from '../../../../api/helper';
+import {FTAsset} from '../../../../types';
 
 const DepositFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const [network, stacksNetwork] = useNetwork();
+    const [, stacksNetwork] = useNetwork();
     const address = useAddress();
     const [safe,] = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [amount, setAmount] = useState<string>('');
 
-    const [txId, setTxId] = useState<string>('');
     const {doSTXTransfer, doContractCall} = useConnect();
 
     const handleClose = () => {
@@ -101,58 +99,47 @@ const DepositFt = (props: { asset: FTAsset }) => {
         }).then();
     }
 
+    const dialogTitle = t(`Deposit {{symbol}}`, {symbol: asset.symbol});
+
     const onFinish = (data: FinishedTxData) => {
-        setTxId(data.txId);
-    }
-
-    let dialogBody = <>
-        <CurrencyField
-            isDecimal={asset.decimals > 0}
-            symbol={asset.symbol}
-            onChange={(a) => {
-                setAmount(a);
-            }}
-            fieldProps={{
-                autoFocus: true,
-                inputRef: inputRef,
-                label: t('Enter amount'),
-                value: amount,
-                fullWidth: true,
-                inputProps: {
-                    autoComplete: "off",
-                    autoCorrect: "off",
-                    spellCheck: "false",
-                    maxLength: "20"
-                }
-            }}/>
-    </>;
-
-    let dialogActions = <>
-        <Button onClick={handleClose}>{t('Cancel')}</Button>
-        <Button onClick={handleSend}>{t('Send')}</Button>
-    </>;
-
-    if (txId) {
-        dialogBody = <DialogContentText component="div">
-            <Box sx={{mb: '12px'}}>{t('Transaction broadcasted.')}</Box>
-            <Box>
-                <a href={makeTxUrl(txId, network)} target='_blank' rel='noreferrer'>
-                    {t('View on Blockchain Explorer')}
-                </a>
-            </Box>
-        </DialogContentText>;
-        dialogActions = <><Button onClick={handleClose}>{t('Close')}</Button></>;
+        showModal({
+            body: <CommonTxFeedbackDialog txId={data.txId} title={dialogTitle} requiresConfirmation={false}
+                                          description={t('Transaction broadcasted')}/>
+        });
     }
 
     return (
         <>
-            <DialogTitle>{t(`Deposit {{symbol}}`, {symbol: asset.symbol})}
+            <DialogTitle>{dialogTitle}
                 <CloseModal onClick={handleClose}/>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{pt: '10px'}}>{dialogBody}</Box>
+                <Box sx={{pt: '10px'}}>
+                    <CurrencyField
+                        isDecimal={asset.decimals > 0}
+                        symbol={asset.symbol}
+                        onChange={(a) => {
+                            setAmount(a);
+                        }}
+                        fieldProps={{
+                            autoFocus: true,
+                            inputRef: inputRef,
+                            label: t('Enter amount'),
+                            value: amount,
+                            fullWidth: true,
+                            inputProps: {
+                                autoComplete: "off",
+                                autoCorrect: "off",
+                                spellCheck: "false",
+                                maxLength: "20"
+                            }
+                        }}/>
+                </Box>
             </DialogContent>
-            <DialogActions>{dialogActions}</DialogActions>
+            <DialogActions>
+                <Button onClick={handleClose}>{t('Cancel')}</Button>
+                <Button onClick={handleSend}>{t('Send')}</Button>
+            </DialogActions>
         </>
     );
 }
