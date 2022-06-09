@@ -124,7 +124,7 @@ const WithdrawNft = (props: { asset: NFTAsset, nftId?: string }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>{t('Cancel')}</Button>
-                <Button onClick={handleSubmit}>{t('Send')}</Button>
+                <Button onClick={handleSubmit}>{t('Withdraw')}</Button>
             </DialogActions>
         </>
     );
