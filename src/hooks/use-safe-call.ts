@@ -95,7 +95,7 @@ const useSafeCalls = (): {
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
         someCV(standardPrincipalCV(recipient)),
         someCV(uintCV(amount)),
-        someCV(bufferCVFromString(memo)),
+        memo.length > 0 ? someCV(bufferCVFromString(memo)) : noneCV(),
     ]);
 
     const safeTransferStxCall = (recipient: string, amount: string, memo: string) => doSafeCall('submit', [
@@ -105,10 +105,10 @@ const useSafeCalls = (): {
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
         someCV(standardPrincipalCV(recipient)),
         someCV(uintCV(amount)),
-        someCV(bufferCVFromString(memo)),
+        memo.length > 0 ? someCV(bufferCVFromString(memo)) : noneCV()
     ]);
 
-    const safeTransferNftCall = (nft: string, id:string, recipient: string) => doSafeCall('submit', [
+    const safeTransferNftCall = (nft: string, id: string, recipient: string) => doSafeCall('submit', [
         contractPrincipalCV(DEPLOYER[network], 'transfer-sip-009'),
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),

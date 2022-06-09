@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import {TextField} from '@mui/material';
-import {validateStacksAddress} from '@stacks/transactions';
 
 import useTranslation from '../../../../hooks/use-translation';
 import useModal from '../../../../hooks/use-modal';
@@ -13,10 +12,9 @@ import useSafeCalls from '../../../../hooks/use-safe-call';
 import CurrencyField from '../../../../components/currency-field';
 import WalletField from '../../../../components/wallet-field';
 import CloseModal from '../../../../components/close-modal';
-import {FTAsset} from '../../../../types';
-import {contractPrincipalCVFromString, parseUnits} from '../../../../helper';
 import CommonTxFeedbackDialog from './common-feedback';
-
+import {FTAsset} from '../../../../types';
+import {parseUnits, isValidRecipient} from '../../../../helper';
 
 const WithdrawFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
@@ -30,30 +28,11 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
     const [memo, setMemo] = useState<string>('');
     const [submitted, setSubmitted] = useState<boolean>(false);
 
-    const validateRecipient = (r: string) => {
-        if (r === '') {
-            return false;
-        }
-
-        if (validateStacksAddress(r)) {
-            return true;
-        }
-
-        try {
-            contractPrincipalCVFromString(r);
-            return true;
-        } catch (e) {
-
-        }
-
-        return false;
-    }
-
     const handleClose = () => {
         showModal(null);
     };
 
-    const isValid = validateRecipient(recipient);
+    const isValid = isValidRecipient(recipient);
 
     let errorText = '';
     if (submitted && !isValid) {
@@ -95,76 +74,71 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
         });
     }
 
-    const dialogBody = <>
-        <Box sx={{mb: '20px'}}>
-            <CurrencyField
-                isDecimal={asset.decimals > 0}
-                symbol={asset.symbol}
-                onChange={(a) => {
-                    setAmount(a);
-                    setSubmitted(false);
-                }}
-                fieldProps={{
-                    name: "amount",
-                    autoFocus: true,
-                    inputRef: amountInputRef,
-                    label: t('Amount'),
-                    value: amount,
-                    fullWidth: true,
-                    inputProps: {
-                        autoComplete: "off",
-                        autoCorrect: "off",
-                        spellCheck: "false",
-                        maxLength: "20"
-                    }
-                }}/>
-        </Box>
-        <WalletField
-            inputProps={{
-                inputRef: recipientInputRef,
-                name: "recipient",
-                value: recipient,
-                label: t('Recipient'),
-                placeholder: t('Recipient'),
-                onChange: (e) => {
-                    setRecipient(e.target.value);
-                    setSubmitted(false);
-                },
-                error: !!errorText,
-                helperText: errorText || ' '
-            }}
-            onBnsResolve={(name) => {
-                setRecipient(name);
-                setSubmitted(false);
-            }}
-            isValid={isValid}
-        />
-
-        <TextField
-            onChange={(e) => {
-                setMemo(e.target.value.replace(/[^a-z0-9 ]+/gi, '')); // only alphanumeric
-                setSubmitted(false);
-            }}
-            value={memo}
-            label="Memo"
-            fullWidth
-            inputProps={{maxLength: 20}} name="memo"/>
-    </>;
-
-    const dialogActions = <>
-        <Button onClick={handleClose}>{t('Cancel')}</Button>
-        <Button onClick={handleSubmit}>{t('Send')}</Button>
-    </>;
-
     return (
         <>
             <DialogTitle>{dialogTitle}
                 <CloseModal onClick={handleClose}/>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{pt: '10px'}}>{dialogBody}</Box>
+                <Box sx={{pt: '10px'}}>
+                    <Box sx={{mb: '20px'}}>
+                        <CurrencyField
+                            isDecimal={asset.decimals > 0}
+                            symbol={asset.symbol}
+                            onChange={(a) => {
+                                setAmount(a);
+                                setSubmitted(false);
+                            }}
+                            fieldProps={{
+                                name: "amount",
+                                autoFocus: true,
+                                inputRef: amountInputRef,
+                                label: t('Amount'),
+                                value: amount,
+                                fullWidth: true,
+                                inputProps: {
+                                    autoComplete: "off",
+                                    autoCorrect: "off",
+                                    spellCheck: "false",
+                                    maxLength: "20"
+                                }
+                            }}/>
+                    </Box>
+                    <WalletField
+                        inputProps={{
+                            inputRef: recipientInputRef,
+                            name: "recipient",
+                            value: recipient,
+                            label: t('Recipient'),
+                            placeholder: t('Recipient'),
+                            onChange: (e) => {
+                                setRecipient(e.target.value);
+                                setSubmitted(false);
+                            },
+                            error: !!errorText,
+                            helperText: errorText || ' '
+                        }}
+                        onBnsResolve={(name) => {
+                            setRecipient(name);
+                            setSubmitted(false);
+                        }}
+                        isValid={isValid}
+                    />
+                    <TextField
+                        onChange={(e) => {
+                            setMemo(e.target.value.replace(/[^a-z0-9 ]+/gi, '')); // only alphanumeric
+                            setSubmitted(false);
+                        }}
+                        value={memo}
+                        label="Memo"
+                        fullWidth
+                        inputProps={{maxLength: 20}} name="memo"/>
+                </Box>
             </DialogContent>
-            <DialogActions>{dialogActions}</DialogActions>
+            <DialogActions>
+                <Button onClick={handleClose}>{t('Cancel')}</Button>
+                <Button onClick={handleSubmit}>{t('Withdraw')}</Button>
+            </DialogActions>
         </>
     );
 }
