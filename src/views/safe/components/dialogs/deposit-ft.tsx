@@ -138,7 +138,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>{t('Cancel')}</Button>
-                <Button onClick={handleSend}>{t('Send')}</Button>
+                <Button onClick={handleSend}>{t('Deposit')}</Button>
             </DialogActions>
         </>
     );

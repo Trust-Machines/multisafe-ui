@@ -5,7 +5,7 @@ exports[`1 Default Render 1`] = `
   <h2
     class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
   >
-    Deposit DIKO
+    Deposit Arkadiko Token
     <button
       aria-label="close"
       class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-lc2yqr-MuiButtonBase-root-MuiIconButton-root"
@@ -43,32 +43,20 @@ exports[`1 Default Render 1`] = `
           for="mui-1"
           id="mui-1-label"
         >
-          Enter amount
+          NFT ID
         </label>
         <div
-          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl MuiInputBase-adornedEnd css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root"
+          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <input
             aria-invalid="false"
-            autocomplete="off"
-            autocorrect="off"
-            class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-1"
-            maxlength="20"
-            placeholder="0.0"
-            spellcheck="false"
+            maxlength="30"
+            placeholder="Enter ID of the NFT you like to transfer to the Safe"
             type="text"
             value=""
           />
-          <div
-            class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
-          >
-            <p
-              class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
-            >
-              DIKO
-            </p>
-          </div>
           <fieldset
             aria-hidden="true"
             class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
@@ -77,7 +65,7 @@ exports[`1 Default Render 1`] = `
               class="css-1in441m"
             >
               <span>
-                Enter amount
+                NFT ID
               </span>
             </legend>
           </fieldset>
