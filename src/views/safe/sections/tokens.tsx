@@ -22,6 +22,8 @@ import WithdrawFt from '../components/dialogs/withdraw-ft';
 import AddFtAsset from '../components/dialogs/add-ft-asset';
 import SectionHeader from '../components/section-header';
 import {FTAsset} from '../../../types';
+import DepositBtc from '../components/deposit-btc';
+import useNetwork from '../../../hooks/use-network';
 
 
 const Tokens = (props: { readOnly: boolean }) => {
@@ -29,6 +31,7 @@ const Tokens = (props: { readOnly: boolean }) => {
     const [, showModal] = useModal()
     const [t] = useTranslation();
     const [, isMd] = useMediaBreakPoint();
+    const [network,] = useNetwork();
 
     if (safe.loading) {
         return <Box sx={{
@@ -53,7 +56,10 @@ const Tokens = (props: { readOnly: boolean }) => {
 
     return <>
         <SectionHeader title="Coins" icon={<TollIcon/>}>
-            <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
+            <Box>
+                <Button onClick={addAssetClicked} variant="contained">{t('Add Asset')}</Button>
+                {network === 'testnet' && <DepositBtc/>}
+            </Box>
         </SectionHeader>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
             <TableContainer component={Paper}>
