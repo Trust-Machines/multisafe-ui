@@ -28,6 +28,7 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
     const {asset, nftId, readOnly} = props;
     const [uri, setUri] = useState<string>('');
     const [image, setImage] = useState<string>(NFT_PLACEHOLDER);
+    const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         getNftTokenUri(stacksNetwork, asset.address, nftId, NULL_ADDRESS[network])
@@ -95,11 +96,13 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
             <Box ref={imgRef} src={image} component="img" sx={{
                 width: '100%',
                 height: '100%',
-                animation: image === NFT_PLACEHOLDER ? `fadeIn 2s infinite` : null
+                animation: !imageLoaded ? `fadeIn 2s infinite` : null
             }} onError={() => {
-                imgRef.current!.src = '/nft-placeholder.png';
-            }}
-            />
+                imgRef.current!.src = NFT_PLACEHOLDER;
+                setImageLoaded(true);
+            }} onLoad={() => {
+                setImageLoaded(true);
+            }}/>
         </Box>
     </Box>
 }
