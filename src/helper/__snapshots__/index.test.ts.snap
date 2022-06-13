@@ -71,6 +71,8 @@ exports[`7 transformNftUri 2`] = `"https://arweave.net/II4z2ziYyqG7-kWDa98lWGfjx
 
 exports[`7 transformNftUri 3`] = `"https://api.satoshibles.com/token/btc/25"`;
 
+exports[`7 transformNftUri 4`] = `"https://gateway.ipfs.io/ipfs/QmYTX3u58v2Ero2drdtqhL6rPE5qnv51EJZ6WSu3LKqUBN/crashpunks-444.json"`;
+
 exports[`8 isValidRecipient 1`] = `false`;
 
 exports[`8 isValidRecipient 2`] = `true`;

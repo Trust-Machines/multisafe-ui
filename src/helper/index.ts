@@ -77,7 +77,7 @@ export const transformNftUri = (uri: string, nftId: string) => {
     const u = uri.replace('{id}', nftId);
 
     if (u.startsWith('ipfs://')) {
-        return u.replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
+        return u.replace(/ipfs:\/\/(ipfs\/)?/, 'https://gateway.ipfs.io/ipfs/');
     }
 
     if (u.startsWith('ar://')) {
