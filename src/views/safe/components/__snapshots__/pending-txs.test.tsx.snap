@@ -18,7 +18,7 @@ exports[`3 With pending txs 1`] = `
         Confirm #24
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1231?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >
@@ -41,7 +41,7 @@ exports[`3 With pending txs 1`] = `
         Revoke #25
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1232?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >
@@ -64,7 +64,7 @@ exports[`3 With pending txs 1`] = `
         Add new owner
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1233?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >
@@ -110,7 +110,7 @@ exports[`3 With pending txs 1`] = `
         Update confirmation threshold
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1235?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >
@@ -133,7 +133,7 @@ exports[`3 With pending txs 1`] = `
         Transfer STX
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1236?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >
@@ -156,7 +156,7 @@ exports[`3 With pending txs 1`] = `
         Transfer NFT
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1237?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >
@@ -179,7 +179,7 @@ exports[`3 With pending txs 1`] = `
         Transfer Token
         <a
           class="MuiBox-root css-1qif583"
-          href="https://explorer.stacks.co/txid/0x1234?chain=mainnet"
+          href="https://explorer.stacks.co/txid/0x1238?chain=mainnet"
           rel="noreferrer"
           target="_blank"
         >

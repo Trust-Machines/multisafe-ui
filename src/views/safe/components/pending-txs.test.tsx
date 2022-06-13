@@ -50,17 +50,17 @@ test('3 With pending txs', () => {
     ]);
     (usePendingTxs as jest.Mock).mockReturnValue([[
         {
-            txHash: "0x1234",
+            txHash: "0x1231",
             fn: "confirm",
             txId: 24
         },
         {
-            txHash: "0x1234",
+            txHash: "0x1232",
             fn: "revoke",
             txId: 25
         },
         {
-            txHash: "0x1234",
+            txHash: "0x1233",
             fn: "submit",
             executor: `${DEPLOYERS[0]}.add-owner`
         },
@@ -70,22 +70,22 @@ test('3 With pending txs', () => {
             executor: `${DEPLOYERS[0]}.remove-owner`
         },
         {
-            txHash: "0x1234",
+            txHash: "0x1235",
             fn: "submit",
             executor: `${DEPLOYERS[0]}.set-threshold`
         },
         {
-            txHash: "0x1234",
+            txHash: "0x1236",
             fn: "submit",
             executor: `${DEPLOYERS[0]}.transfer-stx`
         },
         {
-            txHash: "0x1234",
+            txHash: "0x1237",
             fn: "submit",
             executor: `${DEPLOYERS[0]}.transfer-sip-009`
         },
         {
-            txHash: "0x1234",
+            txHash: "0x1238",
             fn: "submit",
             executor: `${DEPLOYERS[0]}.transfer-sip-010`
         }
