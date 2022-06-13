@@ -24,3 +24,5 @@ export const NETWORKS: Record<NETWORK, StacksNetwork> = {
 }
 
 export const TX_PER_PAGE = 5;
+
+export const NFT_PLACEHOLDER = '/nft-placeholder.png';

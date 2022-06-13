@@ -16,7 +16,7 @@ import useTranslation from '../../../../hooks/use-translation';
 import CloseModal from '../../../../components/close-modal';
 import WithdrawNft from './withdraw-nft';
 import {getNftHoldingsByIdentifier, getNftTokenUri} from '../../../../api';
-import {NULL_ADDRESS} from '../../../../constants';
+import {NULL_ADDRESS, NFT_PLACEHOLDER} from '../../../../constants';
 import {transformNftUri} from '../../../../helper';
 import {NFTAsset} from '../../../../types';
 
@@ -27,7 +27,7 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
     const [, showModal] = useModal();
     const {asset, nftId, readOnly} = props;
     const [uri, setUri] = useState<string>('');
-    const [image, setImage] = useState<string>('/nft-placeholder.png');
+    const [image, setImage] = useState<string>(NFT_PLACEHOLDER);
 
     useEffect(() => {
         getNftTokenUri(stacksNetwork, asset.address, nftId, NULL_ADDRESS[network])
@@ -94,7 +94,8 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
             </Box>
             <Box ref={imgRef} src={image} component="img" sx={{
                 width: '100%',
-                height: '100%'
+                height: '100%',
+                animation: image === NFT_PLACEHOLDER ? `fadeIn 2s infinite` : null
             }} onError={() => {
                 imgRef.current!.src = '/nft-placeholder.png';
             }}
