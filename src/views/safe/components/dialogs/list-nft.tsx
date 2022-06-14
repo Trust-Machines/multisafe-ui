@@ -9,12 +9,12 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import WithdrawNft from './withdraw-nft';
 import useSafe from '../../../../hooks/use-safe';
 import useNetwork from '../../../../hooks/use-network';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import CloseModal from '../../../../components/close-modal';
-import WithdrawNft from './withdraw-nft';
 import {getNftHoldingsByIdentifier, getNftTokenUri} from '../../../../api';
 import {NULL_ADDRESS, NFT_PLACEHOLDER} from '../../../../constants';
 import {transformNftUri} from '../../../../helper';
@@ -96,7 +96,7 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
             <Box ref={imgRef} src={image} component="img" sx={{
                 width: '100%',
                 height: '100%',
-                animation: !imageLoaded ? `fadeIn 2s infinite` : null
+                animation: !imageLoaded ? 'fadeIn 2s infinite' : null
             }} onError={() => {
                 imgRef.current!.src = NFT_PLACEHOLDER;
                 setImageLoaded(true);

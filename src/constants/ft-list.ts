@@ -1,5 +1,5 @@
-import {FTAsset} from '../types';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
+import {FTAsset} from '../types';
 
 const list: Record<NETWORK, FTAsset[]> = {
     'testnet': [],

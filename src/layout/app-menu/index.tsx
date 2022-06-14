@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Box, useTheme} from '@mui/material';
-import useMediaBreakPoint from '../../hooks/use-media-break-point';
 import MenuIcon from '@mui/icons-material/Menu';
 import {grey} from '@mui/material/colors';
+
+import useMediaBreakPoint from '../../hooks/use-media-break-point';
 
 const AppMenu = (props: { children?: React.ReactNode }) => {
     const [, isMd] = useMediaBreakPoint();

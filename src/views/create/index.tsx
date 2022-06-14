@@ -10,20 +10,18 @@ import {useConnect} from '@stacks/connect-react';
 import {makeSafeContract, NETWORK} from '@trustmachines/multisafe-contracts';
 import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
 
-import useUserSession from '../../hooks/use-user-session';
-import useTranslation from '../../hooks/use-translation';
-import useNetwork from '../../hooks/use-network';
-import useToast from '../../hooks/use-toast';
-
-import Navbar from '../../layout/navbar';
-import AppContent from '../../layout/app-content';
-import ThemedBox from '../../components/themed-box';
 import SafeName from './components/safe-name';
 import SafeOwners from './components/safe-owners';
 import SafeConfirmations from './components/safe-confirmations';
 import SafeReview from './components/safe-review';
 import SafeSuccess from './components/safe-success';
-
+import Navbar from '../../layout/navbar';
+import AppContent from '../../layout/app-content';
+import ThemedBox from '../../components/themed-box';
+import useUserSession from '../../hooks/use-user-session';
+import useTranslation from '../../hooks/use-translation';
+import useNetwork from '../../hooks/use-network';
+import useToast from '../../hooks/use-toast';
 import {makeTxUrl} from '../../api/helper';
 
 const Create = (_: RouteComponentProps) => {

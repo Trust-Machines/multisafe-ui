@@ -16,7 +16,7 @@ export const parseUnits = (value: string, decimals: number): BigNumber => {
 }
 
 export const checkDecimalAmount = (input: string) => {
-    const re = RegExp(`^\\d*(?:\\\\[.])?\\d*$`);
+    const re = RegExp('^\\d*(?:\\\\[.])?\\d*$');
 
     if (!re.test(escapeRegExp(input))) {
         return false;
@@ -69,7 +69,7 @@ export const detectTransactionType = (executor: string): TransactionType => {
 }
 
 export const contractPrincipalCVFromString = (s: string) => {
-    const [a, b] = s.split(".");
+    const [a, b] = s.split('.');
     return contractPrincipalCV(a, b);
 }
 

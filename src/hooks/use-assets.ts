@@ -1,12 +1,10 @@
 import {useAtom} from 'jotai';
 
-import {assetsAtom} from '../store';
-import {AssetsState, FTListItem, NFTListItem, ListItem} from '../store/assets';
-
 import useAddress from './use-address';
 import useStorage from './use-storage';
 import useNetwork from './use-network';
-
+import {assetsAtom} from '../store';
+import {AssetsState, FTListItem, NFTListItem, ListItem} from '../store/assets';
 
 const useAssets = (): [AssetsState, () => void, (asset: ListItem) => Promise<any>, () => FTListItem[], () => NFTListItem[]] => {
     const address = useAddress();

@@ -1,12 +1,10 @@
 import {useAtom} from 'jotai';
 
-import {safesAtom} from '../store';
-import {SafesState} from '../store/safes';
-
 import useAddress from './use-address';
 import useStorage from './use-storage';
 import useNetwork from './use-network';
-
+import {safesAtom} from '../store';
+import {SafesState} from '../store/safes';
 
 const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] => {
     const address = useAddress();
@@ -27,14 +25,14 @@ const useSafes = (): [SafesState, () => void, (safe: string) => Promise<any>] =>
 
     const getSafeList = async (): Promise<string[]> => {
         return getFile(`safes_${network}_1`).then(r => {
-            return r.split("\n").filter(x => x.trim());
+            return r.split('\n').filter(x => x.trim());
         });
     }
 
     const upsertSafe = async (safe: string): Promise<any> => {
         return getSafeList().then((r) => {
             const newSafes = [safe, ...r.filter(x => x !== safe)];
-            return putFile(`safes_${network}_1`, newSafes.join("\n")).then(() => {
+            return putFile(`safes_${network}_1`, newSafes.join('\n')).then(() => {
                 setSafes({...safes, list: newSafes});
             })
         })

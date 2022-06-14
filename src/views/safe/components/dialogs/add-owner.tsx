@@ -6,13 +6,13 @@ import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import CommonTxFeedbackDialog from './common-feedback';
 import useTranslation from '../../../../hooks/use-translation';
 import useModal from '../../../../hooks/use-modal';
 import useSafe from '../../../../hooks/use-safe';
 import WalletField from '../../../../components/wallet-field';
 import CloseModal from '../../../../components/close-modal';
 import useSafeCalls from '../../../../hooks/use-safe-call';
-import CommonTxFeedbackDialog from './common-feedback';
 
 const AddOwner = () => {
     const [safe,] = useSafe();
@@ -50,7 +50,7 @@ const AddOwner = () => {
         }
 
         safeAddOwnerCall(owner).then((data) => {
-            showModal({body: <CommonTxFeedbackDialog txId={data.txId} title={t(`Add Owner`)} requiresConfirmation
+            showModal({body: <CommonTxFeedbackDialog txId={data.txId} title={t('Add Owner')} requiresConfirmation
                                                      description={t('A new transaction submitted to add the new owner.')}/>});
         });
     }
@@ -86,7 +86,7 @@ const AddOwner = () => {
 
     return (
         <>
-            <DialogTitle>{t(`Add Owner`)}
+            <DialogTitle>{t('Add Owner')}
                 <CloseModal onClick={handleClose}/>
             </DialogTitle>
             <DialogContent>

@@ -3,14 +3,13 @@ import {RouteComponentProps} from '@reach/router';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import useMediaBreakPoint from '../../hooks/use-media-break-point';
-import useTranslation from '../../hooks/use-translation';
-
-import Navbar from '../../layout/navbar';
-import AppContent from '../../layout/app-content';
 import Load from './components/load';
 import Create from './components/create';
 import Recent from './components/recent';
+import Navbar from '../../layout/navbar';
+import AppContent from '../../layout/app-content';
+import useMediaBreakPoint from '../../hooks/use-media-break-point';
+import useTranslation from '../../hooks/use-translation';
 
 const Home = (_: RouteComponentProps) => {
     const [isSm, isMd] = useMediaBreakPoint();

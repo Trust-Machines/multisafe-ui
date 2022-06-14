@@ -7,6 +7,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import {Button, useTheme} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import CommonTxFeedbackDialog from './dialogs/common-feedback';
 import useAddress from '../../../hooks/use-address';
 import useSafeCalls from '../../../hooks/use-safe-call';
 import usePendingTxs from '../../../hooks/use-pending-txs';
@@ -15,7 +16,6 @@ import useTranslation from '../../../hooks/use-translation';
 import useModal from '../../../hooks/use-modal';
 import ThemedBox from '../../../components/themed-box';
 import Wallet from '../../../components/wallet';
-import CommonTxFeedbackDialog from './dialogs/common-feedback';
 import {detectTransactionType, formatUnits} from '../../../helper';
 import {SafeTransaction} from '../../../store/safe';
 import {hexToAscii} from '../../../util';
@@ -112,7 +112,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
             showModal({
                 body: <CommonTxFeedbackDialog
                     txId={data.txId}
-                    title={t(`Confirm`)}
+                    title={t('Confirm')}
                     description={t('Please note that it may take a few minutes to finalize your request.')}/>
             });
         })
@@ -123,7 +123,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
             showModal({
                 body: <CommonTxFeedbackDialog
                     txId={data.txId}
-                    title={t(`Revoke`)}
+                    title={t('Revoke')}
                     description={t('Please note that it may take a few minutes to finalize your request.')}/>
             });
         })

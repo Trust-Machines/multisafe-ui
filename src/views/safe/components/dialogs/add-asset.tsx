@@ -119,7 +119,7 @@ const AddAsset = (props: { type: 'ft' | 'nft' }) => {
                                onChange={handleInputChange} error={error !== ''}
                                helperText={error || ' '}
                                InputProps={{
-                                   autoComplete: "off",
+                                   autoComplete: 'off',
                                    endAdornment: inProgress ?
                                        <InputAdornment position="end">
                                            <CircularProgress color="primary"/>

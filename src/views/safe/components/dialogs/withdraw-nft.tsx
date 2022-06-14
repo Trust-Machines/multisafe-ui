@@ -6,12 +6,12 @@ import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 
+import CommonTxFeedbackDialog from './common-feedback';
 import useTranslation from '../../../../hooks/use-translation';
 import useModal from '../../../../hooks/use-modal';
 import useSafeCalls from '../../../../hooks/use-safe-call';
 import WalletField from '../../../../components/wallet-field';
 import CloseModal from '../../../../components/close-modal';
-import CommonTxFeedbackDialog from './common-feedback';
 import {isValidRecipient} from '../../../../helper';
 import {NFTAsset} from '../../../../types';
 
@@ -45,7 +45,7 @@ const WithdrawNft = (props: { asset: NFTAsset, nftId?: string }) => {
         }
     }
 
-    const dialogTitle = t(`Withdraw {{symbol}}`, {symbol: asset.name});
+    const dialogTitle = t('Withdraw {{symbol}}', {symbol: asset.name});
 
     const handleSubmit = () => {
         setSubmitted(true);
@@ -103,7 +103,7 @@ const WithdrawNft = (props: { asset: NFTAsset, nftId?: string }) => {
                     <WalletField
                         inputProps={{
                             inputRef: recipientInputRef,
-                            name: "recipient",
+                            name: 'recipient',
                             value: recipient,
                             label: t('Recipient'),
                             placeholder: t('Recipient'),

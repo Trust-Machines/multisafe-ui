@@ -21,12 +21,6 @@
       "last 1 safari version"
     ]
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "resolutions": {
     "//": "See https://github.com/facebook/create-react-app/issues/11773",
     "react-error-overlay": "6.0.9"
@@ -72,6 +66,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "canvas": "^2.9.1"
+    "canvas": "^2.9.1",
+    "eslint-plugin-import": "^2.26.0"
   }
 }

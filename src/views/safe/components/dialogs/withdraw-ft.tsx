@@ -6,13 +6,13 @@ import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import {TextField} from '@mui/material';
 
+import CommonTxFeedbackDialog from './common-feedback';
 import useTranslation from '../../../../hooks/use-translation';
 import useModal from '../../../../hooks/use-modal';
 import useSafeCalls from '../../../../hooks/use-safe-call';
 import CurrencyField from '../../../../components/currency-field';
 import WalletField from '../../../../components/wallet-field';
 import CloseModal from '../../../../components/close-modal';
-import CommonTxFeedbackDialog from './common-feedback';
 import {FTAsset} from '../../../../types';
 import {parseUnits, isValidRecipient} from '../../../../helper';
 
@@ -39,7 +39,7 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
         errorText = t('Enter a valid Stacks wallet address');
     }
 
-    const dialogTitle = t(`Withdraw {{symbol}}`, {symbol: asset.symbol});
+    const dialogTitle = t('Withdraw {{symbol}}', {symbol: asset.symbol});
 
     const handleSubmit = () => {
         setSubmitted(true);
@@ -90,24 +90,24 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
                                 setSubmitted(false);
                             }}
                             fieldProps={{
-                                name: "amount",
+                                name: 'amount',
                                 autoFocus: true,
                                 inputRef: amountInputRef,
                                 label: t('Amount'),
                                 value: amount,
                                 fullWidth: true,
                                 inputProps: {
-                                    autoComplete: "off",
-                                    autoCorrect: "off",
-                                    spellCheck: "false",
-                                    maxLength: "20"
+                                    autoComplete: 'off',
+                                    autoCorrect: 'off',
+                                    spellCheck: 'false',
+                                    maxLength: '20'
                                 }
                             }}/>
                     </Box>
                     <WalletField
                         inputProps={{
                             inputRef: recipientInputRef,
-                            name: "recipient",
+                            name: 'recipient',
                             value: recipient,
                             label: t('Recipient'),
                             placeholder: t('Recipient'),
@@ -130,9 +130,9 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
                             setSubmitted(false);
                         }}
                         value={memo}
-                        label="Memo"
+                        label='Memo'
                         fullWidth
-                        inputProps={{maxLength: 20}} name="memo"/>
+                        inputProps={{maxLength: 20}} name='memo'/>
                 </Box>
             </DialogContent>
             <DialogActions>

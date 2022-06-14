@@ -16,6 +16,7 @@ import {
     makeStandardFungiblePostCondition
 } from '@stacks/transactions';
 
+import CommonTxFeedbackDialog from './common-feedback';
 import useSafe from '../../../../hooks/use-safe';
 import useNetwork from '../../../../hooks/use-network';
 import useAddress from '../../../../hooks/use-address';
@@ -23,7 +24,6 @@ import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import CloseModal from '../../../../components/close-modal';
 import CurrencyField from '../../../../components/currency-field';
-import CommonTxFeedbackDialog from './common-feedback';
 import {parseUnits} from '../../../../helper';
 import {FTAsset} from '../../../../types';
 
@@ -64,7 +64,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
             recipient: safe.fullAddress,
             amount: amount,
             network: stacksNetwork,
-            memo: "",
+            memo: '',
             onFinish: (data) => {
                 onFinish(data);
             },
@@ -99,7 +99,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
         }).then();
     }
 
-    const dialogTitle = t(`Deposit {{symbol}}`, {symbol: asset.symbol});
+    const dialogTitle = t('Deposit {{symbol}}', {symbol: asset.symbol});
 
     const onFinish = (data: FinishedTxData) => {
         showModal({
@@ -128,10 +128,10 @@ const DepositFt = (props: { asset: FTAsset }) => {
                             value: amount,
                             fullWidth: true,
                             inputProps: {
-                                autoComplete: "off",
-                                autoCorrect: "off",
-                                spellCheck: "false",
-                                maxLength: "20"
+                                autoComplete: 'off',
+                                autoCorrect: 'off',
+                                spellCheck: 'false',
+                                maxLength: '20'
                             }
                         }}/>
                 </Box>

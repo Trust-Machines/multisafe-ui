@@ -4,10 +4,6 @@ import {useNavigate} from '@reach/router';
 import {Box} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import useSafe from '../../hooks/use-safe';
-import useAddress from '../../hooks/use-address';
-import Navbar from '../../layout/navbar';
-import AppContent from '../../layout/app-content';
 import SafeMenu from './components/safe-menu';
 import PendingTxs from './components/pending-txs';
 import Tokens from './sections/tokens';
@@ -15,6 +11,10 @@ import NFTs from './sections/nfts';
 import Transactions from './sections/transactions';
 import Owners from './sections/owners';
 import Policy from './sections/policy';
+import useSafe from '../../hooks/use-safe';
+import useAddress from '../../hooks/use-address';
+import Navbar from '../../layout/navbar';
+import AppContent from '../../layout/app-content';
 import {contractPrincipalCVFromString} from '../../helper';
 
 
@@ -48,7 +48,7 @@ const Safe = (_: RouteComponentProps) => {
     const [safe, fetchSafeData] = useSafe();
     const navigate = useNavigate();
 
-    const path = location.pathname.split("/").at(-1);
+    const path = location.pathname.split('/').at(-1);
     const section = path === params.safeId ? '' : path!;
 
     useEffect(() => {

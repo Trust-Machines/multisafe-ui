@@ -16,6 +16,7 @@ import {
     uintCV
 } from '@stacks/transactions';
 
+import CommonTxFeedbackDialog from './common-feedback';
 import useSafe from '../../../../hooks/use-safe';
 import useNetwork from '../../../../hooks/use-network';
 import useAddress from '../../../../hooks/use-address';
@@ -23,7 +24,6 @@ import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import {NFTAsset} from '../../../../types';
 import CloseModal from '../../../../components/close-modal';
-import CommonTxFeedbackDialog from './common-feedback';
 
 const DepositNft = (props: { asset: NFTAsset }) => {
     const [t] = useTranslation();
@@ -40,7 +40,7 @@ const DepositNft = (props: { asset: NFTAsset }) => {
         showModal(null);
     };
 
-    const dialogTitle = t(`Deposit {{symbol}}`, {symbol: asset.name});
+    const dialogTitle = t('Deposit {{symbol}}', {symbol: asset.name});
 
     const handleSend = () => {
         if (nftId.trim() === '') {

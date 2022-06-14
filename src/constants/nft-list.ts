@@ -1,5 +1,5 @@
-import {NFTAsset} from '../types';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
+import {NFTAsset} from '../types';
 
 const list: Record<NETWORK, NFTAsset[]> = {
     'testnet': [],

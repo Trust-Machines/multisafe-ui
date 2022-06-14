@@ -1,11 +1,11 @@
 import {useAtom} from 'jotai';
 
-import {pendingTxsAtom} from '../store';
-import {PendingTxsState, PendingTx} from '../store/pending-txs';
-import {getAccountMemPool} from '../api';
 import useAddress from './use-address';
 import useNetwork from './use-network';
 import useSafe from './use-safe';
+import {getAccountMemPool} from '../api';
+import {pendingTxsAtom} from '../store';
+import {PendingTxsState, PendingTx} from '../store/pending-txs';
 
 const usePendingTxs = (): [PendingTxsState, () => void] => {
     const [pendingTxs, setPendingTxsAtom] = useAtom(pendingTxsAtom);

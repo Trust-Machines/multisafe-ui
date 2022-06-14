@@ -14,8 +14,8 @@ export const baseAuthOptions = {
 }
 
 export const NULL_ADDRESS: Record<NETWORK, string> = {
-    mainnet: "SP000000000000000000002Q6VF78",
-    testnet: "ST000000000000000000002AMW42H"
+    mainnet: 'SP000000000000000000002Q6VF78',
+    testnet: 'ST000000000000000000002AMW42H'
 }
 
 export const NETWORKS: Record<NETWORK, StacksNetwork> = {

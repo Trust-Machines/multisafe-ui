@@ -1,19 +1,15 @@
 import {useAtom} from 'jotai';
 import BigNumber from 'bignumber.js';
 
-import {safeAtom,} from '../store';
-import {SafeFtBalance, SafeNFtBalance, SafeState} from '../store/safe';
-
+import useAssets from './use-assets';
 import useNetwork from './use-network';
 import useSenderAddress from './use-sender-address';
-
+import {safeAtom,} from '../store';
+import {SafeFtBalance, SafeNFtBalance, SafeState} from '../store/safe';
 import * as api from '../api';
-import useAssets from './use-assets';
-
 import ftList from '../constants/ft-list';
 import nftList from '../constants/nft-list';
 import {TX_PER_PAGE} from '../constants';
-import {getNfTInfo} from '../api';
 
 const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) => void] => {
     const [safe, setSafe] = useAtom(safeAtom);

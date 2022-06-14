@@ -24,7 +24,7 @@ const ConfirmDialog = (props: {onConfirm: () => void}) => {
 
     return (
         <>
-            <DialogTitle>{t(`Confirmation`)}
+            <DialogTitle>{t('Confirmation')}
                 <CloseModal onClick={handleClose}/>
             </DialogTitle>
             <DialogContent>

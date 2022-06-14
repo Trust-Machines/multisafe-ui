@@ -4,12 +4,11 @@ import Box from '@mui/material/Box';
 import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 
-import useMediaBreakPoint from '../../hooks/use-media-break-point';
-
 import Brand from './components/brand';
 import Wallet from './components/wallet';
 import NetworkSwitch from './components/network-switch';
 import ThemeSwitch from './components/theme-switch';
+import useMediaBreakPoint from '../../hooks/use-media-break-point';
 
 const Navbar = () => {
     const theme = useTheme();
