@@ -1,16 +1,22 @@
 import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Slide, {SlideProps} from '@mui/material/Slide';
 
 import useToast from '../hooks/use-toast';
+
+const SlideTransition = (props: SlideProps) => {
+    return <Slide {...props} direction='down'/>;
+}
 
 const ToastProvider: React.FC = ({children}) => {
     const [toast, , hideMessage] = useToast();
     return <>
         {children}
         {(toast.message && toast.type) && (
-            <Snackbar open onClose={hideMessage} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
-                <Alert onClose={hideMessage} severity={toast.type} sx={{width: '100%'}}>{toast.message}</Alert>
+            <Snackbar TransitionComponent={SlideTransition} open onClose={hideMessage}
+                      anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
+                <Alert onClose={hideMessage} variant='filled' severity={toast.type} sx={{width: '100%'}}>{toast.message}</Alert>
             </Snackbar>
         )}
     </>;
