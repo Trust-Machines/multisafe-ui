@@ -111,7 +111,7 @@ const NftItem = (props: { readOnly: boolean, asset: NFTAsset, nftId: string }) =
 const ListNft = (props: { readOnly: boolean, asset: NFTAsset }) => {
     const [, showModal] = useModal();
     const [, stacksNetwork] = useNetwork();
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const {asset, readOnly} = props;
     const [items, setItems] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);

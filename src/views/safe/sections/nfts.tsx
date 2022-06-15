@@ -24,7 +24,7 @@ import WithdrawNft from '../components/dialogs/withdraw-nft';
 import {NFTAsset} from '../../../types';
 
 const NFTs = (props: { readOnly: boolean }) => {
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const [, isMd] = useMediaBreakPoint();

@@ -28,7 +28,7 @@ const useSafeCalls = (): {
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const [, syncPendingTxs] = usePendingTxs();
 
     const doSafeCall = (fn: 'submit' | 'confirm' | 'revoke', args: ClarityValue[]): Promise<FinishedTxData> => new Promise((resolve) => {

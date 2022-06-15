@@ -10,12 +10,50 @@ import * as api from '../api';
 import ftList from '../constants/ft-list';
 import nftList from '../constants/nft-list';
 import {TX_PER_PAGE} from '../constants';
+import {FTAsset, NFTAsset} from '../types';
 
-const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) => void] => {
+const useSafe = (): {
+    safe: SafeState,
+    fetchSafeData: (safeAddress: string) => void,
+    scrollTransactions: (nonce: number) => void,
+    addFtBalance: (asset: FTAsset) => void,
+    addNftBalance: (asset: NFTAsset) => void
+} => {
     const [safe, setSafe] = useAtom(safeAtom);
     const [network, stacksNetwork] = useNetwork();
     const [, , , getFtAssets, getNFTAssets] = useAssets();
     const sender = useSenderAddress();
+
+    const addFtBalance = (asset: FTAsset) => {
+        if (safe.ftBalances.find(y => y.asset.address === asset.address) === undefined) {
+            setSafe({
+                ...safe,
+                ftBalances: [
+                    ...safe.ftBalances,
+                    {
+                        asset: asset,
+                        balance: '0'
+                    }
+                ]
+            });
+        }
+    }
+
+    const addNftBalance = (asset: NFTAsset) => {
+        if (safe.nftBalances.find(y => y.asset.address === asset.address) === undefined) {
+            setSafe({
+                ...safe,
+                nftBalances: [
+                    ...safe.nftBalances,
+                    {
+                        asset: asset,
+                        balance: '0',
+                        ids: []
+                    }
+                ]
+            });
+        }
+    }
 
     const fetchSafeData = async (safeAddress: string) => {
         const [address, name] = safeAddress.split('.');
@@ -139,7 +177,7 @@ const useSafes = (): [SafeState, (safeAddress: string) => void, (nonce: number) 
         setSafe({...safe, transactions, page});
     }
 
-    return [safe, fetchSafeData, scrollTransactions]
+    return {safe, fetchSafeData, scrollTransactions, addFtBalance, addNftBalance}
 }
 
-export default useSafes;
+export default useSafe;

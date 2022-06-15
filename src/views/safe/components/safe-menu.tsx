@@ -29,7 +29,7 @@ import {truncateMiddle} from '../../../util';
 import {makeTxUrl} from '../../../api/helper';
 
 const MenuListItem = (props: { selected: boolean, to: string, children: React.ReactNode }) => {
-    const [safe] = useSafe();
+    const {safe} = useSafe();
     const navigate = useNavigate();
 
     return <ListItemButton
@@ -42,7 +42,7 @@ const MenuListItem = (props: { selected: boolean, to: string, children: React.Re
 }
 
 const SafeMenu = (props: { section: string }) => {
-    const [safe, fetchSafeData] = useSafe();
+    const {safe, fetchSafeData} = useSafe();
     const theme = useTheme();
     const [network] = useNetwork();
     const [t] = useTranslation();

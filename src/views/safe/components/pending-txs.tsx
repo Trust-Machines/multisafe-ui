@@ -84,7 +84,7 @@ const PendingTxs = () => {
     const address = useAddress();
     const [txs, syncTxs] = usePendingTxs();
     const prevTxs = usePrevious(txs);
-    const [safe, fetchSafeData] = useSafe();
+    const {safe, fetchSafeData} = useSafe();
     const [t] = useTranslation();
     const theme = useTheme();
     const [detail, setDetail] = useState<boolean>(false);

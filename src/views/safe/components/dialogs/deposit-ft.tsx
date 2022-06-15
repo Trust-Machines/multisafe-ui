@@ -32,7 +32,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
     const [, showModal] = useModal();
     const [, stacksNetwork] = useNetwork();
     const address = useAddress();
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [amount, setAmount] = useState<string>('');

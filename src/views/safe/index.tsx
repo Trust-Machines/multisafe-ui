@@ -19,7 +19,7 @@ import {contractPrincipalCVFromString} from '../../helper';
 
 
 const SafeContent = (props: { section: string }) => {
-    const [safe] = useSafe();
+    const {safe} = useSafe();
     const {section} = props;
     const address = useAddress();
 
@@ -45,7 +45,7 @@ const SafeContent = (props: { section: string }) => {
 const Safe = (_: RouteComponentProps) => {
     const params = useParams();
     const location = useLocation();
-    const [safe, fetchSafeData] = useSafe();
+    const {safe, fetchSafeData} = useSafe();
     const navigate = useNavigate();
 
     const path = location.pathname.split('/').at(-1);

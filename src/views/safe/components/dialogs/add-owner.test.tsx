@@ -28,13 +28,13 @@ jest.mock('@stacks/connect-react', () => {
 });
 
 test('1 Render & Submit', () => {
-    (useSafe as jest.Mock).mockReturnValue([
-        {
+    (useSafe as jest.Mock).mockReturnValue({
+        safe: {
             address: 'SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7',
             name: 'my-safe',
             owners: ['SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7', 'SP2DXHX9Q844EBT80DYJXFWXJKCJ5FFAX50CQQAWN']
         }
-    ]);
+    });
     (useAddress as jest.Mock).mockReturnValue('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7');
 
     // Render

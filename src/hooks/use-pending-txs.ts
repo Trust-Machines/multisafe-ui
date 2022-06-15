@@ -11,7 +11,7 @@ const usePendingTxs = (): [PendingTxsState, () => void] => {
     const [pendingTxs, setPendingTxsAtom] = useAtom(pendingTxsAtom);
     const address = useAddress();
     const [, stacksNetwork] = useNetwork();
-    const [safe] = useSafe();
+    const {safe} = useSafe();
 
     const syncTxs = async () => {
         if (!address) {

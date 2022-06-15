@@ -25,7 +25,7 @@ import {FTAsset} from '../../../types';
 
 
 const Tokens = (props: { readOnly: boolean }) => {
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const [, showModal] = useModal()
     const [t] = useTranslation();
     const [, isMd] = useMediaBreakPoint();

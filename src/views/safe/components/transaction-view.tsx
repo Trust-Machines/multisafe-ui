@@ -23,7 +23,7 @@ import {hexToAscii} from '../../../util';
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
     const theme = useTheme();
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const {transaction} = props;
     const txType = detectTransactionType(transaction.executor);
 
@@ -161,7 +161,7 @@ const TransactionActions = (props: { transaction: SafeTransaction, readOnly: boo
 
 const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolean }) => {
     const [t] = useTranslation();
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const theme = useTheme();
     const [showConfirmations, setShowConfirmations] = useState<boolean>(false);
     const {transaction, readOnly} = props;

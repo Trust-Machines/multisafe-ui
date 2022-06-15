@@ -23,7 +23,7 @@ import CommonTxFeedbackDialog from '../components/dialogs/common-feedback';
 import Wallet from '../../../components/wallet';
 
 const Owners = (props: { readOnly: boolean }) => {
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const {safeRemoveOwnerCall} = useSafeCalls();

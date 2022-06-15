@@ -19,7 +19,7 @@ import {detectTransactionType} from '../../../helper';
 const Policy = (props: { readOnly: boolean }) => {
     const {readOnly} = props;
 
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const {safeSetThresholdCall} = useSafeCalls();

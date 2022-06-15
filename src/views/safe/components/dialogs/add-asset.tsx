@@ -12,6 +12,7 @@ import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import useNetwork from '../../../../hooks/use-network';
 import useAssets from '../../../../hooks/use-assets';
+import useSafe from '../../../../hooks/use-safe';
 import useToast from '../../../../hooks/use-toast';
 import CloseModal from '../../../../components/close-modal';
 import {getFTInfo, getNfTInfo} from '../../../../api';
@@ -25,6 +26,7 @@ const AddAsset = (props: { type: 'ft' | 'nft' }) => {
     const [, showModal] = useModal();
     const [, stacksNetwork] = useNetwork();
     const [, , addAsset] = useAssets();
+    const {addFtBalance, addNftBalance} = useSafe();
     const [, showMessage] = useToast();
     const [t] = useTranslation();
 
@@ -64,13 +66,17 @@ const AddAsset = (props: { type: 'ft' | 'nft' }) => {
             return;
         }
 
+        const objAsset = {
+            address: asset,
+            name: ftInfo.name,
+            symbol: ftInfo.symbol,
+            decimals: ftInfo.decimals,
+            ref: ftInfo.ref,
+        }
+
         try {
             await addAsset({
-                address: asset,
-                name: ftInfo.name,
-                symbol: ftInfo.symbol,
-                decimals: ftInfo.decimals,
-                ref: ftInfo.ref,
+                ...objAsset,
                 type: 'ft'
             });
         } catch (e) {
@@ -78,6 +84,8 @@ const AddAsset = (props: { type: 'ft' | 'nft' }) => {
         } finally {
             setInProgress(false);
         }
+
+        addFtBalance(objAsset);
 
         showMessage(t('{{symbol}} added', {symbol: ftInfo.symbol}), 'success');
         handleClose();
@@ -93,11 +101,16 @@ const AddAsset = (props: { type: 'ft' | 'nft' }) => {
             return;
         }
 
+        const objAsset = {
+            address: asset,
+            name: nftInfo.name,
+            ref: nftInfo.ref,
+            type: 'nft'
+        };
+
         try {
             await addAsset({
-                address: asset,
-                name: nftInfo.name,
-                ref: nftInfo.ref,
+                ...objAsset,
                 type: 'nft'
             });
         } catch (e) {
@@ -105,6 +118,8 @@ const AddAsset = (props: { type: 'ft' | 'nft' }) => {
         } finally {
             setInProgress(false);
         }
+
+        addNftBalance(objAsset);
 
         showMessage(t('{{name}} added', {name: nftInfo.name}), 'success');
         handleClose();

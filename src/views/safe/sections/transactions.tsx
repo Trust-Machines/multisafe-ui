@@ -9,7 +9,7 @@ import TransactionView from '../components/transaction-view';
 
 const Transactions = (props: { readOnly: boolean }) => {
     const [t] = useTranslation();
-    const [safe, , scrollTransactions] = useSafe();
+    const {safe, scrollTransactions} = useSafe();
     const header = <SectionHeader title={t('Transactions')} icon={<SwapVertIcon/>}/>;
 
     if (safe.transactions.length === 0) {

@@ -30,7 +30,7 @@ const DepositNft = (props: { asset: NFTAsset }) => {
     const [, showModal] = useModal();
     const [, stacksNetwork] = useNetwork();
     const address = useAddress();
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [nftId, setNftId] = useState<string>('');

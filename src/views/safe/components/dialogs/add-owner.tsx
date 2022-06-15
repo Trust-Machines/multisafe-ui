@@ -15,7 +15,7 @@ import CloseModal from '../../../../components/close-modal';
 import useSafeCalls from '../../../../hooks/use-safe-call';
 
 const AddOwner = () => {
-    const [safe,] = useSafe();
+    const {safe} = useSafe();
     const [t] = useTranslation();
     const [, showModal] = useModal();
 
