@@ -21,7 +21,7 @@ const list: Record<NETWORK, FTAsset[]> = {
         {
             address: 'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.age000-governance-token',
             name: 'ALEX Token',
-            symbol: 'alex',
+            symbol: 'ALEX',
             decimals: 8,
             ref: 'alex'
         },
