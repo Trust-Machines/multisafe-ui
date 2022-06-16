@@ -146,6 +146,9 @@ export const getFTInfo = async (network: StacksNetwork, address: string): Promis
                     // find first defined token from contract source code
                     const ftMatches = /\((define-fungible-token ([^)]+))\)/.exec(source.source);
                     const ref = ftMatches ? ftMatches[2] : '';
+                    if (!ref) {
+                        throw new Error("Couldn't find token definition");
+                    }
 
                     return {
                         address,
