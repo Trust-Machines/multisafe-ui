@@ -48,7 +48,8 @@ const Safe = (_: RouteComponentProps) => {
     const {safe, fetchSafeData} = useSafe();
     const navigate = useNavigate();
 
-    const path = location.pathname.split('/').at(-1);
+    const pathParts = location.pathname.split('/');
+    const path = pathParts[pathParts.length - 1];
     const section = path === params.safeId ? '' : path!;
 
     useEffect(() => {
