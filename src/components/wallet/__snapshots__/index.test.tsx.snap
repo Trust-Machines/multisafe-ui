@@ -40,3 +40,46 @@ exports[`1 Default render 1`] = `
   </div>
 </div>
 `;
+
+exports[`2 Truncate for SM 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-1ar0ca"
+  >
+    <div
+      class="icon"
+    >
+      <img
+        alt="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA5klEQVRYhe2YsQ3CQAxF7xBroAgxAAUMkAGoWIINGCI9U9AyRigYAVHS0oc28UlnWV8n/eK/7iL78vVl2U7y995Pacbx+pkf0zhsUg0bb4nm2/hVNZsACUTJ3XY31QK8GkLxapjeQQlEWdsHtuYut0dTAeNwWpxtTdI7KIEo2c7iKOgs9qB3UAJRij4Y3QdRtA+2hl5geB/0+p5H9D56ByUQxd0HLYfuBb5yuf95NUnvoASi5HP/W/TB53tfTYj2sWi8rXF6ByUQpfgmic5a9P+hdx+9gxKIUsxii9fH0BrTPtgaeoF/SJJL3B6Nz78AAAAASUVORK5CYII="
+        style="border-radius: 50%;"
+      />
+    </div>
+    <div
+      aria-label="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7"
+      class="address"
+      data-mui-internal-clone-element="true"
+    >
+      SP3XD84...PEKAEK7
+    </div>
+    <a
+      class="link"
+      href="https://explorer.stacks.co/address/SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7?chain=mainnet"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1jm6t9j-MuiSvgIcon-root"
+        data-testid="LaunchIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+        />
+      </svg>
+    </a>
+  </div>
+</div>
+`;
