@@ -18,14 +18,19 @@ const Brand = () => {
             alignItems: 'center',
             flexShrink: 0,
             flexGrow: isSm ? 0 : 1,
-            cursor: 'pointer',
             justifyContent: isSm ? null : 'center',
             mb: isSm ? null : '10px',
             height: isSm ? null : '52px',
             marginLeft: isSm && !isMd ? '40px' : null
-        }} onClick={() => {
-            navigate('/').then();
-        }}>
+        }} >
+            <Box sx={{
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+            }} onClick={() => {
+                navigate('/').then();
+            }}>
             <Box sx={{
                 width: '40px',
                 height: '40px',
@@ -48,6 +53,7 @@ const Brand = () => {
                 fontWeight: 600,
                 color: theme.palette.mode === 'light' ? grey[900] : grey[50],
             }}>MultiSafe</Box>
+            </Box>
         </Box>
     );
 }

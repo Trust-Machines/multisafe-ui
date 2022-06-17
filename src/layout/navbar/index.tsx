@@ -29,7 +29,7 @@ const Navbar = () => {
             userSelect: 'none'
         }}>
             <Brand/>
-            <div className="flex-grow"/>
+            <Box className="flex-grow"/>
             <Box sx={{
                 display: 'flex',
                 justifyContent: isSm ? null : 'center',
