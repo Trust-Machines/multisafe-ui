@@ -21,18 +21,20 @@ const Transactions = (props: { readOnly: boolean }) => {
 
     return <>
         {header}
-        {safe.transactions.map(t => <TransactionView key={t.id} transaction={t} readOnly={props.readOnly}/>)}
-        {safe.totalPages > 1 && (
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                margin: '20px 0'
-            }}>
-                <Pagination page={safe.page} count={safe.totalPages} onChange={(_, page) => {
-                    scrollTransactions(page);
-                }}/>
-            </Box>
-        )}
+        <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
+            {safe.transactions.map(t => <TransactionView key={t.id} transaction={t} readOnly={props.readOnly}/>)}
+            {safe.totalPages > 1 && (
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    margin: '20px 0'
+                }}>
+                    <Pagination page={safe.page} count={safe.totalPages} onChange={(_, page) => {
+                        scrollTransactions(page);
+                    }}/>
+                </Box>
+            )}
+        </Box>
     </>
 }
 

@@ -169,7 +169,8 @@ const TransactionView = (props: { transaction: SafeTransaction, readOnly: boolea
     return <ThemedBox sx={{
         display: 'flex',
         p: 0,
-        mb: '20px'
+        mb: '20px',
+        overflow: 'hidden'
     }}>
         <Box sx={{
             display: 'flex',
