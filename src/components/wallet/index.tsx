@@ -4,16 +4,25 @@ import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
 import LaunchIcon from '@mui/icons-material/Launch';
 import {useTheme} from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 
 import useNetwork from '../../hooks/use-network';
-
 import WalletIcon from '../wallet-icon';
+import useMediaBreakPoint from '../../hooks/use-media-break-point';
+import {truncateMiddle} from '../../util';
 
-const Wallet = (props: { address: string, sx?: SxProps<Theme> }) => {
+const Wallet = (props: { address: string, truncateForSm?: boolean, sx?: SxProps<Theme> }) => {
     const theme = useTheme();
     const [network] = useNetwork();
+    const [, isMd] = useMediaBreakPoint();
 
-    return <Box sx={
+    const label = !isMd && props.truncateForSm ?
+        <Tooltip title={props.address} placement='bottom'>
+            <div className='address'>{truncateMiddle(props.address, 7)}</div>
+        </Tooltip> :
+        <div className='address'>{props.address}</div>;
+
+    return <Box title={!isMd ? props.address : ''} sx={
         {
             ...{
                 display: 'flex',
@@ -45,8 +54,8 @@ const Wallet = (props: { address: string, sx?: SxProps<Theme> }) => {
             ...props.sx
         }
     }>
-        <div className='icon'><WalletIcon address={props.address} /></div>
-        <div className='address'>{props.address}</div>
+        <div className='icon'><WalletIcon address={props.address}/></div>
+        {label}
         <a rel='noreferrer' href={`https://explorer.stacks.co/address/${props.address}?chain=${network}`}
            target='_blank' className='link'><LaunchIcon sx={{width: '16px'}}/></a>
     </Box>
