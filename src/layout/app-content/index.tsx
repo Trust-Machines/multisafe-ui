@@ -14,7 +14,6 @@ const AppContent = (props: { children: React.ReactNode, sx?: SxProps<Theme> }) =
         p: '20px',
         flexDirection:'column',
         flexGrow: 1,
-        overflow: 'auto',
         display: 'flex',
         position: 'relative',
         ...props.sx
