@@ -3,7 +3,7 @@
 exports[`1 Render 1`] = `
 <div>
   <div
-    class="MuiBox-root css-a18sge"
+    class="MuiBox-root css-nu4g12"
   >
     <svg
       aria-hidden="true"
@@ -287,7 +287,7 @@ exports[`1 Render 1`] = `
 exports[`2 Render with owner 1`] = `
 <div>
   <div
-    class="MuiBox-root css-a18sge"
+    class="MuiBox-root css-nu4g12"
   >
     <svg
       aria-hidden="true"

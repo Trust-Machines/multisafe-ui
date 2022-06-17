@@ -22,7 +22,7 @@ const Wallet = (props: { address: string, truncateForSm?: boolean, sx?: SxProps<
         </Tooltip> :
         <div className='address'>{props.address}</div>;
 
-    return <Box title={!isMd ? props.address : ''} sx={
+    return <Box sx={
         {
             ...{
                 display: 'flex',

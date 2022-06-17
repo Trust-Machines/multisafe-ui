@@ -6,24 +6,28 @@ exports[`1 Default render 1`] = `
     class="MuiBox-root css-hoayk1"
   >
     <div
-      class="MuiBox-root css-1r6mtiz"
+      class="MuiBox-root css-azxdeb"
     >
       <div
-        class="MuiBox-root css-wxdvxx"
+        class="MuiBox-root css-1qmgq4"
       >
-        <img
-          alt="Logo"
-          src="/logo.png"
-        />
-      </div>
-      <div
-        class="MuiBox-root css-1dx8jfp"
-      >
-        MultiSafe
+        <div
+          class="MuiBox-root css-wxdvxx"
+        >
+          <img
+            alt="Logo"
+            src="/logo.png"
+          />
+        </div>
+        <div
+          class="MuiBox-root css-1dx8jfp"
+        >
+          MultiSafe
+        </div>
       </div>
     </div>
     <div
-      class="flex-grow"
+      class="flex-grow MuiBox-root css-0"
     />
     <div
       class="MuiBox-root css-ls0mhy"
