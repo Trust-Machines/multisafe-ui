@@ -25,7 +25,7 @@ const useSafeCalls = (): {
     safeTransferFtCall: (ft: string, amount: string, recipient: string, memo: string) => Promise<FinishedTxData>,
     safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>,
     safeTransferNftCall: (nft: string, id: string, recipient: string) => Promise<FinishedTxData>,
-    safeEnableMagicBridgeCall: () => Promise<FinishedTxData>,
+    safeMagicBridgeEnableCall: () => Promise<FinishedTxData>,
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -119,8 +119,8 @@ const useSafeCalls = (): {
         noneCV(),
     ]);
 
-    const safeEnableMagicBridgeCall = () => doSafeCall('submit', [
-        contractPrincipalCV(DEPLOYER[network], 'enable-magic-bridge'),
+    const safeMagicBridgeEnableCall = () => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'magic-bridge-enable'),
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
@@ -138,7 +138,7 @@ const useSafeCalls = (): {
         safeTransferFtCall,
         safeTransferStxCall,
         safeTransferNftCall,
-        safeEnableMagicBridgeCall
+        safeMagicBridgeEnableCall
     };
 }
 
