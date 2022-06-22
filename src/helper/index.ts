@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js';
 import {DEPLOYERS, NETWORK} from '@trustmachines/multisafe-contracts';
 import {StacksNetwork} from '@stacks/network';
 import {contractPrincipalCV, validateStacksAddress} from '@stacks/transactions';
+import {address as bAddress, networks, payments} from 'bitcoinjs-lib';
 import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
 import {TransactionType} from '../types';
@@ -84,7 +85,7 @@ export const transformNftUri = (uri: string, nftId: string) => {
     return uri;
 }
 
-export const isValidRecipient= (r: string) => {
+export const isValidRecipient = (r: string) => {
     if (r === '') {
         return false;
     }
@@ -101,4 +102,23 @@ export const isValidRecipient= (r: string) => {
     }
 
     return false;
+}
+
+
+export function parseBtcAddress(address: string) {
+    const addressVersionToMainnetVersion: Record<number, number> = {
+        [0]: 0,
+        [5]: 5,
+        [111]: 0,
+        [196]: 5,
+    };
+
+
+    const b58 = bAddress.fromBase58Check(address);
+    const version = addressVersionToMainnetVersion[b58.version] as number | undefined;
+    if (typeof version !== 'number') throw new Error('Invalid address version.');
+    return {
+        version,
+        hash: b58.hash,
+    };
 }

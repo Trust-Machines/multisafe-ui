@@ -16,12 +16,13 @@ import CloseModal from '../../../../components/close-modal';
 import {FTAsset} from '../../../../types';
 import {contractPrincipalCVFromString, parseUnits} from '../../../../helper';
 import CommonTxFeedbackDialog from './common-feedback';
+import {parseBtcAddress} from '../../../../helper';
 
 
 const WithdrawFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const {safeTransferFtCall, safeTransferStxCall} = useSafeCalls();
+    const {safeTransferFtCall, safeTransferStxCall, safeMagicBridgeSendCall} = useSafeCalls();
     const {asset} = props;
     const amountInputRef = useRef<HTMLInputElement>();
     const recipientInputRef = useRef<HTMLInputElement>();
@@ -52,6 +53,14 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
     const handleClose = () => {
         showModal(null);
     };
+
+    const withdrawSendBtc = () => {
+        const sendAmount = parseUnits(amount, asset.decimals);
+        const b58 = parseBtcAddress(recipient);
+
+
+        safeMagicBridgeSendCall(sendAmount.toString(), b58.hash)
+    }
 
     const isValid = validateRecipient(recipient);
 
@@ -152,8 +161,13 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
     </>;
 
     const dialogActions = <>
-        <Button onClick={handleClose}>{t('Cancel')}</Button>
-        <Button onClick={handleSubmit}>{t('Send')}</Button>
+        <Box>
+            {asset.symbol === 'xBTC' && <Button onClick={withdrawSendBtc}>{t('Withdraw BTC')}</Button>}
+        </Box>
+        <Box>
+            <Button onClick={handleClose}>{t('Cancel')}</Button>
+            <Button onClick={handleSubmit}>{t('Send')}</Button>
+        </Box>
     </>;
 
     return (
@@ -164,7 +178,7 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
             <DialogContent>
                 <Box sx={{pt: '10px'}}>{dialogBody}</Box>
             </DialogContent>
-            <DialogActions>{dialogActions}</DialogActions>
+            <DialogActions sx={{justifyContent: 'space-between'}}>{dialogActions}</DialogActions>
         </>
     );
 }

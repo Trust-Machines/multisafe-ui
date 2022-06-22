@@ -7,7 +7,8 @@ import {
     PostConditionMode,
     someCV,
     standardPrincipalCV,
-    uintCV
+    uintCV,
+    bufferCV
 } from '@stacks/transactions';
 import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 import useNetwork from './use-network';
@@ -26,6 +27,7 @@ const useSafeCalls = (): {
     safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>,
     safeTransferNftCall: (nft: string, id: string, recipient: string) => Promise<FinishedTxData>,
     safeMagicBridgeEnableCall: () => Promise<FinishedTxData>,
+    safeMagicBridgeSendCall: (amount: string, recipient: Buffer) => Promise<FinishedTxData>,
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -109,7 +111,7 @@ const useSafeCalls = (): {
         someCV(bufferCVFromString(memo)),
     ]);
 
-    const safeTransferNftCall = (nft: string, id:string, recipient: string) => doSafeCall('submit', [
+    const safeTransferNftCall = (nft: string, id: string, recipient: string) => doSafeCall('submit', [
         contractPrincipalCV(DEPLOYER[network], 'transfer-sip-009'),
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),
@@ -129,6 +131,16 @@ const useSafeCalls = (): {
         noneCV(),
     ]);
 
+    const safeMagicBridgeSendCall = (amount: string, recipient: Buffer) => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'magic-bridge-send'),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+        contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+        noneCV(),
+        someCV(uintCV(amount)),
+        someCV(bufferCV(recipient)),
+    ]);
+
     return {
         safeAddOwnerCall,
         safeRemoveOwnerCall,
@@ -138,7 +150,8 @@ const useSafeCalls = (): {
         safeTransferFtCall,
         safeTransferStxCall,
         safeTransferNftCall,
-        safeMagicBridgeEnableCall
+        safeMagicBridgeEnableCall,
+        safeMagicBridgeSendCall
     };
 }
 
