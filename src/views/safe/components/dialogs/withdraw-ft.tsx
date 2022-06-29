@@ -14,12 +14,12 @@ import CurrencyField from '../../../../components/currency-field';
 import WalletField from '../../../../components/wallet-field';
 import CloseModal from '../../../../components/close-modal';
 import {FTAsset} from '../../../../types';
-import {parseUnits, isValidRecipient} from '../../../../helper';
+import {parseUnits, isValidRecipient, parseBtcAddress} from '../../../../helper';
 
 const WithdrawFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const {safeTransferFtCall, safeTransferStxCall} = useSafeCalls();
+    const {safeTransferFtCall, safeTransferStxCall, safeMagicBridgeSendCall} = useSafeCalls();
     const {asset} = props;
     const amountInputRef = useRef<HTMLInputElement>();
     const recipientInputRef = useRef<HTMLInputElement>();
@@ -31,6 +31,13 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
     const handleClose = () => {
         showModal(null);
     };
+
+    const withdrawSendBtc = () => {
+        const b58 = parseBtcAddress(recipient);
+
+
+        safeMagicBridgeSendCall(amount, b58.hash)
+    }
 
     const isValid = isValidRecipient(recipient);
 
@@ -136,6 +143,7 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
                 </Box>
             </DialogContent>
             <DialogActions>
+                <Button onClick={withdrawSendBtc}>{t('Withdraw BTC')}</Button>
                 <Button onClick={handleClose}>{t('Cancel')}</Button>
                 <Button onClick={handleSubmit}>{t('Withdraw')}</Button>
             </DialogActions>

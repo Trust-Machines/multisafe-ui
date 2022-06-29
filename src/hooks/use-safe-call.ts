@@ -7,7 +7,8 @@ import {
     PostConditionMode,
     someCV,
     standardPrincipalCV,
-    uintCV
+    uintCV,
+    bufferCV
 } from '@stacks/transactions';
 import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 import useNetwork from './use-network';
@@ -25,6 +26,7 @@ const useSafeCalls = (): {
     safeTransferFtCall: (ft: string, amount: string, recipient: string, memo: string) => Promise<FinishedTxData>,
     safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>,
     safeTransferNftCall: (nft: string, id: string, recipient: string) => Promise<FinishedTxData>,
+    safeMagicBridgeSendCall: (amount: string, recipient: Buffer) => Promise<FinishedTxData>,
 } => {
     const {doContractCall} = useConnect();
     const [network, stacksNetwork] = useNetwork();
@@ -118,6 +120,16 @@ const useSafeCalls = (): {
         noneCV(),
     ]);
 
+    const safeMagicBridgeSendCall = (amount: string, recipient: Buffer) => doSafeCall('submit', [
+        contractPrincipalCV(DEPLOYER[network], 'magic-bridge-send'),
+        contractPrincipalCV(safe.address, safe.name),
+        contractPrincipalCV(DEPLOYER[network], 'ft-none'),
+        contractPrincipalCV(DEPLOYER[network], 'nft-none'),
+        noneCV(),
+        someCV(uintCV(amount)),
+        someCV(bufferCV(recipient)),
+    ]);
+
     return {
         safeAddOwnerCall,
         safeRemoveOwnerCall,
@@ -126,7 +138,8 @@ const useSafeCalls = (): {
         safeRevokeTxCall,
         safeTransferFtCall,
         safeTransferStxCall,
-        safeTransferNftCall
+        safeTransferNftCall,
+        safeMagicBridgeSendCall
     };
 }
 
