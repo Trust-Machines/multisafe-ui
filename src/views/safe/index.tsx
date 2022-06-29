@@ -11,6 +11,7 @@ import NFTs from './sections/nfts';
 import Transactions from './sections/transactions';
 import Owners from './sections/owners';
 import Policy from './sections/policy';
+import BtcBridge from './sections/btc-bridge';
 import useSafe from '../../hooks/use-safe';
 import useAddress from '../../hooks/use-address';
 import Navbar from '../../layout/navbar';
@@ -39,6 +40,7 @@ const SafeContent = (props: { section: string }) => {
         {section === 'transactions' && <Transactions {...sectionProps}/>}
         {section === 'owners' && <Owners {...sectionProps}/>}
         {section === 'policy' && <Policy {...sectionProps}/>}
+        {section === 'btc-bridge' && <BtcBridge {...sectionProps}/>}
     </>
 }
 
