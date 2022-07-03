@@ -186,17 +186,16 @@ const SwapView = (props: { swap: InboundSwapReady }) => {
         const txBuff = Buffer.from(txState.txid, 'hex');
         const preimageBuff = Buffer.from(hexToBytes(secret));
         const functionArgs: ClarityValue[] = [
-            contractPrincipalCVFromString(MAGIC_BRIDGE[network]),
             bufferCV(txBuff),
             bufferCV(preimageBuff),
         ]
 
-        const [contractAddress, contractName] = safe.fullAddress.split('.')
+        const [contractAddress, contractName] = MAGIC_BRIDGE[network].split('.')
         doContractCall({
             network: stacksNetwork,
             contractAddress,
             contractName,
-            functionName: 'mb-finalize-swap',
+            functionName: 'finalize-swap',
             functionArgs,
             postConditionMode: PostConditionMode.Allow,
             onFinish: (data) => {
