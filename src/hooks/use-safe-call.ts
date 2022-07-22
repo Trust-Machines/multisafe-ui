@@ -1,20 +1,24 @@
-import {FinishedTxData, useConnect} from '@stacks/connect-react';
 import {
     bufferCVFromString,
     ClarityValue,
     contractPrincipalCV,
     noneCV,
-    PostConditionMode,
     someCV,
     standardPrincipalCV,
     uintCV
-} from '@stacks/transactions';
+} from 'micro-stacks/clarity';
+import {
+    PostConditionMode,
+} from 'micro-stacks/transactions';
+import {FinishedTxData} from 'micro-stacks/connect';
+import {useOpenContractCall} from '@micro-stacks/react';
 import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 import useNetwork from './use-network';
 import useSafe from './use-safe';
 import usePendingTxs from './use-pending-txs';
 import {contractPrincipalCVFromString} from '../helper';
 import {SafeTransaction} from '../store/safe';
+
 
 const useSafeCalls = (): {
     safeAddOwnerCall: (owner: string) => Promise<FinishedTxData>,
@@ -26,14 +30,13 @@ const useSafeCalls = (): {
     safeTransferStxCall: (recipient: string, amount: string, memo: string) => Promise<FinishedTxData>,
     safeTransferNftCall: (nft: string, id: string, recipient: string) => Promise<FinishedTxData>,
 } => {
-    const {doContractCall} = useConnect();
-    const [network, stacksNetwork] = useNetwork();
+    const {openContractCall} = useOpenContractCall();
+    const [network] = useNetwork();
     const {safe} = useSafe();
     const [, syncPendingTxs] = usePendingTxs();
 
     const doSafeCall = (fn: 'submit' | 'confirm' | 'revoke', args: ClarityValue[]): Promise<FinishedTxData> => new Promise((resolve) => {
-        doContractCall({
-            network: stacksNetwork,
+        openContractCall({
             contractAddress: safe.address,
             contractName: safe.name,
             functionName: fn,

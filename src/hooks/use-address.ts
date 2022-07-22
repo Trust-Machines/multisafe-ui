@@ -1,15 +1,7 @@
-import useUserSession from './use-user-session';
-import useNetwork from './use-network';
+import {useCurrentStxAddress} from '@micro-stacks/react';
 
 const useAddress = (): string | null => {
-    const [, userData] = useUserSession();
-    const [network] = useNetwork();
-
-    if (userData) {
-        return userData.profile.stxAddress[network];
-    }
-
-    return null;
+  return useCurrentStxAddress() ?? null
 }
 
 export default useAddress;

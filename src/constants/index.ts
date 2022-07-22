@@ -1,8 +1,5 @@
-import {AppConfig} from '@stacks/connect-react';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
-import {StacksMainnet, StacksTestnet, StacksNetwork} from '@stacks/network';
-
-export const appConfig = new AppConfig(['store_write', 'publish_data'], document.location.href);
+import {StacksMainnet, StacksTestnet, StacksNetwork} from 'micro-stacks/network';
 
 export const baseAuthOptions = {
     redirectTo: '/',

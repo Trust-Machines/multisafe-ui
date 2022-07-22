@@ -1,11 +1,11 @@
-import {StacksNetwork} from '@stacks/network';
+import type {StacksNetwork} from 'micro-stacks/network';
 import {
-    callReadOnlyFunction,
     ClarityValue,
     cvToJSON,
     listCV,
     uintCV
-} from '@stacks/transactions';
+} from 'micro-stacks/clarity';
+import {callReadOnlyFunction} from 'micro-stacks/api';
 import {SafeTransaction} from '../store/safe';
 import ftList from '../constants/ft-list';
 import nftList from '../constants/nft-list';
@@ -24,11 +24,11 @@ export const getAccountMemPool = (network: StacksNetwork, account: string): Prom
         } []
     }
 }[]> => {
-    return fetch(`${network.coreApiUrl}/extended/v1/tx/mempool?sender_address=${account}`).then(r => r.json()).then(r => r.results);
+    return fetch(`${network}/extended/v1/tx/mempool?sender_address=${account}`).then(r => r.json()).then(r => r.results);
 }
 
 export const getBnsName = (network: StacksNetwork, address: string): Promise<string | null> => {
-    return fetch(`${network.coreApiUrl}/v1/addresses/stacks/${address}`).then(r => r.json()).then(r => {
+    return fetch(`${network.getCoreApiUrl()}/v1/addresses/stacks/${address}`).then(r => r.json()).then(r => {
         if (r.names.length > 0) {
             return r.names[0];
         }
@@ -37,7 +37,7 @@ export const getBnsName = (network: StacksNetwork, address: string): Promise<str
 }
 
 export const resolveBnsName = (network: StacksNetwork, name: string): Promise<string | null> => {
-    return fetch(`${network.coreApiUrl}/v1/names/${name}`).then(r => r.json()).then(r => {
+    return fetch(`${network.getCoreApiUrl()}/v1/names/${name}`).then(r => r.json()).then(r => {
         if (r.error) {
             return null;
         }
@@ -47,7 +47,7 @@ export const resolveBnsName = (network: StacksNetwork, name: string): Promise<st
 
 export const getContractInfo = (network: StacksNetwork, address: string, name: string): Promise<{ tx_id: string } | null> => {
     const contractId = `${address}.${name}`;
-    return fetch(`${network.coreApiUrl}/extended/v1/contract/${contractId}?unanchored=true`).then(r => r.json()).then(r => {
+    return fetch(`${network.getCoreApiUrl()}/extended/v1/contract/${contractId}?unanchored=true`).then(r => r.json()).then(r => {
         if (r.tx_id) {
             return r;
         }
@@ -66,7 +66,7 @@ export interface AddressBalance {
 
 export const getContractBalances = (network: StacksNetwork, address: string): Promise<AddressBalance> => {
     const [contractAddress, contractName] = address.split('.')
-    return fetch(`${network.coreApiUrl}/extended/v1/address/${contractAddress}.${contractName}/balances`).then(r => r.json())
+    return fetch(`${network.getCoreApiUrl()}/extended/v1/address/${contractAddress}.${contractName}/balances`).then(r => r.json())
 }
 
 export const callReadOnly = (network: StacksNetwork, path: string, functionArgs: ClarityValue[], senderAddress: string) => {
@@ -135,11 +135,11 @@ export const getFTInfo = async (network: StacksNetwork, address: string): Promis
         return inList;
     }
 
-    return fetch(`${network.coreApiUrl}/extended/v1/tokens/${address}/ft/metadata`)
+    return fetch(`${network.getCoreApiUrl()}/extended/v1/tokens/${address}/ft/metadata`)
         .then(r => r.json())
         .then(info => {
             const [a, b] = address.split('.');
-            return fetch(`${network.coreApiUrl}/v2/contracts/source/${a}/${b}`)
+            return fetch(`${network.getCoreApiUrl()}/v2/contracts/source/${a}/${b}`)
                 .then(r => r.json())
                 .then(source => {
 
@@ -168,7 +168,7 @@ export const getNfTInfo = async (network: StacksNetwork, address: string): Promi
     }
 
     const [account, contract] = address.split('.');
-    return fetch(`${network.coreApiUrl}/v2/contracts/source/${account}/${contract}`)
+    return fetch(`${network.getCoreApiUrl()}/v2/contracts/source/${account}/${contract}`)
         .then(r => r.json())
         .then(source => {
             // find first defined non fungible token from contract source code
@@ -186,7 +186,7 @@ export const getNfTInfo = async (network: StacksNetwork, address: string): Promi
 }
 
 export const getNftHoldingsByIdentifier = (network: StacksNetwork, address: string, identifier: string): Promise<{ asset_identifier: string, value: { repr: string } }[]> => {
-    return fetch(`${network.coreApiUrl}/extended/v1/tokens/nft/holdings?principal=${address}&asset_identifiers=${identifier}&limit=200`)
+    return fetch(`${network.getCoreApiUrl()}/extended/v1/tokens/nft/holdings?principal=${address}&asset_identifiers=${identifier}&limit=200`)
         .then(r => r.json())
         .then(r => r.results)
 }

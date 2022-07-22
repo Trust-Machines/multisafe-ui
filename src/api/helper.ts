@@ -1,4 +1,4 @@
-import {ClarityAbi} from '@stacks/transactions';
+import {ClarityAbi} from 'micro-stacks/clarity';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
 
 export const validateSafeAbi = (abi: ClarityAbi) => {

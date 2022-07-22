@@ -4,21 +4,23 @@ import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {FinishedTxData, useConnect} from '@stacks/connect-react';
+
 import {
-    PostConditionMode,
     uintCV,
     noneCV,
     standardPrincipalCV,
     contractPrincipalCV,
+} from 'micro-stacks/clarity'
+import {
+    PostConditionMode,
     FungibleConditionCode,
     createAssetInfo,
     makeStandardFungiblePostCondition
-} from '@stacks/transactions';
-
+} from 'micro-stacks/transactions';
+import {useOpenContractCall, useOpenStxTokenTransfer} from '@micro-stacks/react';
+import type {FinishedTxData} from 'micro-stacks/connect';
 import CommonTxFeedbackDialog from './common-feedback';
 import useSafe from '../../../../hooks/use-safe';
-import useNetwork from '../../../../hooks/use-network';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
@@ -27,17 +29,18 @@ import CurrencyField from '../../../../components/currency-field';
 import {parseUnits} from '../../../../helper';
 import {FTAsset} from '../../../../types';
 
+
 const DepositFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const [, stacksNetwork] = useNetwork();
     const address = useAddress();
     const {safe} = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [amount, setAmount] = useState<string>('');
 
-    const {doSTXTransfer, doContractCall} = useConnect();
+    const {openContractCall} = useOpenContractCall();
+    const {openStxTokenTransfer} = useOpenStxTokenTransfer();
 
     const handleClose = () => {
         showModal(null);
@@ -60,10 +63,9 @@ const DepositFt = (props: { asset: FTAsset }) => {
     }
 
     const sendStx = (amount: string) => {
-        doSTXTransfer({
+        openStxTokenTransfer({
             recipient: safe.fullAddress,
             amount: amount,
-            network: stacksNetwork,
             memo: '',
             onFinish: (data) => {
                 onFinish(data);
@@ -73,8 +75,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
 
     const sendToken = (amount: string) => {
         const [contractAddress, contractName] = asset.address.split('.');
-        doContractCall({
-            network: stacksNetwork,
+        openContractCall({
             contractAddress,
             contractName,
             functionName: 'transfer',

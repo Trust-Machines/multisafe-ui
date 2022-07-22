@@ -6,7 +6,8 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
-import {useConnect} from '@stacks/connect-react';
+import {useOpenContractDeploy} from '@micro-stacks/react';
+
 import {makeSafeContract, NETWORK} from '@trustmachines/multisafe-contracts';
 import safe from '@trustmachines/multisafe-contracts/contracts/safe.clar';
 
@@ -25,8 +26,8 @@ import useToast from '../../hooks/use-toast';
 import {makeTxUrl} from '../../api/helper';
 
 const Create = (_: RouteComponentProps) => {
-    const [, userData, openAuth] = useUserSession();
-    const [network, stacksNetwork] = useNetwork();
+    const [, isSignedIn, openAuth] = useUserSession();
+    const [network] = useNetwork();
     const [t] = useTranslation();
 
     const [step, setStep] = useState<number>(0);
@@ -35,7 +36,7 @@ const Create = (_: RouteComponentProps) => {
     const [confirmations, setConfirmations] = useState<number>(1);
     const [deployedNetwork, setDeployedNetwork] = useState<NETWORK>(network);
     const [txUrl, setTxUrl] = useState<string>('');
-    const {doContractDeploy} = useConnect();
+    const {openContractDeploy} = useOpenContractDeploy();
     const boxSx = {maxWidth: '690px', p: '20px'};
     const [, showToast] = useToast();
 
@@ -112,7 +113,7 @@ const Create = (_: RouteComponentProps) => {
                                     setStep(step - 1);
                                 }}
                                 onNext={() => {
-                                    if (!userData) {
+                                    if (!isSignedIn) {
                                         openAuth();
                                         return;
                                     }
@@ -124,8 +125,7 @@ const Create = (_: RouteComponentProps) => {
                                         network
                                     );
 
-                                    doContractDeploy({
-                                        network: stacksNetwork,
+                                    openContractDeploy({
                                         contractName: name,
                                         codeBody: code,
                                         onFinish: data => {
