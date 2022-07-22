@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {validateStacksAddress} from '@stacks/transactions';
+import {validateStacksAddress} from 'micro-stacks/crypto';
 import DialogContent from '@mui/material/DialogContent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
