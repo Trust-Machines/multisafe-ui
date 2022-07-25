@@ -6,16 +6,16 @@ import useAddress from '../../../../hooks/use-address';
 
 jest.mock('../../../../hooks/use-safe');
 jest.mock('../../../../hooks/use-address');
-jest.mock('@stacks/connect-react', () => {
-    const original = jest.requireActual('@stacks/connect-react');
+jest.mock('@micro-stacks/react', () => {
+    const original = jest.requireActual('@micro-stacks/react');
     return {
         ...original,
         useConnect: () => {
             return {
-                doSTXTransfer: () => {
+                openStxTokenTransfer: () => {
 
                 },
-                doContractCall: (options: any) => {
+                openContractCall: (options: any) => {
                     options.onFinish({txId: '0x234234234'});
 
                     return new Promise((res) => {

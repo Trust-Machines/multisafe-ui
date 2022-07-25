@@ -1,7 +1,7 @@
 import {render} from '@testing-library/react';
 import {createHistory, createMemorySource, LocationProvider} from '@reach/router';
-import {Connect} from '@stacks/connect-react';
 import {baseAuthOptions} from '../constants';
+import {ClientProvider} from "@micro-stacks/react";
 
 export const renderWithRouter = (
     ui: any,
@@ -9,7 +9,7 @@ export const renderWithRouter = (
 ) => {
     return {
         ...render(<LocationProvider history={history}>
-            <Connect authOptions={baseAuthOptions}>{ui}</Connect>
+            <ClientProvider appName={baseAuthOptions.appDetails.name} appIconUrl={baseAuthOptions.appDetails.icon}>{ui}</ClientProvider>
         </LocationProvider>),
         // adding `history` to the returned utilities to allow us
         // to reference it in our tests (just try to avoid using
