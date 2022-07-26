@@ -7,6 +7,18 @@ import useMediaBreakPoint from '../../../hooks/use-media-break-point';
 jest.mock('../../../hooks/use-address');
 jest.mock('../../../hooks/use-media-break-point');
 
+jest.mock('@download/blockies', () => {
+    const original = jest.requireActual('@micro-stacks/react');
+    return {
+        ...original,
+        createIcon: () => {
+            return {
+                toDataURL: () => 'data:image/png;base64,iVBORw0...'
+            }
+        }
+    };
+});
+
 test('1 Add Owner - ReadOnly', () => {
     (useMediaBreakPoint as jest.Mock).mockReturnValue([false, true]);
     const tx: SafeTransaction = {

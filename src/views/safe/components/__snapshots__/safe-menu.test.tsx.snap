@@ -31,7 +31,7 @@ exports[`1 Render 1`] = `
       >
         <img
           alt="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7.my-safe"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA6ElEQVRYhe2XsQ3CMBBFbZQ1UIQYIAUMwADZIwU9Q6RPkRloGSMUjIAoGQLa+Af5yzpAV/zX2Wfrvk5fPl98ng+vMGN/esyXYVffQo7rvcnGS+9P/TpZr7K3HSCBVmK92SYeRM8wj5TCPI753FdQAq1U6KluSA9gHD3EPMnOs3zuKyiBViLrxf9GHvw27gVWuIG9cTy2PxXQDRfYSfO5r6AEWlm8gwj7vzGPosdK/5fuKyiBVtSLrUiglcVczGYQpHQmYffxvPsKSqCVD3Nx2junvs3G8f+GsN7N8rmvoARa0TtoRQKtvAGErmAQgz5qmwAAAABJRU5ErkJggg=="
+          src="data:image/png;base64,iVBORw0..."
           style="border-radius: 50%;"
         />
       </div>
@@ -315,7 +315,7 @@ exports[`2 Render with owner 1`] = `
       >
         <img
           alt="SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7.my-safe"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAA6ElEQVRYhe2XsQ3CMBBFbZQ1UIQYIAUMwADZIwU9Q6RPkRloGSMUjIAoGQLa+Af5yzpAV/zX2Wfrvk5fPl98ng+vMGN/esyXYVffQo7rvcnGS+9P/TpZr7K3HSCBVmK92SYeRM8wj5TCPI753FdQAq1U6KluSA9gHD3EPMnOs3zuKyiBViLrxf9GHvw27gVWuIG9cTy2PxXQDRfYSfO5r6AEWlm8gwj7vzGPosdK/5fuKyiBVtSLrUiglcVczGYQpHQmYffxvPsKSqCVD3Nx2junvs3G8f+GsN7N8rmvoARa0TtoRQKtvAGErmAQgz5qmwAAAABJRU5ErkJggg=="
+          src="data:image/png;base64,iVBORw0..."
           style="border-radius: 50%;"
         />
       </div>

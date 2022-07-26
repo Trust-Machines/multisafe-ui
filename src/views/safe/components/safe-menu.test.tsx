@@ -6,6 +6,18 @@ import useAddress from '../../../hooks/use-address';
 jest.mock('../../../hooks/use-safe');
 jest.mock('../../../hooks/use-address');
 
+jest.mock('@download/blockies', () => {
+    const original = jest.requireActual('@micro-stacks/react');
+    return {
+        ...original,
+        createIcon: () => {
+            return {
+                toDataURL: () => 'data:image/png;base64,iVBORw0...'
+            }
+        }
+    };
+});
+
 test('1 Render', () => {
     (useSafe as jest.Mock).mockReturnValue({
         safe: {
