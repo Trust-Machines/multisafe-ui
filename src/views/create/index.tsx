@@ -36,7 +36,7 @@ const Create = (_: RouteComponentProps) => {
     const [confirmations, setConfirmations] = useState<number>(1);
     const [deployedNetwork, setDeployedNetwork] = useState<NETWORK>(network);
     const [txUrl, setTxUrl] = useState<string>('');
-    const {openContractDeploy} = useOpenContractDeploy();
+    const {openContractDeploy, isRequestPending} = useOpenContractDeploy();
     const boxSx = {maxWidth: '690px', p: '20px'};
     const [, showToast] = useToast();
 
@@ -112,6 +112,8 @@ const Create = (_: RouteComponentProps) => {
                                 onBack={() => {
                                     setStep(step - 1);
                                 }}
+                                isLoading={isRequestPending}
+                                loadingText={'Confirm in wallet'}
                                 onNext={() => {
                                     if (!isSignedIn) {
                                         openAuth();
