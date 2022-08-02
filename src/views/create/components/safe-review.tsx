@@ -17,7 +17,7 @@ import {getContractInfo} from '../../../api';
 import {capitalize} from '../../../util';
 
 
-const SafeReview = (props: { name: string, owners: string[], confirmations: number, onBack: () => void, onNext: () => void, onConflict: () => void, isLoading?: boolean; loadingText?: string }) => {
+const SafeReview = (props: { name: string, owners: string[], confirmations: number, onBack: () => void, onNext: () => void, onConflict: () => void}) => {
     const [inProgress, setInProgress] = useState<boolean>(false);
     const [t, i18n] = useTranslation();
     const theme = useTheme();
@@ -119,7 +119,7 @@ const SafeReview = (props: { name: string, owners: string[], confirmations: numb
         </Box>
         <BoxFooter sx={{pb: 0}}>
             <Button sx={{mr: '10px'}} onClick={props.onBack}>{t('Back')}</Button>
-            {address && <Button variant="contained" onClick={onNext} disabled={props.isLoading || inProgress}>{t((props.isLoading ? props.loadingText : undefined) ?? 'Create')}</Button>}
+            {address && <Button variant="contained" onClick={onNext} disabled={inProgress}>{t('Create')}</Button>}
             {!address && <Button variant="contained" onClick={openAuth}>{t('Connect Wallet')}</Button>}
         </BoxFooter>
     </Box>
