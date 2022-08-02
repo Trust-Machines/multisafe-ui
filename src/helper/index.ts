@@ -1,7 +1,8 @@
 import BigNumber from 'bignumber.js';
 import {DEPLOYERS, NETWORK} from '@trustmachines/multisafe-contracts';
-import {StacksNetwork} from '@stacks/network';
-import {contractPrincipalCV, validateStacksAddress} from '@stacks/transactions';
+import {StacksNetwork} from 'micro-stacks/network';
+import {contractPrincipalCV} from 'micro-stacks/clarity';
+import {validateStacksAddress} from 'micro-stacks/crypto';
 import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
 import {TransactionType} from '../types';

@@ -17,7 +17,7 @@ import {getContractInfo} from '../../../api';
 import {capitalize} from '../../../util';
 
 
-const SafeReview = (props: { name: string, owners: string[], confirmations: number, onBack: () => void, onNext: () => void, onConflict: () => void, }) => {
+const SafeReview = (props: { name: string, owners: string[], confirmations: number, onBack: () => void, onNext: () => void, onConflict: () => void}) => {
     const [inProgress, setInProgress] = useState<boolean>(false);
     const [t, i18n] = useTranslation();
     const theme = useTheme();

@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {validateStacksAddress} from '@stacks/transactions';
+import {validateStacksAddress} from 'micro-stacks/crypto';
 import {Box, Button} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';

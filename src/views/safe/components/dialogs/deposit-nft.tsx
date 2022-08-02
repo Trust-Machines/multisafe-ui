@@ -5,20 +5,21 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import {useConnect} from '@stacks/connect-react';
+import {useOpenContractCall} from '@micro-stacks/react';
 import {
     contractPrincipalCV,
+    standardPrincipalCV,
+    uintCV
+} from 'micro-stacks/clarity';
+import {
     createAssetInfo,
     makeStandardNonFungiblePostCondition,
     NonFungibleConditionCode,
     PostConditionMode,
-    standardPrincipalCV,
-    uintCV
-} from '@stacks/transactions';
+} from 'micro-stacks/transactions'
 
 import CommonTxFeedbackDialog from './common-feedback';
 import useSafe from '../../../../hooks/use-safe';
-import useNetwork from '../../../../hooks/use-network';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
@@ -28,13 +29,12 @@ import CloseModal from '../../../../components/close-modal';
 const DepositNft = (props: { asset: NFTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
-    const [, stacksNetwork] = useNetwork();
     const address = useAddress();
     const {safe} = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [nftId, setNftId] = useState<string>('');
-    const {doContractCall} = useConnect();
+    const {openContractCall} = useOpenContractCall();
 
     const handleClose = () => {
         showModal(null);
@@ -50,8 +50,7 @@ const DepositNft = (props: { asset: NFTAsset }) => {
 
         const [contractAddress, contractName] = asset.address.split('.');
 
-        doContractCall({
-            network: stacksNetwork,
+        openContractCall({
             contractAddress,
             contractName,
             functionName: 'transfer',

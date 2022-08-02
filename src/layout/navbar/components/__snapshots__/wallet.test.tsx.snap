@@ -138,7 +138,7 @@ exports[`4 Default render WalletMenu 1`] = `
       </span>
     </div>
     <button
-      class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >

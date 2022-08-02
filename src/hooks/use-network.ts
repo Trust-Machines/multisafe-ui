@@ -1,17 +1,11 @@
-import {useAtom} from 'jotai';
-import {StacksNetwork} from '@stacks/network';
+import {StacksNetwork} from 'micro-stacks/network';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
-
-import {networkAtom} from '../store';
+import * as MicroStacks from '@micro-stacks/react'
 import {getStacksNetwork} from '../helper';
 
 const useNetwork = (): [NETWORK, StacksNetwork, (n: NETWORK) => void] => {
-    const [network, setNetwork_] = useAtom(networkAtom);
-
-    const setNetwork = (n: NETWORK) => {
-        setNetwork_(n);
-        localStorage.setItem('app_network', n)
-    }
+    const {setNetwork, isMainnet} = MicroStacks.useNetwork()
+    const network = isMainnet ? 'mainnet' : 'testnet'
 
     const stacksNetwork = getStacksNetwork(network)
 

@@ -5,7 +5,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import CircularProgress from '@mui/material/CircularProgress';
-import {ClarityAbi, getAbi} from '@stacks/transactions';
+import {ClarityAbi} from 'micro-stacks/clarity';
+import {getAbi} from 'micro-stacks/transactions';
 
 import useTranslation from '../../../hooks/use-translation';
 import useSafes from '../../../hooks/use-safes';
