@@ -35,7 +35,7 @@ exports[`1 Default Render 1`] = `
       class="MuiBox-root css-542elh"
     >
       <div
-        class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-qfso29-MuiTypography-root-MuiDialogContentText-root"
+        class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 css-qfso29-MuiTypography-root-MuiDialogContentText-root"
       >
         <div
           class="MuiBox-root css-1upilqn"
@@ -60,7 +60,7 @@ exports[`1 Default Render 1`] = `
     class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -108,7 +108,7 @@ exports[`2 Requires confirmation 1`] = `
       class="MuiBox-root css-542elh"
     >
       <div
-        class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-qfso29-MuiTypography-root-MuiDialogContentText-root"
+        class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 css-qfso29-MuiTypography-root-MuiDialogContentText-root"
       >
         <div
           class="MuiBox-root css-1upilqn"
@@ -138,7 +138,7 @@ exports[`2 Requires confirmation 1`] = `
     class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >

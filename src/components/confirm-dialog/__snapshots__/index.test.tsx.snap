@@ -32,7 +32,7 @@ exports[`1 Default render 1`] = `
     class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <p
-      class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-qfso29-MuiTypography-root-MuiDialogContentText-root"
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 css-qfso29-MuiTypography-root-MuiDialogContentText-root"
     >
       Are you sure?
     </p>
@@ -41,7 +41,7 @@ exports[`1 Default render 1`] = `
     class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
   >
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -51,7 +51,7 @@ exports[`1 Default render 1`] = `
       />
     </button>
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
