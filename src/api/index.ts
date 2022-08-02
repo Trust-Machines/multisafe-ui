@@ -91,11 +91,12 @@ export interface SafeInfo {
 export const getSafeInfo = (network: StacksNetwork, safe: string, senderAddress: string): Promise<SafeInfo> => {
     return callReadOnly(network, `${safe}.get-info`, [], senderAddress).then(r => {
         const js = cvToJSON(r);
+        const root = js.value.value ? js.value.value : js.value;
         return {
-            version: js.value.version.value,
-            owners: js.value.owners.value.map((x: any) => x.value),
-            threshold: Number(js.value.threshold.value),
-            nonce: Number(js.value.nonce.value),
+            version: root.version.value,
+            owners: root.owners.value.map((x: any) => x.value),
+            threshold: Number(root.threshold.value),
+            nonce: Number(root.nonce.value),
         }
     });
 }
