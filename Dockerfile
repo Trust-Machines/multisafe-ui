@@ -1,20 +1,5 @@
 FROM node:18-alpine
 
-# Install OS dependencies
-RUN apk add --no-cache \
-        sudo \
-        curl \
-        build-base \
-        g++ \
-        libpng \
-        libpng-dev \
-        jpeg-dev \
-        pango-dev \
-        cairo-dev \
-        giflib-dev \
-        py3-pip \
-        ;
-
 WORKDIR /app
 
 # Install node dependencies
