@@ -1,5 +1,4 @@
 import React from 'react'
-import {useAtom} from 'jotai';
 import {ClientProvider} from '@micro-stacks/react';
 
 import DevToolsProvider from './dev-tools';
@@ -8,18 +7,19 @@ import ModalProvider from './modal';
 import ToastProvider from './toast';
 import UserDataProvider from './user-data';
 
-import {baseAuthOptions} from '../constants';
+import useModal from '../hooks/use-modal';
 import {InstallWalletDialog} from '../components/no-wallet-modal';
-import {showNoWalletAtom} from '../store/ui';
-
+import {baseAuthOptions} from '../constants';
 
 const Providers: React.FC = ({children}) => {
-    const [, setIsOpen] = useAtom(showNoWalletAtom)
+    const [, showModal] = useModal()
     return (
         <ClientProvider appName={baseAuthOptions.appDetails.name}
                         appIconUrl={baseAuthOptions.appDetails.icon}
                         onNoWalletFound={() => {
-                            setIsOpen(true)
+                            showModal({
+                                body: <InstallWalletDialog/>
+                            })
                         }}>
             <DevToolsProvider>
                 <ThemeProvider>
