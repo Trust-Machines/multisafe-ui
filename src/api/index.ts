@@ -24,7 +24,7 @@ export const getAccountMemPool = (network: StacksNetwork, account: string): Prom
         } []
     }
 }[]> => {
-    return fetch(`${network}/extended/v1/tx/mempool?sender_address=${account}`).then(r => r.json()).then(r => r.results);
+    return fetch(`${network.getCoreApiUrl()}/extended/v1/tx/mempool?sender_address=${account}`).then(r => r.json()).then(r => r.results);
 }
 
 export const getBnsName = (network: StacksNetwork, address: string): Promise<string | null> => {
