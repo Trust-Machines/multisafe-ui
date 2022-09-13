@@ -21,7 +21,7 @@ exports[`1 Render with empty safe list 1`] = `
       tabindex="0"
       type="button"
     >
-      Create
+      Create New Safe
       <span
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
