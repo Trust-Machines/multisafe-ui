@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
@@ -10,11 +10,19 @@ import useNetwork from '../../hooks/use-network';
 import WalletIcon from '../wallet-icon';
 import useMediaBreakPoint from '../../hooks/use-media-break-point';
 import {truncateMiddle} from '../../util';
+import {getBnsName} from '../../api';
 
 const Wallet = (props: { address: string, truncateForSm?: boolean, sx?: SxProps<Theme> }) => {
     const theme = useTheme();
-    const [network] = useNetwork();
+    const [network, stacksNetwork] = useNetwork();
     const [, isMd] = useMediaBreakPoint();
+    const [bnsLabel, setBnsLabel] = useState<string | null>(null);
+
+    useEffect(() => {
+        getBnsName(stacksNetwork, props.address).then(r => {
+            setBnsLabel(r);
+        });
+    }, [props.address, stacksNetwork]);
 
     const label = !isMd && props.truncateForSm ?
         <Tooltip title={props.address} placement='bottom'>
@@ -55,7 +63,7 @@ const Wallet = (props: { address: string, truncateForSm?: boolean, sx?: SxProps<
         }
     }>
         <div className='icon'><WalletIcon address={props.address}/></div>
-        {label}
+        {bnsLabel ? <div className='address'>{bnsLabel}</div> : label}
         <a rel='noreferrer' href={`https://explorer.stacks.co/address/${props.address}?chain=${network}`}
            target='_blank' className='link'><LaunchIcon sx={{width: '16px'}}/></a>
     </Box>
