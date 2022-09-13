@@ -49,7 +49,7 @@ const Create = (_: RouteComponentProps) => {
     return <>
         <Navbar/>
         <AppContent>
-            <Typography variant='h4' fontWeight='700' mt='10px' gutterBottom>{t('Create Safe')}</Typography>
+            <Typography variant='h4' fontWeight='700' mt='10px' gutterBottom>{t('Create New Safe')}</Typography>
             <Typography variant='h6' fontWeight='500'>{t('Create a safe with multiple owners.')}</Typography>
             <Stepper activeStep={step} orientation='vertical' sx={{mt: '40px'}}>
                 <Step key={0}>
@@ -82,7 +82,7 @@ const Create = (_: RouteComponentProps) => {
                     </StepContent>
                 </Step>
                 <Step key={2}>
-                    <StepLabel>{t('Confirmation Threshold')}</StepLabel>
+                    <StepLabel>{t('Confirmations')}</StepLabel>
                     <StepContent>
                         <ThemedBox sx={boxSx}>
                             <SafeConfirmations

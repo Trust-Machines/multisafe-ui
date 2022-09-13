@@ -25,7 +25,7 @@ const Create = () => {
         <Typography mb='40px'>{t('Create a safe with multiple owners')}{' '}</Typography>
         <Button variant='contained' onClick={() => {
             navigate('/create').then();
-        }}>{t('Create')}</Button>
+        }}>{t('Create New Safe')}</Button>
     </ThemedBox>
 }
 
