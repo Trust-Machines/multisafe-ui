@@ -15,6 +15,7 @@ const Providers: React.FC = ({children}) => {
     const [, showModal] = useModal()
     return (
         <ClientProvider appName={baseAuthOptions.appDetails.name}
+                        enableNetworkSwitching
                         appIconUrl={baseAuthOptions.appDetails.icon}
                         onNoWalletFound={() => {
                             showModal({
