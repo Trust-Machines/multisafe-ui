@@ -126,7 +126,7 @@ const WithdrawFt = (props: { asset: FTAsset }) => {
                     />
                     <TextField
                         onChange={(e) => {
-                            setMemo(e.target.value.replace(/[^a-z0-9 ]+/gi, '')); // only alphanumeric
+                            setMemo(e.target.value.replace(/[^a-z0-9().\-_ ]+/gi, '')); // only alphanumeric
                             setSubmitted(false);
                         }}
                         value={memo}
