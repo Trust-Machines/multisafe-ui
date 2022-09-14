@@ -19,7 +19,7 @@ const SafeConfirmations = (props: { value: number, max: number, onBack: () => vo
             mb: '20px',
             fontSize: '90%',
             color: 'text.secondary'
-        }}>{t('In general, the more confirmations required, the more secure your Safe is.')}</Typography>
+        }}>{t('How many owners need to confirm a transaction in order for it to send? If you\'re unsure start low as you can always update this later.')}</Typography>
 
         <Box sx={{pb: '20px'}}>
             <Select

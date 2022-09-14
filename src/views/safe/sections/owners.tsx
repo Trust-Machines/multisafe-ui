@@ -72,7 +72,7 @@ const Owners = (props: { readOnly: boolean }) => {
                             return <TableRow
                                 key={o}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                <TableCell component="th" scope="row">
+                                <TableCell component="th" scope="row" width="100">
                                     {t(`Owner ${i + 1}`)}
                                 </TableCell>
                                 <TableCell scope="row">

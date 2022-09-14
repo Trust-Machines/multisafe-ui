@@ -130,11 +130,11 @@ exports[`1 Default render 1`] = `
     <div
       class="MuiBox-root css-1bht99n"
     >
-      You're about to create a new Safe on 
+      You're about to create a new MultiSafe on 
       <strong>
         Mainnet
       </strong>
-       and will have to confirm a transaction with your wallet. The creation cost will be determined by your wallet.
+       and will have to confirm a transaction with your wallet.
     </div>
     <div
       class="MuiBox-root css-4jc3c7"
