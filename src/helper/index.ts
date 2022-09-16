@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import {DEPLOYERS, NETWORK} from '@trustmachines/multisafe-contracts';
 import {StacksNetwork} from 'micro-stacks/network';
-import {contractPrincipalCV} from 'micro-stacks/clarity';
+import {contractPrincipalCV, principalCV} from 'micro-stacks/clarity';
 import {validateStacksAddress} from 'micro-stacks/crypto';
 import {NETWORKS} from '../constants';
 import {escapeRegExp} from '../util';
@@ -72,6 +72,14 @@ export const detectTransactionType = (executor: string): TransactionType => {
 export const contractPrincipalCVFromString = (s: string) => {
     const [a, b] = s.split('.');
     return contractPrincipalCV(a, b);
+}
+
+export const principleFromString = (s: string) => {
+    if (s.indexOf('.') > 0) {
+        return contractPrincipalCVFromString(s);
+    }
+
+    return principalCV(s);
 }
 
 export const transformNftUri = (uri: string, nftId: string) => {
