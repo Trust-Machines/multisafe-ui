@@ -1,22 +1,12 @@
-import {
-    bufferCVFromString,
-    ClarityValue,
-    contractPrincipalCV,
-    noneCV,
-    someCV,
-    standardPrincipalCV,
-    uintCV
-} from 'micro-stacks/clarity';
-import {
-    PostConditionMode,
-} from 'micro-stacks/transactions';
+import {bufferCVFromString, ClarityValue, contractPrincipalCV, noneCV, someCV, uintCV} from 'micro-stacks/clarity';
+import {PostConditionMode} from 'micro-stacks/transactions';
 import {FinishedTxData} from 'micro-stacks/connect';
 import {useOpenContractCall} from '@micro-stacks/react';
 import {DEPLOYER} from '@trustmachines/multisafe-contracts';
 import useNetwork from './use-network';
 import useSafe from './use-safe';
 import usePendingTxs from './use-pending-txs';
-import {contractPrincipalCVFromString} from '../helper';
+import {contractPrincipalCVFromString, principleFromString} from '../helper';
 import {SafeTransaction} from '../store/safe';
 
 
@@ -54,7 +44,7 @@ const useSafeCalls = (): {
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-        someCV(standardPrincipalCV(owner)),
+        someCV(principleFromString(owner)),
         noneCV(),
         noneCV(),
     ]);
@@ -64,7 +54,7 @@ const useSafeCalls = (): {
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-        someCV(standardPrincipalCV(owner)),
+        someCV(principleFromString(owner)),
         noneCV(),
         noneCV(),
     ]);
@@ -96,7 +86,7 @@ const useSafeCalls = (): {
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCVFromString(ft),
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-        someCV(standardPrincipalCV(recipient)),
+        someCV(principleFromString(recipient)),
         someCV(uintCV(amount)),
         memo.length > 0 ? someCV(bufferCVFromString(memo)) : noneCV(),
     ]);
@@ -106,7 +96,7 @@ const useSafeCalls = (): {
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),
         contractPrincipalCV(DEPLOYER[network], 'nft-none'),
-        someCV(standardPrincipalCV(recipient)),
+        someCV(principleFromString(recipient)),
         someCV(uintCV(amount)),
         memo.length > 0 ? someCV(bufferCVFromString(memo)) : noneCV()
     ]);
@@ -116,7 +106,7 @@ const useSafeCalls = (): {
         contractPrincipalCV(safe.address, safe.name),
         contractPrincipalCV(DEPLOYER[network], 'ft-none'),
         contractPrincipalCVFromString(nft),
-        someCV(standardPrincipalCV(recipient)),
+        someCV(principleFromString(recipient)),
         someCV(uintCV(id)),
         noneCV(),
     ]);

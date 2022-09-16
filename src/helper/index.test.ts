@@ -8,7 +8,8 @@ import {
     detectTransactionType,
     contractPrincipalCVFromString,
     transformNftUri,
-    isValidRecipient
+    isValidRecipient,
+    principleFromString
 } from './';
 
 global.TextEncoder = TextEncoder;
@@ -68,4 +69,9 @@ test('8 isValidRecipient', () => {
     expect(isValidRecipient('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7')).toMatchSnapshot();
     expect(isValidRecipient('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7.contract')).toMatchSnapshot();
     expect(isValidRecipient('foo')).toMatchSnapshot();
+});
+
+test('9 principleFromString', () => {
+    expect(principleFromString('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7')).toMatchSnapshot();
+    expect(principleFromString('SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7.contract')).toMatchSnapshot();
 });

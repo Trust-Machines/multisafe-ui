@@ -80,3 +80,31 @@ exports[`8 isValidRecipient 2`] = `true`;
 exports[`8 isValidRecipient 3`] = `true`;
 
 exports[`8 isValidRecipient 4`] = `false`;
+
+exports[`9 principleFromString 1`] = `
+Object {
+  "address": Object {
+    "hash160": "fad413a3b38e9cc64afb1bc0ecae4b948966785d",
+    "type": 0,
+    "version": 22,
+  },
+  "type": 5,
+}
+`;
+
+exports[`9 principleFromString 2`] = `
+Object {
+  "address": Object {
+    "hash160": "fad413a3b38e9cc64afb1bc0ecae4b948966785d",
+    "type": 0,
+    "version": 22,
+  },
+  "contractName": Object {
+    "content": "contract",
+    "lengthPrefixBytes": 1,
+    "maxLengthBytes": 128,
+    "type": 2,
+  },
+  "type": 6,
+}
+`;
