@@ -18,10 +18,11 @@ import useToast from '../../../hooks/use-toast';
 import {AddOn} from '../../../constants/add-ons';
 import useModal from '../../../hooks/use-modal';
 import {principleFromString} from '../../../helper';
+import useAddress from '../../../hooks/use-address';
 
 
 const AddOnForm = (props: { readOnly: boolean, addOn: AddOn }) => {
-    const {addOn} = props;
+    const {addOn, readOnly} = props;
     const {params} = addOn;
     const [network] = useNetwork();
     const {safe} = useSafe();
@@ -29,12 +30,23 @@ const AddOnForm = (props: { readOnly: boolean, addOn: AddOn }) => {
     const [, showMessage] = useToast();
     const {doSafeCall} = useSafeCalls();
     const [, showModal] = useModal();
+    const address = useAddress();
 
     const [paramP,] = useState('');
     const [paramU, setParamU] = useState('');
     const [paramB,] = useState('');
 
     const handleSubmit = () => {
+        if (!address) {
+            showMessage('Login first!', 'error');
+            return;
+        }
+
+        if (readOnly) {
+            showMessage('Only safe owners can submit transactions!', 'error');
+            return;
+        }
+
         if (params.paramU) {
             if (parseInt(paramU).toString() !== paramU) {
                 showMessage(`${params.paramU}: Invalid number`, 'error');
