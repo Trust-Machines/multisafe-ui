@@ -96,15 +96,6 @@ export const transformNftUri = (uri: string, nftId: string) => {
     return u;
 }
 
-export const isValidContractPrincipal = (r: string): boolean => {
-    try {
-        contractPrincipalCVFromString(r);
-        return true;
-    } catch (e) {
-        return false
-    }
-}
-
 export const isValidRecipient = (r: string) => {
     if (r === '') {
         return false;
