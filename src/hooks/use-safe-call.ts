@@ -11,6 +11,7 @@ import {SafeTransaction} from '../store/safe';
 
 
 const useSafeCalls = (): {
+    doSafeCall: (fn: 'submit' | 'confirm' | 'revoke', args: ClarityValue[]) => Promise<FinishedTxData>,
     safeAddOwnerCall: (owner: string) => Promise<FinishedTxData>,
     safeRemoveOwnerCall: (owner: string) => Promise<FinishedTxData>,
     safeSetThresholdCall: (threshold: number) => Promise<FinishedTxData>,
@@ -112,6 +113,7 @@ const useSafeCalls = (): {
     ]);
 
     return {
+        doSafeCall,
         safeAddOwnerCall,
         safeRemoveOwnerCall,
         safeSetThresholdCall,

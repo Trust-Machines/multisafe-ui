@@ -11,6 +11,7 @@ import NFTs from './sections/nfts';
 import Transactions from './sections/transactions';
 import Owners from './sections/owners';
 import Policy from './sections/policy';
+import AddOns from './sections/add-ons';
 import useSafe from '../../hooks/use-safe';
 import useAddress from '../../hooks/use-address';
 import Navbar from '../../layout/navbar';
@@ -34,23 +35,19 @@ const SafeContent = (props: { section: string }) => {
 
     const sectionProps = {readOnly: !(address && safe.owners.includes(address))}
     return <>
-        {section === '' && <Tokens {...sectionProps}/>}
+        {!section && <Tokens {...sectionProps}/>}
         {section === 'nft' && <NFTs {...sectionProps}/>}
         {section === 'transactions' && <Transactions {...sectionProps}/>}
         {section === 'owners' && <Owners {...sectionProps}/>}
         {section === 'policy' && <Policy {...sectionProps}/>}
+        {section?.startsWith('add-ons') && <AddOns {...sectionProps}/>}
     </>
 }
 
 const Safe = (_: RouteComponentProps) => {
     const params = useParams();
-    const location = useLocation();
     const {safe, fetchSafeData} = useSafe();
     const navigate = useNavigate();
-
-    const pathParts = location.pathname.split('/');
-    const path = pathParts[pathParts.length - 1];
-    const section = path === params.safeId ? '' : path!;
 
     useEffect(() => {
         try {
@@ -74,9 +71,9 @@ const Safe = (_: RouteComponentProps) => {
     return <>
         <Navbar/>
         <AppContent sx={{p: 0, flexDirection: 'row',}}>
-            <SafeMenu section={section}/>
+            <SafeMenu section={params.section}/>
             <Box sx={{p: '20px', zIndex: 1, flexGrow: 1}}>
-                <SafeContent section={section}/>
+                <SafeContent section={params.section}/>
             </Box>
         </AppContent>
 

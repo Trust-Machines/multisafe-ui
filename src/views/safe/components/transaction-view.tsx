@@ -19,6 +19,7 @@ import Wallet from '../../../components/wallet';
 import {detectTransactionType, formatUnits} from '../../../helper';
 import {SafeTransaction} from '../../../store/safe';
 import {hexToAscii} from '../../../util';
+import {addOnRenderer} from '../../../constants/add-ons';
 
 const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const [t] = useTranslation();
@@ -26,6 +27,11 @@ const TransactionInfo = (props: { transaction: SafeTransaction }) => {
     const {safe} = useSafe();
     const {transaction} = props;
     const txType = detectTransactionType(transaction.executor);
+
+    const rendered = addOnRenderer(transaction);
+    if (rendered) {
+        return rendered;
+    }
 
     const titleSx = {
         fontWeight: 'bold',
