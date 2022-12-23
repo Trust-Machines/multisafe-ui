@@ -178,21 +178,20 @@ export const getNfTInfo = async (network: StacksNetwork, address: string): Promi
     }
 
     const [account, contract] = address.split('.');
-    return fetch(`${network.getCoreApiUrl()}/v2/contracts/source/${account}/${contract}`)
-        .then(r => r.json())
-        .then(source => {
-            // find first defined non fungible token from contract source code
-            const ftMatches = /\((define-non-fungible-token ([^\s]+))/.exec(source.source);
-            const ref = ftMatches ? ftMatches[2] : '';
-            if (!ref) {
-                throw new Error("Couldn't find token definition");
-            }
-            return {
-                address,
-                name: contract,
-                ref
-            }
-        })
+    const source = await fetch(`${network.getCoreApiUrl()}/v2/contracts/source/${account}/${contract}`).then(r => r.json())
+
+    // find first defined non fungible token from contract source code
+    const ftMatches = /\((define-non-fungible-token ([^\s]+))/.exec(source.source);
+    const ref = ftMatches ? ftMatches[2] : '';
+    if (!ref) {
+        throw new Error("Couldn't find token definition");
+    }
+
+    return {
+        address,
+        name: contract,
+        ref
+    }
 }
 
 export const getNftHoldingsByIdentifier = (network: StacksNetwork, address: string, identifier: string): Promise<{ asset_identifier: string, value: { repr: string } }[]> => {
