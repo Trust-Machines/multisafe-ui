@@ -10,7 +10,7 @@ import {SafeTransaction} from '../store/safe';
 import ftList from '../constants/ft-list';
 import nftList from '../constants/nft-list';
 import {FTAsset, NFTAsset} from '../types';
-import {TX_PER_PAGE} from '../constants';
+import {NULL_ADDRESS, TX_PER_PAGE} from '../constants';
 
 export const getAccountMemPool = (network: StacksNetwork, account: string): Promise<{
     tx_id: string,
@@ -131,35 +131,44 @@ export const getSafeTransactions = (network: StacksNetwork, safe: string, nonce:
 }
 
 export const getFTInfo = async (network: StacksNetwork, address: string): Promise<FTAsset> => {
-    const inList = ftList[network.isMainnet() ? 'mainnet' : 'testnet'].find(x => x.address === address);
+    const _network = network.isMainnet() ? 'mainnet' : 'testnet'
+    const inList = ftList[_network].find(x => x.address === address);
     if (inList) {
         return inList;
     }
 
-    return fetch(`${network.getCoreApiUrl()}/extended/v1/tokens/${address}/ft/metadata`)
-        .then(r => r.json())
-        .then(info => {
-            const [a, b] = address.split('.');
-            return fetch(`${network.getCoreApiUrl()}/v2/contracts/source/${a}/${b}`)
-                .then(r => r.json())
-                .then(source => {
+    const [account, contract] = address.split('.');
+    const source = await fetch(`${network.getCoreApiUrl()}/v2/contracts/source/${account}/${contract}`).then(r => r.json());
 
-                    // find first defined token from contract source code
-                    const ftMatches = /\((define-fungible-token ([^)]+))\)/.exec(source.source);
-                    const ref = ftMatches ? ftMatches[2] : '';
-                    if (!ref) {
-                        throw new Error("Couldn't find token definition");
-                    }
+    // find first defined token from contract source code
+    const ftMatches = /\((define-fungible-token ([^)]+))\)/.exec(source.source);
+    const ref = ftMatches ? ftMatches[2] : '';
+    if (!ref) {
+        throw new Error("Couldn't find token definition");
+    }
 
-                    return {
-                        address,
-                        name: info.name,
-                        symbol: info.symbol,
-                        decimals: info.decimals,
-                        ref
-                    }
-                })
-        });
+    const promises = [
+        callReadOnly(network, `${address}.get-symbol`, [], NULL_ADDRESS[_network]),
+        callReadOnly(network, `${address}.get-name`, [], NULL_ADDRESS[_network]),
+        callReadOnly(network, `${address}.get-decimals`, [], NULL_ADDRESS[_network])
+    ];
+
+    const res = await Promise.all(promises);
+    const symbol = cvToJSON(res[0]).value.value;
+    const name = cvToJSON(res[1]).value.value;
+    const decimals = Number(cvToJSON(res[2]).value.value);
+
+    if (!symbol || !name || !decimals) {
+        throw new Error("Couldn't find token definition");
+    }
+
+    return {
+        address,
+        name,
+        symbol,
+        decimals,
+        ref
+    }
 }
 
 export const getNfTInfo = async (network: StacksNetwork, address: string): Promise<NFTAsset> => {
