@@ -24,6 +24,7 @@ import useSafe from '../../../../hooks/use-safe';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
+import useUserSession from '../../../../hooks/use-user-session';
 import CloseModal from '../../../../components/close-modal';
 import CurrencyField from '../../../../components/currency-field';
 import {parseUnits} from '../../../../helper';
@@ -35,6 +36,7 @@ const DepositFt = (props: { asset: FTAsset }) => {
     const [, showModal] = useModal();
     const address = useAddress();
     const {safe} = useSafe();
+    const [, , openAuth] = useUserSession();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [amount, setAmount] = useState<string>('');
@@ -139,7 +141,8 @@ const DepositFt = (props: { asset: FTAsset }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>{t('Cancel')}</Button>
-                <Button onClick={handleSend}>{t('Deposit')}</Button>
+                {address && <Button onClick={handleSend}>{t('Deposit')}</Button>}
+                {!address && <Button onClick={openAuth}>{t('Deposit')}</Button>}
             </DialogActions>
         </>
     );

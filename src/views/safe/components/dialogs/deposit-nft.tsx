@@ -23,6 +23,7 @@ import useSafe from '../../../../hooks/use-safe';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
+import useUserSession from '../../../../hooks/use-user-session';
 import {NFTAsset} from '../../../../types';
 import CloseModal from '../../../../components/close-modal';
 
@@ -30,6 +31,7 @@ const DepositNft = (props: { asset: NFTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const address = useAddress();
+    const [, , openAuth] = useUserSession();
     const {safe} = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
@@ -106,7 +108,8 @@ const DepositNft = (props: { asset: NFTAsset }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>{t('Cancel')}</Button>
-                <Button onClick={handleSend}>{t('Deposit')}</Button>
+                {address && <Button onClick={handleSend}>{t('Deposit')}</Button>}
+                {!address && <Button onClick={openAuth}>{t('Deposit')}</Button>}
             </DialogActions>
         </>
     );
