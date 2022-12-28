@@ -1,104 +1,36 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useNavigate} from '@reach/router';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import CircularProgress from '@mui/material/CircularProgress';
-import {ClarityAbi} from 'micro-stacks/clarity';
-import {getAbi} from 'micro-stacks/transactions';
-
+import RotateRightIcon from '@mui/icons-material/RotateRight';
+import LoadSafe from './dialogs/load-safe';
 import useTranslation from '../../../hooks/use-translation';
-import useSafes from '../../../hooks/use-safes';
-import useNetwork from '../../../hooks/use-network';
-
-import {validateSafeAbi} from '../../../api/helper';
+import useModal from '../../../hooks/use-modal';
 
 const Load = () => {
-    const inputRef = React.useRef<HTMLInputElement>();
-    const [safeAddress, setSafeAddress] = useState('');
-    const [error, setError] = useState('');
-    const [inProgress, setInProgress] = useState(false);
     const [t] = useTranslation();
-    const [, , upsertSafe] = useSafes();
-    const [, stacksNetwork] = useNetwork();
     const navigate = useNavigate();
+    const [, showModal] = useModal();
 
-    const notifyError = (s: string) => {
-        setError(s);
-        setInProgress(false);
-        setTimeout(() => {
-            inputRef.current!.focus();
-        }, 200);
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSafeAddress(e.target.value);
-        setError('');
-    }
-
-    const submit = async () => {
-        setError('');
-        setInProgress(true);
-
-        const safe = safeAddress.trim();
-
-        const [contractAddress, contractName] = safe.split('.');
-
-        if (safe === '' || contractName === undefined) {
-            notifyError(t('Enter a valid safe address'));
-            return;
-        }
-
-        let abi: ClarityAbi;
-        try {
-            abi = await getAbi(contractAddress, contractName, stacksNetwork)
-        } catch (e) {
-            notifyError(t('Not a valid safe address'));
-            return;
-        }
-
-        if (!validateSafeAbi(abi)) {
-            notifyError(t('Not a valid safe address'))
-            return;
-        }
-
-        await upsertSafe(safe);
-        setInProgress(false);
-        navigate(`/safe/${safe}`).then();
+    const load = () => {
+        showModal({
+            body: <LoadSafe onResolve={(safe) => {
+                navigate(`/safe/${safe}`).then();
+            }}/>
+        })
     }
 
     return <>
-        <Typography variant='h6' fontWeight='400' gutterBottom>{t('Load Existing Safe')}</Typography>
-        <Box sx={{
-            display: 'flex',
-            alignItems: 'center'
-        }}>
-            <TextField
-                inputRef={inputRef}
-                autoFocus={true}
-                spellCheck={false}
-                autoComplete='off'
-                value={safeAddress}
-                onChange={handleChange}
-                error={error !== ''}
-                helperText={error || ' '}
-                InputProps={{
-                    endAdornment: inProgress ?
-                        <InputAdornment position="end"> <CircularProgress color="primary"/></InputAdornment> : null,
-                    readOnly: inProgress
-                }}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        submit().then();
-                    }
-                }}
-                fullWidth
-                label={t('Safe Address')}
-                placeholder={t('Enter safe address and press enter')}
-            />
+        <Typography variant='h6' gutterBottom>{t('Load Existing Safe')}</Typography>
+        <Typography sx={{mb: '12px'}}>{t('Easily load your Safe using your Safe address')}</Typography>
+        <Box>
+            <Button sx={{width: '200px'}} variant='outlined' onClick={load}>
+                <RotateRightIcon fontSize="small" sx={{mr: '8px'}}/>
+                {t('Load')}
+            </Button>
         </Box>
     </>
 }
 
-export default Load;
+export default Load

@@ -1,8 +1,9 @@
 import {atom} from 'jotai';
+import {SafeB} from '../api/backend';
 
 export interface SafesState {
     loading: boolean,
-    list: string[],
+    list: SafeB[],
     init: boolean
 }
 
