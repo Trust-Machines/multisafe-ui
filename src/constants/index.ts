@@ -20,6 +20,11 @@ export const NETWORKS: Record<NETWORK, StacksNetwork> = {
     'testnet': new StacksTestnet()
 }
 
+export const DATA_BACKENDS: Record<NETWORK, string> = {
+    'mainnet': 'https://mainnet-api.multisafe.xyz',
+    'testnet': 'https://testnet-api.multisafe.xyz'
+}
+
 export const TX_PER_PAGE = 5;
 
 export const NFT_PLACEHOLDER = '/nft-placeholder.png';

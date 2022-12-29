@@ -3,62 +3,39 @@
 exports[`1 Default render 1`] = `
 <div>
   <h6
-    class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-cxmfqi-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
   >
     Load Existing Safe
   </h6>
-  <div
-    class="MuiBox-root css-70qvj9"
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1ckb2mn-MuiTypography-root"
   >
-    <div
-      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
-      spellcheck="false"
+    Easily load your Safe using your Safe address
+  </p>
+  <div
+    class="MuiBox-root css-0"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-rqrbu2-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
     >
-      <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
-        data-shrink="true"
-        for="mui-1"
-        id="mui-1-label"
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+        data-testid="RotateRightIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        Safe Address
-      </label>
-      <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-      >
-        <input
-          aria-describedby="mui-1-helper-text"
-          aria-invalid="false"
-          autocomplete="off"
-          class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-1"
-          placeholder="Enter safe address and press enter"
-          type="text"
-          value=""
+        <path
+          d="M15.55 5.55 11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42 1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"
         />
-        <fieldset
-          aria-hidden="true"
-          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-        >
-          <legend
-            class="css-1in441m"
-          >
-            <span>
-              Safe Address
-            </span>
-          </legend>
-        </fieldset>
-      </div>
-      <p
-        class="MuiFormHelperText-root MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-focused css-1wc848c-MuiFormHelperText-root"
-        id="mui-1-helper-text"
-      >
-        <span
-          class="notranslate"
-        >
-          ​
-        </span>
-      </p>
-    </div>
+      </svg>
+      Load
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
   </div>
 </div>
 `;

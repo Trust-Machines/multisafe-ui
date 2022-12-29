@@ -104,7 +104,7 @@ exports[`1 Render 1`] = `
           <span
             class="MuiChip-label MuiChip-labelSmall css-wjsjww-MuiChip-label"
           >
-            Readonly
+            Read only
           </span>
         </div>
         
