@@ -7,6 +7,7 @@ import {grey} from '@mui/material/colors';
 import {useTheme} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import LoadSafe from './dialogs/load-safe';
 import useTranslation from '../../../hooks/use-translation';
@@ -37,8 +38,14 @@ const SafeList = () => {
         <Typography fontSize='small' sx={{mb: '20px', color: grey[600]}}>
             {t('List of Safes created by you or have you as one of its owners.')}
         </Typography>
-        {safes.list.map((s, n) => {
+        {safes.list.sort((a, b) => b.time - a.time).map((s, n) => {
             const [address, name] = s.address.split('.');
+            if (s.status === 'failed') {
+                return null;
+            }
+
+            const deploying = s.status !== 'anchor';
+
             return <Box key={s.address} sx={{
                 cursor: 'pointer',
                 padding: '6px',
@@ -47,12 +54,18 @@ const SafeList = () => {
                 bgcolor: theme.palette.mode === 'light' ? grey[50] : grey[900],
                 ':hover': {
                     bgcolor: 'transparent'
-                }
+                },
+                color: deploying ? grey[600] : null,
+                pointerEvents: deploying ? 'none' : null
             }} onClick={() => {
                 navigate(`/safe/${s.address}`).then();
             }}>
-                <Box sx={{fontWeight: 'bold'}}>{name}</Box>
-                <Box sx={{fontSize: '90%', overflowWrap: 'break-word'}}>{address}</Box>
+                <Box sx={{fontWeight: 'bold', mb: '6px'}}>{name}</Box>
+                <Box sx={{fontSize: '90%', overflowWrap: 'break-word', color: grey[600]}}>{address}</Box>
+                {deploying && (<Box sx={{fontSize: '85%', mt: '6px'}}>
+                    <CircularProgress size='0.6rem'/> {t('being deployed')}
+                </Box>)
+                }
             </Box>
         })}
         <Box sx={{marginTop: '22px'}}>
