@@ -16,6 +16,7 @@ export interface SafeB {
   owners: string[],
   time: number,
   status: Status,
+  balance: string
 }
 
 export const getSafes = (network: NETWORK, owner: string): Promise<SafeB[]> => {

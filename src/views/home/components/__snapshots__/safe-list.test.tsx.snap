@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Render with empty safe list 1`] = `
+<div>
+  <h6
+    class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+  >
+    Your Safes
+  </h6>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-wxj4sl-MuiTypography-root"
+  >
+    List of Safes created by you or have you as one of its owners.
+  </p>
+  <div
+    class="MuiBox-root css-qj0ggg"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-29k7bz-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+        data-testid="AddIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+        />
+      </svg>
+       
+      Create new Safe
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-1k23hlb-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+        data-testid="RotateRightIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M15.55 5.55 11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42 1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"
+        />
+      </svg>
+       
+      Load another safe 
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`2 Render with not empty safe list 1`] = `
+<div>
+  <h6
+    class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+  >
+    Your Safes
+  </h6>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-wxj4sl-MuiTypography-root"
+  >
+    List of Safes created by you or have you as one of its owners.
+  </p>
+  <div
+    class="MuiBox-root css-30wj9f"
+  >
+    <div
+      class="MuiBox-root css-espiy2"
+    >
+      my-safe-19
+    </div>
+    <div
+      class="MuiBox-root css-1lh8mp8"
+    >
+      SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7
+    </div>
+    <div
+      class="MuiBox-root css-lpjzzz"
+    >
+      <span
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 0.6rem; height: 0.6rem;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20.2"
+            stroke-width="3.6"
+          />
+        </svg>
+      </span>
+       
+      being deployed
+    </div>
+  </div>
+  <div
+    class="MuiBox-root css-1mcng6u"
+  >
+    <div
+      class="MuiBox-root css-espiy2"
+    >
+      safe-2
+    </div>
+    <div
+      class="MuiBox-root css-1lh8mp8"
+    >
+      SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7
+    </div>
+  </div>
+  <div
+    class="MuiBox-root css-qj0ggg"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-29k7bz-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+        data-testid="AddIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+        />
+      </svg>
+       
+      Create new Safe
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-1k23hlb-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+        data-testid="RotateRightIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M15.55 5.55 11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42 1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"
+        />
+      </svg>
+       
+      Load another safe 
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;
