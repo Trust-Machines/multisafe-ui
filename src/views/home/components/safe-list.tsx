@@ -17,8 +17,12 @@ const SafeList = () => {
     const [t] = useTranslation();
     const navigate = useNavigate();
     const theme = useTheme();
-    const [safes, ] = useSafes();
+    const [safes,] = useSafes();
     const [, showModal] = useModal();
+
+    const create = () => {
+        navigate('/create').then();
+    }
 
     const load = () => {
         showModal({
@@ -29,7 +33,10 @@ const SafeList = () => {
     }
 
     return <>
-        <Typography variant='h6' gutterBottom>{t('Your Safes')}</Typography>
+        <Typography variant='h6'>{t('Your Safes')}</Typography>
+        <Typography fontSize='small' sx={{mb: '20px', color: grey[600]}}>
+            {t('List of Safes created by you or have you as one of its owners.')}
+        </Typography>
         {safes.list.map((s, n) => {
             const [address, name] = s.address.split('.');
             return <Box key={s.address} sx={{
@@ -48,12 +55,8 @@ const SafeList = () => {
                 <Box sx={{fontSize: '90%', overflowWrap: 'break-word'}}>{address}</Box>
             </Box>
         })}
-        <Box sx={{
-            marginTop: '22px'
-        }}>
-            <Button variant='outlined' size='small' sx={{mr: '12px'}} onClick={() => {
-                navigate('/create').then();
-            }}>
+        <Box sx={{marginTop: '22px'}}>
+            <Button variant='outlined' size='small' sx={{mr: '12px'}} onClick={create}>
                 <AddIcon fontSize="small" sx={{mr: '8px'}}/> {t('Create new Safe')}
             </Button>
             <Button variant='outlined' size='small' onClick={load}>

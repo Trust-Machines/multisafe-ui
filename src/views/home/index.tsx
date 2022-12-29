@@ -36,6 +36,10 @@ const Home = (_: RouteComponentProps) => {
                     justifyContent: 'space-between'
                 }}>
                     {(() => {
+                        if (safes.loading) {
+                            return null;
+                        }
+
                         if (address && safes.list.length > 0) {
                             return <>
                                 <ThemedBox sx={{
