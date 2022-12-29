@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Trans} from 'react-i18next';
 import {useNavigate} from '@reach/router';
 import {Box, Button, useTheme} from '@mui/material';
@@ -6,13 +6,24 @@ import {grey} from '@mui/material/colors';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {NETWORK} from '@trustmachines/multisafe-contracts';
 
+import useSafes from '../../../hooks/use-safes';
 import useTranslation from '../../../hooks/use-translation';
 import {capitalize} from '../../../util';
+
 
 const SafeSuccess = (props: { network: NETWORK, txUrl: string }) => {
     const theme = useTheme();
     const [t, i18n] = useTranslation();
     const navigate = useNavigate();
+    const [, fetchSafes] = useSafes();
+
+    useEffect(() => {
+        return () => {
+            // Update safe list while leaving this page/view so the new safe will be visible on the home page
+            fetchSafes();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return <Box sx={{
         textAlign: 'center'
@@ -44,7 +55,7 @@ const SafeSuccess = (props: { network: NETWORK, txUrl: string }) => {
             components={[<a target="_blank" rel="noreferrer" href={props.txUrl}/>]}
         />
         <Box sx={{mt: '20px'}}>
-            <Button variant="outlined" onClick={()=>{
+            <Button variant="outlined" onClick={() => {
                 navigate('/').then();
             }}>{t('Home')}</Button>
         </Box>
