@@ -1,0 +1,678 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 Default render 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-hoayk1"
+  >
+    <div
+      class="MuiBox-root css-azxdeb"
+    >
+      <div
+        class="MuiBox-root css-1qmgq4"
+      >
+        <div
+          class="MuiBox-root css-wxdvxx"
+        >
+          <img
+            alt="Logo"
+            src="/logo.png"
+          />
+        </div>
+        <div
+          class="MuiBox-root css-1dx8jfp"
+        >
+          MultiSafe
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex-grow MuiBox-root css-0"
+    />
+    <div
+      class="MuiBox-root css-ls0mhy"
+    >
+      <div
+        class="MuiBox-root css-7lmw8c"
+      >
+        <div
+          class="MuiBox-root css-198xhax"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
+            data-testid="AccountBalanceWalletIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+            />
+          </svg>
+          <div
+            class="MuiBox-root css-x1k79c"
+          >
+            <span
+              class="first-line"
+            >
+              Not connected
+            </span>
+            <span
+              class="second-line"
+            >
+              Connect Wallet
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1n1j97o"
+      >
+        <div
+          class="MuiBox-root css-1sfu4nm"
+        >
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-8w4ikn-MuiButtonBase-root-MuiChip-root"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            >
+              mainnet
+            </span>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1qoaa23"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="DarkModeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiBox-root css-pi3xhg"
+  >
+    <div
+      class="MuiBox-root css-8atqhb"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1pxvxmw-MuiTypography-root"
+      >
+        Welcome to MultiSafe
+      </h4>
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
+      >
+        MultiSafe is the most secure platform for storing your STX digital assets.
+      </h6>
+      <div
+        class="MuiBox-root css-rabsv0"
+      >
+        <div
+          class="MuiBox-root css-1fmbk1l"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
+          >
+            Don't have a safe?
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1ckb2mn-MuiTypography-root"
+          >
+            Create a safe with multiple owners
+          </p>
+          <div
+            class="MuiBox-root css-0"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-2k1wi7-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+                data-testid="AddIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                />
+              </svg>
+               
+              Create New Safe
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-ke8wp"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
+          >
+            Load Existing Safe
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1ckb2mn-MuiTypography-root"
+          >
+            Easily load your Safe using your Safe address
+          </p>
+          <div
+            class="MuiBox-root css-0"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-rqrbu2-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+                data-testid="RotateRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.55 5.55 11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42 1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"
+                />
+              </svg>
+              Load
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`2 Wallet connected but no safe 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-hoayk1"
+  >
+    <div
+      class="MuiBox-root css-azxdeb"
+    >
+      <div
+        class="MuiBox-root css-1qmgq4"
+      >
+        <div
+          class="MuiBox-root css-wxdvxx"
+        >
+          <img
+            alt="Logo"
+            src="/logo.png"
+          />
+        </div>
+        <div
+          class="MuiBox-root css-1dx8jfp"
+        >
+          MultiSafe
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex-grow MuiBox-root css-0"
+    />
+    <div
+      class="MuiBox-root css-ls0mhy"
+    >
+      <div
+        class="MuiBox-root css-7lmw8c"
+      >
+        <div
+          class="MuiBox-root css-198xhax"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
+            data-testid="AccountBalanceWalletIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+            />
+          </svg>
+          <div
+            class="MuiBox-root css-x1k79c"
+          >
+            <span
+              class="first-line"
+            >
+              SP3XD...KAEK7
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1n1j97o"
+      >
+        <div
+          class="MuiBox-root css-1sfu4nm"
+        >
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-8w4ikn-MuiButtonBase-root-MuiChip-root"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            >
+              mainnet
+            </span>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1qoaa23"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="DarkModeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiBox-root css-pi3xhg"
+  >
+    <div
+      class="MuiBox-root css-8atqhb"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1pxvxmw-MuiTypography-root"
+      >
+        Welcome to MultiSafe
+      </h4>
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
+      >
+        MultiSafe is the most secure platform for storing your STX digital assets.
+      </h6>
+      <div
+        class="MuiBox-root css-rabsv0"
+      >
+        <div
+          class="MuiBox-root css-1fmbk1l"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
+          >
+            Don't have a safe?
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1ckb2mn-MuiTypography-root"
+          >
+            Create a safe with multiple owners
+          </p>
+          <div
+            class="MuiBox-root css-0"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-2k1wi7-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+                data-testid="AddIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                />
+              </svg>
+               
+              Create New Safe
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-ke8wp"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
+          >
+            Load Existing Safe
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1ckb2mn-MuiTypography-root"
+          >
+            Easily load your Safe using your Safe address
+          </p>
+          <div
+            class="MuiBox-root css-0"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-rqrbu2-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+                data-testid="RotateRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.55 5.55 11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42 1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"
+                />
+              </svg>
+              Load
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`3 Wallet connected and the user has wallets 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-hoayk1"
+  >
+    <div
+      class="MuiBox-root css-azxdeb"
+    >
+      <div
+        class="MuiBox-root css-1qmgq4"
+      >
+        <div
+          class="MuiBox-root css-wxdvxx"
+        >
+          <img
+            alt="Logo"
+            src="/logo.png"
+          />
+        </div>
+        <div
+          class="MuiBox-root css-1dx8jfp"
+        >
+          MultiSafe
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex-grow MuiBox-root css-0"
+    />
+    <div
+      class="MuiBox-root css-ls0mhy"
+    >
+      <div
+        class="MuiBox-root css-7lmw8c"
+      >
+        <div
+          class="MuiBox-root css-198xhax"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-18wkfow-MuiSvgIcon-root"
+            data-testid="AccountBalanceWalletIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+            />
+          </svg>
+          <div
+            class="MuiBox-root css-x1k79c"
+          >
+            <span
+              class="first-line"
+            >
+              SP3XD...KAEK7
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1n1j97o"
+      >
+        <div
+          class="MuiBox-root css-1sfu4nm"
+        >
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-8w4ikn-MuiButtonBase-root-MuiChip-root"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+            >
+              mainnet
+            </span>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1qoaa23"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="DarkModeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiBox-root css-pi3xhg"
+  >
+    <div
+      class="MuiBox-root css-8atqhb"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1pxvxmw-MuiTypography-root"
+      >
+        Welcome to MultiSafe
+      </h4>
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
+      >
+        MultiSafe is the most secure platform for storing your STX digital assets.
+      </h6>
+      <div
+        class="MuiBox-root css-rabsv0"
+      >
+        <div
+          class="MuiBox-root css-ke8wp"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+          >
+            Your Safes
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-wxj4sl-MuiTypography-root"
+          >
+            List of Safes created by you or have you as one of its owners.
+          </p>
+          <div
+            class="MuiBox-root css-30wj9f"
+          >
+            <div
+              class="MuiBox-root css-espiy2"
+            >
+              my-safe-19
+            </div>
+            <div
+              class="MuiBox-root css-1lh8mp8"
+            >
+              SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7
+            </div>
+            <div
+              class="MuiBox-root css-lpjzzz"
+            >
+              <span
+                class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+                role="progressbar"
+                style="width: 0.6rem; height: 0.6rem;"
+              >
+                <svg
+                  class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                  viewBox="22 22 44 44"
+                >
+                  <circle
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                    cx="44"
+                    cy="44"
+                    fill="none"
+                    r="20.2"
+                    stroke-width="3.6"
+                  />
+                </svg>
+              </span>
+               
+              being deployed
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-1mcng6u"
+          >
+            <div
+              class="MuiBox-root css-espiy2"
+            >
+              safe-2
+            </div>
+            <div
+              class="MuiBox-root css-1lh8mp8"
+            >
+              SP3XD84X3PE79SHJAZCDW1V5E9EA8JSKRBPEKAEK7
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-qj0ggg"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-29k7bz-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+                data-testid="AddIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                />
+              </svg>
+               
+              Create new Safe
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-1k23hlb-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+                data-testid="RotateRightIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.55 5.55 11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42 1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"
+                />
+              </svg>
+               
+              Load another safe 
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
