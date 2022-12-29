@@ -1,26 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`1 Render with empty safe list 1`] = `
+exports[`1 Default render 1`] = `
 <div>
-  <div
-    class="MuiBox-root css-ke8wp"
+  <h6
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
   >
-    <h6
-      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
-    >
-      Don't have a safe?
-    </h6>
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-17665zs-MuiTypography-root"
-    >
-      Create a safe with multiple owners
-       
-    </p>
+    Don't have a safe?
+  </h6>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1ckb2mn-MuiTypography-root"
+  >
+    Create a safe with multiple owners
+  </p>
+  <div
+    class="MuiBox-root css-0"
+  >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-2k1wi7-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-15ikgma-MuiSvgIcon-root"
+        data-testid="AddIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+        />
+      </svg>
+       
       Create New Safe
       <span
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
@@ -29,5 +40,3 @@ exports[`1 Render with empty safe list 1`] = `
   </div>
 </div>
 `;
-
-exports[`2 Render with not empty safe list 1`] = `<div />`;
