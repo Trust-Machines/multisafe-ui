@@ -16,7 +16,7 @@ import useNetwork from '../../../../hooks/use-network';
 import CloseModal from '../../../../components/close-modal';
 import {validateSafeAbi} from '../../../../api/helper';
 
-const AddAsset = (props: { onResolve: (safe: string) => void }) => {
+const LoadSafe = (props: { onResolve: (safe: string) => void }) => {
     const {onResolve} = props;
     const inputRef = React.useRef<HTMLInputElement>();
     const [safeAddress, setSafeAddress] = useState('');
@@ -105,11 +105,8 @@ const AddAsset = (props: { onResolve: (safe: string) => void }) => {
                     />
                 </Box>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={onSubmit} disabled={inProgress}>{t('Submit')}</Button>
-            </DialogActions>
         </>
     );
 }
 
-export default AddAsset;
+export default LoadSafe;
