@@ -53,6 +53,8 @@ const Owners = (props: { readOnly: boolean }) => {
         })
     }
 
+    const canDelete = !props.readOnly && safe.owners.length > 1;
+
     return <>
         <SectionHeader title={t('Owners')} icon={<GroupsIcon/>}>
             {!props.readOnly && <Button onClick={addOwnerClicked} variant="contained">{t('Add Owner')}</Button>}
@@ -79,7 +81,7 @@ const Owners = (props: { readOnly: boolean }) => {
                                     <Wallet address={o}/>
                                 </TableCell>
                                 <TableCell align="right">
-                                    {!props.readOnly && (
+                                    {canDelete && (
                                         <IconButton onClick={() => {
                                             deleteOwnerClicked(o)
                                         }}>
