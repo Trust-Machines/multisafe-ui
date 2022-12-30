@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Typography from '@mui/material/Typography';
 
 import {
     uintCV,
@@ -25,22 +26,25 @@ import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import useUserSession from '../../../../hooks/use-user-session';
+import useNetwork from '../../../../hooks/use-network';
 import CloseModal from '../../../../components/close-modal';
 import CurrencyField from '../../../../components/currency-field';
-import {parseUnits} from '../../../../helper';
+import {formatUnits, parseUnits} from '../../../../helper';
 import {FTAsset} from '../../../../types';
+import {AddressBalance, getAccountBalances} from '../../../../api';
 
 
 const DepositFt = (props: { asset: FTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const address = useAddress();
+    const [, stacksNetwork] = useNetwork()
     const {safe} = useSafe();
     const [, , openAuth] = useUserSession();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [amount, setAmount] = useState<string>('');
-
+    const [balances, setBalances] = useState<AddressBalance | null>(null);
     const {openContractCall} = useOpenContractCall();
     const {openStxTokenTransfer} = useOpenStxTokenTransfer();
 
@@ -111,6 +115,23 @@ const DepositFt = (props: { asset: FTAsset }) => {
         });
     }
 
+    useEffect(() => {
+        if (address) {
+            getAccountBalances(stacksNetwork, address).then(r => {
+                setBalances(r);
+            })
+        }
+    }, [address, stacksNetwork]);
+
+    const getBalance = () => {
+        if (balances === null) {
+            return '0';
+        }
+
+        const balance = asset.address === 'STX' ? balances.stx.balance : (balances.fungible_tokens[`${asset.address}::${asset.ref}`]?.balance || '0');
+        return formatUnits(balance, asset.decimals).toString()
+    }
+
     return (
         <>
             <DialogTitle>{dialogTitle}
@@ -137,6 +158,36 @@ const DepositFt = (props: { asset: FTAsset }) => {
                                 maxLength: '20'
                             }
                         }}/>
+                    {(() => {
+                        if (!address) {
+                            return null;
+                        }
+
+                        const balance = getBalance();
+                        const hasBalance = balance !== '0';
+
+                        return <Box sx={{
+                            mt: '10px'
+                        }}>
+                            <Typography fontSize='small' color='gray'>
+                                <Box component='span' sx={{mr: '6px'}}>
+                                    Balance:
+                                </Box>
+                                <Box component='span'
+                                     sx={{
+                                         textDecoration: hasBalance ? 'underline' : null,
+                                         cursor: hasBalance ? 'pointer' : null
+                                     }}
+                                     onClick={() => {
+                                         if (hasBalance) {
+                                             setAmount(balance);
+                                         }
+                                     }}>
+                                    {balance}
+                                </Box>
+                            </Typography>
+                        </Box>
+                    })()}
                 </Box>
             </DialogContent>
             <DialogActions>

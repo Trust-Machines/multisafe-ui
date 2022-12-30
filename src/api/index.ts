@@ -69,6 +69,10 @@ export const getContractBalances = (network: StacksNetwork, address: string): Pr
     return fetch(`${network.getCoreApiUrl()}/extended/v1/address/${contractAddress}.${contractName}/balances`).then(r => r.json())
 }
 
+export const getAccountBalances = (network: StacksNetwork, account: string): Promise<AddressBalance> => {
+    return fetch(`${network.getCoreApiUrl()}/extended/v1/address/${account}/balances`).then(r => r.json())
+}
+
 export const callReadOnly = (network: StacksNetwork, path: string, functionArgs: ClarityValue[], senderAddress: string) => {
     const [contractAddress, contractName, functionName] = path.split('.')
     return callReadOnlyFunction({
