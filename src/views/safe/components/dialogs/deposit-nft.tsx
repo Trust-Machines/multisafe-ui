@@ -1,10 +1,13 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+
 import {useOpenContractCall} from '@micro-stacks/react';
 import {
     contractPrincipalCV,
@@ -19,24 +22,28 @@ import {
 } from 'micro-stacks/transactions'
 
 import CommonTxFeedbackDialog from './common-feedback';
+import CloseModal from '../../../../components/close-modal';
 import useSafe from '../../../../hooks/use-safe';
 import useAddress from '../../../../hooks/use-address';
 import useModal from '../../../../hooks/use-modal';
 import useTranslation from '../../../../hooks/use-translation';
 import useUserSession from '../../../../hooks/use-user-session';
+import useNetwork from '../../../../hooks/use-network';
+import {getNftHoldingsByIdentifier} from '../../../../api';
 import {NFTAsset} from '../../../../types';
-import CloseModal from '../../../../components/close-modal';
 
 const DepositNft = (props: { asset: NFTAsset }) => {
     const [t] = useTranslation();
     const [, showModal] = useModal();
     const address = useAddress();
+    const [, stacksNetwork] = useNetwork()
     const [, , openAuth] = useUserSession();
     const {safe} = useSafe();
     const {asset} = props;
     const inputRef = useRef<HTMLInputElement>();
     const [nftId, setNftId] = useState<string>('');
     const {openContractCall} = useOpenContractCall();
+    const [holdings, setHoldings] = useState<string[]>([]);
 
     const handleClose = () => {
         showModal(null);
@@ -79,6 +86,16 @@ const DepositNft = (props: { asset: NFTAsset }) => {
         }).then();
     }
 
+    useEffect(() => {
+        if (address) {
+            getNftHoldingsByIdentifier(stacksNetwork, address, `${asset.address}::${asset.ref}`).then(r => {
+                const items = r.filter(x => x.value.repr.startsWith('u')) // Only int NFTs
+                    .map(x => x.value.repr.replace('u', ''));
+                setHoldings(items);
+            })
+        }
+    }, [asset, address, stacksNetwork]);
+
     return (
         <>
             <DialogTitle>{dialogTitle}
@@ -104,6 +121,34 @@ const DepositNft = (props: { asset: NFTAsset }) => {
                                    }
                                }}
                     />
+                    {(() => {
+                        if (holdings.length === 0) {
+                            return null;
+                        }
+
+                        return <Box sx={{mt: '10px'}}>
+                            <Box sx={{display: 'flex', alignItems: 'center'}}>
+                                <Typography fontSize='small' color='gray'
+                                            sx={{mr: '10px', flexGrow: 0, whiteSpace: 'nowrap'}}>
+                                    {t('Your holdings:')}
+                                </Typography>
+                                <Box sx={{flexGrow: 1, display: 'flex', overflow: 'auto'}}>
+                                    {holdings.map(h => {
+                                        return <Chip
+                                            key={h}
+                                            label={`#${h}`}
+                                            color='primary'
+                                            size='small'
+                                            clickable
+                                            sx={{m: '2px'}}
+                                            onClick={() => {
+                                                setNftId(h);
+                                            }}/>
+                                    })}
+                                </Box>
+                            </Box>
+                        </Box>
+                    })()}
                 </Box>
             </DialogContent>
             <DialogActions>
