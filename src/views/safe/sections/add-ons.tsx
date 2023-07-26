@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import Box from '@mui/material/Box';
 import {useNavigate, useParams} from '@reach/router';
+import TextField from '@mui/material/TextField';
 
 import AddOnForm from '../components/add-on-form';
 import SectionHeader from '../components/section-header';
@@ -19,10 +20,22 @@ const AddOnsList = (props: { readOnly: boolean }) => {
     const [network] = useNetwork();
     const [, showMessage] = useToast();
     const navigate = useNavigate();
+    const [search, setSearch] = useState('');
+    const list = search ? addOns.filter(x => x.name.toLowerCase().startsWith(search.toLowerCase())) : [];
 
     return <>
         <SectionHeader title={t('Add-ons')} icon={<ExtensionIcon/>}/>
         <Box sx={{display: 'table', tableLayout: 'fixed', width: '100%'}}>
+            <Box sx={{
+                p: '0 20px'
+            }}>
+                <TextField fullWidth autoFocus placeholder={t('Search Add-ons')} value={search} onChange={(e) => {
+                    setSearch(e.target.value);
+                }}/>
+                {(search !== '' && list.length === 0) && (
+                    <Box sx={{mt: '4px', color: 'text.secondary'}}>{t('No match')}</Box>
+                )}
+            </Box>
             <Box sx={{
                 p: '20px 20px 0 20px',
                 display: 'grid',
@@ -30,7 +43,7 @@ const AddOnsList = (props: { readOnly: boolean }) => {
                 maxWidth: '660px',
                 gap: '20px'
             }}>
-                {addOns.map(a => {
+                {list.map(a => {
                     return <Box key={a.id}
                                 sx={{
                                     cursor: 'pointer'
