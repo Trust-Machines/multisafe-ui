@@ -15,6 +15,7 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import ExtensionIcon from '@mui/icons-material/Extension';
 import {grey} from '@mui/material/colors';
 import Chip from '@mui/material/Chip';
 
@@ -133,7 +134,7 @@ const SafeMenu = (props: { section: string }) => {
                 </Box>
             </Box>
             <List component='nav'>
-                <MenuListItem selected={props.section === ''} to="">
+                <MenuListItem selected={!props.section} to="">
                     <ListItemIcon>
                         <TollIcon/>
                     </ListItemIcon>
@@ -162,6 +163,12 @@ const SafeMenu = (props: { section: string }) => {
                         <FactCheckIcon/>
                     </ListItemIcon>
                     <ListItemText primary={t('Policy')}/>
+                </MenuListItem>
+                <MenuListItem selected={props.section?.startsWith('add-ons')} to="/add-ons">
+                    <ListItemIcon>
+                        <ExtensionIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={t('Add-ons')}/>
                 </MenuListItem>
             </List>
         </AppMenu>
