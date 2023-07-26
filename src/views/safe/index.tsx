@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {RouteComponentProps, useParams, useLocation} from '@reach/router';
+import {RouteComponentProps, useParams} from '@reach/router';
 import {useNavigate} from '@reach/router';
 import {Box} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
